@@ -1,0 +1,21 @@
+# (PART) Tidyverse {.unnumbered}
+
+# **Introduction**
+
+```{r tidyverse, echo=FALSE, fig.align="center", out.width = "50%"}
+knitr::include_graphics("./Picture/tidyverse.jpg")
+```
+
+Tidyverse เป็น package ซึ่งนิพนธ์โดย Haley Wickham และคณะ โดย function ส่วนใหญ่ใน tidyverse นั้นเกี่ยวข้องกับการปรับแต่งข้อมูลจาก dataframe ซึ่งจะอำนวยความสะดวกให้ท่านสามารถทำงานได้มากขึ้นกว่าการใช้ base R ข้อเสียของ tidyverse นั้น อาจจะทำให้ run ช้ากว่า และมีปรับแต่งให้ตรงกับการใช้งานจำเพาะได้ยากกว่า แต่สำหรับผู้ที่ไม่ใช่ R hardcore นั้น tidyverse ถือว่าเป็น package ที่อำนวยความสะดวกได้อย่างดีเยี่ยม
+
+การจะใช้งาน package ใดๆ นั้น เริ่มจากท่านจะต้องติดตั้ง package นั้นลงบนเครื่องของท่านก่อน โดยคำสั่ง `install.packages()` โดยการ
+
+```{r, eval = FALSE}
+install.packages("tidyverse") 
+```
+
+โดย tidyverse นั้นจะเป็น package ใหญ่ และจะแบ่งเป็นหลาย package ย่อยๆ ได้อีก โดยท่านสามารถเรียกใช้ ทั้งหมดได้ หรือ เรียกใช้แค่ package ย่อย
+
+```{r, message = FALSE}
+library(tidyverse) 
+```

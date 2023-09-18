@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>9 Parametric test | A gentle introduction to R for biologists</title>
+<meta name="author" content="Kittinun Leetanaporn">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="9 Parametric test | A gentle introduction to R for biologists">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="9 Parametric test | A gentle introduction to R for biologists">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="Parametric test คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง  9.1 t-test คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย...">
+<meta property="og:description" content="Parametric test คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง  9.1 t-test คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย...">
+<meta name="twitter:description" content="Parametric test คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง  9.1 t-test คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">A gentle introduction to R for biologists</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Basic R</li>
+<li><a class="" href="basic-r.html"><span class="header-section-number">1</span> Basic R</a></li>
+<li><a class="" href="r-function.html"><span class="header-section-number">2</span> R function</a></li>
+<li class="book-part">Tidyverse</li>
+<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">3</span> What is tidyverse</a></li>
+<li><a class="" href="importing-data.html"><span class="header-section-number">4</span> Importing data</a></li>
+<li><a class="" href="data-wrangling.html"><span class="header-section-number">5</span> Data wrangling</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
+<li><a class="" href="GSE63514.html"><span class="header-section-number">7</span> Case study: Microarray visualization</a></li>
+<li class="book-part">Statistical analysis</li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
+<li><a class="active" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">10</span> Survival analysis</a></li>
+<li class="book-part">Session info</li>
+<li><a class="" href="session-info.html"><span class="header-section-number">11</span> Session info</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="parametric-test" class="section level1" number="9">
+<h1>
+<span class="header-section-number">9</span> Parametric test<a class="anchor" aria-label="anchor" href="#parametric-test"><i class="fas fa-link"></i></a>
+</h1>
+<p>Parametric test คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง</p>
+<div id="t-test" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> t-test<a class="anchor" aria-label="anchor" href="#t-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย (mean) และความแปรปรวน (sd) แบ่งเป็น</p>
+<div id="one-sample-t-test" class="section level3" number="9.1.1">
+<h3>
+<span class="header-section-number">9.1.1</span> One sample t-test<a class="anchor" aria-label="anchor" href="#one-sample-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>เป็นการเปรียบเทียบความแตกต่างของ mean ระหว่าง <code>sample</code> กับ <code>population</code></p>
+<p><span class="math display">\[
+t = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
+\]</span></p>
+<p>เพื่อให้เห็นภาพของความต่างใน test นี้เราจะทำการสร้างกราฟเปรียบว่า sample นั้น มี mean ต่างจาก population ที่ mean = 10 และ mean = 30 หรือไม่</p>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">norm_10_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span>, mean <span class="op">=</span> <span class="fl">10</span>, sd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="co"># สร้างประชากร mean = 10, sd = 4</span></span>
+<span><span class="va">norm_10_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">norm_10_pop</span>, <span class="fl">100</span><span class="op">)</span> <span class="co"># สุ่มตัวอย่างมาจากประชากร 100 ราย</span></span>
+<span><span class="va">norm_30_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span>, mean <span class="op">=</span> <span class="fl">30</span>, sd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">norm_30_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">norm_40_pop</span>, <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">norm_pop_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Pop_10 <span class="op">=</span> <span class="va">norm_10_pop</span>, Pop_30 <span class="op">=</span> <span class="va">norm_30_pop</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"Pop"</span>, values_to <span class="op">=</span> <span class="st">"Values"</span><span class="op">)</span>  </span>
+<span></span>
+<span><span class="va">norm_sample_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Samp_10 <span class="op">=</span> <span class="va">norm_10_sample</span>, Samp_30 <span class="op">=</span> <span class="va">norm_30_sample</span><span class="op">)</span> <span class="op">|&gt;</span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"Samp"</span>, values_to <span class="op">=</span> <span class="st">"Values"</span><span class="op">)</span>  </span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">norm_pop_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Values</span>, fill <span class="op">=</span> <span class="va">Pop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>    </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span>,color <span class="op">=</span> <span class="st">"black"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">norm_sample_df</span>, </span>
+<span>               <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x  <span class="op">=</span> <span class="va">Values</span>, y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>, fill <span class="op">=</span> <span class="va">Samp</span><span class="op">)</span>, </span>
+<span>               color <span class="op">=</span> <span class="st">"black"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/one_t_plot-1.png" width="100%"></div>
+<p>จะเห็นว่าเมื่อดูลักษณะการกระจายตัวของข้อมูลแล้ว <code>Samp_10</code> ที่มี mean = 10 นั้น ไม่ต่างจากประชากรที่มี mean = 10 แต่ดูแตกต่างอย่างเห็นได้ชัดกับประชากรที่มี mean = 30 <code>t.test</code> จะช่วยตัดสินว่าค่าที่ได้นั้นแตกต่างกันจริงหรือไม่ hypothesis ที่ตั้งคือ</p>
+<p><strong>Case 1</strong>: Population at mean = 10</p>
+<ul>
+<li><p><span class="math inline">\(H_{0}\)</span>: mean ของ sample นั้น ไม่ต่างจาก mean ของ population ที่ mean = 10</p></li>
+<li><p><span class="math inline">\(H_{a}\)</span>: mean ของ sample นั้น ต่างจาก mean ของ population ที่ mean = 10</p></li>
+</ul>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, mu <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># p &gt; 0.05</span></span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  norm_10_sample
+## t = 0.73547, df = 99, p-value = 0.4638
+## alternative hypothesis: true mean is not equal to 10
+## 95 percent confidence interval:
+##   9.533936 11.015052
+## sample estimates:
+## mean of x 
+##  10.27449</code></pre>
+<p><strong>Case 2</strong>: Population at mean = 40</p>
+<ul>
+<li><p><span class="math inline">\(H_{0}\)</span>: mean ของ sample นั้น ไม่ต่างจาก mean ของ population ที่ mean = 40</p></li>
+<li><p><span class="math inline">\(H_{a}\)</span>: mean ของ sample นั้น ต่างจาก mean ของ population ที่ mean = 40</p></li>
+</ul>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, mu <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="co"># p &lt;= 0.05</span></span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  norm_10_sample
+## t = -52.852, df = 99, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean is not equal to 30
+## 95 percent confidence interval:
+##   9.533936 11.015052
+## sample estimates:
+## mean of x 
+##  10.27449</code></pre>
+<p>จะเห็นว่าต่างจาก population ที่ mean = 30 อย่างมีนัยสำคัญ (p = <span class="math inline">\(2.2 \times 10^{-16}\)</span> &lt; critical point (0.05) )</p>
+<p>พิจารณาที่มาของ <code>p-value</code> นั้นมีที่มาจากสูตรขั้นต้น</p>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hypothesized_mean</span> <span class="op">&lt;-</span> <span class="fl">30</span></span>
+<span><span class="va">mean_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">norm_10_sample</span><span class="op">)</span></span>
+<span><span class="va">sd_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">norm_10_sample</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">mean_sample</span> <span class="op">-</span> <span class="va">hypothesized_mean</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">sd_sample</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">norm_10_sample</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span></span></code></pre></div>
+<pre><code>## [1] -52.85159</code></pre>
+<p>จะเห็นว่าค่า <code>t</code> นั้นเท่ากับ ค่าที่ได้จาก function <code>t.test</code> ขั้นต้น</p>
+</div>
+<div id="independent-t-test" class="section level3" number="9.1.2">
+<h3>
+<span class="header-section-number">9.1.2</span> Independent t-test<a class="anchor" aria-label="anchor" href="#independent-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>เป็นการเปรียบเทียบ mean ระหว่าง <code>sample</code> สองกลุ่มที่ไม่เกี่ยวเนื่องกัน</p>
+<p><span class="math display">\[
+t = \frac{\bar{x_{1}}-\bar{x_{2}}}{S_{p}\sqrt{\frac{1}{n_{1}}+\frac{1}{n_{2}}}}
+\]</span></p>
+<p><span class="math display">\[
+S_{p}^{2} = \frac{\sum(x-\bar{x_{1}})^{2} + \sum(x-\bar{x_{2}})^{2}}{{n_{1}} + n_{2} - 2}
+\]</span></p>
+<p>กลับไปดูภาพขั้นต้น ครั้งนี้จะเทียบระหว่าง sample สองกลุ่ม คือ <code>norm_10_sample</code> และ <code>norm_30_sample</code> ว่ามี mean ที่แตกต่างกันอย่างมีนัยสำคัญหรือไม่</p>
+<ul>
+<li><p><span class="math inline">\(H_{0}\)</span>: mean ของ <code>norm_10_sample</code> และ <code>norm_30_sample</code> นั้นไม่แตกต่างกัน (<span class="math inline">\(\text{mean difference} = 0\)</span>)</p></li>
+<li><p><span class="math inline">\(H_{a}\)</span>: mean ของ <code>norm_10_sample</code> และ <code>norm_30_sample</code> นั้นแตกต่างกัน (<span class="math inline">\(\text{mean difference} \neq 0\)</span>)</p></li>
+</ul>
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, <span class="va">norm_30_sample</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  norm_10_sample and norm_30_sample
+## t = -38.469, df = 198, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -20.93623 -18.89440
+## sample estimates:
+## mean of x mean of y 
+##  10.27449  30.18981</code></pre>
+<p>สรุปได้ว่า mean ของ <code>sample</code> ทั้งสองกลุ่มนั้นแตกต่างกันอย่างมีนัยสำคัญ</p>
+<p>ปล. บางครั้งข้อมูลอาจจะมีความแปรปรวนไม่เท่ากัน ในที่นี้มักจะใช้ <code>Welch's t-test</code> โดย <code>t.test(…, var.equal = FALSE)</code> โดยสมการนี้จะทำการปรับควมแปรปรวนให้ด้วย</p>
+</div>
+<div id="paired-t-test" class="section level3" number="9.1.3">
+<h3>
+<span class="header-section-number">9.1.3</span> Paired t-test<a class="anchor" aria-label="anchor" href="#paired-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>เป็นการเปรียบเทียบ mean ระหว่าง <code>sample</code> สองกลุ่มที่เกี่ยวเนื่องกัน (ก่อน-หลัง แม่-ลูก เป็นต้น)</p>
+<p><span class="math display">\[
+t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
+\]</span></p>
+<p><span class="math display">\[ s_{d} = \sqrt{\sum(x_{d}-\bar{x}_{d})/(n-1)}\]</span></p>
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, <span class="va">norm_30_sample</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  norm_10_sample and norm_30_sample
+## t = -37.802, df = 99, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  -20.96067 -18.86996
+## sample estimates:
+## mean difference 
+##       -19.91532</code></pre>
+<p>จะเห็นว่ามีความแตกต่างในส่วนของ <code>df</code> (degree of freedom) ซึ่งเกิดจากการจับคู่หาความต่าง 100 ครั้ง เนื่องจากค่าที่เปรียบเทียบนั้นอยู่ในตัวอย่างเดียวกัน (แม่ลูก คู่ที่ 1 แม่ลูกคู่ที่ 2 … เป็นต้น) เมื่อเปรียบเทียบกับ <code>independent t-test</code> เนื่องจากเป็นการหา mean ในกลุ่มของตัวเอง 2 ครั้ง และมาเทียบความต่างกัน</p>
+<p>ดังนั้น การเลือก <code>paired vs independent</code> นั้นมีความสำคัญ ขึ้นอยู่กับโจทย์การศึกษาของท่านด้วย</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></div>
+<div class="next"><a href="survival-analysis.html"><span class="header-section-number">10</span> Survival analysis</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#parametric-test"><span class="header-section-number">9</span> Parametric test</a></li>
+<li>
+<a class="nav-link" href="#t-test"><span class="header-section-number">9.1</span> t-test</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#one-sample-t-test"><span class="header-section-number">9.1.1</span> One sample t-test</a></li>
+<li><a class="nav-link" href="#independent-t-test"><span class="header-section-number">9.1.2</span> Independent t-test</a></li>
+<li><a class="nav-link" href="#paired-t-test"><span class="header-section-number">9.1.3</span> Paired t-test</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-18.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

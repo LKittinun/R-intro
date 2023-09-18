@@ -1,0 +1,64 @@
+par(mfrow = c(3,2))
+normal_pool <- rnorm(10000)
+hist(normal_pool, col = 'skyblue', main = "Normal distribution population")
+sample_normal_pool <- lapply(1:100 , \(x) sample(normal_pool, 30, replace = FALSE))
+hist(sapply(sample_normal_pool, mean), col = 'slateblue', main = "Mean of normal distribution")
+
+skew_pool <- rbeta(10000,1,2)
+hist(skew_pool, col = 'skyblue', main = "Skewed distribution population")
+sample_skew_pool <- lapply(1:100 , \(x) sample(skew_pool, 30, replace = FALSE))
+hist(sapply(sample_skew_pool, mean), col = 'slateblue', main = "Mean of skewed distribution")
+
+bimodal_pool <-  c(rnorm(5000, -1, .25), rnorm(5000, 1, .25))
+hist(bimodal_pool, col = 'skyblue', main = "Bimodal distribution population")
+sample_bimodal_pool <- lapply(1:100 , \(x) sample(bimodal_pool, 30, replace = FALSE))
+hist(sapply(sample_bimodal_pool, mean), col = 'slateblue', main = "Mean of bimodal distribution")
+
+
+library(tidyverse)
+prob_df<- map_dfc(c(0.1, 0.3,0.5,0.7,0.9), \(x) dbinom(1:20, 20,x)) %>% 
+  set_names(paste0("prob = ", c(0.1, 0.3,0.5,0.7,0.9) )) %>% 
+  mutate(numb_success = 1:20) %>% 
+  pivot_longer(!numb_success, names_to = "Prob", values_to = "rate") 
+
+ggplot(prob_df, aes(x = numb_success, y = rate, col = Prob)) + 
+  geom_point(alpha = 0.9, size =2) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(0,20,2)) +
+  theme_bw() +
+  labs(x = "Number of success", y = "Rate")
+
+nbprob_df<- map_dfc(c(0.1, 0.3,0.5,0.7,0.9), \(x) dnbinom(1:20, 20,x)) %>% 
+  set_names(paste0("prob = ", c(0.1, 0.3,0.5,0.7,0.9) )) %>% 
+  mutate(numb_success = 1:20) %>% 
+  pivot_longer(!numb_success, names_to = "Prob", values_to = "rate") 
+
+nbmean_df<- map_dfc(c(1,2,4,10), \(x) dnbinom(1:20, 2, mu = x)) %>% 
+  set_names(c("X1","X2","X4","X10")) %>% 
+  mutate(numb_success = 1:20) %>% 
+  pivot_longer(!numb_success, names_to = "lambda", values_to = "rate") %>% 
+  mutate(lambda = fct_relevel(lambda, "X1", "X2", "X4", "X10"))
+
+ggplot(nbmean_df, aes(x = numb_success, y = rate, col = lambda)) + 
+  geom_point(alpha = 0.9, size =2) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(0,20,2)) +
+  theme_bw() +
+  labs(x = "Number of failures", y = "Rate")
+
+plot(dunif(1:10, 1,6), type = 'l', col = 'red', xaxt = 'n', main = "1 time dice roll")
+axis(1, 0:10)
+
+t_df<- map_dfc(1:5, ~dt(-4:4, .x)) %>% 
+  set_names(paste0("X", 1:5)) %>% 
+  mutate(x = -4:4) %>% 
+  pivot_longer(-x, names_to = "df", values_to = "prob")
+
+ggplot(t_df, aes(x = x, y = prob, col = df)) + geom_smooth(se = FALSE)+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank()) +
+  labs(x = "Value", y = "Probability")
+

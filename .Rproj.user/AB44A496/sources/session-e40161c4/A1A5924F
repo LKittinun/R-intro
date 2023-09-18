@@ -1,0 +1,33 @@
+{
+    "id": "A1A5924F",
+    "path": "D:/OneDrive - Prince of Songkla University/R Workspace/Teaching/08-Hypothesis-testing.Rmd",
+    "project_path": "08-Hypothesis-testing.Rmd",
+    "type": "r_markdown",
+    "hash": "3442197881",
+    "contents": "",
+    "dirty": false,
+    "created": 1695013644976.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "tempName": "Untitled1",
+        "chunk_output_type": "inline",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "26,0",
+        "scrollLine": "7",
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "49:0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1695029553,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1695029553,
+    "read_only": false,
+    "read_only_alternatives": []
+}

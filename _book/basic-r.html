@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>1 Basic R | A gentle introduction to R for biologists</title>
+<meta name="author" content="Kittinun Leetanaporn">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="1 Basic R | A gentle introduction to R for biologists">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1 Basic R | A gentle introduction to R for biologists">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="1.1 Basic operation ท่านสามารถใช้ R ในการคำนวณต่างๆ ได้ เช่น บวก ลบ คูณ หาร ยกกำลัง เป็นต้น 3+2 ## [1] 5 3-2 ## [1] 1 3*2 ## [1] 6 3/2 ## [1] 1.5 3^2 ## [1] 9 log(3) ## [1] 1.098612 sqrt(3) ## [1]...">
+<meta property="og:description" content="1.1 Basic operation ท่านสามารถใช้ R ในการคำนวณต่างๆ ได้ เช่น บวก ลบ คูณ หาร ยกกำลัง เป็นต้น 3+2 ## [1] 5 3-2 ## [1] 1 3*2 ## [1] 6 3/2 ## [1] 1.5 3^2 ## [1] 9 log(3) ## [1] 1.098612 sqrt(3) ## [1]...">
+<meta name="twitter:description" content="1.1 Basic operation ท่านสามารถใช้ R ในการคำนวณต่างๆ ได้ เช่น บวก ลบ คูณ หาร ยกกำลัง เป็นต้น 3+2 ## [1] 5 3-2 ## [1] 1 3*2 ## [1] 6 3/2 ## [1] 1.5 3^2 ## [1] 9 log(3) ## [1] 1.098612 sqrt(3) ## [1]...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">A gentle introduction to R for biologists</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Basic R</li>
+<li><a class="active" href="basic-r.html"><span class="header-section-number">1</span> Basic R</a></li>
+<li><a class="" href="r-function.html"><span class="header-section-number">2</span> R function</a></li>
+<li class="book-part">Tidyverse</li>
+<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">3</span> What is tidyverse</a></li>
+<li><a class="" href="importing-data.html"><span class="header-section-number">4</span> Importing data</a></li>
+<li><a class="" href="data-wrangling.html"><span class="header-section-number">5</span> Data wrangling</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
+<li><a class="" href="GSE63514.html"><span class="header-section-number">7</span> Case study: Microarray visualization</a></li>
+<li class="book-part">Statistical analysis</li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
+<li><a class="" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">10</span> Survival analysis</a></li>
+<li class="book-part">Session info</li>
+<li><a class="" href="session-info.html"><span class="header-section-number">11</span> Session info</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="basic-r" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> <strong>Basic R</strong><a class="anchor" aria-label="anchor" href="#basic-r"><i class="fas fa-link"></i></a>
+</h1>
+<div id="basic-operation" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Basic operation<a class="anchor" aria-label="anchor" href="#basic-operation"><i class="fas fa-link"></i></a>
+</h2>
+<p>ท่านสามารถใช้ R ในการคำนวณต่างๆ ได้ เช่น บวก ลบ คูณ หาร ยกกำลัง เป็นต้น</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">3</span><span class="op">+</span><span class="fl">2</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">3</span><span class="op">-</span><span class="fl">2</span></span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">3</span><span class="op">*</span><span class="fl">2</span></span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">3</span><span class="op">/</span><span class="fl">2</span></span></code></pre></div>
+<pre><code>## [1] 1.5</code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">3</span><span class="op">^</span><span class="fl">2</span></span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.098612</code></pre>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.732051</code></pre>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">3</span><span class="op">==</span><span class="fl">3</span> <span class="co"># ตรวจสอบว่าข้อมูลเหมือนกันหรือไม่</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="variable" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Variable<a class="anchor" aria-label="anchor" href="#variable"><i class="fas fa-link"></i></a>
+</h2>
+<div id="variable-assignment" class="section level3" number="1.2.1">
+<h3>
+<span class="header-section-number">1.2.1</span> Variable assignment<a class="anchor" aria-label="anchor" href="#variable-assignment"><i class="fas fa-link"></i></a>
+</h3>
+<p>R สามารถเก็บข้อมูลต่างๆ ไว้ในตัวแปรได้ เพื่อที่สามารถนำมาใช้ในภายหลัง โดยการเก็บตัวแปรนั้นจะใช้เครื่องหมาย <code>&lt;-</code></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="va">x</span></span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span><span class="va">y</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">+</span><span class="va">y</span> <span class="co"># ท่านสามารถนำตัวแปรมาทำ operation ได้ตามปกติ</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">*</span><span class="va">y</span></span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="co"># การลงข้อมูลในตัวแปรเดิมจะเป็นการลบตัวแปรเก่า</span></span>
+<span><span class="va">x</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">helloworld</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="va">y</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="va">x</span><span class="op">-</span><span class="va">y</span><span class="op">)</span> <span class="co"># สามารถตั้งชื่ออะไรก็ได้ตราบใดที่ไม่เว้นวรรค</span></span>
+<span><span class="va">helloworld</span></span></code></pre></div>
+<pre><code>## [1] 64</code></pre>
+</div>
+<div id="type-of-variable" class="section level3" number="1.2.2">
+<h3>
+<span class="header-section-number">1.2.2</span> Type of variable<a class="anchor" aria-label="anchor" href="#type-of-variable"><i class="fas fa-link"></i></a>
+</h3>
+<p>R นั้นสามารถรองรับตัวแปรต่างๆ ได้หลากหลาย ซึ่งเป็นได้ทั้ง ตัวเลข หรือตัวอักษร หรือแม้กระทั่งเก็บหลายข้อมูลภายในตัวแปรเดียวได้</p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"Hello world"</span> <span class="co"># ตัวอักษร</span></span>
+<span><span class="va">x</span></span></code></pre></div>
+<pre><code>## [1] "Hello world"</code></pre>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span> <span class="co"># เก็บหลายตัวข้อมูลในตัวแปรเดียว</span></span>
+<span><span class="va">y</span></span></code></pre></div>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fl">4</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hello world"</span>, <span class="st">"I love R"</span><span class="op">)</span><span class="op">)</span>  <span class="co"># เก็บข้อมูลในรูปแบบ list</span></span>
+<span><span class="va">z</span></span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 1 2 3
+## 
+## [[2]]
+## [1] 4
+## 
+## [[3]]
+## [1] "hello world" "I love R"</code></pre>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># ท่านสามารถเช็คชนิดของตัวแปรได้โดยใช้ function class()</span></span></code></pre></div>
+<pre><code>## [1] "character"</code></pre>
+<p>ลักษณะตัวแปรต่างๆ ใน R มีดังนี้</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="25%">
+<col width="26%">
+<col width="48%">
+</colgroup>
+<thead><tr class="header">
+<th>ชนิด</th>
+<th>ตัวอย่าง</th>
+<th>คำอธิบาย</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>numeric</td>
+<td>
+<code>1</code>, <code>2.3</code>, <code>5</code>
+</td>
+<td>จำนวนจริง รวมทศนิยม</td>
+</tr>
+<tr class="even">
+<td>integer</td>
+<td>
+<code>1</code>, <code>2</code>, <code>3</code>
+</td>
+<td>จำนวนเต็ม เป็น subset ของ numeric</td>
+</tr>
+<tr class="odd">
+<td>complex</td>
+<td><code>1i</code></td>
+<td>จำนวนเชิงซ้อน</td>
+</tr>
+<tr class="even">
+<td>character</td>
+<td>
+<code>"สวัสดี"</code>, <code>"Hello world"</code>
+</td>
+<td>ตัวอักษร ต้องอยู่ในเครื่องหมาย ” ”</td>
+</tr>
+<tr class="odd">
+<td>factor</td>
+<td>
+<code>"a"</code>, <code>"b"</code>, <code>"c"</code>
+</td>
+<td>คล้าย character แต่มีจำนวนตัวแปรจำกัด</td>
+</tr>
+<tr class="even">
+<td>logical</td>
+<td>
+<code>TRUE</code>, <code>FALSE</code>
+</td>
+<td>ตามหลักตรรกศาสตร์</td>
+</tr>
+<tr class="odd">
+<td>vector</td>
+<td><code>c(1,2,3)</code></td>
+<td>หลายข้อมูลใน 1 ตัวแปร โดยต้องเป็นตัวแปรชนิดเดียวกัน</td>
+</tr>
+<tr class="even">
+<td>list</td>
+<td><code>list(1, c(1,3,4), "Hello")</code></td>
+<td>หลายข้อมูลใน 1 ตัวแปร โดยไม่จำเป้นต้องเป็นตัวแปรชนิดเดียวกัน</td>
+</tr>
+<tr class="odd">
+<td>dataframe</td>
+<td><code>data.frame(x=3, y=2)</code></td>
+<td>ตาราง</td>
+</tr>
+</tbody>
+</table></div>
+<p>ในบางครั้ง class ที่ R ทำการเดามาให้ตั้งแต่แรกอาจจะไม่ใช่ลักษณะตัวแปรที่ท่านต้องการ ท่านสามารถใช้ คำสั่ง <code>as.*()</code> ในการเปลี่ยน class ของตัวแปรนั้นได้</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># ไม่ต้องการให้คิดเป็นตัวเลข เช่น ตัวแปรที่จริงแล้วอาจจะเป็น กลุ่ม1 กลุ่ม2</span></span></code></pre></div>
+<pre><code>## [1] "numeric"</code></pre>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># เปลี่ยนเป็น factor</span></span></code></pre></div>
+<pre><code>## [1] "factor"</code></pre>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"A"</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>, <span class="st">"B"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>,<span class="st">"e"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">x_list</span></span></code></pre></div>
+<pre><code>## $A
+## [1] 1 2 3 4 5
+## 
+## $B
+## [1] "a" "b" "c" "d" "e"</code></pre>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">x_list</span><span class="op">)</span> <span class="co"># เปลี่ยนเป็น dataframe</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["A"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["B"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"a"},{"1":"2","2":"b"},{"1":"3","2":"c"},{"1":"4","2":"d"},{"1":"5","2":"e"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="matrix-and-dataframe" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Matrix and Dataframe<a class="anchor" aria-label="anchor" href="#matrix-and-dataframe"><i class="fas fa-link"></i></a>
+</h2>
+<p>เนื่องจาก R นั้นเป็นโปรแกรมที่ส่วนมากใช้ในการวิเคราะห์ทางสถิติ ซึ่งเกี่ยวข้อมูลส่วนใหญ่จะถูกเก็บในรูปของตาราง R จึงมีตัวแปรที่เก็บข้อมูลในรูปของตารางโดยเฉพาะ เรียกว่า matrix และ dataframe ซึ่งท่านจะใช้เป็นหลักในการวิเคราะห์ข้อมูลใน R</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">mat</span></span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4</code></pre>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "matrix" "array"</code></pre>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>,y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span>,z<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">7</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["x"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["y"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["z"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"3","2":"2","3":"4"},{"1":"4","2":"5","3":"7"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "data.frame"</code></pre>
+<p>โดยตารางนั้นจะประกอบด้วยสองส่วนหลักๆ คล้าย excel spreadsheet ได้แก่</p>
+<ul>
+<li>Column (คอลัมน์): คือ ข้อมูลในแนวตั้ง ซึ่งแถวบนสุดจะเป็นชื่อ column นั้นๆ</li>
+<li>Row (แถว): คือ ข้อมูลในแนวนอน</li>
+</ul>
+<p>โดย matrix นั้น สามารถเก็บ variable ในรูปแบบเดียวกันได้เท่านั้น แต่ dataframe สามารถเก็บข้อมูลต่างชนิดร่วมกันได้ โดยมีข้อแม้ว่า column เดียวกัน จะต้องเป็นข้อมูลชุดเดียวกัน</p>
+</div>
+<div id="subset" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Subset<a class="anchor" aria-label="anchor" href="#subset"><i class="fas fa-link"></i></a>
+</h2>
+<p>ท่านสามารถดึงข้อมูลแค่บางส่วนออกมาจาก vector, list, matrix หรือ dataframe ได้ เรียกว่าการ subset</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span><span class="op">)</span></span>
+<span><span class="va">x</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="co"># subset โดยระบุตำแหน่ง</span></span></code></pre></div>
+<pre><code>## [1] "c"</code></pre>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="co"># subset หลายตำแหน่ง</span></span></code></pre></div>
+<pre><code>## [1] "a" "b" "c"</code></pre>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="co"># subset หลากหลายตำแหน่งแบบจำเพาะ</span></span></code></pre></div>
+<pre><code>## [1] "a" "c"</code></pre>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co"># subset list ตามตำแหน่ง (จะได้ list ย่อยออกมา)</span></span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 1 2 3</code></pre>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="co"># ดึงข้อมูลที่อยู่ใน list ออกมา</span></span></code></pre></div>
+<pre><code>## [1] 1 2 3</code></pre>
+<p>ในส่วนของ matrix และ dataframe นั้น ท่านสามารถ subset ตามตำแหน่งได้ โดยการระบุ row และ column ตามลำดับ</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mat</span></span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4</code></pre>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mat</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span> <span class="co"># 1st row, 2nd column</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["x"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["y"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["z"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"3","2":"2","3":"4"},{"1":"4","2":"5","3":"7"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">]</span> <span class="co"># 1st row, 3rd column</span></span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>ในส่วนของ dataframe นั้น ท่านสามารถ subset ได้โดยใช้ชื่อของ column อีกด้วย</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span> <span class="co"># subset เป็น column ย่อย</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["x"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"3"},{"1":"4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span> <span class="co"># subset ข้อมูลที่อยู่ใน column นั้น</span></span></code></pre></div>
+<pre><code>## [1] 3 4</code></pre>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"x"</span><span class="op">]</span><span class="op">]</span> <span class="co"># ระบุแถวด้วย</span></span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">x</span> <span class="co"># เหมือนกัน df[["x"]]</span></span></code></pre></div>
+<pre><code>## [1] 3 4</code></pre>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Preface</a></div>
+<div class="next"><a href="r-function.html"><span class="header-section-number">2</span> R function</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#basic-r"><span class="header-section-number">1</span> Basic R</a></li>
+<li><a class="nav-link" href="#basic-operation"><span class="header-section-number">1.1</span> Basic operation</a></li>
+<li>
+<a class="nav-link" href="#variable"><span class="header-section-number">1.2</span> Variable</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#variable-assignment"><span class="header-section-number">1.2.1</span> Variable assignment</a></li>
+<li><a class="nav-link" href="#type-of-variable"><span class="header-section-number">1.2.2</span> Type of variable</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#matrix-and-dataframe"><span class="header-section-number">1.3</span> Matrix and Dataframe</a></li>
+<li><a class="nav-link" href="#subset"><span class="header-section-number">1.4</span> Subset</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-18.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

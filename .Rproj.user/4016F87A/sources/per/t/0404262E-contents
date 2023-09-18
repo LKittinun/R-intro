@@ -1,0 +1,140 @@
+# **Data visualization**
+
+## General visualization `ggplot2` {#ggplot2}
+
+ggplot2 คือ package ย่อยอีกตัวของ tidyverse ซึ่งใช้สำหรับการพล็อตกราฟ
+
+### (Simple) Anatomy of ggplot
+
+```{r iris_loading, echo=FALSE}
+df <- iris
+```
+
+```{r, eval =FALSE}
+ggplot(data = your_data, aes(x = x, y = y, col = col, fill = fill)) +
+  geom_*() +
+  theme_*() 
+```
+
+-   `aes` คือ aesthetic ซึ่งหมายถึงการ map ข้อมูลของท่านเข้ากับตำแหน่งของกราฟ
+    -   `x` = แกน x, y = แกน y
+    -   `col` = สี, fill = สีพื้นหลัง
+-   `geom_*()` คือ การกำหนดว่าท่านต้องการที่จะ plot กราฟอะไร
+-   `theme_*()` คือ การกำหนด theme ของกราฟ เช่น `theme_bw()`, `theme_classic()`
+-   และยังมีการปรับแต่งอื่นๆ ได้อีกมาก สามารถศึกษาได้ที่ <https://ggplot2.tidyverse.org/reference/>
+
+### Scatterplot
+
+```{r scatterplot}
+library(ggplot2) 
+
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + geom_point()
+```
+
+### Barchart
+
+`geom_bar()` ใช้สำหรับนับจำนวนของ column นั้น ไม่มีค่า y
+
+```{r barplot}
+ggplot(df, aes(x = Species, fill = Species)) + # fill ไว้สำหรับแบ่งสีใน barchart
+  geom_bar() 
+```
+
+ส่วน `geom_col()` จะรับค่า y ด้วย โดยข้อมูล x ที่ซ้ำกันจะถูกนำมารวมกัน
+
+```{r colplot}
+ggplot(df, aes(x = Species, y = Sepal.Width, fill = Species)) + 
+  geom_col() 
+```
+
+สังเกตว่าค่าที่ได้เกิดจากการรวมกันของข้อมูลทั้งคอลัมน์ ซึ่งมักไม่เป็นที่ต้องการในการแสดง ส่วนใหญ่มักจะใช้ในการแสดงค่าเฉลี่ยมากกว่า ในการนี้ ควรใช้คำสั่ง `dplyr::summarize()` ในการสรุปข้อมูลก่อน
+
+```{r colplot_summarized}
+df |> 
+  group_by(Species) |> 
+  summarize(across(everything(), mean)) |> 
+  ggplot(aes(x = Species, y = Sepal.Width, fill = Species)) + 
+  geom_col() 
+```
+
+จะเห็นว่ากราฟแสดงค่าเฉลี่ยซึ่งตรงตามความต้องการทั่วไปมากกว่า (สังเกตแกน `y`)
+
+### Boxplot {#multi_boxplot}
+
+ทำการสร้าง box plot
+
+```{r boxplot}
+ggplot(df, aes(x = Species, y = Sepal.Width, fill = Species)) +
+  geom_boxplot() 
+```
+
+ถ้าท่านต้องการสร้าง plot ที่แสดงหลาย metrics ท่านจะต้อง[เปลี่ยนข้อมูลเป็น long form](#reshape) เสียก่อน
+
+```{r multi_boxplot}
+head(long_df, 10)
+
+long_df |> 
+    ggplot(aes(x = Species, y = cm, fill = Metrics)) +
+    geom_boxplot() 
+```
+
+### Histogram
+
+ในการทำงานสถิตินั้น โดยส่วนใหญ่จะต้องทำการตรวจสอบการกระจายของข้อมูลก่อนวิเคราะห์ทางสถิติ ซึ่งสามารถทำได้โดยใช้ `geom_histogram()`หรือ `geom_density()`
+
+```{r geom_histogram}
+ggplot(df, aes(x = Sepal.Width)) + 
+  geom_histogram(fill = "skyblue", binwidth = 0.1)  # binwidth = ความกว้างของแต่ละช่วงข้อมุล
+```
+
+```{r geom_density}
+ggplot(df, aes(x = Sepal.Width)) + 
+  geom_density(fill = "violet", alpha = 0.5)
+```
+
+ทั้งนี้ ท่านสามารถพล็อตหลายกราฟเข้าด้วยกันได้ ด้วยการ `+` ตามหลังไปเรื่อยๆ เพียงแต่ต้องระวังเรื่อง scale ที่ต้องเป็นระดับเดียวกัน
+
+```{r combine_density}
+ggplot(df, aes(x = Sepal.Width)) +
+  geom_histogram(aes(y = after_stat(density)), binwidth = 0.1, fill = "skyblue") + # ปรับเป็นความถี่
+  geom_density(fill = "violet", alpha = 0.5) +
+  theme_bw() # ลบภาพพื้นหลังสีเทาออก
+```
+
+### Fitting a statistical model
+
+ท่านสามารถที่พล็อต statistical model ได้โดยใช้ `geom_smooth()` ยกตัวอย่าง เช่น ถ้าอยากดูความสัมพันธ์ของ `Sepal.Length` และ `Petal.Length`
+
+```{r geom_smooth_loess}
+ggplot(df, aes(x = Sepal.Length, y = Petal.Length, color = Species)) + # สีตาม Species
+  geom_point(color = "black") +
+  geom_smooth(method = "loess") + # fit a LOESS model
+  theme_bw()
+```
+
+```{r geom_smooth}
+ggplot(df, aes(x = Sepal.Length, y = Petal.Length, color = Species)) + # สีตาม Species
+  geom_point(color = "black") +
+  geom_smooth(method = "lm") + # fit a linear model
+  theme_bw()
+```
+
+### Faceting
+
+ในบางครั้งท่านอาจจะต้องการที่จะพล็อตกราฟแยกกันเป็นส่วนๆ มากกว่ารวมกันในกราฟเดียว ท่านสามารถแบ่ง partition ของการพล็อตแต่ละกลุ่มได้โดยใช้ `facet`
+
+```{r facet_model}
+ggplot(df, aes(x = Sepal.Length, y = Petal.Length, color = Species)) + # สีตาม Species
+  geom_point(color = "black") +
+  geom_smooth(method = "lm") +
+  facet_wrap(~Species) + # แบ่งเป็นหลายกลุ่ม
+  theme_bw()
+```
+
+```{r facet_hist}
+ggplot(df, aes(x = Sepal.Length,  fill = Species)) + # สีตาม Species
+  geom_histogram(binwidth = 0.1) +
+  facet_wrap(~Species, scales = "free_x", nrow = 2) + # ทำให้แกน x ไม่ fix ค่า
+  theme_bw()
+
+```

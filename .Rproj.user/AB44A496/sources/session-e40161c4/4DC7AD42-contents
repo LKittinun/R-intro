@@ -1,0 +1,55 @@
+---
+title: "A gentle introduction to R for biologists"
+author: "Kittinun Leetanaporn"
+date: "`r Sys.Date()`"
+output: 
+  bookdown::bs4_book:
+    df_print: paged
+    config:
+      download: 
+       - ["_main.pdf", "PDF"]
+       - ["_presentation.pptx", "PPTX"]
+site: bookdown::bookdown_site
+documentclass: book
+delete_merged_file: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+#                      tidy.opts = list(width.cutoff = 80), tidy = TRUE)
+```
+
+# **Preface**  {.unnumbered}
+
+เอกสารนี้จัดทำขึ้นเพื่อจุดประสงค์ขึ้นเพื่อแนะนำการใช้ R เบื้องต้น สำหรับนักวิทยาศาสตร์ที่มีความสนใจในการใช้ R ในการวิเคราะห์ข้อมูล ซึ่งผู้ใช้งานจำเป็นจะต้องมีความรู้เรื่อง basic R ต่างๆ เล็กน้อย เพื่อที่จะได้ใช้งานได้อย่างไม่ติดขัด
+
+Online version: <https://tmrc.psu.ac.th/RNAseq/_book/index.html>
+
+## R installation {.unnumbered}
+
+### R console {.unnumbered}
+
+ผู้ที่ต้องการใช้ R สามารถดาวน์โหลดโปรแกรม ได้ที่นี่ <https://cran.r-project.org/bin/windows/base/> โดยตัว R console จะมีหน้าตาดังภาพ
+
+```{r rconsole, fig.align="center", echo=FALSE, out.width="100%"}
+knitr::include_graphics("./Picture/Rconsole (Custom).jpg")
+```
+
+### Rstudio {.unnumbered}
+
+อย่างไรก็ตาม การใช้งาน R ด้วยโปรแกรมนี้จะใช้งานค่อนข้างยาก โดยส่วนใหญผู้ใช้การจะต้องดาวน์โหลด IDE (integrated development environment) มาอำนวยความสะดวกในการเขียนคำสั่ง ซึ่ง IDE ที่ได้รับความนิยมมากที่สุด คือ Rstudio สามารถดาวน์โหลดได้ที่ <https://posit.co/download/rstudio-desktop/>
+
+```{r rstudio, fig.align="center", echo=FALSE, out.width="100%"}
+knitr::include_graphics("./Picture/Rstudio (Custom).jpg")
+```
+
+นี่คือหน้าต่าง default ของ Rstudio โดยส่วนประกอบหลักคือ
+
+1.  **Text editor** มุมซ้ายบน คือ ที่ๆ เราจะเขียน script ไว้เพื่อ run
+2.  **Environment** มุมขวาบน คือ ส่วนที่เก็บข้อมูล variable ต่างๆ ที่เรา assign
+3.  **R console** มุมซ้ายล่าง คือ ส่วนที่ R ทำงานจริงๆ ซึ่งก็คือ ตัว R console ที่เราโหลดมาตอนแรกนั่นเอง
+4.  **ส่วน Output** ที่จะมีไว้แสดงที่อยู่ของไฟล์ รูปภาพที่ render ออกมา และ อื่นๆ ตามที่เราจะปรับแต่ง
+
+เราสามารถเขียนไว้ script ไว้ที่ text editor และกด run คำสั่งแต่ละบรรทัดได้โดยการกด Ctrl + Enter
+
+**ยินดีด้วย!** เท่านี้ท่านก็สามารถเริ่มใช้งาน R ได้แล้ว

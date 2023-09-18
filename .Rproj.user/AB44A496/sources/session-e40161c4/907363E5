@@ -1,0 +1,33 @@
+{
+    "id": "907363E5",
+    "path": "D:/OneDrive - Prince of Songkla University/R Workspace/Teaching/06-ggplot.Rmd",
+    "project_path": "06-ggplot.Rmd",
+    "type": "r_markdown",
+    "hash": "1660088801",
+    "contents": "",
+    "dirty": false,
+    "created": 1695010911130.0,
+    "source_on_save": false,
+    "relative_order": 7,
+    "properties": {
+        "tempName": "Untitled1",
+        "chunk_output_type": "inline",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "2,0",
+        "scrollLine": "10",
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "55:0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1695024765,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1695024765303,
+    "read_only": false,
+    "read_only_alternatives": []
+}

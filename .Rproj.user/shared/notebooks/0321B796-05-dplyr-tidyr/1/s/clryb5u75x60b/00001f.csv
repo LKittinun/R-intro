@@ -1,0 +1,5 @@
+"0","df |> select(Species) |> head(5) # เลือก column ""Species""
+"
+"2","Error in h(simpleError(msg, call)) : 
+  error in evaluating the argument 'x' in selecting a method for function 'head': unable to find an inherited method for function ‘select’ for signature ‘""data.frame""’
+"
