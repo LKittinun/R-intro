@@ -1,4 +1,4 @@
-# Case study {#GSE63514}
+# Case study: Microarray visualization {#GSE63514}
 
 ต่อไปนี้จะเป็นตัวอย่างในการใช้ R ในการวิเคราะห์ข้อมูล molecular data เบื้องต้น โดยใช้ข้อมูลจาก [GEO dataset](https://www.ncbi.nlm.nih.gov/gds) `GSE63514` ซึ่งเป็น gene expression microarray
 
@@ -103,6 +103,22 @@ ggplot(top10_long, aes(x = SYMBOL, y = Intensity, fill = Group)) +
           element_text(angle = 45, vjust = 1, hjust=1)) # หมุนแกน x เพื่อความสวยงาม
 ```
 
+ท่านอาจจะอยากเพิ่มเส้นค่าเฉลี่ยเพื่อดูว่า global mean intensity เป็นเท่าไร
+
+```{r global_mean}
+global_mean_intensity <- mean(top10_long$Intensity)
+global_mean_intensity
+
+ggplot(top10_long, aes(x = SYMBOL, y = Intensity, fill = Group)) + 
+  geom_boxplot() +
+  geom_hline(yintercept = global_mean_intensity, linetype = "dashed", color = "darkviolet", linewidth = 1) +
+  theme_bw() +
+  theme(axis.text.x = 
+          element_text(angle = 45, vjust = 1, hjust=1))
+```
+
+ตัวกลุ่ม `RPL` ดูน่าสนใน เนื่องจาก intensity ใน `cancer` ต่ำกว่า `global mean` แต่จะมีนัยสำคัญหรือไม่ต้องใช้การวิเคราะห์ทางสถิติเพิ่มเติมทีหลัง
+
 ต่อไป เราอยากที่จะแบ่งว่า tissue ที่เป็น `whole section` กับ `laser captured` มีการแสดงออกที่แตกต่างกันอย่างไร เราจะใช้ `facet_wrap()` เข้ามาช่วย
 
 ```{r top10_long_dissec}
@@ -112,26 +128,34 @@ top10_long_dissec <- top10_long |>
 top10_long_dissec
 ```
 
-```{r top10_long_dissec_boxplot}
-ggplot(top10_long_dissec, aes(x = SYMBOL, y = Intensity, fill = Group)) + 
-  geom_boxplot() +
-  facet_wrap(~`dissection:ch1`) +
-  theme(axis.text.x = 
-          element_text(angle = 45, vjust = 1, hjust=1))
+พล็อตอัตราส่วนจำนวนของ `laser capture` vs `whole section`
+
+```{r top10_barchart}
+ggplot(top10_long_dissec, aes(x = `dissection:ch1`, fill = Group)) + 
+  geom_bar(col = "black", width = 0.5, position = "dodge") + 
+  theme_bw()
 ```
 
 เห็นว่าผลที่ได้ประหลาด เนื่องจาก `laser captured`และ `laser-captured` เป็นตัวแปรซ้ำ ต้องแก้ไขเสียก่อน
 
-```{r top10_long_dissec_fix}
+```{r top10_long_dissec_fixed_bar}
 top10_long_dissec <- top10_long_dissec |> 
                       mutate(`dissection:ch1` = gsub("-", " ", `dissection:ch1`))
 
+ggplot(top10_long_dissec, aes(x = `dissection:ch1`, fill = Group)) + 
+  geom_bar(col = "black", width = 0.5, position = "dodge") + 
+  theme_bw()
+```
+
+เมื่อข้อมูลที่ได้ถูกต้อง จะเห็นว่า มีเฉพาะกลุ่ม `cancer` เท่านั้น ที่มีการตัดแบบ `whole section`
+
+หลังจากนั้นเราจะทำการพล็อต intensity ในแต่ละ gene
+
+```{r top10_long_dissec_fixed_intensity}
 ggplot(top10_long_dissec, aes(x = SYMBOL, y = Intensity, fill = Group)) + 
   geom_boxplot() +
-  facet_wrap(~`dissection:ch1`, nrow = 2) +
+  facet_wrap(~`dissection:ch1`) +
   theme_bw() +
   theme(axis.text.x = 
           element_text(angle = 45, vjust = 1, hjust=1))
 ```
-
-เมื่อข้อมูลที่ได้ถูกต้อง จะเห็นว่า มีเฉพาะกลุ่ม `cancer` เท่านั้น ที่มีการตัดแบบ `whole section`

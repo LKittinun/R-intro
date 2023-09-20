@@ -1,8 +1,8 @@
 # **Data visualization**
 
-## General visualization `ggplot2` {#ggplot2}
+## General visualization with `ggplot2` {#ggplot2}
 
-ggplot2 คือ package ย่อยอีกตัวของ tidyverse ซึ่งใช้สำหรับการพล็อตกราฟ
+`ggplot2` คือ package ย่อยอีกตัวของ `tidyverse` ซึ่งใช้สำหรับการพล็อตกราฟ
 
 ### (Simple) Anatomy of ggplot
 
@@ -13,59 +13,105 @@ df <- iris
 ```{r, eval =FALSE}
 ggplot(data = your_data, aes(x = x, y = y, col = col, fill = fill)) +
   geom_*() +
-  theme_*() 
+  theme_*() +
+  ...
 ```
 
 -   `aes` คือ aesthetic ซึ่งหมายถึงการ map ข้อมูลของท่านเข้ากับตำแหน่งของกราฟ
     -   `x` = แกน x, y = แกน y
-    -   `col` = สี, fill = สีพื้นหลัง
+    -   `col` = สี, `fill` = สีพื้นหลัง
 -   `geom_*()` คือ การกำหนดว่าท่านต้องการที่จะ plot กราฟอะไร
--   `theme_*()` คือ การกำหนด theme ของกราฟ เช่น `theme_bw()`, `theme_classic()`
--   และยังมีการปรับแต่งอื่นๆ ได้อีกมาก สามารถศึกษาได้ที่ <https://ggplot2.tidyverse.org/reference/>
+-   `theme_*()` คือ การกำหนด theme ของกราฟ เพื่อความสวยงาม เช่น `theme_bw()`, `theme_classic()`
 
-### Scatterplot
+การสร้างภาพที่สมบูรณ์นั้นมีส่วนจำเป็นที่ประกอบด้วย `aes` และ `geom` ตรงส่วนอื่นเป็นส่วนเสริมที่จะช่วยให้ภาพมีความสวยงามขึ้น
+
+```{r blank_geom}
+library(ggplot2) 
+df
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length))
+```
+
+สังเกตว่าจะยังไม่มีกราฟใดๆ ปรากฏ ท่านจำเป็นต้องใช้ function `geom` เพื่อทำการสร้างภาพนั้นขึ้น
+
+### Scatter plot
 
 ```{r scatterplot}
-library(ggplot2) 
-
 ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + geom_point()
 ```
 
-### Barchart
+สังเกตการ mapping ของ `aes()`
+
+```{r aes_mapping, out.width = "100%", fig.align="center", echo=FALSE}
+knitr::include_graphics("Picture/aes.jpg")
+```
+
+### Straight line
+
+ท่านสามารถเพิ่มเส้นที่ท่านต้องการได้โดย `geom_hline` (แนวตั้ง), `geom_vline` (แนวนอน), `geom_abline` (แนวเฉียง)
+
+```{r straight_line}
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + 
+  geom_point() + 
+  geom_hline(yintercept = 6, linetype = "dashed", col = "red", linewidth = 1) + 
+  geom_vline(xintercept = 2.7, linetype = "dotted", col = "blue", linewidth = 1.25) + 
+  geom_abline(intercept = 2, slope = 1, linetype = "dotdash", col = "black", linewidth = 1.5)
+```
+
+สังเกตว่าท่านสามารถปรับค่าจำพวก สี ลักษณะเส้นต่างๆ ได้ โดย parameter นั้น ต้องอยู่นอก `aes` มิเช่นนั้น function จะพยายามไปดึงข้อมูลจากกราฟมา
+
+```{r wrong_aes}
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = "darkviolet")) + # ผิด
+  geom_point() + 
+  geom_hline(yintercept = 6, linetype = "dashed", col = "red", linewidth = 1) + 
+  geom_vline(xintercept = 2.7, linetype = "dotted", col = "blue", linewidth = 1.25) + 
+  geom_abline(intercept = 2, slope = 1, linetype = "dotdash", col = "black", linewidth = 1.5)
+```
+
+ที่ถูกต้อง ท่านต้องนำ `col` ไปอยู่นอก `aes` จึงจะได้สีที่ท่านต้องการ
+
+```{r wrong_aes_fixed}
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length)) + # ผิด
+  geom_point(col = "darkviolet") + 
+  geom_hline(yintercept = 6, linetype = "dashed", col = "red", linewidth = 1) + 
+  geom_vline(xintercept = 2.7, linetype = "dotted", col = "blue", linewidth = 1.25) + 
+  geom_abline(intercept = 2, slope = 1, linetype = "dotdash", col = "black", linewidth = 1.5)
+```
+
+### Bar chart
 
 `geom_bar()` ใช้สำหรับนับจำนวนของ column นั้น ไม่มีค่า y
 
 ```{r barplot}
 ggplot(df, aes(x = Species, fill = Species)) + # fill ไว้สำหรับแบ่งสีใน barchart
-  geom_bar() 
+  geom_bar(col = "black", width = 0.5) # ความกว้าง 50% 
 ```
 
 ส่วน `geom_col()` จะรับค่า y ด้วย โดยข้อมูล x ที่ซ้ำกันจะถูกนำมารวมกัน
 
 ```{r colplot}
 ggplot(df, aes(x = Species, y = Sepal.Width, fill = Species)) + 
-  geom_col() 
+  geom_col(col = "black", width = 0.5) 
 ```
 
-สังเกตว่าค่าที่ได้เกิดจากการรวมกันของข้อมูลทั้งคอลัมน์ ซึ่งมักไม่เป็นที่ต้องการในการแสดง ส่วนใหญ่มักจะใช้ในการแสดงค่าเฉลี่ยมากกว่า ในการนี้ ควรใช้คำสั่ง `dplyr::summarize()` ในการสรุปข้อมูลก่อน
+สังเกตว่าค่าที่ได้เกิดจากการรวมกันของข้อมูลทั้งคอลัมน์ (สังเกตที่เส้นสีดำเป็นเส้นต่อๆ กัน ไม่ใช่เส้นเดียว) ซึ่งมักไม่เป็นที่ต้องการในการแสดง โดยมักเกิดจากความผิดพลาดมากกว่า (โดยเฉพาะถ้าไม่ได้ใส่ `col = black`) และส่วนใหญ่มักจะใช้ในการแสดงค่าเฉลี่ยมากกว่าผลรวม ในการนี้ ควรใช้คำสั่ง `dplyr::summarize()` ในการสรุปข้อมูลก่อน
 
 ```{r colplot_summarized}
 df |> 
   group_by(Species) |> 
   summarize(across(everything(), mean)) |> 
   ggplot(aes(x = Species, y = Sepal.Width, fill = Species)) + 
-  geom_col() 
+  geom_col(col = "black", width = 0.5) 
 ```
 
 จะเห็นว่ากราฟแสดงค่าเฉลี่ยซึ่งตรงตามความต้องการทั่วไปมากกว่า (สังเกตแกน `y`)
 
-### Boxplot {#multi_boxplot}
+### Box plot {#multi_boxplot}
 
 ทำการสร้าง box plot
 
 ```{r boxplot}
 ggplot(df, aes(x = Species, y = Sepal.Width, fill = Species)) +
-  geom_boxplot() 
+  geom_boxplot(width = 0.5) 
 ```
 
 ถ้าท่านต้องการสร้าง plot ที่แสดงหลาย metrics ท่านจะต้อง[เปลี่ยนข้อมูลเป็น long form](#reshape) เสียก่อน
@@ -136,5 +182,10 @@ ggplot(df, aes(x = Sepal.Length,  fill = Species)) + # สีตาม Species
   geom_histogram(binwidth = 0.1) +
   facet_wrap(~Species, scales = "free_x", nrow = 2) + # ทำให้แกน x ไม่ fix ค่า
   theme_bw()
-
 ```
+
+ทั้งหมดที่แสดงนี้ เป็นเพียงกราฟพื้นฐานเท่านั้น ยังมีการปรับแต่งอื่นๆ ได้อีกมาก สามารถศึกษาเพิ่มเติมได้ที่:
+
+-   **Function reference:** <https://ggplot2.tidyverse.org/reference/>
+
+-   **Plot gallery:** <https://r-graph-gallery.com/>

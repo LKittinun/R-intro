@@ -12,7 +12,7 @@ library(dplyr)
 
 ในกรณีนี้จะใช้ข้อมูลตัวอย่าง `iris` เพื่อสาธิตการใช้ `dplyr` โดย `iris` เป็นข้อมูลของความยาวกลีบของพันธุ์ดอกไม้ต่างๆ
 
-```{r iris, echo = FALSE}
+```{r iris, fig.align="center", echo = FALSE}
 knitr::include_graphics("Picture/iris.png")
 ```
 
@@ -277,8 +277,7 @@ df |>
 
 อีก **ประเด็นสำคัญ** ของข้อมูลประเภท `long form` นั้นคือ สามารทำ [visualization](#ggplot2) ที่ซับซ้อนได้ดีกว่า `wide form` เป็นอย่างมาก ดังตัวอย่าง [Boxplot1](#multi_boxplot), [Boxplot2](#top10_boxplot)
 
-
----
+------------------------------------------------------------------------
 
 ### Long to wide
 

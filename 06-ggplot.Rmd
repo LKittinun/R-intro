@@ -2,7 +2,7 @@
 
 ## General visualization with `ggplot2` {#ggplot2}
 
-ggplot2 คือ package ย่อยอีกตัวของ tidyverse ซึ่งใช้สำหรับการพล็อตกราฟ
+`ggplot2` คือ package ย่อยอีกตัวของ `tidyverse` ซึ่งใช้สำหรับการพล็อตกราฟ
 
 ### (Simple) Anatomy of ggplot
 
@@ -182,7 +182,6 @@ ggplot(df, aes(x = Sepal.Length,  fill = Species)) + # สีตาม Species
   geom_histogram(binwidth = 0.1) +
   facet_wrap(~Species, scales = "free_x", nrow = 2) + # ทำให้แกน x ไม่ fix ค่า
   theme_bw()
-
 ```
 
 ทั้งหมดที่แสดงนี้ เป็นเพียงกราฟพื้นฐานเท่านั้น ยังมีการปรับแต่งอื่นๆ ได้อีกมาก สามารถศึกษาเพิ่มเติมได้ที่:

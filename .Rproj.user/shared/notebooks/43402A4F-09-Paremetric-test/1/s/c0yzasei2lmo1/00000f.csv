@@ -1,5 +1,0 @@
-"0","set.seed(123)"
-"0","norm_10_pop <- rnorm(1000, mean = 10, sd = 4) # สร้างประชากร mean = 10, sd = 4"
-"0","norm_10_sample <- sample(norm_10_pop, 100) # สุ่มตัวอย่างมาจากประชากร 100 ราย"
-"0","norm_30_pop <- rnorm(1000, mean = 30, sd = 4)"
-"0","norm_30_sample <- sample(norm_40_pop, 100)"

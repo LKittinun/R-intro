@@ -2,16 +2,92 @@
 
 # Hypothesis testing
 
-การทดสอบสมมติฐานนั้น คือการเปรียบเทียบข้อมูลที่มีอยู่ เทียบกับสมมติฐานทางสถิติว่ามีความแตกต่างกันอย่างมีนัยสำคัญหรือไม่ ซึ่งจะนำไปสู่การปฏิเสธ หรือยอมรับ สมมติฐานนั้นๆ โดยหลักการคือ
+การทดสอบสมมติฐาน คือ การใช้วิธีทางสถิติในตอบคำถามสมมติฐานที่ต้องการ โดยมีขั้นตอน คือ
 
-1.  สร้างสมมติฐาน (Construct the hypothesis)
-    -   สมมติฐานว่าง (Null hypothesis; $H_{0}$) คือสมมติฐานที่ต้องการทดสอบ ซึ่งเปรียบเทียบได้กับสิ่งที่ทุกคนมีความเชื่อกันอยู่แล้ว (default belief) หรือไม่ทราบแน่ชัดว่าเป็นอย่างไร ซึ่งจะการแนวปฏิเสธไว้ก่อน คือ **ไม่มีความแตกต่างกัน**
-    -   สมมติฐานทางเลือก (Alternative hypothesis; $H_{a}$) คือสมมติฐานที่คาดหวังว่าจะเป็นการค้นพบใหม่
-2.  ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics) โดยเครื่องมือจะมีหลายรูปแบบตามลักษณะของข้อมูล เช่น `t-test`, `Chi-square` เป็นต้น
-3.  หา `p-value` คือ โอกาสที่สามารถสังเกตค่าทางสถิติที่มากกว่าค่าการวิเคราะห์ทางสถิติที่โดยที่ยังอยู่ภายใต้ $H_{0}$ ได้
-4.  เปรียบเทียบ `p-value` กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้ โดยทั่วไปมักใช้ที่น้อยกว่า 5% (0.05) หรือ 1% (0.01)
+## สร้างสมมติฐาน (Construct the hypothesis)
 
-ซึ่งการตั้งค่าวิกฤตินั้นมี trade-off ระหว่าง `false positive` และ `false negative` ที่ต้องพิจารณา
+-   สมมติฐานว่าง (Null hypothesis; $H_{0}$) คือสมมติฐานที่ต้องการทดสอบ ซึ่งเปรียบเทียบได้กับสิ่งที่ทุกคนมีความเชื่อกันอยู่แล้ว (default belief) หรือไม่ทราบแน่ชัดว่าเป็นอย่างไร ซึ่งจะเป็นแนวปฏิเสธไว้ก่อน คือ **ไม่มีความแตกต่างกัน**
+-   สมมติฐานทางเลือก (Alternative hypothesis; $H_{a}$) คือสมมติฐานที่คาดหวังว่าจะเป็นการค้นพบใหม่
+
+## ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics)
+
+โดยเครื่องมือจะมีหลายรูปแบบตามลักษณะของข้อมูล เช่น `t-test`, `Chi-square` เป็นต้น ซึ่งผลลัพธ์จากการหาค่าทางสถิติจะเป็นไปตามการทดสอบนั้นๆ เช่น `t-test`: $t$, `Chi-square`: $X^{2}$, `F-test`: $F$ เป็นต้น
+
+## หา `p-value`
+
+คือ โอกาสที่สามารถสังเกตค่าทางสถิติที่มากกว่าค่าการวิเคราะห์ทางสถิติที่โดยไม่ได้อยู่ภายใต้ $H_{0}$ โดยทางปฏิบัติแล้วคือ การสร้างแบบจำลองข้อมูลภายใต้ $H_{0}$ ขึ้นมาแล้วแล้วดูว่า ที่ค่าสถิตินั้น มีโอกาส**ไม่เกิด**เท่าไร
+
+ยกตัวอย่าง เมื่อวิเคราะห์ `t-test` จะทำการสร้าง `t-distribution` ขึ้นมา (ตัวอย่างของการวิเคราะห์ อยู่[บทถัดไป](#sec-t-test) ) ภายใต้ $H_{0}$ ว่า mean = 10
+
+```{r t_dist}
+library(tidyverse)
+t_dist <- dt(seq(-5,5,0.01), df = 99) # t-distribution มี mean = 0 sd = 1
+
+tval <- 0.7345 # t-value วิธีคำนวณอยู่ในบท t-test
+
+density_df <- data.frame(x = seq(-5,5,0.01), y = t_dist) |>
+  mutate(area = ifelse(between(x,-tval,tval), TRUE,FALSE))
+
+ggplot(density_df, aes(x,y)) + 
+  geom_area(fill = "skyblue", color = "black") +
+  geom_area(data = filter(density_df, area), fill = "white", color = "black") +
+  geom_vline(xintercept = c(-tval,tval), linetype = "dashed") +
+  theme_bw()
+```
+
+-   ที่ -0.7345 \< $t$ \< 0.7345 (พื้นที่ใต้กราฟสีขาว) หมายถึงโอกาสที่ค่านั้นเกิดจากความบังเอิญภายใต้ $H_{0}$ ที่ยังเป็นจริง คิดเป็น AUC ได้
+
+```{r AUC_white}
+density_df |> 
+  filter(area) |> 
+  summarize(AUC_white = sum(y)) |> pull()
+```
+
+-   ที่ $t$ \< -0.7345 หรือ $t$ \> 0.7345 (พื้นที่ใต้กราฟสีฟ้า) หมายถึงโอกาสที่ค่านั้น**ไม่ได้**เกิดจากความบังเอิญภายใต้ $H_{0}$ ที่ยังเป็นจริง (extreme value) คิดเป็น AUC ได้
+
+```{r AUC_blue}
+density_df |> 
+  filter(!area) |> 
+  summarize(AUC_blue = sum(y)) |> pull()
+
+p <- 2*pt(0.7345, 99, lower.tail = FALSE) 
+p # p-value
+```
+
+โดย `AUC_blue` = `p-value` = พื้นที่ใต้กราฟสีฟ้า = \~46.4%
+
+## เปรียบเทียบ `p-value` กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้
+
+จุดนี้จะเป็นการตัดว่า ท่านสามารถยอมรับความบังเอิญนี้ที่กี่ % โดยทั่วไปมักใช้ที่น้อยกว่า 5% (0.05) หรือ 1% (0.01) ซึ่งแบ่งเป็น
+
+-   `Left-tailed` คือ โอกาสที่ `critical value` $\leq H_{0}$
+
+-   `Right-tailed` คือ โอกาสที่ `critical value` $\geq H_{0}$
+
+-   `Two-tailed` คือ โอกาสที่ `critical value` $\neq H_{0}$ นิยมใช้วิเคราะห์มากที่สุด
+
+```{r pvalue_crit}
+crit <- qt(1-0.05/2, df = 99) # ตัดที่ <= p 0.05, two-tailed
+
+density_df <- density_df |> 
+  mutate(crits = ifelse(between(x,-crit,crit), TRUE,FALSE))
+
+ggplot(density_df, aes(x,y)) + 
+  geom_area(fill = "darkred", color = "black") +
+  geom_area(data = filter(density_df, crits), fill = "skyblue", color = "black") + 
+  geom_area(data = filter(density_df, area), fill = "white", color = "black") +
+  geom_vline(xintercept = c(-tval,tval), linetype = "dashed") +
+  geom_vline(xintercept = c(-crit,crit), linetype = "dashed", color = "red") +
+  theme_bw()
+```
+
+จะเห็นว่า โอกาสที่ความแตกต่างนั้น**ไม่ได้**เกิดจากความบังเอิญภายใต้ $H_{0}$ นั้นอยู่ที่ 46% ซึ่งมากกว่า 5% ที่ต้องการ จึงไม่สามารถ reject null hypothesis ได้ เรียกอีกแบบหนึ่งว่า ไม่ได้แตกต่างอย่างมีนัยสำคัญ (จนสามารถ reject $H_{0}$ ได้)
+
+ตรงส่วนพื้นที่ระหว่าง `critical value` (ระหว่างเส้นประสีแดง) คือ พิสัยของความแตกต่างที่สามารถรับได้ ซึ่งจะถูกนำไปใช้ในการคำนวณ**ค่าความเชื่อมั่น (confidence interval)** ต่อไป
+
+## Trade-off ของ p-value threshold
+
+การตั้งค่าวิกฤตินั้นมี trade-off ระหว่าง `false positive` และ `false negative` ที่ต้องพิจารณา
 
 | Decision/Truth     | $H_{0}$      | $H_{a}$       |
 |--------------------|--------------|---------------|
@@ -23,4 +99,3 @@
 -   `Type II error` = `false negative` = $\beta$ = 1 - `power`
 
 $\therefore$ `power` = `true negative`
-

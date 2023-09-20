@@ -1,9 +1,10 @@
 h1:data-visualization 
-h2:ggplot2 General visualization 
+h2:ggplot2 General visualization with 
 h3:simple-anatomy-of-ggplot (Simple) Anatomy of ggplot
-h3:scatterplot Scatterplot
-h3:barchart Barchart
-h3:multi_boxplot Boxplot
+h3:scatter-plot Scatter plot
+h3:straight-line Straight line
+h3:bar-chart Bar chart
+h3:multi_boxplot Box plot
 h3:histogram Histogram
 h3:fitting-a-statistical-model Fitting a statistical model
 h3:faceting Faceting

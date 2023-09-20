@@ -9,6 +9,7 @@ output:
       download: 
        - ["_main.pdf", "PDF"]
        - ["_presentation.pptx", "PPTX"]
+  bookdown::word_document2:
 site: bookdown::bookdown_site
 documentclass: book
 delete_merged_file: true

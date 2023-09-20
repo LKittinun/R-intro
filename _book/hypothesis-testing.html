@@ -19,9 +19,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="การทดสอบสมมติฐานนั้น คือการเปรียบเทียบข้อมูลที่มีอยู่ เทียบกับสมมติฐานทางสถิติว่ามีความแตกต่างกันอย่างมีนัยสำคัญหรือไม่ ซึ่งจะนำไปสู่การปฏิเสธ หรือยอมรับ สมมติฐานนั้นๆ โดยหลักการคือ สร้างสมมติฐาน...">
-<meta property="og:description" content="การทดสอบสมมติฐานนั้น คือการเปรียบเทียบข้อมูลที่มีอยู่ เทียบกับสมมติฐานทางสถิติว่ามีความแตกต่างกันอย่างมีนัยสำคัญหรือไม่ ซึ่งจะนำไปสู่การปฏิเสธ หรือยอมรับ สมมติฐานนั้นๆ โดยหลักการคือ สร้างสมมติฐาน...">
-<meta name="twitter:description" content="การทดสอบสมมติฐานนั้น คือการเปรียบเทียบข้อมูลที่มีอยู่ เทียบกับสมมติฐานทางสถิติว่ามีความแตกต่างกันอย่างมีนัยสำคัญหรือไม่ ซึ่งจะนำไปสู่การปฏิเสธ หรือยอมรับ สมมติฐานนั้นๆ โดยหลักการคือ สร้างสมมติฐาน...">
+<meta name="description" content="การทดสอบสมมติฐาน คือ การใช้วิธีทางสถิติในตอบคำถามสมมติฐานที่ต้องการ โดยมีขั้นตอน คือ  8.1 สร้างสมมติฐาน (Construct the hypothesis) สมมติฐานว่าง (Null hypothesis; \(H_{0}\))...">
+<meta property="og:description" content="การทดสอบสมมติฐาน คือ การใช้วิธีทางสถิติในตอบคำถามสมมติฐานที่ต้องการ โดยมีขั้นตอน คือ  8.1 สร้างสมมติฐาน (Construct the hypothesis) สมมติฐานว่าง (Null hypothesis; \(H_{0}\))...">
+<meta name="twitter:description" content="การทดสอบสมมติฐาน คือ การใช้วิธีทางสถิติในตอบคำถามสมมติฐานที่ต้องการ โดยมีขั้นตอน คือ  8.1 สร้างสมมติฐาน (Construct the hypothesis) สมมติฐานว่าง (Null hypothesis; \(H_{0}\))...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -56,9 +56,10 @@
 <li class="book-part">Statistical analysis</li>
 <li><a class="active" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
 <li><a class="" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">10</span> Survival analysis</a></li>
+<li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">11</span> Survival analysis</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">11</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">12</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -70,20 +71,98 @@
 <h1>
 <span class="header-section-number">8</span> Hypothesis testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing"><i class="fas fa-link"></i></a>
 </h1>
-<p>การทดสอบสมมติฐานนั้น คือการเปรียบเทียบข้อมูลที่มีอยู่ เทียบกับสมมติฐานทางสถิติว่ามีความแตกต่างกันอย่างมีนัยสำคัญหรือไม่ ซึ่งจะนำไปสู่การปฏิเสธ หรือยอมรับ สมมติฐานนั้นๆ โดยหลักการคือ</p>
-<ol style="list-style-type: decimal">
-<li>สร้างสมมติฐาน (Construct the hypothesis)
+<p>การทดสอบสมมติฐาน คือ การใช้วิธีทางสถิติในตอบคำถามสมมติฐานที่ต้องการ โดยมีขั้นตอน คือ</p>
+<div id="สรางสมมตฐาน-construct-the-hypothesis" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> สร้างสมมติฐาน (Construct the hypothesis)<a class="anchor" aria-label="anchor" href="#%E0%B8%AA%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%A1%E0%B8%A1%E0%B8%95%E0%B8%90%E0%B8%B2%E0%B8%99-construct-the-hypothesis"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
-<li>สมมติฐานว่าง (Null hypothesis; <span class="math inline">\(H_{0}\)</span>) คือสมมติฐานที่ต้องการทดสอบ ซึ่งเปรียบเทียบได้กับสิ่งที่ทุกคนมีความเชื่อกันอยู่แล้ว (default belief) หรือไม่ทราบแน่ชัดว่าเป็นอย่างไร ซึ่งจะการแนวปฏิเสธไว้ก่อน คือ <strong>ไม่มีความแตกต่างกัน</strong>
+<li>สมมติฐานว่าง (Null hypothesis; <span class="math inline">\(H_{0}\)</span>) คือสมมติฐานที่ต้องการทดสอบ ซึ่งเปรียบเทียบได้กับสิ่งที่ทุกคนมีความเชื่อกันอยู่แล้ว (default belief) หรือไม่ทราบแน่ชัดว่าเป็นอย่างไร ซึ่งจะเป็นแนวปฏิเสธไว้ก่อน คือ <strong>ไม่มีความแตกต่างกัน</strong>
 </li>
 <li>สมมติฐานทางเลือก (Alternative hypothesis; <span class="math inline">\(H_{a}\)</span>) คือสมมติฐานที่คาดหวังว่าจะเป็นการค้นพบใหม่</li>
 </ul>
-</li>
-<li>ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics) โดยเครื่องมือจะมีหลายรูปแบบตามลักษณะของข้อมูล เช่น <code>t-test</code>, <code>Chi-square</code> เป็นต้น</li>
-<li>หา <code>p-value</code> คือ โอกาสที่สามารถสังเกตค่าทางสถิติที่มากกว่าค่าการวิเคราะห์ทางสถิติที่โดยที่ยังอยู่ภายใต้ <span class="math inline">\(H_{0}\)</span> ได้</li>
-<li>เปรียบเทียบ <code>p-value</code> กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้ โดยทั่วไปมักใช้ที่น้อยกว่า 5% (0.05) หรือ 1% (0.01)</li>
-</ol>
-<p>ซึ่งการตั้งค่าวิกฤตินั้นมี trade-off ระหว่าง <code>false positive</code> และ <code>false negative</code> ที่ต้องพิจารณา</p>
+</div>
+<div id="ทำการวเคราะหคาทางสถต-construct-the-test-statistics" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics)<a class="anchor" aria-label="anchor" href="#%E0%B8%97%E0%B8%B3%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A7%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B2%E0%B8%B0%E0%B8%AB%E0%B8%84%E0%B8%B2%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%96%E0%B8%95-construct-the-test-statistics"><i class="fas fa-link"></i></a>
+</h2>
+<p>โดยเครื่องมือจะมีหลายรูปแบบตามลักษณะของข้อมูล เช่น <code>t-test</code>, <code>Chi-square</code> เป็นต้น ซึ่งผลลัพธ์จากการหาค่าทางสถิติจะเป็นไปตามการทดสอบนั้นๆ เช่น <code>t-test</code>: <span class="math inline">\(t\)</span>, <code>Chi-square</code>: <span class="math inline">\(X^{2}\)</span>, <code>F-test</code>: <span class="math inline">\(F\)</span> เป็นต้น</p>
+</div>
+<div id="หา-p-value" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> หา <code>p-value</code><a class="anchor" aria-label="anchor" href="#%E0%B8%AB%E0%B8%B2-p-value"><i class="fas fa-link"></i></a>
+</h2>
+<p>คือ โอกาสที่สามารถสังเกตค่าทางสถิติที่มากกว่าค่าการวิเคราะห์ทางสถิติที่โดยไม่ได้อยู่ภายใต้ <span class="math inline">\(H_{0}\)</span> โดยทางปฏิบัติแล้วคือ การสร้างแบบจำลองข้อมูลภายใต้ <span class="math inline">\(H_{0}\)</span> ขึ้นมาแล้วแล้วดูว่า ที่ค่าสถิตินั้น มีโอกาส<strong>ไม่เกิด</strong>เท่าไร</p>
+<p>ยกตัวอย่าง เมื่อวิเคราะห์ <code>t-test</code> จะทำการสร้าง <code>t-distribution</code> ขึ้นมา (ตัวอย่างของการวิเคราะห์ อยู่<a href="parametric-test.html#sec-t-test">บทถัดไป</a> ) ภายใต้ <span class="math inline">\(H_{0}\)</span> ว่า mean = 10</p>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">t_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">dt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">0.01</span><span class="op">)</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span> <span class="co"># t-distribution มี mean = 0 sd = 1</span></span>
+<span></span>
+<span><span class="va">tval</span> <span class="op">&lt;-</span> <span class="fl">0.7345</span> <span class="co"># t-value วิธีคำนวณอยู่ในบท t-test</span></span>
+<span></span>
+<span><span class="va">density_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">0.01</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">t_dist</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/between.html">between</a></span><span class="op">(</span><span class="va">x</span>,<span class="op">-</span><span class="va">tval</span>,<span class="va">tval</span><span class="op">)</span>, <span class="cn">TRUE</span>,<span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">density_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"skyblue"</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">density_df</span>, <span class="va">area</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"white"</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="va">tval</span>,<span class="va">tval</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/t_dist-1.png" width="672"></div>
+<ul>
+<li>ที่ -0.7345 &lt; <span class="math inline">\(t\)</span> &lt; 0.7345 (พื้นที่ใต้กราฟสีขาว) หมายถึงโอกาสที่ค่านั้นเกิดจากความบังเอิญภายใต้ <span class="math inline">\(H_{0}\)</span> ที่ยังเป็นจริง คิดเป็น AUC ได้</li>
+</ul>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">density_df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>AUC_white <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 53.59248</code></pre>
+<ul>
+<li>ที่ <span class="math inline">\(t\)</span> &lt; -0.7345 หรือ <span class="math inline">\(t\)</span> &gt; 0.7345 (พื้นที่ใต้กราฟสีฟ้า) หมายถึงโอกาสที่ค่านั้น<strong>ไม่ได้</strong>เกิดจากความบังเอิญภายใต้ <span class="math inline">\(H_{0}\)</span> ที่ยังเป็นจริง (extreme value) คิดเป็น AUC ได้</li>
+</ul>
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">density_df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">area</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>AUC_blue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 46.40728</code></pre>
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="fl">0.7345</span>, <span class="fl">99</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
+<span><span class="va">p</span> <span class="co"># p-value</span></span></code></pre></div>
+<pre><code>## [1] 0.4643803</code></pre>
+<p>โดย <code>AUC_blue</code> = <code>p-value</code> = พื้นที่ใต้กราฟสีฟ้า = ~46.4%</p>
+</div>
+<div id="เปรยบเทยบ-p-value-กบ-คาวกฤต-critical-value-ทยอมรบได" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> เปรียบเทียบ <code>p-value</code> กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้<a class="anchor" aria-label="anchor" href="#%E0%B9%80%E0%B8%9B%E0%B8%A3%E0%B8%A2%E0%B8%9A%E0%B9%80%E0%B8%97%E0%B8%A2%E0%B8%9A-p-value-%E0%B8%81%E0%B8%9A-%E0%B8%84%E0%B8%B2%E0%B8%A7%E0%B8%81%E0%B8%A4%E0%B8%95-critical-value-%E0%B8%97%E0%B8%A2%E0%B8%AD%E0%B8%A1%E0%B8%A3%E0%B8%9A%E0%B9%84%E0%B8%94"><i class="fas fa-link"></i></a>
+</h2>
+<p>จุดนี้จะเป็นการตัดว่า ท่านสามารถยอมรับความบังเอิญนี้ที่กี่ % โดยทั่วไปมักใช้ที่น้อยกว่า 5% (0.05) หรือ 1% (0.01) ซึ่งแบ่งเป็น</p>
+<ul>
+<li><p><code>Left-tailed</code> คือ โอกาสที่ <code>critical value</code> <span class="math inline">\(\leq H_{0}\)</span></p></li>
+<li><p><code>Right-tailed</code> คือ โอกาสที่ <code>critical value</code> <span class="math inline">\(\geq H_{0}\)</span></p></li>
+<li><p><code>Two-tailed</code> คือ โอกาสที่ <code>critical value</code> <span class="math inline">\(\neq H_{0}\)</span> นิยมใช้วิเคราะห์มากที่สุด</p></li>
+</ul>
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">crit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.05</span><span class="op">/</span><span class="fl">2</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span> <span class="co"># ตัดที่ &lt;= p 0.05, two-tailed</span></span>
+<span></span>
+<span><span class="va">density_df</span> <span class="op">&lt;-</span> <span class="va">density_df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>crits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/between.html">between</a></span><span class="op">(</span><span class="va">x</span>,<span class="op">-</span><span class="va">crit</span>,<span class="va">crit</span><span class="op">)</span>, <span class="cn">TRUE</span>,<span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">density_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"darkred"</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">density_df</span>, <span class="va">crits</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"skyblue"</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">density_df</span>, <span class="va">area</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"white"</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="va">tval</span>,<span class="va">tval</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="va">crit</span>,<span class="va">crit</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/pvalue_crit-1.png" width="672"></div>
+<p>จะเห็นว่า โอกาสที่ความแตกต่างนั้น<strong>ไม่ได้</strong>เกิดจากความบังเอิญภายใต้ <span class="math inline">\(H_{0}\)</span> นั้นอยู่ที่ 46% ซึ่งมากกว่า 5% ที่ต้องการ จึงไม่สามารถ reject null hypothesis ได้ เรียกอีกแบบหนึ่งว่า ไม่ได้แตกต่างอย่างมีนัยสำคัญ (จนสามารถ reject <span class="math inline">\(H_{0}\)</span> ได้)</p>
+<p>ตรงส่วนพื้นที่ระหว่าง <code>critical value</code> (ระหว่างเส้นประสีแดง) คือ พิสัยของความแตกต่างที่สามารถรับได้ ซึ่งจะถูกนำไปใช้ในการคำนวณ<strong>ค่าความเชื่อมั่น (confidence interval)</strong> ต่อไป</p>
+</div>
+<div id="trade-off-ของ-p-value-threshold" class="section level2" number="8.5">
+<h2>
+<span class="header-section-number">8.5</span> Trade-off ของ p-value threshold<a class="anchor" aria-label="anchor" href="#trade-off-%E0%B8%82%E0%B8%AD%E0%B8%87-p-value-threshold"><i class="fas fa-link"></i></a>
+</h2>
+<p>การตั้งค่าวิกฤตินั้นมี trade-off ระหว่าง <code>false positive</code> และ <code>false negative</code> ที่ต้องพิจารณา</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th>Decision/Truth</th>
@@ -114,12 +193,20 @@
 <p><span class="math inline">\(\therefore\)</span> <code>power</code> = <code>true negative</code></p>
 
 </div>
+</div>
   <div class="chapter-nav">
 <div class="prev"><a href="GSE63514.html"><span class="header-section-number">7</span> Case study: Microarray visualization</a></div>
 <div class="next"><a href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#hypothesis-testing"><span class="header-section-number">8</span> Hypothesis testing</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypothesis-testing"><span class="header-section-number">8</span> Hypothesis testing</a></li>
+<li><a class="nav-link" href="#%E0%B8%AA%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%A1%E0%B8%A1%E0%B8%95%E0%B8%90%E0%B8%B2%E0%B8%99-construct-the-hypothesis"><span class="header-section-number">8.1</span> สร้างสมมติฐาน (Construct the hypothesis)</a></li>
+<li><a class="nav-link" href="#%E0%B8%97%E0%B8%B3%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A7%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B2%E0%B8%B0%E0%B8%AB%E0%B8%84%E0%B8%B2%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%96%E0%B8%95-construct-the-test-statistics"><span class="header-section-number">8.2</span> ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics)</a></li>
+<li><a class="nav-link" href="#%E0%B8%AB%E0%B8%B2-p-value"><span class="header-section-number">8.3</span> หา p-value</a></li>
+<li><a class="nav-link" href="#%E0%B9%80%E0%B8%9B%E0%B8%A3%E0%B8%A2%E0%B8%9A%E0%B9%80%E0%B8%97%E0%B8%A2%E0%B8%9A-p-value-%E0%B8%81%E0%B8%9A-%E0%B8%84%E0%B8%B2%E0%B8%A7%E0%B8%81%E0%B8%A4%E0%B8%95-critical-value-%E0%B8%97%E0%B8%A2%E0%B8%AD%E0%B8%A1%E0%B8%A3%E0%B8%9A%E0%B9%84%E0%B8%94"><span class="header-section-number">8.4</span> เปรียบเทียบ p-value กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้</a></li>
+<li><a class="nav-link" href="#trade-off-%E0%B8%82%E0%B8%AD%E0%B8%87-p-value-threshold"><span class="header-section-number">8.5</span> Trade-off ของ p-value threshold</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -135,7 +222,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-18.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -3,7 +3,7 @@
     "path": "D:/OneDrive - Prince of Songkla University/R Workspace/Teaching/05-dplyr-tidyr.Rmd",
     "project_path": "05-dplyr-tidyr.Rmd",
     "type": "r_markdown",
-    "hash": "954745286",
+    "hash": "3979294247",
     "contents": "",
     "dirty": false,
     "created": 1694795693496.0,
@@ -12,8 +12,8 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "282,16",
-        "scrollLine": "271",
+        "cursorPosition": "282,0",
+        "scrollLine": "23",
         "rmdVisualMode": "false",
         "rmdVisualWrapConfigured": "true",
         "docOutlineVisible": "1",
@@ -21,11 +21,11 @@
         "rmdVisualCollapsedChunks": ""
     },
     "folds": "",
-    "lastKnownWriteTime": 1694947274,
+    "lastKnownWriteTime": 1695006095,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1694947274682,
+    "last_content_update": 1695137157770,
     "read_only": false,
     "read_only_alternatives": []
 }
