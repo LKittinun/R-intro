@@ -41,7 +41,6 @@ hypothesis-testing
 ทำการวเคราะหคาทางสถต-construct-the-test-statistics
 หา-p-value
 เปรยบเทยบ-p-value-กบ-คาวกฤต-critical-value-ทยอมรบได
-trade-off-ของ-p-value-threshold
 parametric-test
 sec-t-test
 one-sample-t-test
@@ -49,6 +48,15 @@ independent-t-test
 paired-t-test
 analysis-of-variance-anova
 non-parametric-test
+proportion-test
+chi-square-test
+chi-square-goodness-of-fit
+chi-square-test-of-independence
+fishers-exact-test
+rank-test
+test-for-normality
+wilcoxons-rank-sum-test-mann-whitney-u-test
+wilcoxons-signed-rank-test
 survival-analysis
 kaplein-meir-estimate
 การสราง-km-ใน-r

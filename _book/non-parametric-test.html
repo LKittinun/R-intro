@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>10 Non-parametric test | A gentle introduction to R for biologists</title>
+<title>8 Non-parametric test | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
-<meta property="og:title" content="10 Non-parametric test | A gentle introduction to R for biologists">
+<meta property="og:title" content="8 Non-parametric test | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="10 Non-parametric test | A gentle introduction to R for biologists">
+<meta name="twitter:title" content="8 Non-parametric test | A gentle introduction to R for biologists">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -19,9 +19,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="A book created with bookdown.">
-<meta property="og:description" content="A book created with bookdown.">
-<meta name="twitter:description" content="A book created with bookdown.">
+<meta name="description" content="Non-parametric test คือ การวิเคราะห์ทางสถิติที่เราไม่ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า  8.1 Proportion test คือ...">
+<meta property="og:description" content="Non-parametric test คือ การวิเคราะห์ทางสถิติที่เราไม่ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า  8.1 Proportion test คือ...">
+<meta name="twitter:description" content="Non-parametric test คือ การวิเคราะห์ทางสถิติที่เราไม่ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า  8.1 Proportion test คือ...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -42,43 +42,403 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Preface</a></li>
-<li class="book-part">Basic R</li>
-<li><a class="" href="basic-r.html"><span class="header-section-number">1</span> Basic R</a></li>
-<li><a class="" href="r-function.html"><span class="header-section-number">2</span> R function</a></li>
-<li class="book-part">Tidyverse</li>
-<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">3</span> What is tidyverse</a></li>
-<li><a class="" href="importing-data.html"><span class="header-section-number">4</span> Importing data</a></li>
-<li><a class="" href="data-wrangling.html"><span class="header-section-number">5</span> Data wrangling</a></li>
-<li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
-<li><a class="" href="GSE63514.html"><span class="header-section-number">7</span> Case study: Microarray visualization</a></li>
-<li class="book-part">Statistical analysis</li>
-<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
-<li><a class="" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
-<li><a class="active" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">11</span> Survival analysis</a></li>
-<li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">12</span> Session info</a></li>
-</ul>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">8</span> Non-parametric test</a></li></ul>
 
         <div class="book-extra">
           
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="non-parametric-test" class="section level1" number="10">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="non-parametric-test" class="section level1" number="8">
 <h1>
-<span class="header-section-number">10</span> Non-parametric test<a class="anchor" aria-label="anchor" href="#non-parametric-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> Non-parametric test<a class="anchor" aria-label="anchor" href="#non-parametric-test"><i class="fas fa-link"></i></a>
 </h1>
+<p>Non-parametric test คือ การวิเคราะห์ทางสถิติที่เรา<strong>ไม่</strong>ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า</p>
+<div id="proportion-test" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Proportion test<a class="anchor" aria-label="anchor" href="#proportion-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>คือ การทดสอบทางสถิติเพื่อทำการเปรียบเทียบอัตราส่วนของจำนวน โดยจะใช้กับข้อมูลประเภทจำนวนนับของตัวแปรจัดประเภท (Nominal variable) เช่น จำนวนคน จำนวนเซลล์ เป็นต้น</p>
+<p><strong>ข้อสังเกต</strong> การทดลองที่มีการทำ technical replicate แล้วหาค่าเฉลี่ยนั้น ตัวข้อมูลยังเป็น <strong>จำนวนนับ</strong> การจะหาความต่างค่าเฉลี่ยโดยใช้ <code>t.test</code> นั้น จำนวน sample ควรจะมากพอตาม Central limit theorem นอกเหนือจากนั้นควรใช้ proportional test หรือ ควรใช้ generalized linear model ประเภทอื่นมากกว่า</p>
+<div id="chi-square-test" class="section level3" number="8.1.1">
+<h3>
+<span class="header-section-number">8.1.1</span> Chi-square test<a class="anchor" aria-label="anchor" href="#chi-square-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>คือ การทดสอบความต่างของอัตราส่วนโดยใช้การประมาณการของ ค่าที่คาดหวัง (expected value) และ ค่าที่สังเกตได้จริง (observed value)</p>
+<p><span class="math display">\[
+\chi^{2} = \sum_{i=1}^{n}\frac{(O-E)^{2}}{E}
+\]</span></p>
+<div id="chi-square-goodness-of-fit" class="section level4" number="8.1.1.1">
+<h4>
+<span class="header-section-number">8.1.1.1</span> Chi-square goodness of fit<a class="anchor" aria-label="anchor" href="#chi-square-goodness-of-fit"><i class="fas fa-link"></i></a>
+</h4>
+<p>เป็นการเปรียบเทียบว่า observed value นั้นมาจากประชากรทางทฤษฎีหรือไม่ โดย expected value นั้นคำนวนจาก</p>
+<p><span class="math display">\[
+E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
+\]</span></p>
+<p>ยกตัวอย่างการทอดลูกเต๋า ซึ่งมีโอกาสการเกิดทุกหน้า = <span class="math inline">\(1/6\)</span></p>
+<ul>
+<li><p><span class="math inline">\(H_{0}\)</span> การกระจายตัวของการทอดลูกเต๋านี้เท่ากับการกระจายทางทฤษฎี</p></li>
+<li><p><span class="math inline">\(H_{a}\)</span> การกระจายตัวของการทอดลูกเต๋านี้<strong>ไม่</strong>เท่ากับการกระจายทางทฤษฎี</p></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">dice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">1000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># โยนลูกเต๋า 1000 ครั้ง</span></span>
+<span><span class="va">chisq_dice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">dice</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">chisq_dice</span></span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  table(dice)
+## X-squared = 1.436, df = 5, p-value = 0.9203</code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>O <span class="op">=</span> <span class="va">chisq_dice</span><span class="op">$</span><span class="va">observed</span>, E.Freq <span class="op">=</span> <span class="va">chisq_dice</span><span class="op">$</span><span class="va">expected</span><span class="op">)</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["O.dice"],"name":[1],"type":["fct"],"align":["left"]},{"label":["O.Freq"],"name":[2],"type":["int"],"align":["right"]},{"label":["E.Freq"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"170","3":"166.6667","_rn_":"1"},{"1":"2","2":"176","3":"166.6667","_rn_":"2"},{"1":"3","2":"171","3":"166.6667","_rn_":"3"},{"1":"4","2":"157","3":"166.6667","_rn_":"4"},{"1":"5","2":"162","3":"166.6667","_rn_":"5"},{"1":"6","2":"164","3":"166.6667","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>จะเห็นว่าความแตกต่างระหว่าง observed และ expected นั้น อยู่ในพิสัยของของ $H_{0}$</p>
+<p>แต่ถ้าลูกเต๋านั้นเป็นลูกเต๋าถ่วงน้ำหนัก</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">weight_dice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">1000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">9</span><span class="op">)</span></span>
+<span><span class="va">chisq_weight_norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">weight_dice</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">chisq_weight_norm</span></span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  table(weight_dice)
+## X-squared = 248.55, df = 5, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>O <span class="op">=</span> <span class="va">chisq_weight_norm</span><span class="op">$</span><span class="va">observed</span>, E.freq <span class="op">=</span> <span class="va">chisq_weight_norm</span><span class="op">$</span><span class="va">expected</span><span class="op">)</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["O.weight_dice"],"name":[1],"type":["fct"],"align":["left"]},{"label":["O.Freq"],"name":[2],"type":["int"],"align":["right"]},{"label":["E.freq"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"335","3":"166.6667","_rn_":"1"},{"1":"2","2":"209","3":"166.6667","_rn_":"2"},{"1":"3","2":"122","3":"166.6667","_rn_":"3"},{"1":"4","2":"113","3":"166.6667","_rn_":"4"},{"1":"5","2":"103","3":"166.6667","_rn_":"5"},{"1":"6","2":"118","3":"166.6667","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">chisq_weight_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">weight_dice</span><span class="op">)</span>, p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">9</span><span class="op">)</span></span>
+<span><span class="va">chisq_weight_weight</span></span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  table(weight_dice)
+## X-squared = 2.9135, df = 5, p-value = 0.7133</code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>O <span class="op">=</span> <span class="va">chisq_weight_weight</span><span class="op">$</span><span class="va">observed</span>, E.freq <span class="op">=</span> <span class="va">chisq_weight_weight</span><span class="op">$</span><span class="va">expected</span><span class="op">)</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["O.weight_dice"],"name":[1],"type":["fct"],"align":["left"]},{"label":["O.Freq"],"name":[2],"type":["int"],"align":["right"]},{"label":["E.freq"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"335","3":"333.3333","_rn_":"1"},{"1":"2","2":"209","3":"222.2222","_rn_":"2"},{"1":"3","2":"122","3":"111.1111","_rn_":"3"},{"1":"4","2":"113","3":"111.1111","_rn_":"4"},{"1":"5","2":"103","3":"111.1111","_rn_":"5"},{"1":"6","2":"118","3":"111.1111","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>จะเห็นว่า ถ้าเป็นลูกเต๋าถ่วงน้ำหนัก เมื่อวิเคราะห์ chi-square ตามการกระจายตัวของลูกเต๋าทั่วไป จะแตกต่างอย่างมีนัยสำคัญ แต่ถ้าใช้การกระจายตัวเดียวกับลูกเต๋าถ่วงน้ำหนัก จะไม่แตกต่าง</p>
+</div>
+<div id="chi-square-test-of-independence" class="section level4" number="8.1.1.2">
+<h4>
+<span class="header-section-number">8.1.1.2</span> Chi-square test of independence<a class="anchor" aria-label="anchor" href="#chi-square-test-of-independence"><i class="fas fa-link"></i></a>
+</h4>
+<p>เป็นการเปรียบเทียบข้อมูลจำนวนสองกลุ่มขึ้นไปว่า มีความสัมพันธ์ที่ทำให้การกระจายตัวของข้อมูลเปลี่ยนไปจากปกติหรือไม่</p>
+<p><span class="math inline">\(H_{0}\)</span>: ข้อมูลทั้ง 2+ กลุ่มนั้น<strong>ไม่</strong>มีความสัมพันธ์ต่อกัน</p>
+<p><span class="math inline">\(H_{a}\)</span>: ข้อมูลทั้ง 2+ กลุ่มนั้นมีความสัมพันธ์ต่อกัน</p>
+<p>โดยการวิเคราะห์นั้นจะใช้กับข้อมูลความถี่แบบ <span class="math inline">\(n \times n\)</span> โดย expected event นั้นคิดจาก</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th>Group/Success</th>
+<th>Con1</th>
+<th>Con2</th>
+<th>Total</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>Group 1</strong></td>
+<td>A</td>
+<td>B</td>
+<td>A + B</td>
+</tr>
+<tr class="even">
+<td><strong>Group 2</strong></td>
+<td>C</td>
+<td>D</td>
+<td>C + D</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>A + C</td>
+<td>B + D</td>
+<td>A + B + C + D</td>
+</tr>
+</tbody>
+</table></div>
+<p><span class="math display">\[
+E_{i,j} = P(G_{i,j}) \times P(Con_{i,j}) \times \text{total counts}
+\]</span> <span class="math display">\[
+E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
+\]</span></p>
+<p>อย่างเช่น expected event สำหรับช่อง <span class="math inline">\(A\)</span> คือ <span class="math display">\[
+\frac{(A + B) \times (A + C)}{(A + B + C + D)^{2}}(A+B+C+D)
+\]</span></p>
+<p>ยกตัวอย่างว่าอยากทราบว่าเพศมีผลต่ออัตราการตายในมะเร็งปอดหรือไม่</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lung_ob</span></span></code></pre></div>
+<pre><code>##         status
+## sex      Alive Dead
+##   Female    37   53
+##   Male      26  112</code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lung_chisq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">lung_ob</span>, correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">lung_chisq</span></span></code></pre></div>
+<pre><code>## 
+##  Pearson's Chi-squared test
+## 
+## data:  lung_ob
+## X-squared = 13.511, df = 1, p-value = 0.0002371</code></pre>
+<p><code>p</code> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ</p>
+<p>ลองคำนวณเองตามสูตรขั้นต้น</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lung_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span><span class="op">)</span>,<span class="fl">1</span>, <span class="va">prod</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span> <span class="co"># สร้าง expected table</span></span>
+<span></span>
+<span><span class="va">lung_ex</span></span></code></pre></div>
+<pre><code>##          [,1]     [,2]
+## [1,] 24.86842 65.13158
+## [2,] 38.13158 99.86842</code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">chi_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">lung_ob</span> <span class="op">-</span> <span class="va">lung_ex</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="va">lung_ex</span><span class="op">)</span></span>
+<span><span class="va">chi_value</span> <span class="co"># chi-squared</span></span></code></pre></div>
+<pre><code>## [1] 13.51117</code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">chi_value</span>, df <span class="op">=</span> <span class="va">lung_chisq</span><span class="op">$</span><span class="va">parameter</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># p-value</span></span></code></pre></div>
+<pre><code>## [1] 0.000237147</code></pre>
+</div>
+</div>
+<div id="fishers-exact-test" class="section level3" number="8.1.2">
+<h3>
+<span class="header-section-number">8.1.2</span> Fisher’s exact test<a class="anchor" aria-label="anchor" href="#fishers-exact-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>คือการทดสอบว่าข้อมูลนั้นมีความสัมพันธ์หรือไม่ โดยการเทียบกับความสัมพันธ์แบบสุ่ม การทดสอบนี้จะมีความแม่นยำกว่า chi-square เนื่องจากเป็นการคำนวณความน่าจะเป็นโดยตรง</p>
+<p><span class="math display">\[
+p = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose B}{C+D \choose D}}{{n \choose B+D}}
+\]</span></p>
+<p>พิจารณาสูตร จุดประสงค์คือ การคำนวณความน่าจะเป็นของการหยิบสุ่มแบบไม่คืนให้ได้ตาม condition ที่ต้องการนั่นเอง</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">lung_ob</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Fisher's Exact Test for Count Data
+## 
+## data:  lung_ob
+## p-value = 0.0004349
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  1.583762 5.727861
+## sample estimates:
+## odds ratio 
+##   2.991585</code></pre>
+<p><code>p</code> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ สังเกตว่า <code>p</code> จะมากกว่า chi-square เนื่องจากการทดสอบนี้มีความ conservative กว่า</p>
+<p>ลองคำนวณเองตามสูตรขั้นต้น</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alive_dead</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span></span>
+<span><span class="va">alive_dead</span> <span class="co"># total alive and dead</span></span></code></pre></div>
+<pre><code>## Alive  Dead 
+##    63   165</code></pre>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">male_female</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span></span>
+<span><span class="va">male_female</span> <span class="co"># total male and female</span></span></code></pre></div>
+<pre><code>## Female   Male 
+##     90    138</code></pre>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fisher_p</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="va">alive_dead</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">lung_ob</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="va">alive_dead</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">lung_ob</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">/</span></span>
+<span>               <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span>, <span class="va">male_female</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">fisher_p</span><span class="op">*</span><span class="fl">2</span></span></code></pre></div>
+<pre><code>##        Alive 
+## 0.0004388966</code></pre>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## or</span></span>
+<span><span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">phyper</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span>,<span class="va">alive_dead</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, </span>
+<span>       <span class="va">alive_dead</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">male_female</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,lower.tail<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.0004635661</code></pre>
+<p>ปล. การใช้ <code>lung_ob[1] - 1</code> นั้นมีที่มาจากว่า เมื่อใช้ <code>lower.tail = TRUE</code> จะคำนวณโอกาสที่ ได้ <span class="math inline">\(P[X &gt; x]\)</span> ซึ่งเราต้องการ <span class="math inline">\(P[X \geq x]\)</span> จึงต้อง ลบ condition ที่ต้องการออกด้วย</p>
+<hr>
+</div>
+</div>
+<div id="rank-test" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Rank test<a class="anchor" aria-label="anchor" href="#rank-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>เป็นการหาความต่างของ<strong>ลำดับ</strong> แทนที่จะหาความต่างของ mean/variance ในภาวะที่ไม่ทราบการกระจายตัวของข้อมูลที่ชัดเจน</p>
+<div id="test-for-normality" class="section level3" number="8.2.1">
+<h3>
+<span class="header-section-number">8.2.1</span> Test for normality<a class="anchor" aria-label="anchor" href="#test-for-normality"><i class="fas fa-link"></i></a>
+</h3>
+<p>กลับมาที่ตัวอย่าง <code>iris</code> ดูการกระจายของข้อมูล</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">long_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cm</span>, fill <span class="op">=</span> <span class="va">Metrics</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">Metrics</span><span class="op">~</span><span class="va">Species</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<div class="inline-figure"><img src="_main_files/figure-html/iris_hist-1.png" width="672"></div>
+<p>พิจารณาแล้ว <code>Petal.Width</code> ไม่น่าจะใช่ normal distribution จะทำการทดสอบต่อโดย <code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code> ซึ่งเป็นการทดสอบการกระจายตัวของข้อมูลว่าหลุดออกจาก normal distribution หรือไม่</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">long_df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Metrics</span>, <span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>normality <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">cm</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by 'Metrics'. You can override using the `.groups` argument.</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Metrics"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Species"],"name":[2],"type":["fct"],"align":["left"]},{"label":["normality"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Petal.Length","2":"setosa","3":"0.0548"},{"1":"Petal.Length","2":"versicolor","3":"0.1585"},{"1":"Petal.Length","2":"virginica","3":"0.1098"},{"1":"Petal.Width","2":"setosa","3":"0.0000"},{"1":"Petal.Width","2":"versicolor","3":"0.0273"},{"1":"Petal.Width","2":"virginica","3":"0.0870"},{"1":"Sepal.Length","2":"setosa","3":"0.4595"},{"1":"Sepal.Length","2":"versicolor","3":"0.4647"},{"1":"Sepal.Length","2":"virginica","3":"0.2583"},{"1":"Sepal.Width","2":"setosa","3":"0.2715"},{"1":"Sepal.Width","2":"versicolor","3":"0.3380"},{"1":"Sepal.Width","2":"virginica","3":"0.1809"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>จะเห็นว่า <code>Petal.Width</code> มี <code>p</code> &lt; 0.05 พอสมควร (ไม่เป็น normal distribution) จึงสมควรใช้ non-parametric test</p>
+</div>
+<div id="wilcoxons-rank-sum-test-mann-whitney-u-test" class="section level3" number="8.2.2">
+<h3>
+<span class="header-section-number">8.2.2</span> Wilcoxon’s rank sum test (Mann-Whitney U test)<a class="anchor" aria-label="anchor" href="#wilcoxons-rank-sum-test-mann-whitney-u-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>คือ การคำนวณว่ากลุ่มตัวอย่าง 2 กลุ่มนั้นมาจากประชากรกลุ่มเดียวกันหรือไม่ จากการพิจารณาผลรวมของ<strong>ลำดับข้อมูล</strong>ทั้งสองกลุ่ม</p>
+<p>ลักษณะการใช้คล้าย <code>t.test(…, paired = FALSE)</code> สำหรับ non-normal distribution</p>
+<p><span class="math display">\[
+W_{j} = n_{1}n_{2} + \frac{n_{j}(n_{j}+1)}{2} - R_{n}
+\]</span></p>
+<p><span class="math display">\[
+W = min(W_{1}, W_{2})
+\]</span></p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris_pw</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">!=</span> <span class="st">"virginica"</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="va">p_wil</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">Petal.Width</span><span class="op">~</span><span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris_pw</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p_wil</span></span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  Petal.Width by Species
+## W = 0, p-value &lt; 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p_wil</span><span class="op">$</span><span class="va">p.value</span></span></code></pre></div>
+<pre><code>## [1] 2.284669e-18</code></pre>
+<p>ลองคำนวณเอง</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris_pw_rank</span> <span class="op">&lt;-</span> <span class="va">iris_pw</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">`Petal.Width`</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="va">`Petal.Width`</span>, ties.method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span><span class="op">)</span> <span class="co"># rank all values</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">versicolor</span><span class="op">$</span><span class="va">`Petal.Width`</span> ,<span class="va">setosa</span><span class="op">$</span><span class="va">`Petal.Width`</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  versicolor$Petal.Width and setosa$Petal.Width
+## W = 2500, p-value &lt; 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">setosa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">iris_pw_rank</span>, <span class="va">iris_pw</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">$</span><span class="va">setosa</span></span>
+<span><span class="va">versicolor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">iris_pw_rank</span>, <span class="va">iris_pw</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">$</span><span class="va">versicolor</span></span>
+<span></span>
+<span><span class="va">all_combn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">setosa</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">versicolor</span><span class="op">)</span></span>
+<span><span class="va">all_combn</span></span></code></pre></div>
+<pre><code>## [1] 2500</code></pre>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">setosa_rank_sum</span> <span class="op">&lt;-</span> <span class="va">all_combn</span> <span class="op">+</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">setosa</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">setosa</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">setosa</span><span class="op">$</span><span class="va">Rank</span><span class="op">)</span></span>
+<span><span class="va">setosa_rank_sum</span></span></code></pre></div>
+<pre><code>## [1] 2500</code></pre>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">versicolor_rank_sum</span> <span class="op">&lt;-</span> <span class="va">all_combn</span> <span class="op">+</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">versicolor</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">versicolor</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">versicolor</span><span class="op">$</span><span class="va">Rank</span><span class="op">)</span></span>
+<span><span class="va">versicolor_rank_sum</span></span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">W</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">setosa_rank_sum</span>,<span class="va">versicolor_rank_sum</span><span class="op">)</span></span>
+<span><span class="va">W</span></span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Normal approximation</span></span>
+<span><span class="va">mW</span> <span class="op">&lt;-</span> <span class="va">all_combn</span><span class="op">/</span><span class="fl">2</span></span>
+<span><span class="va">sdW</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">all_combn</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">setosa</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">versicolor</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">12</span><span class="op">)</span></span>
+<span><span class="va">z</span> <span class="op">=</span> <span class="op">(</span><span class="va">W</span><span class="op">-</span><span class="va">mW</span><span class="op">)</span><span class="op">/</span><span class="va">sdW</span></span>
+<span><span class="va">pval</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="va">pval</span> <span class="co"># not exactly equal due to tie adjustment in wilcox.test()</span></span></code></pre></div>
+<pre><code>## [1] 6.856641e-18</code></pre>
+<p>ปล. เมื่อจำนวนตัวอย่าง &gt;50 ค่า <span class="math inline">\(W\)</span> จะเข้าสู่ normal distribution ซึ่งสามารถเปลี่ยนเป็นค่า <span class="math inline">\(Z\)</span> ได้ ส่งผลให้การคำนวณ <code>p-value</code> จะแม่นยำขึ้น</p>
+<p><span class="math display">\[
+Z = \frac{W-m_{w}}{s_{w}}
+\]</span></p>
+<p><span class="math display">\[
+m_{w} = \frac{n_{1}n_{2}}{2} = \text{mean of W}
+\]</span></p>
+<p><span class="math display">\[
+s_{w} = \sqrt{\frac{n_{1}n_{2}(n_{1}+n_{2}+1)}{12}}
+\]</span></p>
+</div>
+<div id="wilcoxons-signed-rank-test" class="section level3" number="8.2.3">
+<h3>
+<span class="header-section-number">8.2.3</span> Wilcoxon’s signed-rank test<a class="anchor" aria-label="anchor" href="#wilcoxons-signed-rank-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>คือ การคำนวณว่ากลุ่มตัวอย่าง 2 กลุ่มนั้นมาจากประชากรกลุ่มเดียวกันหรือไม่ จากการคำนวณ<strong>ลำดับข้อมูล</strong>ของทั้งสองกลุ่ม</p>
+<p>ลักษณะการใช้คล้าย <code>t.test(…, paired = TRUE)</code> สำหรับ non-normal distribution</p>
+<p><span class="math display">\[
+V = \sum_{i=1}^{N_{r}}[sgn(x_{2,i} - x_{1,i}) \cdot R_{i}]
+\]</span></p>
+<p><span class="math display">\[
+sgn(x) =\begin{cases} -1 \quad \text{if} \, x &lt; 1,  \\0 \quad \ \ \  \text{if} \, x = 0,\\1 \quad \ \ \  \text{if} \, x &gt; 0\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+V = min(V_{-}, V_{+})
+\]</span></p>
+<p>สมมติการวัด wound healing assay (วัดการเคลื่อนที่ของเซลล์) ก่อนและหลัง treat ยา</p>
+<div class="inline-figure"><img src="Picture/cell_migration.jpg" width="60%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">treat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,</span>
+<span>  Before <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">20</span>, min <span class="op">=</span> <span class="fl">400</span>, max <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span>
+<span>           After <span class="op">=</span> <span class="fu">detectnorm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/detectnorm/man/rnonnorm.html">rnonnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">400</span>, sd <span class="op">=</span> <span class="fl">30</span>, skew <span class="op">=</span> <span class="fl">10</span>, kurt <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">$</span><span class="va">dat</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">treat</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["sample"],"name":[1],"type":["int"],"align":["right"]},{"label":["Before"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["After"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"428.7578","3":"303.0696","_rn_":"1"},{"1":"2","2":"478.8305","3":"366.3324","_rn_":"2"},{"1":"3","2":"440.8977","3":"362.7011","_rn_":"3"},{"1":"4","2":"488.3017","3":"389.0433","_rn_":"4"},{"1":"5","2":"494.0467","3":"449.7370","_rn_":"5"},{"1":"6","2":"404.5556","3":"287.1157","_rn_":"6"},{"1":"7","2":"452.8105","3":"354.2570","_rn_":"7"},{"1":"8","2":"489.2419","3":"515.6657","_rn_":"8"},{"1":"9","2":"455.1435","3":"337.4896","_rn_":"9"},{"1":"10","2":"445.6615","3":"442.5479","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">treat</span><span class="op">$</span><span class="va">Before</span>, <span class="va">treat</span><span class="op">$</span><span class="va">After</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon signed rank exact test
+## 
+## data:  treat$Before and treat$After
+## V = 169, p-value = 0.01531
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<p>ลองคำนวณเอง</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">treat_rank</span> <span class="op">&lt;-</span> <span class="va">treat</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Diff <span class="op">=</span> <span class="va">Before</span><span class="op">-</span><span class="va">After</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Absdiff <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">Diff</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="va">Absdiff</span>, ties.method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="va">treat_rank</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["sample"],"name":[1],"type":["int"],"align":["right"]},{"label":["Before"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["After"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Diff"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Absdiff"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Rank"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"428.7578","3":"303.0696","4":"125.688143","5":"125.688143","6":"19"},{"1":"2","2":"478.8305","3":"366.3324","4":"112.498103","5":"112.498103","6":"16"},{"1":"3","2":"440.8977","3":"362.7011","4":"78.196580","5":"78.196580","6":"12"},{"1":"4","2":"488.3017","3":"389.0433","4":"99.258441","5":"99.258441","6":"15"},{"1":"5","2":"494.0467","3":"449.7370","4":"44.309755","5":"44.309755","6":"9"},{"1":"6","2":"404.5556","3":"287.1157","4":"117.439959","5":"117.439959","6":"17"},{"1":"7","2":"452.8105","3":"354.2570","4":"98.553597","5":"98.553597","6":"14"},{"1":"8","2":"489.2419","3":"515.6657","4":"-26.423829","5":"26.423829","6":"8"},{"1":"9","2":"455.1435","3":"337.4896","4":"117.653880","5":"117.653880","6":"18"},{"1":"10","2":"445.6615","3":"442.5479","4":"3.113528","5":"3.113528","6":"1"},{"1":"11","2":"495.6833","3":"488.4314","4":"7.251942","5":"7.251942","6":"3"},{"1":"12","2":"445.3334","3":"419.5685","4":"25.764901","5":"25.764901","6":"7"},{"1":"13","2":"467.7571","3":"485.7330","4":"-17.975980","5":"17.975980","6":"4"},{"1":"14","2":"457.2633","3":"464.0356","4":"-6.772238","5":"6.772238","6":"2"},{"1":"15","2":"410.2925","3":"455.5750","4":"-45.282567","5":"45.282567","6":"10"},{"1":"16","2":"489.9825","3":"514.5312","4":"-24.548709","5":"24.548709","6":"6"},{"1":"17","2":"424.6088","3":"327.1418","4":"97.466941","5":"97.466941","6":"13"},{"1":"18","2":"404.2060","3":"385.0956","4":"19.110398","5":"19.110398","6":"5"},{"1":"19","2":"432.7921","3":"492.7410","4":"-59.948960","5":"59.948960","6":"11"},{"1":"20","2":"495.4504","3":"301.5993","4":"193.851048","5":"193.851048","6":"20"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sign_rank</span> <span class="op">&lt;-</span> <span class="va">treat_rank</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span><span class="op">(</span><span class="va">Diff</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>rank_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">Rank</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">V</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">sign_rank</span><span class="op">$</span><span class="va">rank_sum</span><span class="op">)</span></span>
+<span><span class="va">V</span></span></code></pre></div>
+<pre><code>## [1] 41</code></pre>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/SignRank.html">psignrank</a></span><span class="op">(</span><span class="va">V</span>, <span class="fl">20</span>,<span class="fl">20</span><span class="op">)</span><span class="op">*</span><span class="fl">2</span></span>
+<span><span class="va">pval</span></span></code></pre></div>
+<pre><code>## [1] 0.01531219</code></pre>
 
 </div>
+</div>
+</div>
   <div class="chapter-nav">
-<div class="prev"><a href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></div>
-<div class="next"><a href="survival-analysis.html"><span class="header-section-number">11</span> Survival analysis</a></div>
+<div class="empty"></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#non-parametric-test"><span class="header-section-number">10</span> Non-parametric test</a></li></ul>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -94,7 +454,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-20.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
