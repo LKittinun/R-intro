@@ -39,7 +39,7 @@ unique(c(1,1,1,1,2,2,4,5,5,6,7,8)) # display only unique values
 
 ในส่วนของการ manipulate dataframe นั้น คำสั่งต่างๆ ที่น่ารู้มีดังนี้
 
-```{r}
+```{r df_man}
 df <- data.frame(x = c(3,3,6,7,8,9),y = c(2,5,8,1,2,3),z = c(4,7,9,4,7,8))
 df
 
@@ -53,4 +53,4 @@ colnames(df) # ชื่อ column
 
 สามารถดู base R function ทั้งหมดได้ที่ <https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html>
 
-ถ้าท่านต้องการดูว่า function นั้นใช้งานอย่างไร ให้ใส่เครื่องหมาย ? หน้า function นั้น
+ถ้าท่านต้องการดูว่า function นั้นใช้งานอย่างไร ให้ใส่เครื่องหมาย ? หน้า function นั้น เช่น `?mean()` `?colSums()`
