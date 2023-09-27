@@ -57,9 +57,12 @@
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
 <li><a class="" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">11</span> Survival analysis</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="distribution.html"><span class="header-section-number">13</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">12</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">14</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -85,49 +88,71 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">GSE63514</span><span class="op">)</span></span></code></pre></div>
-<pre style="max-height: 300px;"><code>##   [1] "probe"                                  "GSM1551311_Normal-01_U133_Plus2.CEL.gz" "GSM1551312_Normal-02_U133_Plus2.CEL.gz"
-##   [4] "GSM1551313_Normal-03_U133_Plus2.CEL.gz" "GSM1551314_Normal-04_U133_Plus2.CEL.gz" "GSM1551315_Normal-05_U133_Plus2.CEL.gz"
-##   [7] "GSM1551316_Normal-06_U133_Plus2.CEL.gz" "GSM1551317_Normal-07_U133_Plus2.CEL.gz" "GSM1551318_Normal-08_U133_Plus2.CEL.gz"
-##  [10] "GSM1551319_Normal-09_U133_Plus2.CEL.gz" "GSM1551320_Normal-10_U133_Plus2.CEL.gz" "GSM1551321_Normal-11_U133_Plus2.CEL.gz"
-##  [13] "GSM1551322_Normal-12_U133_Plus2.CEL.gz" "GSM1551323_Normal-13_U133_Plus2.CEL.gz" "GSM1551324_Normal-14_U133_Plus2.CEL.gz"
-##  [16] "GSM1551325_Normal-15_U133_Plus2.CEL.gz" "GSM1551326_Normal-16_U133_Plus2.CEL.gz" "GSM1551327_Normal-17_U133_Plus2.CEL.gz"
-##  [19] "GSM1551328_Normal-18_U133_Plus2.CEL.gz" "GSM1551329_Normal-19_U133_Plus2.CEL.gz" "GSM1551330_Normal-20_U133_Plus2.CEL.gz"
-##  [22] "GSM1551331_Normal-21_U133_Plus2.CEL.gz" "GSM1551332_Normal-22_U133_Plus2.CEL.gz" "GSM1551333_Normal-23_U133_Plus2.CEL.gz"
-##  [25] "GSM1551334_Normal-24_U133_Plus2.CEL.gz" "GSM1551335_CIN1-01_U133_Plus2.CEL.gz"   "GSM1551336_CIN1-02_U133_Plus2.CEL.gz"  
-##  [28] "GSM1551337_CIN1-03_U133_Plus2.CEL.gz"   "GSM1551338_CIN1-04_U133_Plus2.CEL.gz"   "GSM1551339_CIN1-05_U133_Plus2.CEL.gz"  
-##  [31] "GSM1551340_CIN1-06_U133_Plus2.CEL.gz"   "GSM1551341_CIN1-07_U133_Plus2.CEL.gz"   "GSM1551342_CIN1-08_U133_Plus2.CEL.gz"  
-##  [34] "GSM1551343_CIN1-09_U133_Plus2.CEL.gz"   "GSM1551344_CIN1-10_U133_Plus2.CEL.gz"   "GSM1551345_CIN1-11_U133_Plus2.CEL.gz"  
-##  [37] "GSM1551346_CIN1-12_U133_Plus2.CEL.gz"   "GSM1551347_CIN1-13_U133_Plus2.CEL.gz"   "GSM1551348_CIN1-14_U133_Plus2.CEL.gz"  
-##  [40] "GSM1551349_CIN2-01_U133_Plus2.CEL.gz"   "GSM1551350_CIN2-02_U133_Plus2.CEL.gz"   "GSM1551351_CIN2-03_U133_Plus2.CEL.gz"  
-##  [43] "GSM1551352_CIN2-04_U133_Plus2.CEL.gz"   "GSM1551353_CIN2-05_U133_Plus2.CEL.gz"   "GSM1551354_CIN2-06_U133_Plus2.CEL.gz"  
-##  [46] "GSM1551355_CIN2-07_U133_Plus2.CEL.gz"   "GSM1551356_CIN2-08_U133_Plus2.CEL.gz"   "GSM1551357_CIN2-09_U133_Plus2.CEL.gz"  
-##  [49] "GSM1551358_CIN2-10_U133_Plus2.CEL.gz"   "GSM1551359_CIN2-11_U133_Plus2.CEL.gz"   "GSM1551360_CIN2-12_U133_Plus2.CEL.gz"  
-##  [52] "GSM1551361_CIN2-13_U133_Plus2.CEL.gz"   "GSM1551362_CIN2-14_U133_Plus2.CEL.gz"   "GSM1551363_CIN2-15_U133_Plus2.CEL.gz"  
-##  [55] "GSM1551364_CIN2-16_U133_Plus2.CEL.gz"   "GSM1551365_CIN2-17_U133_Plus2.CEL.gz"   "GSM1551366_CIN2-18_U133_Plus2.CEL.gz"  
-##  [58] "GSM1551367_CIN2-19_U133_Plus2.CEL.gz"   "GSM1551368_CIN2-20_U133_Plus2.CEL.gz"   "GSM1551369_CIN2-21_U133_Plus2.CEL.gz"  
-##  [61] "GSM1551370_CIN2-22_U133_Plus2.CEL.gz"   "GSM1551371_CIN3-01_U133_Plus2.CEL.gz"   "GSM1551372_CIN3-02_U133_Plus2.CEL.gz"  
-##  [64] "GSM1551373_CIN3-03_U133_Plus2.CEL.gz"   "GSM1551374_CIN3-04_U133_Plus2.CEL.gz"   "GSM1551375_CIN3-05_U133_Plus2.CEL.gz"  
-##  [67] "GSM1551376_CIN3-06_U133_Plus2.CEL.gz"   "GSM1551377_CIN3-07_U133_Plus2.CEL.gz"   "GSM1551378_CIN3-08_U133_Plus2.CEL.gz"  
-##  [70] "GSM1551379_CIN3-09_U133_Plus2.CEL.gz"   "GSM1551380_CIN3-10_U133_Plus2.CEL.gz"   "GSM1551381_CIN3-11_U133_Plus2.CEL.gz"  
-##  [73] "GSM1551382_CIN3-12_U133_Plus2.CEL.gz"   "GSM1551383_CIN3-13_U133_Plus2.CEL.gz"   "GSM1551384_CIN3-14_U133_Plus2.CEL.gz"  
-##  [76] "GSM1551385_CIN3-15_U133_Plus2.CEL.gz"   "GSM1551386_CIN3-16_U133_Plus2.CEL.gz"   "GSM1551387_CIN3-17_U133_Plus2.CEL.gz"  
-##  [79] "GSM1551388_CIN3-18_U133_Plus2.CEL.gz"   "GSM1551389_CIN3-19_U133_Plus2.CEL.gz"   "GSM1551390_CIN3-20_U133_Plus2.CEL.gz"  
-##  [82] "GSM1551391_CIN3-21_U133_Plus2.CEL.gz"   "GSM1551392_CIN3-22_U133_Plus2.CEL.gz"   "GSM1551393_CIN3-23_U133_Plus2.CEL.gz"  
-##  [85] "GSM1551394_CIN3-24_U133_Plus2.CEL.gz"   "GSM1551395_CIN3-25_U133_Plus2.CEL.gz"   "GSM1551396_CIN3-26_U133_Plus2.CEL.gz"  
-##  [88] "GSM1551397_CIN3-27_U133_Plus2.CEL.gz"   "GSM1551398_CIN3-28_U133_Plus2.CEL.gz"   "GSM1551399_CIN3-29_U133_Plus2.CEL.gz"  
-##  [91] "GSM1551400_CIN3-30_U133_Plus2.CEL.gz"   "GSM1551401_CIN3-31_U133_Plus2.CEL.gz"   "GSM1551402_CIN3-32_U133_Plus2.CEL.gz"  
-##  [94] "GSM1551403_CIN3-33_U133_Plus2.CEL.gz"   "GSM1551404_CIN3-34_U133_Plus2.CEL.gz"   "GSM1551405_CIN3-35_U133_Plus2.CEL.gz"  
-##  [97] "GSM1551406_CIN3-36_U133_Plus2.CEL.gz"   "GSM1551407_CIN3-37_U133_Plus2.CEL.gz"   "GSM1551408_CIN3-38_U133_Plus2.CEL.gz"  
-## [100] "GSM1551409_CIN3-39_U133_Plus2.CEL.gz"   "GSM1551410_CIN3-40_U133_Plus2.CEL.gz"   "GSM1551411_Cancer-01_U133_Plus2.CEL.gz"
-## [103] "GSM1551412_Cancer-02_U133_Plus2.CEL.gz" "GSM1551413_Cancer-03_U133_Plus2.CEL.gz" "GSM1551414_Cancer-04_U133_Plus2.CEL.gz"
-## [106] "GSM1551415_Cancer-05_U133_Plus2.CEL.gz" "GSM1551416_Cancer-06_U133_Plus2.CEL.gz" "GSM1551417_Cancer-07_U133_Plus2.CEL.gz"
-## [109] "GSM1551418_Cancer-08_U133_Plus2.CEL.gz" "GSM1551419_Cancer-09_U133_Plus2.CEL.gz" "GSM1551420_Cancer-10_U133_Plus2.CEL.gz"
-## [112] "GSM1551421_Cancer-11_U133_Plus2.CEL.gz" "GSM1551422_Cancer-12_U133_Plus2.CEL.gz" "GSM1551423_Cancer-13_U133_Plus2.CEL.gz"
-## [115] "GSM1551424_Cancer-14_U133_Plus2.CEL.gz" "GSM1551425_Cancer-15_U133_Plus2.CEL.gz" "GSM1551426_Cancer-16_U133_Plus2.CEL.gz"
-## [118] "GSM1551427_Cancer-17_U133_Plus2.CEL.gz" "GSM1551428_Cancer-18_U133_Plus2.CEL.gz" "GSM1551429_Cancer-19_U133_Plus2.CEL.gz"
-## [121] "GSM1551430_Cancer-20_U133_Plus2.CEL.gz" "GSM1551431_Cancer-21_U133_Plus2.CEL.gz" "GSM1551432_Cancer-22_U133_Plus2.CEL.gz"
-## [124] "GSM1551433_Cancer-23_U133_Plus2.CEL.gz" "GSM1551434_Cancer-24_U133_Plus2.CEL.gz" "GSM1551435_Cancer-25_U133_Plus2.CEL.gz"
-## [127] "GSM1551436_Cancer-26_U133_Plus2.CEL.gz" "GSM1551437_Cancer-27_U133_Plus2.CEL.gz" "GSM1551438_Cancer-28_U133_Plus2.CEL.gz"</code></pre>
+<pre style="max-height: 300px;"><code>##   [1] "probe"                                  "GSM1551311_Normal-01_U133_Plus2.CEL.gz"
+##   [3] "GSM1551312_Normal-02_U133_Plus2.CEL.gz" "GSM1551313_Normal-03_U133_Plus2.CEL.gz"
+##   [5] "GSM1551314_Normal-04_U133_Plus2.CEL.gz" "GSM1551315_Normal-05_U133_Plus2.CEL.gz"
+##   [7] "GSM1551316_Normal-06_U133_Plus2.CEL.gz" "GSM1551317_Normal-07_U133_Plus2.CEL.gz"
+##   [9] "GSM1551318_Normal-08_U133_Plus2.CEL.gz" "GSM1551319_Normal-09_U133_Plus2.CEL.gz"
+##  [11] "GSM1551320_Normal-10_U133_Plus2.CEL.gz" "GSM1551321_Normal-11_U133_Plus2.CEL.gz"
+##  [13] "GSM1551322_Normal-12_U133_Plus2.CEL.gz" "GSM1551323_Normal-13_U133_Plus2.CEL.gz"
+##  [15] "GSM1551324_Normal-14_U133_Plus2.CEL.gz" "GSM1551325_Normal-15_U133_Plus2.CEL.gz"
+##  [17] "GSM1551326_Normal-16_U133_Plus2.CEL.gz" "GSM1551327_Normal-17_U133_Plus2.CEL.gz"
+##  [19] "GSM1551328_Normal-18_U133_Plus2.CEL.gz" "GSM1551329_Normal-19_U133_Plus2.CEL.gz"
+##  [21] "GSM1551330_Normal-20_U133_Plus2.CEL.gz" "GSM1551331_Normal-21_U133_Plus2.CEL.gz"
+##  [23] "GSM1551332_Normal-22_U133_Plus2.CEL.gz" "GSM1551333_Normal-23_U133_Plus2.CEL.gz"
+##  [25] "GSM1551334_Normal-24_U133_Plus2.CEL.gz" "GSM1551335_CIN1-01_U133_Plus2.CEL.gz"  
+##  [27] "GSM1551336_CIN1-02_U133_Plus2.CEL.gz"   "GSM1551337_CIN1-03_U133_Plus2.CEL.gz"  
+##  [29] "GSM1551338_CIN1-04_U133_Plus2.CEL.gz"   "GSM1551339_CIN1-05_U133_Plus2.CEL.gz"  
+##  [31] "GSM1551340_CIN1-06_U133_Plus2.CEL.gz"   "GSM1551341_CIN1-07_U133_Plus2.CEL.gz"  
+##  [33] "GSM1551342_CIN1-08_U133_Plus2.CEL.gz"   "GSM1551343_CIN1-09_U133_Plus2.CEL.gz"  
+##  [35] "GSM1551344_CIN1-10_U133_Plus2.CEL.gz"   "GSM1551345_CIN1-11_U133_Plus2.CEL.gz"  
+##  [37] "GSM1551346_CIN1-12_U133_Plus2.CEL.gz"   "GSM1551347_CIN1-13_U133_Plus2.CEL.gz"  
+##  [39] "GSM1551348_CIN1-14_U133_Plus2.CEL.gz"   "GSM1551349_CIN2-01_U133_Plus2.CEL.gz"  
+##  [41] "GSM1551350_CIN2-02_U133_Plus2.CEL.gz"   "GSM1551351_CIN2-03_U133_Plus2.CEL.gz"  
+##  [43] "GSM1551352_CIN2-04_U133_Plus2.CEL.gz"   "GSM1551353_CIN2-05_U133_Plus2.CEL.gz"  
+##  [45] "GSM1551354_CIN2-06_U133_Plus2.CEL.gz"   "GSM1551355_CIN2-07_U133_Plus2.CEL.gz"  
+##  [47] "GSM1551356_CIN2-08_U133_Plus2.CEL.gz"   "GSM1551357_CIN2-09_U133_Plus2.CEL.gz"  
+##  [49] "GSM1551358_CIN2-10_U133_Plus2.CEL.gz"   "GSM1551359_CIN2-11_U133_Plus2.CEL.gz"  
+##  [51] "GSM1551360_CIN2-12_U133_Plus2.CEL.gz"   "GSM1551361_CIN2-13_U133_Plus2.CEL.gz"  
+##  [53] "GSM1551362_CIN2-14_U133_Plus2.CEL.gz"   "GSM1551363_CIN2-15_U133_Plus2.CEL.gz"  
+##  [55] "GSM1551364_CIN2-16_U133_Plus2.CEL.gz"   "GSM1551365_CIN2-17_U133_Plus2.CEL.gz"  
+##  [57] "GSM1551366_CIN2-18_U133_Plus2.CEL.gz"   "GSM1551367_CIN2-19_U133_Plus2.CEL.gz"  
+##  [59] "GSM1551368_CIN2-20_U133_Plus2.CEL.gz"   "GSM1551369_CIN2-21_U133_Plus2.CEL.gz"  
+##  [61] "GSM1551370_CIN2-22_U133_Plus2.CEL.gz"   "GSM1551371_CIN3-01_U133_Plus2.CEL.gz"  
+##  [63] "GSM1551372_CIN3-02_U133_Plus2.CEL.gz"   "GSM1551373_CIN3-03_U133_Plus2.CEL.gz"  
+##  [65] "GSM1551374_CIN3-04_U133_Plus2.CEL.gz"   "GSM1551375_CIN3-05_U133_Plus2.CEL.gz"  
+##  [67] "GSM1551376_CIN3-06_U133_Plus2.CEL.gz"   "GSM1551377_CIN3-07_U133_Plus2.CEL.gz"  
+##  [69] "GSM1551378_CIN3-08_U133_Plus2.CEL.gz"   "GSM1551379_CIN3-09_U133_Plus2.CEL.gz"  
+##  [71] "GSM1551380_CIN3-10_U133_Plus2.CEL.gz"   "GSM1551381_CIN3-11_U133_Plus2.CEL.gz"  
+##  [73] "GSM1551382_CIN3-12_U133_Plus2.CEL.gz"   "GSM1551383_CIN3-13_U133_Plus2.CEL.gz"  
+##  [75] "GSM1551384_CIN3-14_U133_Plus2.CEL.gz"   "GSM1551385_CIN3-15_U133_Plus2.CEL.gz"  
+##  [77] "GSM1551386_CIN3-16_U133_Plus2.CEL.gz"   "GSM1551387_CIN3-17_U133_Plus2.CEL.gz"  
+##  [79] "GSM1551388_CIN3-18_U133_Plus2.CEL.gz"   "GSM1551389_CIN3-19_U133_Plus2.CEL.gz"  
+##  [81] "GSM1551390_CIN3-20_U133_Plus2.CEL.gz"   "GSM1551391_CIN3-21_U133_Plus2.CEL.gz"  
+##  [83] "GSM1551392_CIN3-22_U133_Plus2.CEL.gz"   "GSM1551393_CIN3-23_U133_Plus2.CEL.gz"  
+##  [85] "GSM1551394_CIN3-24_U133_Plus2.CEL.gz"   "GSM1551395_CIN3-25_U133_Plus2.CEL.gz"  
+##  [87] "GSM1551396_CIN3-26_U133_Plus2.CEL.gz"   "GSM1551397_CIN3-27_U133_Plus2.CEL.gz"  
+##  [89] "GSM1551398_CIN3-28_U133_Plus2.CEL.gz"   "GSM1551399_CIN3-29_U133_Plus2.CEL.gz"  
+##  [91] "GSM1551400_CIN3-30_U133_Plus2.CEL.gz"   "GSM1551401_CIN3-31_U133_Plus2.CEL.gz"  
+##  [93] "GSM1551402_CIN3-32_U133_Plus2.CEL.gz"   "GSM1551403_CIN3-33_U133_Plus2.CEL.gz"  
+##  [95] "GSM1551404_CIN3-34_U133_Plus2.CEL.gz"   "GSM1551405_CIN3-35_U133_Plus2.CEL.gz"  
+##  [97] "GSM1551406_CIN3-36_U133_Plus2.CEL.gz"   "GSM1551407_CIN3-37_U133_Plus2.CEL.gz"  
+##  [99] "GSM1551408_CIN3-38_U133_Plus2.CEL.gz"   "GSM1551409_CIN3-39_U133_Plus2.CEL.gz"  
+## [101] "GSM1551410_CIN3-40_U133_Plus2.CEL.gz"   "GSM1551411_Cancer-01_U133_Plus2.CEL.gz"
+## [103] "GSM1551412_Cancer-02_U133_Plus2.CEL.gz" "GSM1551413_Cancer-03_U133_Plus2.CEL.gz"
+## [105] "GSM1551414_Cancer-04_U133_Plus2.CEL.gz" "GSM1551415_Cancer-05_U133_Plus2.CEL.gz"
+## [107] "GSM1551416_Cancer-06_U133_Plus2.CEL.gz" "GSM1551417_Cancer-07_U133_Plus2.CEL.gz"
+## [109] "GSM1551418_Cancer-08_U133_Plus2.CEL.gz" "GSM1551419_Cancer-09_U133_Plus2.CEL.gz"
+## [111] "GSM1551420_Cancer-10_U133_Plus2.CEL.gz" "GSM1551421_Cancer-11_U133_Plus2.CEL.gz"
+## [113] "GSM1551422_Cancer-12_U133_Plus2.CEL.gz" "GSM1551423_Cancer-13_U133_Plus2.CEL.gz"
+## [115] "GSM1551424_Cancer-14_U133_Plus2.CEL.gz" "GSM1551425_Cancer-15_U133_Plus2.CEL.gz"
+## [117] "GSM1551426_Cancer-16_U133_Plus2.CEL.gz" "GSM1551427_Cancer-17_U133_Plus2.CEL.gz"
+## [119] "GSM1551428_Cancer-18_U133_Plus2.CEL.gz" "GSM1551429_Cancer-19_U133_Plus2.CEL.gz"
+## [121] "GSM1551430_Cancer-20_U133_Plus2.CEL.gz" "GSM1551431_Cancer-21_U133_Plus2.CEL.gz"
+## [123] "GSM1551432_Cancer-22_U133_Plus2.CEL.gz" "GSM1551433_Cancer-23_U133_Plus2.CEL.gz"
+## [125] "GSM1551434_Cancer-24_U133_Plus2.CEL.gz" "GSM1551435_Cancer-25_U133_Plus2.CEL.gz"
+## [127] "GSM1551436_Cancer-26_U133_Plus2.CEL.gz" "GSM1551437_Cancer-27_U133_Plus2.CEL.gz"
+## [129] "GSM1551438_Cancer-28_U133_Plus2.CEL.gz"</code></pre>
 <p>ส่วนที่สองคือ metadata (ข้อมูลระบุตัวตน) ของข้อมูลนี้</p>
 <div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">GSE63514_meta</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
@@ -311,7 +336,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-21.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

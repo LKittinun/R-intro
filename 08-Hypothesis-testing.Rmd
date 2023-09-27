@@ -85,9 +85,9 @@ ggplot(density_df, aes(x,y)) +
 
 ตรงส่วนพื้นที่ระหว่าง `critical value` (ระหว่างเส้นประสีแดง) คือ พิสัยของความแตกต่างที่สามารถรับได้ ซึ่งจะถูกนำไปใช้ในการคำนวณ**ค่าความเชื่อมั่น (confidence interval)** ต่อไป
 
----
+------------------------------------------------------------------------
 
-## Trade-off ของ p-value threshold {-}
+## Trade-off ของ p-value threshold {.unnumbered}
 
 การตั้งค่าวิกฤตินั้นมี trade-off ระหว่าง `false positive` และ `false negative` ที่ต้องพิจารณา
 

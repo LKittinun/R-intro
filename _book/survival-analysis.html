@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>11 Survival analysis | A gentle introduction to R for biologists</title>
+<title>12 Survival analysis | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
-<meta property="og:title" content="11 Survival analysis | A gentle introduction to R for biologists">
+<meta property="og:title" content="12 Survival analysis | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="11 Survival analysis | A gentle introduction to R for biologists">
+<meta name="twitter:title" content="12 Survival analysis | A gentle introduction to R for biologists">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -57,9 +57,12 @@
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
 <li><a class="" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
-<li><a class="active" href="survival-analysis.html"><span class="header-section-number">11</span> Survival analysis</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
+<li><a class="active" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="distribution.html"><span class="header-section-number">13</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">12</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">14</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -67,9 +70,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="survival-analysis" class="section level1" number="11">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="survival-analysis" class="section level1" number="12">
 <h1>
-<span class="header-section-number">11</span> <strong>Survival analysis</strong><a class="anchor" aria-label="anchor" href="#survival-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12</span> <strong>Survival analysis</strong><a class="anchor" aria-label="anchor" href="#survival-analysis"><i class="fas fa-link"></i></a>
 </h1>
 <p>ในงานวิจัยที่กระทำกับผู้ป่วย หรือแม้กระทั้งเซลล์นั้น บางครั้งจะมีความจำเป็นที่ต้องทำการวิเคราะห์ข้อมูลเพื่อเปรียบเทียบสร้างแบบจำลองที่สามารถทำนายเวลาที่ใช้ก่อนที่จะเกิดเหตุการณ์ที่ท่านสนใจ (event) เช่น เวลาที่ผู้ป่วยจะเสียชีวิตจากโรคมะเร็งนับตั้งแต่วันวินิจฉัย เวลาของเซลล์ที่จะตายหลังจากใส่สารบางอย่างที่สนใจ เป็นต้น</p>
 <p>ลักษณะพิเศษของการวิเคราะห์ survival analysis คือ มีการวิเคราะห์โดยใช้ปัจจัยที่เรียกว่า censoring ร่วม ซึ่งคือการที่ เหตุการณ์ที่คาดหวังว่าจะเกิดนั้นไม่มาถึงแม้ว่าจะครบตามเวลาที่ผู้วิจัยสังเกตการณ์แล้ว ซึ่งทำให้ไม่สามารถมั่นใจได้ว่าเหตุการณ์นั้นจะเกิดต่อไปหรือไม่ ณ เวลาหลังจากนี้</p>
@@ -80,9 +83,9 @@
 <li><p>Left-censor คือ ไม่แน่ใจข้อมูลช่วงเวลาเริ่มต้น เช่น diagnosis วันไหน</p></li>
 <li><p>Interval-censor คือ เวลาช่วงใดช่วงหนึ่งหายไป</p></li>
 </ul>
-<div id="kaplein-meir-estimate" class="section level2" number="11.1">
+<div id="kaplein-meir-estimate" class="section level2" number="12.1">
 <h2>
-<span class="header-section-number">11.1</span> Kaplein-Meir estimate<a class="anchor" aria-label="anchor" href="#kaplein-meir-estimate"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1</span> Kaplein-Meir estimate<a class="anchor" aria-label="anchor" href="#kaplein-meir-estimate"><i class="fas fa-link"></i></a>
 </h2>
 <p>Kaplein-Meir estimate (KM) คือกราฟแสดงอัตราการเกิดของเหตุการณ์เมื่อเทียบกับเวลาที่ผ่านไป โดยหลักการคำนวณ survival คือ</p>
 <p><span class="math display">\[ \hat{S}(t) = \prod_{i: t_{i} \leq t}(1- \frac{d_{i}}{n_{i}})\]</span></p>
@@ -167,23 +170,69 @@
 </tbody>
 </table></div>
 <p>เมื่อนำไปพล็อตกราฟแล้วจะได้ผลดังนี้</p>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
 <p>สังเกตุว่าส่วนที่ censor (มีสัญลักษณ์ <code>+</code>) จะไม่มีการตกลงของกราฟ แต่เมื่อถึงเวลาที่มี event เกิดขึ้น การตกลงของกราฟจะสูงกว่าเมื่อไม่มี censor นำมาก่อน</p>
-<div id="การสราง-km-ใน-r" class="section level3" number="11.1.1">
+<div id="การสราง-km-ใน-r" class="section level3" number="12.1.1">
 <h3>
-<span class="header-section-number">11.1.1</span> การสร้าง KM ใน R<a class="anchor" aria-label="anchor" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%A3%E0%B8%B2%E0%B8%87-km-%E0%B9%83%E0%B8%99-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1.1</span> การสร้าง KM ใน R<a class="anchor" aria-label="anchor" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%A3%E0%B8%B2%E0%B8%87-km-%E0%B9%83%E0%B8%99-r"><i class="fas fa-link"></i></a>
 </h3>
 <p>ตัวอย่างข้อมูลของผู้ป่วยมะเร็งรังไข่ที่ได้รับการรักษาโดยการผ่าตัด</p>
-<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span> </span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ovarian</span><span class="op">)</span></span></code></pre></div>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["futime"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["fustat"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["age"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["resid.ds"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["rx"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["ecog.ps"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"59","2":"1","3":"72.3315","4":"2","5":"1","6":"1","_rn_":"1"},{"1":"115","2":"1","3":"74.4932","4":"2","5":"1","6":"1","_rn_":"2"},{"1":"156","2":"1","3":"66.4658","4":"2","5":"1","6":"2","_rn_":"3"},{"1":"421","2":"0","3":"53.3644","4":"2","5":"2","6":"1","_rn_":"4"},{"1":"431","2":"1","3":"50.3397","4":"2","5":"1","6":"1","_rn_":"5"},{"1":"448","2":"0","3":"56.4301","4":"1","5":"1","6":"2","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">ovarian</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "futime"   "fustat"   "age"      "resid.ds" "rx"       "ecog.ps"</code></pre>
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ovarian</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>age_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">age</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">100</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">age_group</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">fustat</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">fustat</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">n</span><span class="op">~</span><span class="va">age_group</span>, family <span class="op">=</span> <span class="st">"poisson"</span>, data <span class="op">=</span> <span class="va">_</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = n ~ age_group, family = "poisson", data = filter(count(group_by(mutate(ovarian, 
+##     age_group = cut(age, seq(0, 100, 10))), age_group), fustat), 
+##     fustat == 1))
+## 
+## Coefficients:
+##                   Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)      4.676e-11  1.000e+00   0.000    1.000
+## age_group(50,60] 1.609e+00  1.095e+00   1.469    0.142
+## age_group(60,70] 1.099e+00  1.155e+00   0.951    0.341
+## age_group(70,80] 1.099e+00  1.155e+00   0.951    0.341
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance:  2.9110e+00  on 3  degrees of freedom
+## Residual deviance: -4.4409e-16  on 0  degrees of freedom
+## AIC: 19.464
+## 
+## Number of Fisher Scoring iterations: 3</code></pre>
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">fustat</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">resid.ds</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">futime</span><span class="op">)</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"poisson"</span>, data <span class="op">=</span> <span class="va">ovarian</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = fustat ~ age + resid.ds + offset(log(futime)), 
+##     family = "poisson", data = ovarian)
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -14.17523    2.08156  -6.810 9.77e-12 ***
+## age           0.10234    0.03502   2.922  0.00347 ** 
+## resid.ds      0.73279    0.71520   1.025  0.30556    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 35.691  on 25  degrees of freedom
+## Residual deviance: 22.070  on 23  degrees of freedom
+## AIC: 52.07
+## 
+## Number of Fisher Scoring iterations: 6</code></pre>
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">ovarian</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, y <span class="op">=</span> <span class="va">fustat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"glm"</span>, method.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"poisson"</span><span class="op">)</span>,</span>
+<span>              formula <span class="op">=</span> <span class="va">y</span><span class="op">~</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/ovarian_file-1.png" width="672"></div>
 <p>อธิบายตัวแปร:</p>
 <ul>
 <li><p><code>age</code> = อายุ</p></li>
@@ -193,8 +242,8 @@
 <li><p><code>rx</code> = กลุ่มการรักษา</p></li>
 <li><p><code>ecog.ps</code> = ECOG performance status คะแนนน้อยแปลว่าผู้ป่วยมีสุขภาพโดยรวมดี</p></li>
 </ul>
-<p>เมื่อใช้ function <code><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv()</a></code> จะทำการเปลี่ยน <code>futime</code> ให้รับรู้การ censor สังเกตว่าผู้ป่วยที่ ไม่เกิดเหตุการณ์จะทีสัญลักษณ์ <code>+</code> อยู่ข้างหลัง บ่งบอกว่าข้อมูลนั้นถูก censor นั่นหมายความว่า ผู้ป่วยจะเกิดเหตุการณ์หรือไม่ก็ได้หลังจากนี้ เพียงแต่ผู้วิจัยไม่สามารถทราบได้แล้ว</p>
-<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<p>เมื่อใช้ function <code><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv()</a></code> จะทำการเปลี่ยน <code>futime</code> ให้รับรู้การ censor สังเกตว่าผู้ป่วยที่ ไม่เกิดเหตุการณ์จะมีสัญลักษณ์ <code>+</code> อยู่ข้างหลัง บ่งบอกว่าข้อมูลนั้นถูก censor นั่นหมายความว่า ผู้ป่วยจะเกิดเหตุการณ์หรือไม่ก็ได้หลังจากนี้ เพียงแต่ผู้วิจัยไม่สามารถทราบได้แล้ว</p>
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">censored_df</span> <span class="op">&lt;-</span> <span class="va">ovarian</span> <span class="op">|&gt;</span>    </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>censored_futime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">ovarian</span><span class="op">$</span><span class="va">futime</span>, <span class="va">ovarian</span><span class="op">$</span><span class="va">fustat</span><span class="op">)</span><span class="op">)</span> </span>
 <span></span>
@@ -205,27 +254,26 @@
   </script>
 </div>
 <p>การพล็อต KM นั้นสามารถทำได้โดยใช้ package <code>survminer</code> โดยเริ่มจากการสร้างตาราง survival curve จากคำสั่ง <code><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit()</a></code></p>
-<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/survminer/index.html">survminer</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ovarian_surv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span><span class="op">/</span><span class="fl">365.25</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">ovarian</span> <span class="co"># เปลี่ยนเป็นปี</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="va">ovarian_surv</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">ovarian_surv</span> <span class="op">|&gt;</span> <span class="fu">tidy</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["time"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["n.risk"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["n.event"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["n.censor"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["estimate"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.1615332","2":"26","3":"1","4":"0","5":"0.9615385","6":"0.03922323","7":"1.0000000","8":"0.8903890"},{"1":"0.3148528","2":"25","3":"1","4":"0","5":"0.9230769","6":"0.05661385","7":"1.0000000","8":"0.8261294"},{"1":"0.4271047","2":"24","3":"1","4":"0","5":"0.8846154","6":"0.07082882","7":"1.0000000","8":"0.7699542"},{"1":"0.7337440","2":"23","3":"1","4":"0","5":"0.8461538","6":"0.08362420","7":"0.9968513","8":"0.7182378"},{"1":"0.9007529","2":"22","3":"1","4":"0","5":"0.8076923","6":"0.09569488","7":"0.9743199","8":"0.6695613"},{"1":"0.9664613","2":"21","3":"1","4":"0","5":"0.7692308","6":"0.10741723","7":"0.9494899","8":"0.6231935"},{"1":"0.9993155","2":"20","3":"1","4":"0","5":"0.7307692","6":"0.11903798","7":"0.9227957","8":"0.5787019"},{"1":"1.0321697","2":"19","3":"0","4":"1","5":"0.7307692","6":"0.11903798","7":"0.9227957","8":"0.5787019"},{"1":"1.1526352","2":"18","3":"0","4":"1","5":"0.7307692","6":"0.11903798","7":"0.9227957","8":"0.5787019"},{"1":"1.1800137","2":"17","3":"1","4":"0","5":"0.6877828","6":"0.13359083","7":"0.8936430","8":"0.5293447"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>หลังจากนั้นใช้คำสั่ง <code><a href="https://rdrr.io/pkg/survminer/man/ggsurvplot.html">ggsurvplot()</a></code> เพื่อทำการสร้างกราฟ</p>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggsurvplot.html">ggsurvplot</a></span><span class="op">(</span><span class="va">ovarian_surv</span>, risk.table <span class="op">=</span> <span class="cn">TRUE</span>, break.time.by <span class="op">=</span> <span class="fl">0.25</span>, </span>
 <span>           surv.median.line <span class="op">=</span> <span class="st">"hv"</span><span class="op">)</span> </span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/ovarian_survplot-1.png" width="672"></div>
 <p>จะเห็นว่าผู้ป่วยกลุ่มนี้มี median survival อยู่ประมาณ 1.75 ปี</p>
-<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_surv_resid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span><span class="op">/</span><span class="fl">365.25</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="va">resid.ds</span>, data <span class="op">=</span> <span class="va">ovarian</span></span>
 <span>  <span class="op">)</span></span>
@@ -236,12 +284,12 @@
 <p>จะพบว่า ถ้าผ่าตัดแล้วไม่เหลือร่องรอยของโรค จะมีอัตราการรอดชีวิตที่ดีกว่า แต่ยังไม่ถึงระดับมีนัยสำคัญ</p>
 </div>
 </div>
-<div id="log-rank-test" class="section level2" number="11.2">
+<div id="log-rank-test" class="section level2" number="12.2">
 <h2>
-<span class="header-section-number">11.2</span> Log-rank test<a class="anchor" aria-label="anchor" href="#log-rank-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2</span> Log-rank test<a class="anchor" aria-label="anchor" href="#log-rank-test"><i class="fas fa-link"></i></a>
 </h2>
 <p>Log-rank test คือ non-parametric test สำหรับ univariate analysis ที่เปรียบเทียบความแตกต่างของอัตราการเกิด event ว่าแตกต่างอย่างมีนัยสำคัญหรือไม่</p>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_surv_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survdiff.html">survdiff</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span><span class="op">/</span><span class="fl">365.25</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="va">resid.ds</span>, data <span class="op">=</span> <span class="va">ovarian</span></span>
 <span>  <span class="op">)</span></span>
@@ -264,9 +312,9 @@
 </ul>
 <p>ค่า log-rank นี้ สามารถแสดงใน KM ได้โดยใช้ <code>pval</code> = <code>TRUE</code> ตามหัวข้อเบื้องต้น</p>
 </div>
-<div id="cox-proportional-hazard-model" class="section level2" number="11.3">
+<div id="cox-proportional-hazard-model" class="section level2" number="12.3">
 <h2>
-<span class="header-section-number">11.3</span> Cox-proportional hazard model<a class="anchor" aria-label="anchor" href="#cox-proportional-hazard-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3</span> Cox-proportional hazard model<a class="anchor" aria-label="anchor" href="#cox-proportional-hazard-model"><i class="fas fa-link"></i></a>
 </h2>
 <p>Cox-proportional hazard model (CPH) เป็น semi-parametric model ซึ่งวัด risk ของการเกิด event นั้นๆ โดยมี function คือ</p>
 <p><span class="math display">\[
@@ -277,7 +325,7 @@ ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 \]</span></p>
 <p>ซึ่ง <span class="math inline">\(h(t)/h_{0}(t)\)</span> นั้นคือ hazard ratio (HR) หรือ ความเสี่ยงของการเกิด event นั้นๆ</p>
 <p>การวิเคราะห์ CPH นั้นมีข้อดีกว่า log-rank คือสามารถประมาณการเชิงปริมาณ (quantitative measurement) ผ่าน HR และสามารถวิเคราะห์สมการแบบ multivariate analysis ได้</p>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_cox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span><span class="op">/</span><span class="fl">365.25</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> </span>
 <span>                       <span class="va">resid.ds</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">rx</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">ovarian</span><span class="op">)</span> </span>
 <span></span>
@@ -298,9 +346,9 @@ ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 <li><p><code>p</code> ในตาราง คือ ค่าคำนวณ p-value จาก Wald’s test ของแต่ละตัวแปรว่ามีผลต่ออัตราการรอดชีวิตหรือไม่</p></li>
 <li><p><code>p</code> ข้างล่าง คือ overall p จาก likelihood ratio test ว่าจากทั้งหมด มีตัวแปรใดตัวแปรหนึ่งส่งผลให้อัตรากการรอดชีวิตเปลี่ยนไปอย่างมีนัยสำคัญทางสถิติหรือไม่</p></li>
 </ul>
-<div id="การตรวจสอบ-assumption-validity-ของ-cph" class="section level3" number="11.3.1">
+<div id="การตรวจสอบ-assumption-validity-ของ-cph" class="section level3" number="12.3.1">
 <h3>
-<span class="header-section-number">11.3.1</span> การตรวจสอบ assumption validity ของ CPH<a class="anchor" aria-label="anchor" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%AD%E0%B8%9A-assumption-validity-%E0%B8%82%E0%B8%AD%E0%B8%87-cph"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3.1</span> การตรวจสอบ assumption validity ของ CPH<a class="anchor" aria-label="anchor" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%AD%E0%B8%9A-assumption-validity-%E0%B8%82%E0%B8%AD%E0%B8%87-cph"><i class="fas fa-link"></i></a>
 </h3>
 <p>CPH นั้นมี assumption ดังนี้:</p>
 <ul>
@@ -310,14 +358,14 @@ ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 <li><p>ไม่จำเป็นต้องทราบลักษณะการกระจายตัวของข้อมูลก่อน (จึงเป็น semi-parametric model)</p></li>
 </ul>
 <p>สามารถตรวจสอบ HR ได้โดยใช้ proportionality assumption test จาก Schoenfeld residuals โดย <code><a href="https://rdrr.io/pkg/survival/man/cox.zph.html">cox.zph()</a></code></p>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_coxzph</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html">cox.zph</a></span><span class="op">(</span><span class="va">ovarian_cox</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggcoxzph.html">ggcoxzph</a></span><span class="op">(</span><span class="va">ovarian_coxzph</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/cox_proportion-1.png" width="672"></div>
 <p>โดย test นี้จะทำการเปรียบเทียบ residuals ระหว่าง risk-weight average กับ ตัวแปรนั้นๆ ว่ามีการเปลี่ยนแปลงไปในทิศทางใดทิศทางหนึ่งหรือไม่ ถ้ามี (p &lt; 0.05) หมายความว่า เวลาที่ผ่านไปอาจจะส่งผลให้ HR นั้นมีความแตกต่างกัน ซึ่งจะต้องทำ time-varying CPH เพิ่มเติม</p>
 <p>โดยในข้อมูล <code>ovarian</code> นี้ ไม่มีตัวใดที่ p-value &lt; 0.05 จึงถือได้ว่า อัตราส่วนนั้นคงที่ และทำให้ CPH นั้น valid</p>
 <p>ในส่วนของ linearity สามารถตวจสอบโดยใช้ function <code><a href="https://rdrr.io/pkg/survminer/man/ggcoxfunctional.html">ggcoxfunctional()</a></code></p>
-<div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_linear_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggcoxfunctional.html">ggcoxfunctional</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span><span class="op">/</span><span class="fl">365.25</span>, <span class="va">fustat</span><span class="op">)</span><span class="op">~</span>  <span class="va">age</span><span class="op">+</span>                                 <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">ovarian</span><span class="op">)</span> </span>
 <span><span class="va">ovarian_linear_age</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/cox_linearity-1.png" width="672"></div>
@@ -330,18 +378,18 @@ ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></div>
-<div class="next"><a href="session-info.html"><span class="header-section-number">12</span> Session info</a></div>
+<div class="prev"><a href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></div>
+<div class="next"><a href="distribution.html"><span class="header-section-number">13</span> Distribution</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#survival-analysis"><span class="header-section-number">11</span> Survival analysis</a></li>
+<li><a class="nav-link" href="#survival-analysis"><span class="header-section-number">12</span> Survival analysis</a></li>
 <li>
-<a class="nav-link" href="#kaplein-meir-estimate"><span class="header-section-number">11.1</span> Kaplein-Meir estimate</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%A3%E0%B8%B2%E0%B8%87-km-%E0%B9%83%E0%B8%99-r"><span class="header-section-number">11.1.1</span> การสร้าง KM ใน R</a></li></ul>
+<a class="nav-link" href="#kaplein-meir-estimate"><span class="header-section-number">12.1</span> Kaplein-Meir estimate</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%A3%E0%B8%B2%E0%B8%87-km-%E0%B9%83%E0%B8%99-r"><span class="header-section-number">12.1.1</span> การสร้าง KM ใน R</a></li></ul>
 </li>
-<li><a class="nav-link" href="#log-rank-test"><span class="header-section-number">11.2</span> Log-rank test</a></li>
+<li><a class="nav-link" href="#log-rank-test"><span class="header-section-number">12.2</span> Log-rank test</a></li>
 <li>
-<a class="nav-link" href="#cox-proportional-hazard-model"><span class="header-section-number">11.3</span> Cox-proportional hazard model</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%AD%E0%B8%9A-assumption-validity-%E0%B8%82%E0%B8%AD%E0%B8%87-cph"><span class="header-section-number">11.3.1</span> การตรวจสอบ assumption validity ของ CPH</a></li></ul>
+<a class="nav-link" href="#cox-proportional-hazard-model"><span class="header-section-number">12.3</span> Cox-proportional hazard model</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%AD%E0%B8%9A-assumption-validity-%E0%B8%82%E0%B8%AD%E0%B8%87-cph"><span class="header-section-number">12.3.1</span> การตรวจสอบ assumption validity ของ CPH</a></li></ul>
 </li>
 </ul>
 
@@ -359,7 +407,7 @@ ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-21.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

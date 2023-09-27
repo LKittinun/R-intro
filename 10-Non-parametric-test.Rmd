@@ -38,7 +38,7 @@ chisq_dice
 data.frame(O = chisq_dice$observed, E.Freq = chisq_dice$expected)
 ```
 
-จะเห็นว่าความแตกต่างระหว่าง observed และ expected นั้น อยู่ในพิสัยของของ \$H\_{0}\$
+จะเห็นว่าความแตกต่างระหว่าง observed และ expected นั้น อยู่ในพิสัยของของ $H_{0}$
 
 แต่ถ้าลูกเต๋านั้นเป็นลูกเต๋าถ่วงน้ำหนัก
 
@@ -47,14 +47,18 @@ weight_dice <- sample(6,1000, replace = TRUE, prob = c(3,2,1,1,1,1)/9)
 chisq_weight_norm <- chisq.test(table(weight_dice))
 chisq_weight_norm
 data.frame(O = chisq_weight_norm$observed, E.freq = chisq_weight_norm$expected)
+```
 
+เมื่อวิเคราะห์ chi-square ตามการกระจายตัวของลูกเต๋าทั่วไป จะแตกต่างอย่างมีนัยสำคัญ
+
+```{r weight_dice_weight}
 chisq_weight_weight <- chisq.test(table(weight_dice), p = c(3,2,1,1,1,1)/9)
 chisq_weight_weight
 data.frame(O = chisq_weight_weight$observed, E.freq = chisq_weight_weight$expected)
 
 ```
 
-จะเห็นว่า ถ้าเป็นลูกเต๋าถ่วงน้ำหนัก เมื่อวิเคราะห์ chi-square ตามการกระจายตัวของลูกเต๋าทั่วไป จะแตกต่างอย่างมีนัยสำคัญ แต่ถ้าใช้การกระจายตัวเดียวกับลูกเต๋าถ่วงน้ำหนัก จะไม่แตกต่าง
+แต่ถ้าวิเคราะห์เทียบกับการกระจายตัวเดียวกับลูกเต๋าถ่วงน้ำหนัก จะไม่แตกต่างกัน
 
 #### Chi-square test of independence
 
@@ -116,7 +120,7 @@ chi_value # chi-squared
 pchisq(chi_value, df = lung_chisq$parameter, lower.tail = FALSE) # p-value
 ```
 
-### Fisher's exact test
+### Fisher's exact test {#fisher}
 
 คือการทดสอบว่าข้อมูลนั้นมีความสัมพันธ์หรือไม่ โดยการเทียบกับความสัมพันธ์แบบสุ่ม การทดสอบนี้จะมีความแม่นยำกว่า chi-square เนื่องจากเป็นการคำนวณความน่าจะเป็นโดยตรง
 
@@ -126,7 +130,7 @@ $$
 
 พิจารณาสูตร จุดประสงค์คือ การคำนวณความน่าจะเป็นของการหยิบสุ่มแบบไม่คืนให้ได้ตาม condition ที่ต้องการนั่นเอง
 
-```{r fish_lung}
+```{r fisher_lung}
 fisher.test(lung_ob, alternative = "two.sided")
 ```
 
@@ -141,7 +145,8 @@ male_female <- rowSums(lung_ob)
 male_female # total male and female
 fisher_p <- (choose(alive_dead[1], lung_ob[1]-1)*choose(alive_dead[2], lung_ob[3])/
                (choose(sum(lung_ob), male_female[1])))
-fisher_p*2
+
+unname(fisher_p)*2 # remove name
 
 ## or
 2*(phyper(lung_ob[1]-1,alive_dead[1], 
@@ -171,16 +176,16 @@ fisher_p*2
 ```{r shapiro}
 long_df |> 
   group_by(Metrics, Species) |> 
-  summarise(normality = round(shapiro.test(cm)$p.value,4))
+  summarise(normality = round(shapiro.test(cm)$p.value, 4))
 ```
 
 จะเห็นว่า `Petal.Width` มี `p` \< 0.05 พอสมควร (ไม่เป็น normal distribution) จึงสมควรใช้ non-parametric test
 
-### Wilcoxon's rank sum test (Mann-Whitney U test)
+### Wilcoxon's rank sum test (Mann-Whitney U test) {#wilcox-rs}
 
 คือ การคำนวณว่ากลุ่มตัวอย่าง 2 กลุ่มนั้นมาจากประชากรกลุ่มเดียวกันหรือไม่ จากการพิจารณาผลรวมของ**ลำดับข้อมูล**ทั้งสองกลุ่ม
 
-ลักษณะการใช้คล้าย `t.test(…, paired = FALSE)` สำหรับ non-normal distribution
+ลักษณะการใช้คล้าย [independent t-test](#ind-t) สำหรับ non-normal distribution
 
 $$
 W_{j} = n_{1}n_{2} + \frac{n_{j}(n_{j}+1)}{2} - R_{n}
@@ -195,20 +200,22 @@ iris_pw <- df |>
   select(Petal.Width, Species) |> 
   filter(Species != "virginica" )
 
-p_wil <- wilcox.test(Petal.Width~Species, data = iris_pw)
+iris_wx <- wilcox.test(Petal.Width~Species, data = iris_pw)
 
-p_wil
-p_wil$p.value
+iris_wx
+iris_wx$p.value
 ```
 
-ลองคำนวณเอง
+ลองคำนวณเอง หลักการคือ
+
+-   จัดอันดับของข้อมูลโดยเรียงจาก น้อยไปมาก และให้อันดับเป็นตัวเลข (อันดับที่เท่ากัน ให้เป็นค่าเฉลี่ยของลำดับนั้น เช่น อันดับ 2, 3, 4 ที่มีค่าเท่ากัน ให้อันดับเป็น (2+3+4)/3 = 5 ทุกตัว)
+
+-   คำนวณค่า $W$ โดยแยกกลุ่ม 1 และ กลุ่ม 2 และเลือกค่า $W$ ที่น้อยที่สุด
 
 ```{r wilcox_rs_manual}
 iris_pw_rank <- iris_pw |> 
   arrange(`Petal.Width`) |> 
   mutate(Rank = rank(`Petal.Width`, ties.method = "average")) # rank all values
-
-wilcox.test(versicolor$`Petal.Width` ,setosa$`Petal.Width`)
 
 setosa <- split(iris_pw_rank, iris_pw$Species)$setosa
 versicolor <- split(iris_pw_rank, iris_pw$Species)$versicolor
@@ -245,11 +252,11 @@ $$
 s_{w} = \sqrt{\frac{n_{1}n_{2}(n_{1}+n_{2}+1)}{12}}
 $$
 
-### Wilcoxon's signed-rank test
+### Wilcoxon's signed-rank test {#wilcox-sign}
 
 คือ การคำนวณว่ากลุ่มตัวอย่าง 2 กลุ่มนั้นมาจากประชากรกลุ่มเดียวกันหรือไม่ จากการคำนวณ**ลำดับข้อมูล**ของทั้งสองกลุ่ม
 
-ลักษณะการใช้คล้าย `t.test(…, paired = TRUE)` สำหรับ non-normal distribution
+ลักษณะการใช้คล้าย [paired t-test](#pair-t) สำหรับ non-normal distribution
 
 $$
 V = \sum_{i=1}^{N_{r}}[sgn(x_{2,i} - x_{1,i}) \cdot R_{i}]
@@ -269,7 +276,6 @@ $$
 knitr::include_graphics("Picture/cell_migration.jpg")
 ```
 
-
 ```{r wilcox_sign}
 set.seed(123)
 
@@ -282,7 +288,13 @@ head(treat, 10)
 wilcox.test(treat$Before, treat$After, paired = TRUE, exact = TRUE)
 ```
 
-ลองคำนวณเอง
+ลองคำนวณเอง หลักการคือ
+
+-   คำนวณความต่างของก่อนและหลัง (หรือคู่เทียบ)
+
+-   จัดอันดับของข้อมูลโดยเรียงจาก น้อยไปมาก และให้อันดับเป็นตัวเลข (อันดับที่เท่ากัน ให้เป็นค่าเฉลี่ยของลำดับนั้น เช่น อันดับ 2, 3, 4 เท่ากัน ให้อันดับเป็น (2+3+4)/3 = 5 ทุกตัวแปร)
+
+-   คำนวณค่า $V$ โดยแยกเครื่องหมาย `+` และ `-` และเลือกค่า $V$ ที่น้อยที่สุด
 
 ```{r wilcox_sign_manual}
 treat_rank <- treat |> mutate(Diff = Before-After) |> 
@@ -299,3 +311,70 @@ V
 pval <- psignrank(V, 20,20)*2
 pval
 ```
+
+### Kruskal-Wallis test
+
+คือ การเปรียบเทียบค่าเฉลี่ยของ**ลำดับ**ว่ามาจากประชากรเดียวกันหรือไม่ ลักษณะการใช้เช่นเดียวกับ [ANOVA](#ANOVA)
+
+$$
+H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^{n_{i}}_{j=1}(r_{ij}-\bar{r})^{2}}
+$$
+
+```{r iris_kruskal}
+iris_pw_all <- df |> 
+               select(Petal.Width, Species) # 3 groups
+
+iris_kw <- kruskal.test(Petal.Width ~ Species, data = iris_pw_all)
+iris_kw$p.value
+```
+
+ลองคำนวณเอง หลักการการจัดอันดับเหมือน [Wilcoxon's rank sum test](#wilcox-rs)
+
+```{r iris_kruskal_manual}
+iris_pw_all_ranked <- iris_pw_all |> arrange(`Petal.Width`) |> 
+                        mutate(Rank = rank(`Petal.Width`, ties.method = "average"))
+iris_pw_all_ranked
+average_rank <- mean(iris_pw_all_ranked$Rank) # also = (nrow(iris_pw_all_ranked)+1)/2
+average_rank
+
+between_group_var <- iris_pw_all_ranked |>
+                  group_by(Species) |> 
+                   summarise(rank_var = ((mean(Rank) - average_rank)^2)*n())
+between_group_var
+within_group_var <- iris_pw_all_ranked |> 
+                    mutate(rank_var = (Rank-average_rank)^2)
+within_group_var
+H <- ((nrow(iris_pw_all_ranked)-1))*sum(between_group_var$rank_var)/sum(within_group_var$rank_var)
+H
+
+pval <- pchisq(H, 2, lower.tail = FALSE)
+pval
+```
+
+## Correlation test
+
+### Spearman's correlation
+
+เป็นการทดสอบความสัมพันธ์ในทิศทางของตัวแปรสองตัวแปรว่าเป็นไปในทางเดียวกันหรือไม่ (monotonic relationship)
+
+$$ \rho_{xy} =\frac{cov(x,y)}{s(x) s(y)} $$
+
+$$
+\rho_{xy} = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum^{n}_{i=1}(x_{i}-\bar{x})^{2}}\sqrt{\sum^{n}_{i=1}(y_{i}-\bar{y})^{2}}}
+$$
+
+โดย $x, y$ คือ ลำดับของข้อมูล (ไม่ใช่ตัวข้อมูลเอง) ส่งผลให้การทดสอบนี้ เป็นการทดสอบการเพิ่มขึ้นของลำดับ ไม่ใช่การเพิ่มขึ้นของข้อมูล ดังนั้น จึงไม่ใช่การทดสอบความสัมพันธ์เป็นเชิงเส้นเหมือน [Pearson's correlation](#pearson) แต่เป็นการทดสอบเพียงว่าข้อมูลไปในทิศทางเดียวันหรือไม่
+
+```{r poly_cor}
+poly_data <- data.frame(x = seq(-10, 10, length.out = 100)) |> 
+  mutate(y = x^9+x+10+rnorm(100, mean = 0, sd =3))
+
+ggplot(poly_data, aes(x=x,y=y)) + geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+
+cor(poly_data$x, poly_data$y, method = "pearson") # not quite linear
+cor(poly_data$x, poly_data$y, method = "spearman") # monotonic
+```
+
+การทดสอบใน `R` ใช้ลักษณะ code เดียวกันกับ [Pearson's correlation](#pearson) แต่เปลี่ยน argument เป็น `method = "pearson"` และข้อควรระวังก็คิดเหมือนกัน

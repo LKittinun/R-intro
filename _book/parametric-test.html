@@ -57,9 +57,12 @@
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
 <li><a class="active" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">11</span> Survival analysis</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="distribution.html"><span class="header-section-number">13</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">12</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">14</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -77,13 +80,13 @@
 <span class="header-section-number">9.1</span> t-test<a class="anchor" aria-label="anchor" href="#sec-t-test"><i class="fas fa-link"></i></a>
 </h2>
 <p>คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย (mean) และความแปรปรวน (sd) ระหว่างสองกลุ่ม แบ่งเป็น</p>
-<div id="one-sample-t-test" class="section level3" number="9.1.1">
+<div id="one-t" class="section level3" number="9.1.1">
 <h3>
-<span class="header-section-number">9.1.1</span> One sample t-test<a class="anchor" aria-label="anchor" href="#one-sample-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1.1</span> One sample t-test<a class="anchor" aria-label="anchor" href="#one-t"><i class="fas fa-link"></i></a>
 </h3>
 <p>เป็นการเปรียบเทียบความแตกต่างของ mean ระหว่าง <code>sample</code> กับ <code>population</code></p>
 <p><span class="math display">\[
-t = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
+t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 \]</span></p>
 <p>เพื่อให้เห็นภาพของความต่างใน test นี้เราจะทำการสร้างกราฟเปรียบว่า sample นั้น มี mean ต่างจาก population ที่ mean = 10 และ mean = 30 หรือไม่</p>
 <div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
@@ -157,9 +160,9 @@ t = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 <pre><code>## [1] 2.306252e-74</code></pre>
 <p>จะเห็นว่าค่า <code>t</code> นั้นเท่ากับ ค่าที่ได้จาก function <code>t.test</code> ขั้นต้น เมื่อสร้าง <code>t-distribution</code> ที่มี <span class="math inline">\(H_{0}\)</span> คือ mean = 0 แล้วจะพบว่าค่านี้มากกว่า critical value</p>
 </div>
-<div id="independent-t-test" class="section level3" number="9.1.2">
+<div id="ind-t" class="section level3" number="9.1.2">
 <h3>
-<span class="header-section-number">9.1.2</span> Independent t-test<a class="anchor" aria-label="anchor" href="#independent-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1.2</span> Independent t-test<a class="anchor" aria-label="anchor" href="#ind-t"><i class="fas fa-link"></i></a>
 </h3>
 <p>เป็นการเปรียบเทียบ mean ระหว่าง <code>sample</code> สองกลุ่มที่ไม่เกี่ยวเนื่องกัน</p>
 <p><span class="math display">\[
@@ -189,9 +192,9 @@ S_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
 <p>สรุปได้ว่า mean ของ <code>sample</code> ทั้งสองกลุ่มนั้นแตกต่างกันอย่างมีนัยสำคัญ</p>
 <p>ปล. บางครั้งข้อมูลอาจจะมีความแปรปรวนไม่เท่ากัน ในที่นี้มักจะใช้ <code>Welch's t-test</code> โดย <code>t.test(…, var.equal = FALSE)</code> โดยสมการนี้จะทำการปรับความแปรปรวนให้ด้วย</p>
 </div>
-<div id="paired-t-test" class="section level3" number="9.1.3">
+<div id="pair-t" class="section level3" number="9.1.3">
 <h3>
-<span class="header-section-number">9.1.3</span> Paired t-test<a class="anchor" aria-label="anchor" href="#paired-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1.3</span> Paired t-test<a class="anchor" aria-label="anchor" href="#pair-t"><i class="fas fa-link"></i></a>
 </h3>
 <p>เป็นการเปรียบเทียบ mean ระหว่าง <code>sample</code> สองกลุ่มที่เกี่ยวเนื่องกัน (ก่อน-หลัง แม่-ลูก เป็นต้น)</p>
 <p><span class="math display">\[
@@ -216,9 +219,9 @@ t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 <hr>
 </div>
 </div>
-<div id="analysis-of-variance-anova" class="section level2" number="9.2">
+<div id="ANOVA" class="section level2" number="9.2">
 <h2>
-<span class="header-section-number">9.2</span> Analysis of Variance (ANOVA)<a class="anchor" aria-label="anchor" href="#analysis-of-variance-anova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2</span> Analysis of Variance (ANOVA)<a class="anchor" aria-label="anchor" href="#ANOVA"><i class="fas fa-link"></i></a>
 </h2>
 <p>คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย (mean) และความแปรปรวน (sd) ระหว่างสองกลุ่มขึ้นไป โดยมีสมมติฐาน คือ</p>
 <ul>
@@ -281,7 +284,89 @@ t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 ## 
 ## P value adjustment method: holm</code></pre>
 <p><code>p-value</code> น้อยกว่า 0.05 ทุกกลุ่ม หมายความว่า ทุกกลุ่มมีค่าเฉลี่ยของ <code>Petal.Width</code> ที่แตกต่างกัน</p>
+</div>
+<div id="correlation-test" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Correlation test<a class="anchor" aria-label="anchor" href="#correlation-test"><i class="fas fa-link"></i></a>
+</h2>
+<div id="pearson" class="section level3" number="9.3.1">
+<h3>
+<span class="header-section-number">9.3.1</span> Pearson correlation<a class="anchor" aria-label="anchor" href="#pearson"><i class="fas fa-link"></i></a>
+</h3>
+<p>เป็นการทดสอบความสัมพันธ์<strong>เชิงเส้น</strong>ของตัวแปรสองตัวแปร</p>
+<p><span class="math display">\[
+r_{xy} =\frac{cov(x,y)}{s(x) s(y)}
+\]</span></p>
+<p><span class="math display">\[
+r_{xy} = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum^{n}_{i=1}(x_{i}-\bar{x})^{2}}\sqrt{\sum^{n}_{i=1}(y_{i}-\bar{y})^{2}}}
+\]</span></p>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Petal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/cor_iris-1.png" width="672"></div>
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.8717538</code></pre>
+<p>การแปลผลของ correlation ขึ้นอยู่กับ</p>
+<ul>
+<li><p>ระดับของความสัมพันธ์ = 0-1 ยิ่งเข้าใกล้ 1 ยิ่งสัมพันธ์กันมาก</p></li>
+<li><p>ทิศทางของความสัมพันธ์ = + ไปทิศทางเดียวกัน - ไปทิศทางตรงข้ามกัน</p></li>
+</ul>
+<p>ท่านสามารถสร้างตาราง correlation และ p-value ได้ด้วย package <code>corrplot</code></p>
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">iris_cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">iris_cor</span></span></code></pre></div>
+<pre><code>##              Sepal.Length Sepal.Width Petal.Length Petal.Width
+## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
+## Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
+## Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
+## Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000</code></pre>
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris_cor_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/cor.mtest.html">cor.mtest</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">iris_cor_p</span></span></code></pre></div>
+<pre><code>## $p
+##              Sepal.Length  Sepal.Width Petal.Length  Petal.Width
+## Sepal.Length 0.000000e+00 1.518983e-01 1.038667e-47 2.325498e-37
+## Sepal.Width  1.518983e-01 0.000000e+00 4.513314e-08 4.073229e-06
+## Petal.Length 1.038667e-47 4.513314e-08 0.000000e+00 4.675004e-86
+## Petal.Width  2.325498e-37 4.073229e-06 4.675004e-86 0.000000e+00
+## 
+## $lowCI
+##              Sepal.Length Sepal.Width Petal.Length Petal.Width
+## Sepal.Length    1.0000000  -0.2726932    0.8270363   0.7568971
+## Sepal.Width    -0.2726932   1.0000000   -0.5508771  -0.4972130
+## Petal.Length    0.8270363  -0.5508771    1.0000000   0.9490525
+## Petal.Width     0.7568971  -0.4972130    0.9490525   1.0000000
+## 
+## $uppCI
+##              Sepal.Length Sepal.Width Petal.Length Petal.Width
+## Sepal.Length   1.00000000  0.04351158    0.9055080   0.8648361
+## Sepal.Width    0.04351158  1.00000000   -0.2879499  -0.2186966
+## Petal.Length   0.90550805 -0.28794993    1.0000000   0.9729853
+## Petal.Width    0.86483606 -0.21869663    0.9729853   1.0000000</code></pre>
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">iris_cor</span>, method <span class="op">=</span> <span class="st">"shade"</span>,type <span class="op">=</span> <span class="st">"upper"</span>,order <span class="op">=</span> <span class="st">"AOE"</span>, </span>
+<span>         p.mat <span class="op">=</span> <span class="va">iris_cor_p</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"p-value"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/corrplot-1.png" width="672"></div>
+<p><strong>ข้อควรระวัง</strong> <code>p-value</code> ของ correlation test นั้นอยู่ภายใต้สมมติฐาน (<span class="math inline">\(t\)</span>-test/<span class="math inline">\(F\)</span>-test)</p>
+<ul>
+<li><p><span class="math inline">\(H_{0}\)</span>: ไม่มีความสัมพันธ์เชิงเส้นของทั้งสองตัวแปร (<span class="math inline">\(r_{xy} = 0\)</span>)</p></li>
+<li><p><span class="math inline">\(H_{0}\)</span>: มีความสัมพันธ์เชิงเส้นของทั้งสองตัวแปร (<span class="math inline">\(r_{xy} \neq 0\)</span>)</p></li>
+</ul>
+<p>ซึ่งถ้า <span class="math inline">\(p\)</span> &lt; 0.05 หมายความว่า ท่านมีความมั่นใจมากเพียงพอว่า ความสัมพันธ์เชิงเส้นของทั้งสองตัวแปรนั้น มีมากกว่าการวาดเส้นจากการสร้างจุดแบบสุ่ม ท่านยังคงต้องแปรผลร่วมกับค่า correlation coefficient ต่อไป</p>
+<p>เช่น</p>
+<ul>
+<li><p><span class="math inline">\(r_{x,y}\)</span> = 0.2, <span class="math inline">\(p\)</span> &lt; 0.05 มั่นใจว่ามีความสัมพันธ์เชิงเส้นของสองตัวแปร ความสัมพันธ์เป็นไปในทิศทางเดียวกัน แต่ความสัมพันธ์เชิงเส้นอยู่ในระดับน้อย</p></li>
+<li><p><span class="math inline">\(r_{x,y}\)</span> = 1, <span class="math inline">\(p\)</span> = 1 ความสัมพันธ์เชิงเส้นอยู่ในระดับดีเยี่ยม แต่ไม่มั่นใจว่ามีความสัมพันธ์กันจริงหรือไม่ เนื่องจากข้อมูลน้อย (เช่น มีข้อมูลเพียงสองจุด <span class="math inline">\(r_{x,y}\)</span> ย่อมเท่ากับ 1)</p></li>
+<li><p><span class="math inline">\(r_{x,y}\)</span> = 0.3, <span class="math inline">\(p\)</span> = 1 ความสัมพันธ์เชิงเส้นอยู่ในระดับน้อย แต่ไม่มั่นใจว่ามีความสัมพันธ์กันจริงหรือไม่ เนื่องจากข้อมูลน้อยเกินไป ควรเก็บข้อมูลเพิ่ม</p></li>
+<li><p><span class="math inline">\(r_{x,y}\)</span> = -1, <span class="math inline">\(p\)</span> &lt; 0.05 มั่นใจว่ามีความสัมพันธ์เชิงเส้นของสองตัวแปร ความสัมพันธ์เป็นไปในทิศทางตรงข้าม และความสัมพันธ์เชิงเส้นอยู่ในระดับดีเยี่ยม</p></li>
+</ul>
+<p>นั่นหมายความว่า ยิ่งจำนวนตัวอย่างเพิ่มขึ้น <strong>ความมั่นใจ</strong>ยิ่งเพิ่มขึ้น <strong>ไม่ใช่ความสัมพันธ์เพิ่มขึ้น</strong></p>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -293,12 +378,15 @@ t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 <li><a class="nav-link" href="#parametric-test"><span class="header-section-number">9</span> Parametric test</a></li>
 <li>
 <a class="nav-link" href="#sec-t-test"><span class="header-section-number">9.1</span> t-test</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#one-sample-t-test"><span class="header-section-number">9.1.1</span> One sample t-test</a></li>
-<li><a class="nav-link" href="#independent-t-test"><span class="header-section-number">9.1.2</span> Independent t-test</a></li>
-<li><a class="nav-link" href="#paired-t-test"><span class="header-section-number">9.1.3</span> Paired t-test</a></li>
+<li><a class="nav-link" href="#one-t"><span class="header-section-number">9.1.1</span> One sample t-test</a></li>
+<li><a class="nav-link" href="#ind-t"><span class="header-section-number">9.1.2</span> Independent t-test</a></li>
+<li><a class="nav-link" href="#pair-t"><span class="header-section-number">9.1.3</span> Paired t-test</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#analysis-of-variance-anova"><span class="header-section-number">9.2</span> Analysis of Variance (ANOVA)</a></li>
+<li><a class="nav-link" href="#ANOVA"><span class="header-section-number">9.2</span> Analysis of Variance (ANOVA)</a></li>
+<li>
+<a class="nav-link" href="#correlation-test"><span class="header-section-number">9.3</span> Correlation test</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#pearson"><span class="header-section-number">9.3.1</span> Pearson correlation</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -315,7 +403,7 @@ t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-21.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

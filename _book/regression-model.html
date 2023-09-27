@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>11 Regression model | A gentle introduction to R for biologists</title>
+<meta name="author" content="Kittinun Leetanaporn">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="11 Regression model | A gentle introduction to R for biologists">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="11 Regression model | A gentle introduction to R for biologists">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย ตัวแปรต้น (independent variable, \(x\)) คือ ตัวแปรที่เป็นต้นเหตุ ตัวแปรตาม (dependent variable, \(y\)) คือ...">
+<meta property="og:description" content="Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย ตัวแปรต้น (independent variable, \(x\)) คือ ตัวแปรที่เป็นต้นเหตุ ตัวแปรตาม (dependent variable, \(y\)) คือ...">
+<meta name="twitter:description" content="Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย ตัวแปรต้น (independent variable, \(x\)) คือ ตัวแปรที่เป็นต้นเหตุ ตัวแปรตาม (dependent variable, \(y\)) คือ...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">A gentle introduction to R for biologists</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Basic R</li>
+<li><a class="" href="basic-r.html"><span class="header-section-number">1</span> Basic R</a></li>
+<li><a class="" href="r-function.html"><span class="header-section-number">2</span> R function</a></li>
+<li class="book-part">Tidyverse</li>
+<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">3</span> What is tidyverse</a></li>
+<li><a class="" href="importing-data.html"><span class="header-section-number">4</span> Importing data</a></li>
+<li><a class="" href="data-wrangling.html"><span class="header-section-number">5</span> Data wrangling</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
+<li><a class="" href="GSE63514.html"><span class="header-section-number">7</span> Case study: Microarray visualization</a></li>
+<li class="book-part">Statistical analysis</li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
+<li><a class="" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
+<li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
+<li><a class="active" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="distribution.html"><span class="header-section-number">13</span> Distribution</a></li>
+<li class="book-part">Session info</li>
+<li><a class="" href="session-info.html"><span class="header-section-number">14</span> Session info</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="regression-model" class="section level1" number="11">
+<h1>
+<span class="header-section-number">11</span> Regression model<a class="anchor" aria-label="anchor" href="#regression-model"><i class="fas fa-link"></i></a>
+</h1>
+<p>Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย</p>
+<ul>
+<li><p>ตัวแปรต้น (independent variable, <span class="math inline">\(x\)</span>) คือ ตัวแปรที่เป็น<strong>ต้นเหตุ</strong></p></li>
+<li><p>ตัวแปรตาม (dependent variable, <span class="math inline">\(y\)</span>) คือ ตัวแปรที่เป็น<strong>ปลายเหตุ</strong> ซึ่งเป็นผลมาจากการเปลี่ยนแปลงของตัวแปรต้น</p></li>
+</ul>
+<p>ความสัมพันธ์ของตัวแปรต้นและตัวแปรตามจะเขียนในรูปแบบ <span class="math inline">\(f(x) \sim x\)</span></p>
+<div id="linear-regression" class="section level2" number="11.1">
+<h2>
+<span class="header-section-number">11.1</span> Linear regression<a class="anchor" aria-label="anchor" href="#linear-regression"><i class="fas fa-link"></i></a>
+</h2>
+<div id="model-summary" class="section level3" number="11.1.1">
+<h3>
+<span class="header-section-number">11.1.1</span> Model summary<a class="anchor" aria-label="anchor" href="#model-summary"><i class="fas fa-link"></i></a>
+</h3>
+<p>คือ การสร้างความสัมพันธ์ของตัวแปรแบบเชิงเส้น ใช้กับข้อมูลแบบต่อเนื่อง (continuous data)</p>
+<p><span class="math display">\[
+h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \theta_{n}x_{n} + \epsilon
+\]</span></p>
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"Diabetes"</span>, package <span class="op">=</span> <span class="st">"heplots"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Diabetes</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">glufast</span>, y <span class="op">=</span> <span class="va">sspg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/lm-1.png" width="672"></div>
+<p>ในการวัดความแม่นยำของ linear regression นั้นประกอบด้วยสามองค์ประกอบ</p>
+<pre><code>## 
+## Call:
+## lm(formula = sspg ~ glufast, data = Diabetes)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -197.030  -59.050   -0.371   68.950  142.060 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  39.4534    13.3348   2.959  0.00362 ** 
+## glufast       1.1866     0.0969  12.247  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 74.33 on 143 degrees of freedom
+## Multiple R-squared:  0.5119, Adjusted R-squared:  0.5085 
+## F-statistic:   150 on 1 and 143 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="inline-figure"><img src="_main_files/figure-html/residual-1.png" width="672"></div>
+<p><span class="math display">\[
+\text{Total variation} = \text{Explained variation} + \text{Unexplained variation/Error}
+\]</span></p>
+<p><span class="math display">\[
+\text{Total sum of squares} \ (TSS) = \text{Sum of squares regression} \ (SSR) + \text{Sum of squares error} \ (SSE)
+\]</span></p>
+<p><span class="math display">\[
+\sum^{n}_{i=1}(y_{i}-\bar{y}_{i})^{2} = \sum^{n}_{i=1}(\hat{y}_{i}-\bar{y}_{i})^{2} + \sum^{n}_{i=1}(y_{i}-\hat{y}_{i})^{2}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(TSS\)</span> = Total variation = ค่าความผันผวนระหว่างข้อมูลกับค่าเฉลี่ยของข้อมูล</p></li>
+<li><p><span class="math inline">\(SSR\)</span> = Explained variation = ค่าความผันผวนระหว่างค่าเฉลี่ยของข้อมูลกับเส้น regression</p></li>
+<li><p><span class="math inline">\(SSE\)</span> = Error = ค่าความผันผวนระหว่างข้อมูลกับเส้น regression</p></li>
+</ul>
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">diabetes_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">sspg</span> <span class="op">~</span> <span class="va">glufast</span>, data <span class="op">=</span> <span class="va">Diabetes</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">diabetes_fit</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = sspg ~ glufast, data = Diabetes)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -197.030  -59.050   -0.371   68.950  142.060 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  39.4534    13.3348   2.959  0.00362 ** 
+## glufast       1.1866     0.0969  12.247  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 74.33 on 143 degrees of freedom
+## Multiple R-squared:  0.5119, Adjusted R-squared:  0.5085 
+## F-statistic:   150 on 1 and 143 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><span class="math inline">\(R^{2}\)</span> คือ อัตราส่วนระหว่าง <code>Explained variation</code> กับ <code>Total variation</code> = <span class="math inline">\(\frac{SSR}{TSS} = 1-\frac{SSE}{TSS}\)</span> ซึ่งจะบ่งบอกความสามารถของเส้นถดถอย ในการอธิบายข้อมูล (goodness of fit)</p>
+<p><span class="math inline">\(F\)</span>-test คือการเปรียบเทียบความสามารถของเส้นถดถอย ว่าสามารถอธิบายข้อมูลได้ดีกว่า <span class="math inline">\(H_{0}\)</span> อย่างมีนัยสำคัญหรือไม่ ภายใต้สมมติฐาน</p>
+<ul>
+<li><p><span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(f(x) = \theta_{0} + c\)</span> หรือ สามารถอธิบายข้อมูลได้โดยใช้แค่ค่าเฉลี่ย</p></li>
+<li><p><span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(f(x) = \theta_{0} + x_{1}\theta_{1} + … + \epsilon\)</span></p></li>
+</ul>
+<p>ซึ่งเป็นการเทียบอัตราส่วน explained กับ unexplained variation เช่นเดียวกับ <a href="parametric-test.html#ANOVA">ANOVA</a></p>
+<p><span class="math display">\[F =\frac{MSR}{MSE} = \frac{TSS-SSE}{SSE}/\frac{DF_{TSS}-DF_{SSE}}{DF_{SSE}}\]</span></p>
+<p><span class="math inline">\(t\)</span>-test คือการเปรียบเทียบเส้น regression เมื่อมีตัวแปรนั้น ว่าอธิบายได้ดีกว่าเมื่อไม่มีตัวแปรนั้นหรือไม่</p>
+<ul>
+<li><p><span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\theta = 0\)</span></p></li>
+<li><p><span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\theta \neq 0\)</span></p></li>
+</ul>
+<p>จะเห็นว่าสมการนั้นเหมือน <a href="parametric-test.html#one-t">One-sample t-test</a> แต่เขียนในรูปแบบ regression</p>
+<p><span class="math display">\[
+t = \frac{\theta-\theta_{0}}{SE(\theta)}
+\]</span></p>
+<p><span class="math display">\[
+SE(\theta) = \sqrt{\frac{1}{n-2} \times {\sum_{i=1}^{n}\frac{(y_{i} - \hat{y_{i}})^2}{(x_{i} - \hat{x_{i}})^2}}}
+\]</span></p>
+</div>
+<div id="prediction" class="section level3" number="11.1.2">
+<h3>
+<span class="header-section-number">11.1.2</span> Prediction<a class="anchor" aria-label="anchor" href="#prediction"><i class="fas fa-link"></i></a>
+</h3>
+<p>ข้อดีของสมการถอดถอย คือ สามารถใช้ในการทำนายข้อมูลตัวแปรตามชุดใหม่ได้ จากผลลัพธ์ขั้นต้นในคอลัมน์ <code>coef</code> พบว่าทุกๆ <code>glufast</code> ที่เพิ่มขึ้น 1.186 หน่วย ส่งผลให้ <code>sspg</code> เพิ่มขึ้น 1 หน่วย ซึ่งเขียนเป็นสมการได้ว่า</p>
+<p><span class="math display">\[
+f(x) = 39.4354 \ + 1.1866\times(\text{glufast}) + \epsilon
+\]</span></p>
+<p>โดยสมการนี้จะอยู่ใน <code>diabetes_fit</code></p>
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_sspg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>glufast <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span> </span>
+<span><span class="va">new_sspg</span> <span class="op">&lt;-</span> <span class="va">new_sspg</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>predicted_sspg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">diabetes_fit</span>, newdata <span class="op">=</span> <span class="va">new_sspg</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">new_sspg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">glufast</span>, y <span class="op">=</span> <span class="va">predicted_sspg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/predicted_diabetes-1.png" width="672"></div>
+<hr>
+</div>
+</div>
+<div id="logistic-regression" class="section level2" number="11.2">
+<h2>
+<span class="header-section-number">11.2</span> Logistic regression<a class="anchor" aria-label="anchor" href="#logistic-regression"><i class="fas fa-link"></i></a>
+</h2>
+<p>คือ สมการถดถอยซึ่งมีคุณสมบัติในการจำแนกตัวแปรแบบสองตัวแปร (binary classification) ซึ่งเขียนอยู่ในรูปของ ค่าลอการิธึมของอัตราส่วนความเสี่ยง (log odds)</p>
+<p><span class="math display">\[
+log(\frac{h(x)}{1-h(x)}) = \theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + x_{n}\theta_{n} + \epsilon = z
+\]</span></p>
+<p><span class="math display">\[
+\frac{h(x)}{1-h(x)} = e^{z}
+\]</span></p>
+<p><span class="math display">\[
+h(x) = \frac{1}{1+e^{z}}
+\]</span></p>
+<p><span class="math display">\[
+h(x) = \frac{1}{1+e^{\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + x_{n}\theta_{n} + \epsilon}}
+\]</span></p>
+<p>ความพิเศษของสมการนี้คือ ขอบเขตของ <span class="math inline">\(h(x)\)</span> จะอยู่ระหว่าง (0, 1) เสมอ ซึ่งส่งผลให้สามารถคำนวณกลับไปทำนายอัตราการเกิดเหตุการณ์จากอัตราส่วนความเสี่ยงได้</p>
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">log_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fl">0</span> <span class="op">+</span> <span class="fl">0.75</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">log_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"h(x)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/logistic_regression-1.png" width="672"></div>
+<p>ต่อไปเราจะทำนายว่า <code>glufast</code> เพื่อให้ตัวแปรเป็น binary เราจะรวม <code>Overt_Diabetic</code> และ <code>Chemical_Diabetic</code> เป็นกลุ่มเดียวกัน</p>
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Diabetes_mixed</span> <span class="op">&lt;-</span> <span class="va">Diabetes</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group <span class="op">=</span> </span>
+<span>                                       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span><span class="va">group</span>,</span>
+<span>                                                  <span class="st">"Normal"</span> <span class="op">~</span> <span class="fl">0</span>,</span>
+<span>                                                  <span class="st">"Chemical_Diabetic"</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>                                                  <span class="st">"Overt_Diabetic"</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Diabetes_mixed</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">glufast</span>, y <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"glm"</span>,  method.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>, </span>
+<span>              se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/logistc_summary-1.png" width="672"></div>
+<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">logit_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">group</span> <span class="op">~</span> <span class="va">glufast</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, </span>
+<span>                 data <span class="op">=</span> <span class="va">Diabetes_mixed</span><span class="op">)</span> </span>
+<span><span class="va">logit_fit</span></span></code></pre></div>
+<pre><code>## 
+## Call:  glm(formula = group ~ glufast, family = "binomial", data = Diabetes_mixed)
+## 
+## Coefficients:
+## (Intercept)      glufast  
+##    -11.7611       0.1158  
+## 
+## Degrees of Freedom: 144 Total (i.e. Null);  143 Residual
+## Null Deviance:       200.7 
+## Residual Deviance: 121.9     AIC: 125.9</code></pre>
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>glufast <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">200</span><span class="op">)</span> </span>
+<span><span class="va">new_group</span> <span class="op">&lt;-</span> <span class="va">new_group</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>predicted_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">logit_fit</span>, </span>
+<span>                                   newdata <span class="op">=</span> <span class="va">new_group</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">new_group</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">glufast</span>, y <span class="op">=</span> <span class="va">predicted_group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/predicted_logit-1.png" width="672"></div>
+</div>
+<div id="poisson-quassipoisson-and-negative-binomial-regression" class="section level2" number="11.3">
+<h2>
+<span class="header-section-number">11.3</span> Poisson, quassipoisson, and negative binomial regression<a class="anchor" aria-label="anchor" href="#poisson-quassipoisson-and-negative-binomial-regression"><i class="fas fa-link"></i></a>
+</h2>
+<p>Poission regression คือ สมการถดถอยที่ใช้ในการทำนายความถี่ หรือค่าเฉลี่ยของการเกิดเหตุการณ์นั้นๆ มักใช้กับข้อมูลที่ไม่ต่อเนื่อง (discrete value) พิจารณาข้อมูลแบบ <a href="distribution.html#poisson-dist">Poisson distribution</a></p>
+<p><span class="math display">\[
+f(k) = P(X = k) = \frac{\lambda^{k}}{k!}e^{-\lambda}
+\]</span></p>
+<p>จะพบว่ามีตัวแปรที่สามารถทำนายได้เมื่อมีข้อมูลอีกชนิดหนึ่ง คือ ค่าเฉลี่ยการเกิดเหตุการณ์ <span class="math inline">\((\lambda)\)</span> และ จำนวนเหตุการณ์ที่เกิด <span class="math inline">\((k)\)</span> จึงออกมาเป็นสมการถดถอยได้สองรูปแบบ</p>
+<ul>
+<li>สำหรับ <span class="math inline">\(\lambda\)</span>
+</li>
+</ul>
+<p><span class="math display">\[
+\lambda = e^{\theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n}}
+\]</span></p>
+<p><span class="math display">\[
+ln(\lambda) = \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n}
+\]</span></p>
+<ul>
+<li>สำหรับ <span class="math inline">\(k\)</span> เราจำเป็นต้องเปลี่ยน <span class="math inline">\(\lambda\)</span> ให้อยู่ในรูป <span class="math inline">\(k/t\)</span> และย้ายไปเป็นตัวแปรควบคุมเวลา (offset) ซึ่งจะมี regression coefficient = 1 เสมอ</li>
+</ul>
+<p><span class="math display">\[ \lambda = \frac{k}{t} = e^{\theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n}} \]</span></p>
+<p><span class="math display">\[ ln(k) - \ln(t) = \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} \]</span></p>
+<p><span class="math display">\[
+ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t) \rightarrow  \text{offset}
+\]</span></p>
+<p>ซึ่งสมการนี้เป็นสมการพื้นฐานของการนับจำนวนใดๆ ดังเช่นตัวอย่างนี้ คือความสัมพันธ์ระหว่างจำนวนครั้งที่เจ็บป่วยกับการเข้าพบแพทย์ในสองสัปดาห์ ในประเทศออสเตรเลีย</p>
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"DoctorVisits"</span>, package <span class="op">=</span> <span class="st">"AER"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">visits</span> <span class="op">~</span>  <span class="va">illness</span>, family <span class="op">=</span> <span class="st">"poisson"</span>, data <span class="op">=</span> <span class="va">DoctorVisits</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = visits ~ illness, family = "poisson", data = DoctorVisits)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -1.83750    0.04300  -42.73   &lt;2e-16 ***
+## illness      0.35155    0.01546   22.74   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 5634.8  on 5189  degrees of freedom
+## Residual deviance: 5159.3  on 5188  degrees of freedom
+## AIC: 7494.9
+## 
+## Number of Fisher Scoring iterations: 6</code></pre>
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">DoctorVisits</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span> <span class="op">(</span>x <span class="op">=</span> <span class="va">illness</span>, y <span class="op">=</span> <span class="va">visits</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"glm"</span>, method.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"poisson"</span><span class="op">)</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/poisson-1.png" width="672"></div>
+<p>อย่างไรก็ตาม Poisson regression มีสมมติฐานที่สำคัญตาม <a href="#id_0">Poisson distribution</a> คือ</p>
+<ul>
+<li>ต้องเป็นจำนวนนับ</li>
+<li>Variance = Mean</li>
+</ul>
+<p>ซึ่งข้อมูลบางส่วนจะไม่เป็นไปตามสมมติฐานนี้ โดยจะนิยมใช้ Quassipoisson regression</p>
+<p><span class="math display">\[
+V = \phi\times\mu
+\]</span>
+<span class="math display">\[
+\phi = \frac{\chi^{2}}{\text{DF}} = \frac{1}{n-k}{\sum_{i=1}^{n}\frac{(Y_{i}-\hat{\mu_{i}})^{2}}{\hat{\mu_{i}}}}
+\]</span></p>
+<p>หรือ Negative binomial regression มากกว่า</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></div>
+<div class="next"><a href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#regression-model"><span class="header-section-number">11</span> Regression model</a></li>
+<li>
+<a class="nav-link" href="#linear-regression"><span class="header-section-number">11.1</span> Linear regression</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#model-summary"><span class="header-section-number">11.1.1</span> Model summary</a></li>
+<li><a class="nav-link" href="#prediction"><span class="header-section-number">11.1.2</span> Prediction</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#logistic-regression"><span class="header-section-number">11.2</span> Logistic regression</a></li>
+<li><a class="nav-link" href="#poisson-quassipoisson-and-negative-binomial-regression"><span class="header-section-number">11.3</span> Poisson, quassipoisson, and negative binomial regression</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
