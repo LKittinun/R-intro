@@ -217,7 +217,7 @@ iris_cor <- cor(iris[1:4])
 iris_cor
 iris_cor_p <- cor.mtest(iris[1:4])
 iris_cor_p
-  
+
 corrplot(iris_cor, method = "shade",type = "upper",order = "AOE", 
          p.mat = iris_cor_p$p, insig = "p-value")
 ```

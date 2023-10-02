@@ -1,0 +1,38 @@
+# (PART) Bioconductor {.unnumbered}
+
+# Bioconductor
+
+```{r bioconductor_pic, fig.align="center", echo = FALSE}
+knitr::include_graphics("Picture/Bioconductor.jpg")
+```
+
+[Bioconductor](https://www.bioconductor.org/) คือกลุ่มของ open-source `package` ที่ใช้ในการวิเคราะห์ข้อมูลประเภท bioinformatics ที่ครอบคลุมหลากหลายมากที่สุดใน `R` ซึ่งจุดเด่นหลักของ bioconductor นั้นคือการวิเคราะห์ข้อมูลประเภท high-throughout technology เช่น
+
+-   [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html), [Biobase](https://www.bioconductor.org/packages/release/bioc/html/Biobase.html) สำหรับการเก็บข้อมูล
+
+-   [limma](https://bioconductor.org/packages/release/bioc/html/limma.html) สำหรับการวิเคราะห์ข้อมูล RNA microarray, RNA-seq, proteomics
+
+-   [edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html), [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) สำหรับการวิเคราะห์ข้อมูล RNA-seq
+
+-   [maftools](https://bioconductor.org/packages/release/bioc/html/maftools.html) สำหรับ สำหรับการวิเคราะห์ข้อมูล genomics
+
+-   [clusterProfiler](https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html) สำหรับ functional analysis
+
+-   [ComplexHeatmap](https://bioconductor.org/packages/ComplexHeatmap/), [EnhancedVolcano](https://bioconductor.org/packages/release/bioc/html/EnhancedVolcano.html), [PCAtools](https://www.bioconductor.org/packages/release/bioc/html/PCAtools.html) สำหรับ visualization
+
+และอื่นๆ อีกมากสามารถดูได้ที่ <https://www.bioconductor.org/packages/release/bioc/>
+
+การติดตั้ง `package` ต่างๆ จาก bioconductor ลงใน `R` นั้น จำเป็นเรียกจากชุดติดตั้งของ bioconductor โดยเฉพาะ ชื่อว่า `BiocManager`
+
+```{r bioconductor, eval = FALSE}
+if (!require("BiocManager", quietly = TRUE)) # ตรวจสอบว่ามีติดตั้งไว้แล้วหรือไม่
+    install.packages("BiocManager")
+```
+
+หลังจากนั้น จะสามารถติดตั้ง `package` ได้โดยการเรียกชุดติดตั้ง `BiocManager` เช่น
+
+```{r install_bioc_package, eval = FALSE}
+BiocManager::install("limma")
+```
+
+จะทำการติดตั้ง `package` `limma` ลงใน `R` ซึ่งหลังจากนั้นสามารถใช้คำสั่ง `library` เรียกได้ตามปกติ

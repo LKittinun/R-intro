@@ -4,5 +4,6 @@ h2:สรางสมมตฐาน-construct-the-hypothesis สร้างส
 h2:ทำการวเคราะหคาทางสถต-construct-the-test-statistics ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics)
 h2:หา-p-value หา 
 h2:เปรยบเทยบ-p-value-กบ-คาวกฤต-critical-value-ทยอมรบได เปรียบเทียบ  กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้
+h2:power Power
 h2:trade-off-ของ-p-value-threshold Trade-off ของ p-value threshold
 

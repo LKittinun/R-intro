@@ -74,8 +74,11 @@ kaplein-meir-estimate
 log-rank-test
 cox-proportional-hazard-model
 การตรวจสอบ-assumption-validity-ของ-cph
+bioconductor
+limma
+core-principle
 distribution
-normal-distribution
+norm-dist
 t-distribution
 uniform-distribution
 binomial-distribution

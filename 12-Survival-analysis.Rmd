@@ -68,15 +68,6 @@ ggsurvplot(lung_fit, conf.int = TRUE, risk.table = TRUE, break.time.by = 25)
 library(dplyr) 
 library(survival)
 names(ovarian)
-ovarian |> mutate(age_group = cut(age, seq(0,100,10))) |> 
-  group_by(age_group) |> count(fustat) |> filter(fustat==1) |> 
-  glm(n~age_group, family = "poisson", data = _) |> summary()
-glm(fustat ~ age + resid.ds + offset(log(futime)), family = "poisson", data = ovarian) |> summary()
-
-ggplot(ovarian, aes(x = age, y = fustat)) + geom_point() +
-  geom_smooth(method = "glm", method.args = list(family = "poisson"),
-              formula = y~x)
-
 ```
 
 อธิบายตัวแปร:
@@ -181,23 +172,23 @@ ovarian_cox <- coxph(Surv(futime/365.25, fustat) ~
 ovarian_cox
 ```
 
-- `exp(coef)` = HR = $h(t)/h_{0}(t)$ ในที่นี้ท่านสามารถอภิปรายได้ว่า อายุที่เพิ่มขึ้น 1 ปีนั้น ส่งผลให้เกิดอัตราการเสียชีวิตในผู้ป่วยมะเร็งรังไข่เพิ่มขึ้น 1.13 เท่า (13%) และมีนัยสำคัญทางสถิติ
+-   `exp(coef)` = HR = $h(t)/h_{0}(t)$ ในที่นี้ท่านสามารถอภิปรายได้ว่า อายุที่เพิ่มขึ้น 1 ปีนั้น ส่งผลให้เกิดอัตราการเสียชีวิตในผู้ป่วยมะเร็งรังไข่เพิ่มขึ้น 1.13 เท่า (13%) และมีนัยสำคัญทางสถิติ
 
-- `p` ในตาราง คือ ค่าคำนวณ p-value จาก Wald's test ของแต่ละตัวแปรว่ามีผลต่ออัตราการรอดชีวิตหรือไม่
+-   `p` ในตาราง คือ ค่าคำนวณ p-value จาก Wald's test ของแต่ละตัวแปรว่ามีผลต่ออัตราการรอดชีวิตหรือไม่
 
-- `p` ข้างล่าง คือ overall p จาก likelihood ratio test ว่าจากทั้งหมด มีตัวแปรใดตัวแปรหนึ่งส่งผลให้อัตรากการรอดชีวิตเปลี่ยนไปอย่างมีนัยสำคัญทางสถิติหรือไม่
+-   `p` ข้างล่าง คือ overall p จาก likelihood ratio test ว่าจากทั้งหมด มีตัวแปรใดตัวแปรหนึ่งส่งผลให้อัตรากการรอดชีวิตเปลี่ยนไปอย่างมีนัยสำคัญทางสถิติหรือไม่
 
 ### การตรวจสอบ assumption validity ของ CPH
 
 CPH นั้นมี assumption ดังนี้:
 
-- ตัวแปรแต่ละกลุ่มมีอัตราการเกิด event ที่แตกต่างกัน
+-   ตัวแปรแต่ละกลุ่มมีอัตราการเกิด event ที่แตกต่างกัน
 
-- HR เท่ากันทุกช่วงเวลา เช่น ที่ 1, 2, 5 ปี อัตราส่วนการเสียชีวิตระหว่างตัวแปรเท่ากันหมด
+-   HR เท่ากันทุกช่วงเวลา เช่น ที่ 1, 2, 5 ปี อัตราส่วนการเสียชีวิตระหว่างตัวแปรเท่ากันหมด
 
-- ตัวแปรมีความสัมพันธ์แบบ linear continuous variable
+-   ตัวแปรมีความสัมพันธ์แบบ linear continuous variable
 
-- ไม่จำเป็นต้องทราบลักษณะการกระจายตัวของข้อมูลก่อน (จึงเป็น semi-parametric model)
+-   ไม่จำเป็นต้องทราบลักษณะการกระจายตัวของข้อมูลก่อน (จึงเป็น semi-parametric model)
 
 สามารถตรวจสอบ HR ได้โดยใช้ proportionality assumption test จาก Schoenfeld residuals โดย `cox.zph()`
 

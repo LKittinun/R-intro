@@ -198,6 +198,8 @@ ggplot(new_group, aes(x = glufast, y = predicted_group)) +
   geom_point() + theme_bw()
 ```
 
+------------------------------------------------------------------------
+
 ## Poisson, quassipoisson, and negative binomial regression
 
 Poission regression คือ สมการถดถอยที่ใช้ในการทำนายความถี่ หรือค่าเฉลี่ยของการเกิดเหตุการณ์นั้นๆ มักใช้กับข้อมูลที่ไม่ต่อเนื่อง (discrete value) พิจารณาข้อมูลแบบ [Poisson distribution](#poisson-dist)
@@ -228,35 +230,77 @@ $$
 ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t) \rightarrow  \text{offset}
 $$
 
-ซึ่งสมการนี้เป็นสมการพื้นฐานของการนับจำนวนใดๆ ดังเช่นตัวอย่างนี้ คือความสัมพันธ์ระหว่างจำนวนครั้งที่เจ็บป่วยกับการเข้าพบแพทย์ในสองสัปดาห์ ในประเทศออสเตรเลีย
+ซึ่งสมการนี้เป็นสมการพื้นฐานของการนับจำนวนใดๆ ดังเช่นตัวอย่างนี้ คือความสัมพันธ์ของตัวแปรต่างๆ กับอัตราการตายในโรคมะเร็งปากมดลูก
 
 ```{r poisson, warning = FALSE}
-data("DoctorVisits", package = "AER")
+cervix_mort <- read.csv("Resource/cervix_mort.csv") |>  # aggregrated data for demonstration
+                mutate(histo_major = fct_relevel(histo_major, "Squamous cell carcinoma",
+                                                 "Adenocarcinoma",
+                                                 "Adenosquamous carcinoma",
+                                                 "Others"))
+glm(dead ~  age_group + histo_major + stage, family = "poisson", data = cervix_mort) |> summary()
 
-glm(visits ~  illness, family = "poisson", data = DoctorVisits) |> summary()
-
-ggplot(DoctorVisits, aes (x = illness, y = visits)) +
+ggplot(cervix_mort, aes (x = age_group, y = dead)) +
   geom_jitter() +
   geom_smooth(method = "glm", method.args = list(family = "poisson"), se = FALSE) +
-  scale_x_continuous(breaks = 0:5) +
-  scale_y_continuous(breaks = 0:9) +
+  scale_x_continuous(breaks = 1:4) +
   theme_bw()
-
 ```
 
-อย่างไรก็ตาม Poisson regression มีสมมติฐานที่สำคัญตาม [Poisson distribution](#0) คือ
+สังเกตว่ายิ่งอายุเยอะ อัตราการตายยิ่งน้อยลงอย่างมีนัยสำคัญ ซึ่งไม่น่าจะเป็นไปได้ ทั้งนี้ เพราะยังไม่ได้ปรับระยะเวลาติดตาม โดยการใส่ offset เป็น `person-month` เข้าไปคำนวณด้วย
+
+```{r pois_fit}
+pois_fit <- glm(dead ~  age_group + histo_major + stage + offset(log(person_month)),
+                family = "poisson", data = cervix_mort)
+summary(pois_fit)
+```
+
+จะพบว่าหลังจากปรับตามระยะเวลาติดตาม กลุ่มอายุที่เพิ่มขึ้นจะส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญ
+
+```{r pois_plot}
+new_data <- expand_grid(age_group = 1:4,
+                       histo_major = unique(cervix_mort$histo_major),
+                       stage = 1:4,
+                       person_month = 1200)
+new_data <- new_data |> 
+  mutate(predicted_dead = predict(pois_fit, newdata = new_data, type = "response"))
+
+ggplot(new_data, aes (x = age_group, y = predicted_dead, col = histo_major)) +
+  geom_line() +
+  facet_wrap(~stage)+
+  scale_y_continuous(breaks = seq(0,60,10)) +
+  theme_bw()
+```
+
+อย่างไรก็ตาม พิจารณาดูแล้วอัตราการตายไม่ได้เพิ่มขึ้นมากตามกลุ่มอายุ ซึ่งอาจจะเป็นผลบวกลวง เมื่อกลับมาพิจารณาแล้ว Poisson regression มีสมมติฐานที่สำคัญตาม [Poisson distribution](#poisson-dist) คือ
 
 -   ต้องเป็นจำนวนนับ
--   Variance = Mean
+-   การกระจายตัวของข้อมูล = Dispersion parameter ($\phi$) = Variance/Mean = 1
 
-ซึ่งข้อมูลบางส่วนจะไม่เป็นไปตามสมมติฐานนี้ โดยจะนิยมใช้ Quassipoisson regression
-
+เมื่อตรวจสอบจากผลลัพธ์ของสมการถอดถอย โดยพิจารณาจาก $\text{residuals/deviance}$ แล้วพบว่า $\phi > 1$ ซึ่งหมายความว่าข้อมูลตั้งต้นนั้นมีการกระจายตัวของข้อมูลสูงเกินไป (over-dispersed) จึงไม่เป็นไปตามสมมติฐานของ Poisson ณ จุดนี้จึงจำเป็นต้องใช้ ส่วนขยายสมการของ Poisson regression เรียกว่า Quasipoisson regression ซึ่งจะทำการปรับความแปรปรวน ตามการเพิ่มขึ้นของความแปรปรวนต่อค่าเฉลี่ย
 
 $$
-V = \phi\times\mu
-$$
-$$
+V = \phi\mu_{i}
+$$ $$
 \phi = \frac{\chi^{2}}{\text{DF}} = \frac{1}{n-k}{\sum_{i=1}^{n}\frac{(Y_{i}-\hat{\mu_{i}})^{2}}{\hat{\mu_{i}}}}
 $$
 
-หรือ Negative binomial regression มากกว่า
+```{r quasi_fit}
+quasipois_fit <- glm(dead ~  age_group + histo_major + stage + offset(log(person_month)),
+                family = "quasipoisson", data = cervix_mort)
+summary(quasipois_fit)
+```
+
+จะเห็นว่าหลังจากปรับ dispersion parameter แล้ว `age_group` ไม่ได้ส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญแต่อย่างใด ปัญหาของ Quasipoisson คือ อาจจะไม่มี parameter ที่ต้องการ เช่น `AIC` เป็นต้น ซึ่งสามารถใช้อีกหนึ่งสมการถดถอยที่นิยมใช้คือ Negative binomial regression จาก package `MASS` ซึ่งปรับตามอัตราส่วนความแปรปรวนเช่นกัน
+
+$$
+V = u_{i}(1+\frac{u_{i}}{\phi})
+$$
+
+```{r nb_fit}
+nb_fit <- MASS::glm.nb(dead ~  age_group + histo_major + stage + offset(log(person_month)), 
+                 data = cervix_mort)
+summary(nb_fit)
+```
+
+ผลลัพธ์ที่ได้จะใกล้เคียงกันกับสมการถดถอย Quasipoisson ทั้งสองสมการนี้จะนิยมใช้ในการตั้งสมการถดถอยในจำนวนนับจากงานทดลอง high-troughput เช่น RNA-sequencing เนื่องจากข้อมูลประเภทนี้มักมีเป็นข้อมูลจำนวนนับที่มีการกระจายตัวสูงมาก ($\phi > 1$)

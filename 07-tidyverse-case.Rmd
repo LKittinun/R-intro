@@ -8,17 +8,17 @@ knitr::include_graphics("Picture/affymatrix.jpg")
 
 ## Import files
 
-ไฟล์แรกที่อ่านเข้ามาคือ `GSE63514_norm.csv` ซึ่งเป็นไฟล์ microarray expression ของชิ้นเนื้อปากมดลูก ประกอบด้วย ตัวอย่าง `Normal` , `CIN1` , `CIN2` , `CIN3` , `Cancer` ในที่นี้เราจะทำการวิเคราะห์ 10,000 gene แรก
+ไฟล์แรกที่อ่านเข้ามาคือ `GSE63514_norm.csv` ซึ่งเป็นไฟล์ microarray expression ของชิ้นเนื้อปากมดลูก ประกอบด้วย ตัวอย่าง `Normal` , `CIN1` , `CIN2` , `CIN3` , `Cancer` ในที่นี้เราจะทำการวิเคราะห์ 20,000 gene แรก
 
 ```{r read_file_cx, message = FALSE}
 library(tidyverse) 
 
-GSE63514 <- read_csv("Resource/GSE63514_norm.csv") |> 
-  head(10000)
+GSE63514 <- read_csv("Resource/GSE63514_norm.csv") 
+GSE63514_20000 <- read_csv("Resource/GSE63514_norm.csv") |> head(2000)
 ```
 
 ```{r name_GSE,attr.output='style="max-height: 300px;"'}
-names(GSE63514)
+names(GSE63514_20000)
 ```
 
 ส่วนที่สองคือ metadata (ข้อมูลระบุตัวตน) ของข้อมูลนี้
@@ -40,7 +40,7 @@ head(hgu133plus2_genenames, 10)
 สมมติว่าในตัวอย่างนี้ จะทำการวิเคราะห์แค่ระหว่าง `Normal`, `CIN1`, และ `Cancer` เท่านั้น จึงจำเป็นที่จะต้องกรองข้อมูลที่ไม่ต้องการออกไปเสียก่อน
 
 ```{r clean_data}
-exprs_nc <- GSE63514 |> select(probe, contains(c("Normal", "CIN1", "Cancer")))
+exprs_nc <- GSE63514_20000 |> select(probe, contains(c("Normal", "CIN1", "Cancer")))
 meta_nc <- GSE63514_meta |> 
   filter(grepl("Normal|CIN1|Cancer", title)) |> 
   select(title, `characteristics_ch1.1`, `dissection:ch1`)
@@ -63,9 +63,6 @@ nrow(hgu133plus2_genenames)
 gene_nc <- exprs_nc |> 
             left_join(hgu133plus2_genenames, by = c("prob"="PROBEID")) |> 
             relocate(c("SYMBOL", "ENTREZID", "GENENAME"), .after = "prob")
-
-gene_nc
-nrow(gene_nc)
 ```
 
 ## Visualization {#top10_boxplot}
@@ -75,14 +72,14 @@ nrow(gene_nc)
 ขั้นแรก เราจะทำการรวม intensity ทั้งหมดใน 1 gene ผ่าน function `rowSums()` และเรียง `total_intensity` จากมากไปน้อย หลังจากนั้นเลือก top10 intensity ออกมาโดยใช้ function `head()`
 
 ```{r top_intensity}
-top10_intensity <- gene_nc |> 
+gene_symbol_mat <- gene_nc |> 
   select(-prob, -ENTREZID, -GENENAME) |> 
   mutate(total_intensity = 
            rowSums(select(gene_nc, -prob, -ENTREZID, -GENENAME, -SYMBOL)),
          .before = "Normal-01") |> 
-  arrange(desc(total_intensity)) |> 
-  head(10)
+  arrange(desc(total_intensity)) 
 
+top10_intensity <- head(gene_symbol_mat,10)
 top10_intensity
 ```
 

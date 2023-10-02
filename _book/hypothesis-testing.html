@@ -59,10 +59,13 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li class="book-part">Bioconductor</li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">13</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">15</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">14</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">16</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -96,8 +99,8 @@
 <span class="header-section-number">8.3</span> หา <code>p-value</code><a class="anchor" aria-label="anchor" href="#%E0%B8%AB%E0%B8%B2-p-value"><i class="fas fa-link"></i></a>
 </h2>
 <p>คือ โอกาสที่สามารถสังเกตค่าทางสถิติที่มากกว่าค่าการวิเคราะห์ทางสถิติที่โดยไม่ได้อยู่ภายใต้ <span class="math inline">\(H_{0}\)</span> โดยทางปฏิบัติแล้วคือ การสร้างแบบจำลองข้อมูลภายใต้ <span class="math inline">\(H_{0}\)</span> ขึ้นมาแล้วแล้วดูว่า ที่ค่าสถิตินั้น มีโอกาส<strong>ไม่เกิด</strong>เท่าไร</p>
-<p>ยกตัวอย่าง เมื่อวิเคราะห์ <code>t-test</code> จะทำการสร้าง <code>t-distribution</code> ขึ้นมา (ตัวอย่างของการวิเคราะห์ อยู่<a href="parametric-test.html#sec-t-test">บทถัดไป</a> ) ภายใต้ <span class="math inline">\(H_{0}\)</span> ว่า mean = 10</p>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<p>ยกตัวอย่าง เมื่อวิเคราะห์ <span class="math inline">\(t\)</span>-test จะทำการสร้าง <a href="#t-dist">t-distribution</a> ขึ้นมา (ตัวอย่างของการวิเคราะห์ อยู่<a href="parametric-test.html#sec-t-test">บทถัดไป</a> ) ภายใต้ <span class="math inline">\(H_{0}\)</span> ว่า mean = 10</p>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">t_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">dt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">0.01</span><span class="op">)</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span> <span class="co"># t-distribution มี mean = 0 sd = 1</span></span>
 <span></span>
@@ -115,7 +118,7 @@
 <ul>
 <li>ที่ -0.7345 &lt; <span class="math inline">\(t\)</span> &lt; 0.7345 (พื้นที่ใต้กราฟสีขาว) หมายถึงโอกาสที่ค่านั้นเกิดจากความบังเอิญภายใต้ <span class="math inline">\(H_{0}\)</span> ที่ยังเป็นจริง คิดเป็น AUC ได้</li>
 </ul>
-<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">density_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>AUC_white <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -123,12 +126,12 @@
 <ul>
 <li>ที่ <span class="math inline">\(t\)</span> &lt; -0.7345 หรือ <span class="math inline">\(t\)</span> &gt; 0.7345 (พื้นที่ใต้กราฟสีฟ้า) หมายถึงโอกาสที่ค่านั้น<strong>ไม่ได้</strong>เกิดจากความบังเอิญภายใต้ <span class="math inline">\(H_{0}\)</span> ที่ยังเป็นจริง (extreme value) คิดเป็น AUC ได้</li>
 </ul>
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">density_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">area</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>AUC_blue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 46.40728</code></pre>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="fl">0.7345</span>, <span class="fl">99</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
 <span><span class="va">p</span> <span class="co"># p-value</span></span></code></pre></div>
 <pre><code>## [1] 0.4643803</code></pre>
@@ -144,7 +147,7 @@
 <li><p><code>Right-tailed</code> คือ โอกาสที่ <code>critical value</code> <span class="math inline">\(\geq H_{0}\)</span></p></li>
 <li><p><code>Two-tailed</code> คือ โอกาสที่ <code>critical value</code> <span class="math inline">\(\neq H_{0}\)</span> นิยมใช้วิเคราะห์มากที่สุด</p></li>
 </ul>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">crit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.05</span><span class="op">/</span><span class="fl">2</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span> <span class="co"># ตัดที่ &lt;= p 0.05, two-tailed</span></span>
 <span></span>
 <span><span class="va">density_df</span> <span class="op">&lt;-</span> <span class="va">density_df</span> <span class="op">|&gt;</span> </span>
@@ -160,6 +163,90 @@
 <div class="inline-figure"><img src="_main_files/figure-html/pvalue_crit-1.png" width="672"></div>
 <p>จะเห็นว่า โอกาสที่ความแตกต่างนั้น<strong>ไม่ได้</strong>เกิดจากความบังเอิญภายใต้ <span class="math inline">\(H_{0}\)</span> นั้นอยู่ที่ 46% ซึ่งมากกว่า 5% ที่ต้องการ จึงไม่สามารถ reject null hypothesis ได้ เรียกอีกแบบหนึ่งว่า ไม่ได้แตกต่างอย่างมีนัยสำคัญ (จนสามารถ reject <span class="math inline">\(H_{0}\)</span> ได้)</p>
 <p>ตรงส่วนพื้นที่ระหว่าง <code>critical value</code> (ระหว่างเส้นประสีแดง) คือ พิสัยของความแตกต่างที่สามารถรับได้ ซึ่งจะถูกนำไปใช้ในการคำนวณ<strong>ค่าความเชื่อมั่น (confidence interval)</strong> ต่อไป</p>
+<hr>
+</div>
+<div id="power" class="section level2 unnumbered">
+<h2>Power<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
+</h2>
+<p>คือ โอกาสการเกิดผลบวกจริง (True positive) ของ <span class="math inline">\(H_{a}\)</span> = 1 - <code>power</code></p>
+<p>พิจารณาการคำนวณทางสถิติ <a href="parametric-test.html#sec-t-test">t-test</a> ภายใต้สมมติฐาน <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\mu = 12\)</span> และ <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\mu &gt; 12\)</span> ที่ <span class="math inline">\(S = 1.7\)</span></p>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">mean_5_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">5</span>, mean <span class="op">=</span> <span class="fl">13</span>, sd <span class="op">=</span> <span class="fl">1.7</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mean_5_sample</span><span class="op">)</span> <span class="co">#sd</span></span></code></pre></div>
+<pre><code>## [1] 1.378737</code></pre>
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t_test_5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">mean_5_sample</span>, mu <span class="op">=</span> <span class="fl">12</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span>
+<span><span class="va">t_test_5</span></span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  mean_5_sample
+## t = 2.1555, df = 4, p-value = 0.04869
+## alternative hypothesis: true mean is greater than 12
+## 95 percent confidence interval:
+##  12.01459      Inf
+## sample estimates:
+## mean of x 
+##  13.32907</code></pre>
+<p>จากการคำนวณ สามารถสรุปได้ว่าสามารถปฏิเสธ <span class="math inline">\(H_{0}\)</span> นั่นคือ ข้อมูลของกลุ่มตัวอย่างนี้มีค่าเฉลี่ยมากกว่าจาก 12 อย่างมีนัยสำคัญ แต่ว่า <span class="math inline">\(H_{a}\)</span> นั้น มีโอกาสเป็นจริงหรือไม่นั้น เมื่อพิจารณาของกระจายตัวของข้อมูล <a href="#t-dist">t-distribution</a> แล้ว</p>
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pwrss</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pwrss/man/0-Generic-t-Test.html">power.t.test</a></span><span class="op">(</span>ncp <span class="op">=</span> <span class="va">t_test_5</span><span class="op">$</span><span class="va">statistic</span>, df <span class="op">=</span> <span class="fl">4</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>             alternative <span class="op">=</span> <span class="st">"greater"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/t_test_5-1.png" width="672"></div>
+<p>จากกราฟ เส้นประสีแดงคือการกระจายตัวของข้อมูล <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\mu = 12\)</span> ส่วนเส้นประสีฟ้าคือ <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\mu = 12 + \frac{1.379}{4}\times2.156 = 12.743\)</span> พื้นที่สีแดงคือ critical value = <span class="math inline">\(\alpha\)</span> ที่ 0.05</p>
+<p>ดังนั้น พื้นที่สีฟ้าคือ พื้นที่ของกลุ่มตัวอย่างจาก <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\mu = 12.743\)</span> ซึ่งแท้จริงแล้ว สามารถอยู่ในกลุ่ม <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\mu = 12\)</span> ได้เช่นกัน ซึ่งก็คือโอกาสการเกิดผลบวกลวง (False positive) = Type-II error นั้นเอง</p>
+<p>ส่วนตรงที่เป็นเส้นแนวเฉียงสีฟ้า คือพื้นที่ๆ ไม่มีทางมาจาก <span class="math inline">\(H_{0}\)</span> ได้ ซึ่งก็คือ ความสามารถในการแยกแยะกลุ่มตัวอย่างที่เป็นความจริง เรียกว่า ผลบวกที่แท้จริง (True positive) = Power = 1 - Type-II error ดังนั้น ถ้าท่านเพิ่มค่า <span class="math inline">\(\alpha\)</span> สูงสุดที่รับได้ โอกาสการเกิด False positive ก็จะเพิ่มขึ้น แต่โอกาสการเกิด False negative ก็จะต่ำลง (= Power สูงขึ้น)</p>
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwrss/man/0-Generic-t-Test.html">power.t.test</a></span><span class="op">(</span>ncp <span class="op">=</span> <span class="va">t_test_5</span><span class="op">$</span><span class="va">statistic</span>, df <span class="op">=</span> <span class="fl">4</span>, alpha <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>             alternative <span class="op">=</span> <span class="st">"greater"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/power_5-1.png" width="672"></div>
+<p>อย่างไรก็ตาม ในด้านงานวิจัยนั้น ส่วนใหญ่จะให้ความสำคัญกับ False positive มากกว่า เนื่องจากผลบวกลวงอาจจะส่งผลให้ตัดสินใจเปลี่ยนแปลงการรักษาเดิมที่เป็นมาตรฐาน ซึ่งอาจเกิดผลเสียแก่ผู้ป่วยได้ ดังนั้น จึงไม่ค่อยมีการปรับเพิ่ม <span class="math inline">\(\alpha\)</span> แต่จะเลือกเพิ่ม Power จากการเพิ่ม Sample size มากกว่า โดยจำนวนตัวอย่างที่มากขึ้น ส่งผลให้ความแปรปรวนในการวัด (Standard error) ลดลง ส่งผลให้การกระจายตัวของข้อมูลนั้นแคบลงด้วย</p>
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">mean_20_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">13</span>, sd <span class="op">=</span> <span class="fl">1.7</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mean_20_sample</span><span class="op">)</span> <span class="co"># sd</span></span></code></pre></div>
+<pre><code>## [1] 1.653531</code></pre>
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mean_20_sample</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mean_20_sample</span><span class="op">)</span><span class="op">)</span> <span class="co"># standard error</span></span></code></pre></div>
+<pre><code>## [1] 0.3697408</code></pre>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t_test_20</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">mean_20_sample</span>, mu <span class="op">=</span> <span class="fl">12</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span>
+<span><span class="va">t_test_20</span></span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  mean_20_sample
+## t = 3.3558, df = 19, p-value = 0.00166
+## alternative hypothesis: true mean is greater than 12
+## 95 percent confidence interval:
+##  12.60143      Inf
+## sample estimates:
+## mean of x 
+##  13.24076</code></pre>
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwrss/man/0-Generic-t-Test.html">power.t.test</a></span><span class="op">(</span>ncp <span class="op">=</span> <span class="va">t_test_20</span><span class="op">$</span><span class="va">statistic</span>, df <span class="op">=</span> <span class="fl">19</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>             alternative <span class="op">=</span> <span class="st">"greater"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/power_20-1.png" width="672"></div>
+<p>จากกราฟ เส้นประสีแดงคือการกระจายตัวของข้อมูล <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\mu = 12\)</span> ส่วนเส้นประสีฟ้าคือ <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\mu = 12 + \frac{1.654}{19}\times3.356 = 12.29\)</span> พื้นที่สีแดงคือ critical value = <span class="math inline">\(\alpha\)</span> ที่ 0.05 จะเห็นว่าการกระจายตัวของข้อมูลทั้งสองกลุ่มนั้นแคบกว่า (สังเกตตัวเลขแกน x) จึงมีส่วนที่พื้นที่ร่วมกันที่น้อยกว่าด้วย</p>
+<p>เมื่อพล็อตกราฟความสัมพันธ์ระหว่าง ขนาดตัวอย่าง, <span class="math inline">\(\alpha\)</span>, power จะได้ดังรูป</p>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mean_diff</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># ความต่างคงที่ 1</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">50</span></span>
+<span><span class="va">alphas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>,<span class="fl">0.05</span>,<span class="fl">0.01</span>,<span class="fl">0.001</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">power_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, alphas <span class="op">=</span> <span class="va">alphas</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>power <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/power.t.test.html">power.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, delta <span class="op">=</span> <span class="va">mean_diff</span>, sig.level <span class="op">=</span> <span class="va">alphas</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">$</span><span class="va">power</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">alphas</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">alpha</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">alphas</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">power_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">n</span>, y <span class="op">=</span> <span class="va">power</span>, col <span class="op">=</span> <span class="va">alpha</span>, linetype <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Power (1-beta)"</span>, x <span class="op">=</span> <span class="st">"Sample size"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/power_graph-1.png" width="672"></div>
+<p><strong>Note:</strong> ทั้งหมดนี้เป็นการคำนวณตัวอย่างของ <a href="parametric-test.html#sec-t-test">t-test</a> เท่านั้น การกระจายตัวแบบอื่นจะมีวิธีคำนวณ Power ที่ต่างกันไป อย่างไรก็ตามหลักการพื้นฐานจะคล้ายกัน</p>
 <hr>
 </div>
 <div id="trade-off-ของ-p-value-threshold" class="section level2 unnumbered">
@@ -208,6 +295,7 @@
 <li><a class="nav-link" href="#%E0%B8%97%E0%B8%B3%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A7%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B2%E0%B8%B0%E0%B8%AB%E0%B8%84%E0%B8%B2%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%96%E0%B8%95-construct-the-test-statistics"><span class="header-section-number">8.2</span> ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics)</a></li>
 <li><a class="nav-link" href="#%E0%B8%AB%E0%B8%B2-p-value"><span class="header-section-number">8.3</span> หา p-value</a></li>
 <li><a class="nav-link" href="#%E0%B9%80%E0%B8%9B%E0%B8%A3%E0%B8%A2%E0%B8%9A%E0%B9%80%E0%B8%97%E0%B8%A2%E0%B8%9A-p-value-%E0%B8%81%E0%B8%9A-%E0%B8%84%E0%B8%B2%E0%B8%A7%E0%B8%81%E0%B8%A4%E0%B8%95-critical-value-%E0%B8%97%E0%B8%A2%E0%B8%AD%E0%B8%A1%E0%B8%A3%E0%B8%9A%E0%B9%84%E0%B8%94"><span class="header-section-number">8.4</span> เปรียบเทียบ p-value กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้</a></li>
+<li><a class="nav-link" href="#power">Power</a></li>
 <li><a class="nav-link" href="#trade-off-%E0%B8%82%E0%B8%AD%E0%B8%87-p-value-threshold">Trade-off ของ p-value threshold</a></li>
 </ul>
 
@@ -225,7 +313,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-09-27.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

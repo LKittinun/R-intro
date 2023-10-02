@@ -7,7 +7,7 @@ theme_set(theme_bw() +
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()))
 ```
 
-## Normal distribution
+## Normal distribution {#norm-dist}
 
 คือ ลักษณะการกระจายตัวของข้อมูลที่เป็นรูประฆังคว่ำ ซึ่งพบมากสุดในธรรมชาติ
 
@@ -62,11 +62,15 @@ ggplot(z_dist) +
 
 ## $t$ distribution
 
-Standard distribution ของ**กลุ่มตัวอย่าง**ที่สุ่มจากประชากร ใช้ใน [t-test](#sec-t-test)
+คือ การกระจายตัวของ**ความต่างของค่าเฉลี่ยระหว่างกลุ่มตัวอย่าง**ที่สุ่มจากประชากร ใช้ใน [t-test](#sec-t-test)
 
 $$
 f(t) = \frac{\Gamma(\frac{v+1}{2})}{\sqrt{v\pi}\Gamma(\frac{v}{2})}(1+\frac{t^{2}}{v})^{-\frac{v+1}{2}}
 $$
+
+plot(x, dt(x, df = 10, ncp = 0), from = -4, to = +4, type = "l")
+
+for(ncp in 1:6){
 
 ```{r t_distribution, warning = FALSE, out.width= "70%", fig.align="center"}
 t_dist <- data.frame(x = x, 
