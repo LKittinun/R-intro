@@ -14,8 +14,8 @@ exprs(gse)
 
 #|> write.csv("GSE63514_meta.csv")
 
-fData(gse) |> View()
-GSE63514_files <- list.files(path = "Resource/GSE63514_RAW", full.names = TRUE)
+
+GSE63514_files <- list.files(path = "../../GSE63514_RAW", full.names = TRUE)
 GSE63514_files_3 <- GSE63514_files[grep("0[1-3]", GSE63514_files)]
 GSE63514_files_3_NC <- GSE63514_files_3[grep("Normal|Cancer", GSE63514_files_3)]
 GSE63514_raw <- ReadAffy(filenames = GSE63514_files)

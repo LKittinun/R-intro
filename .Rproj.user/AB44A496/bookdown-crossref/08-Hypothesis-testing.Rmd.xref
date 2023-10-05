@@ -1,9 +1,10 @@
 h1:part-statistical-analysis (PART) Statistical analysis
 h1:hypothesis-testing Hypothesis testing
-h2:สรางสมมตฐาน-construct-the-hypothesis สร้างสมมติฐาน (Construct the hypothesis)
-h2:ทำการวเคราะหคาทางสถต-construct-the-test-statistics ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics)
-h2:หา-p-value หา 
-h2:เปรยบเทยบ-p-value-กบ-คาวกฤต-critical-value-ทยอมรบได เปรียบเทียบ  กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้
+h2:principle Principle
+h3:สรางสมมตฐาน-construct-the-hypothesis สร้างสมมติฐาน (Construct the hypothesis)
+h3:ทำการวเคราะหคาทางสถต-construct-the-test-statistics ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics)
+h3:หา-p-value หา 
+h3:เปรยบเทยบ-p-value-กบ-คาวกฤต-critical-value-ทยอมรบได เปรียบเทียบ  กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้
 h2:power Power
 h2:trade-off-ของ-p-value-threshold Trade-off ของ p-value threshold
 

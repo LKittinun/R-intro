@@ -62,10 +62,11 @@
 <li class="book-part">Bioconductor</li>
 <li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
 <li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">15</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">16</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -108,11 +109,11 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Rows: 150
 ## Columns: 5
-## $ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.8, 4.8, 4.3, 5.8, 5.7, 5.4, 5.1, 5.7, 5…
-## $ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.8, 3…
-## $ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4, 1.1, 1.2, 1.5, 1.3, 1.4, 1.7, 1…
-## $ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0…
-## $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, …</code></pre>
+## $ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.8, 4.8, 4.3, 5.8, 5.7, 5.4, 5.1, 5.7, 5.…
+## $ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.8, 3.…
+## $ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4, 1.1, 1.2, 1.5, 1.3, 1.4, 1.7, 1.…
+## $ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.…
+## $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, s…</code></pre>
 <ul>
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> เลือก column ที่ต้องการโดยใช้ตำแหน่งหรือชื่อ column ก็ได้</li>
@@ -196,8 +197,8 @@
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ใช้แค่ base R solution จะไม่สามารถดึงออกมาเป็น dataframe ได้</span></span>
 <span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">[</span><span class="st">"Species"</span><span class="op">]</span> <span class="op">==</span> <span class="st">"setosa"</span>, <span class="st">"Sepal.Length"</span><span class="op">]</span></span></code></pre></div>
-<pre><code>##  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2
-## [29] 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0</code></pre>
+<pre><code>##  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2
+## [30] 4.7 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0</code></pre>
 <p>บรรทัดสุดท้าย สำหรับ dataframe จะไม่สามารถดึงมาทั้ง column ได้ ซึ่งจะต้องใช้ข้อมูลอีกแบบ (tibble) แต่จะไม่กล่าวถึง ณ ที่นี่</p>
 <p><strong>Note:</strong> การ subset โดย dplyr นั้นสามารถทำใน dataframe/tibble เท่านั้น ไม่สามารถทำใน matrix ได้ (ต้องใช้วิธีของ base R)</p>
 <ul>
@@ -462,7 +463,7 @@
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span>    </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>median <span class="op">=</span> <span class="va">median</span>, mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>median <span class="op">=</span> <span class="va">median</span>, mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Species"],"name":[1],"type":["fct"],"align":["left"]},{"label":["Sepal.Length_median"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Sepal.Length_mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Sepal.Length_sd"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width_median"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width_mean"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width_sd"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Petal.Length_median"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["Petal.Length_mean"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["Petal.Length_sd"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["Petal.Width_median"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["Petal.Width_mean"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["Petal.Width_sd"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"setosa","2":"5.0","3":"5.006","4":"0.3524897","5":"3.4","6":"3.428","7":"0.3790644","8":"1.50","9":"1.462","10":"0.1736640","11":"0.2","12":"0.246","13":"0.1053856"},{"1":"versicolor","2":"5.9","3":"5.936","4":"0.5161711","5":"2.8","6":"2.770","7":"0.3137983","8":"4.35","9":"4.260","10":"0.4699110","11":"1.3","12":"1.326","13":"0.1977527"},{"1":"virginica","2":"6.5","3":"6.588","4":"0.6358796","5":"3.0","6":"2.974","7":"0.3224966","8":"5.55","9":"5.552","10":"0.5518947","11":"2.0","12":"2.026","13":"0.2746501"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -536,7 +537,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-01.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

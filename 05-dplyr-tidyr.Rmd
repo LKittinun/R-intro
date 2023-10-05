@@ -272,7 +272,7 @@ df |>
 ```{r summarize_wide_easy}
 df |> 
   group_by(Species) |>    
-  summarize(across(everything(), list(median = median, mean = mean, sd = sd)))
+  dplyr::summarize(across(everything(), list(median = median, mean = mean, sd = sd)))
 ```
 
 อีก **ประเด็นสำคัญ** ของข้อมูลประเภท `long form` นั้นคือ สามารทำ [visualization](#ggplot2) ที่ซับซ้อนได้ดีกว่า `wide form` เป็นอย่างมาก ดังตัวอย่าง [Boxplot1](#multi_boxplot), [Boxplot2](#top10_boxplot)

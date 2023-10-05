@@ -62,10 +62,11 @@
 <li class="book-part">Bioconductor</li>
 <li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
 <li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">15</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">16</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -86,11 +87,11 @@
 <li><p>Left-censor คือ ไม่แน่ใจข้อมูลช่วงเวลาเริ่มต้น เช่น diagnosis วันไหน</p></li>
 <li><p>Interval-censor คือ เวลาช่วงใดช่วงหนึ่งหายไป</p></li>
 </ul>
-<div id="kaplein-meir-estimate" class="section level2" number="12.1">
+<div id="kaplein-meier-estimate" class="section level2" number="12.1">
 <h2>
-<span class="header-section-number">12.1</span> Kaplein-Meir estimate<a class="anchor" aria-label="anchor" href="#kaplein-meir-estimate"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1</span> Kaplein-Meier estimate<a class="anchor" aria-label="anchor" href="#kaplein-meier-estimate"><i class="fas fa-link"></i></a>
 </h2>
-<p>Kaplein-Meir estimate (KM) คือกราฟแสดงอัตราการเกิดของเหตุการณ์เมื่อเทียบกับเวลาที่ผ่านไป โดยหลักการคำนวณ survival คือ</p>
+<p>Kaplein-Meier estimate (KM) คือกราฟแสดงอัตราการเกิดของเหตุการณ์เมื่อเทียบกับเวลาที่ผ่านไป โดยหลักการคำนวณ survival คือ</p>
 <p><span class="math display">\[ \hat{S}(t) = \prod_{i: t_{i} \leq t}(1- \frac{d_{i}}{n_{i}})\]</span></p>
 <p><span class="math display">\[
 \text{Survival proability} = \frac{n.risk - n.event}{n.risk}
@@ -173,7 +174,7 @@
 </tbody>
 </table></div>
 <p>เมื่อนำไปพล็อตกราฟแล้วจะได้ผลดังนี้</p>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-85-1.png" width="672"></div>
 <p>สังเกตุว่าส่วนที่ censor (มีสัญลักษณ์ <code>+</code>) จะไม่มีการตกลงของกราฟ แต่เมื่อถึงเวลาที่มี event เกิดขึ้น การตกลงของกราฟจะสูงกว่าเมื่อไม่มี censor นำมาก่อน</p>
 <div id="การสราง-km-ใน-r" class="section level3" number="12.1.1">
 <h3>
@@ -337,7 +338,7 @@ ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#survival-analysis"><span class="header-section-number">12</span> Survival analysis</a></li>
 <li>
-<a class="nav-link" href="#kaplein-meir-estimate"><span class="header-section-number">12.1</span> Kaplein-Meir estimate</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%A3%E0%B8%B2%E0%B8%87-km-%E0%B9%83%E0%B8%99-r"><span class="header-section-number">12.1.1</span> การสร้าง KM ใน R</a></li></ul>
+<a class="nav-link" href="#kaplein-meier-estimate"><span class="header-section-number">12.1</span> Kaplein-Meier estimate</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%A3%E0%B8%B2%E0%B8%87-km-%E0%B9%83%E0%B8%99-r"><span class="header-section-number">12.1.1</span> การสร้าง KM ใน R</a></li></ul>
 </li>
 <li><a class="nav-link" href="#log-rank-test"><span class="header-section-number">12.2</span> Log-rank test</a></li>
 <li>
@@ -359,7 +360,7 @@ ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-01.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
