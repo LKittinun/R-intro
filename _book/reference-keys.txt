@@ -68,7 +68,7 @@ linear-regression
 model-summary
 prediction
 logistic-regression
-poisson-quassipoisson-and-negative-binomial-regression
+poisson-family
 survival-analysis
 kaplein-meier-estimate
 การสราง-km-ใน-r
@@ -85,7 +85,11 @@ principle-2
 negative-binomial-model
 handling-biological-variation
 estimation-of-phi-and-dge
-extension-of-negative-binomial
+negative-binomial-extension
+log-linear-model
+example-1
+workflow
+make-a-design-matrix
 distribution
 norm-dist
 t-dist

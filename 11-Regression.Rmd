@@ -112,11 +112,11 @@ $t$-test คือการเปรียบเทียบเส้น regress
 จะเห็นว่าสมการนั้นเหมือน [One-sample t-test](#one-t) แต่เขียนในรูปแบบ regression
 
 $$
-t = \frac{\theta-\theta_{0}}{SE(\theta)}
+t = \frac{\theta_{H_{a}}-\theta_{H_0}}{SE(\theta)} = \frac{\theta-0}{SE(\theta)}
 $$
 
 $$
-SE(\theta) = \sqrt{\frac{1}{n-2} \times {\sum_{i=1}^{n}\frac{(y_{i} - \hat{y_{i}})^2}{(x_{i} - \hat{x_{i}})^2}}}
+SE(\theta) = \sqrt{\frac{1}{n-2} \times {\sum_{i=1}^{n}\frac{(y_{i} - \hat{y_{i}})^2}{(x_{i} - \bar{x})^2}}}
 $$
 
 ### Prediction
@@ -200,7 +200,7 @@ ggplot(new_group, aes(x = glufast, y = predicted_group)) +
 
 ------------------------------------------------------------------------
 
-## Poisson, quassipoisson, and negative binomial regression
+## Poisson, quassipoisson, and negative binomial regression {#poisson-family}
 
 Poission regression คือ สมการถดถอยที่ใช้ในการทำนายความถี่ หรือค่าเฉลี่ยของการเกิดเหตุการณ์นั้นๆ มักใช้กับข้อมูลที่ไม่ต่อเนื่อง (discrete value) พิจารณาข้อมูลแบบ [Poisson distribution](#poisson-dist)
 
