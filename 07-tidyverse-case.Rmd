@@ -1,6 +1,6 @@
 # Case study: Microarray visualization {#GSE63514}
 
-ต่อไปนี้จะเป็นตัวอย่างในการใช้ R ในการวิเคราะห์ข้อมูล molecular data เบื้องต้น โดยใช้ข้อมูลจาก [GEO dataset](https://www.ncbi.nlm.nih.gov/gds) `GSE63514` ซึ่งเป็น gene expression microarray
+ต่อไปนี้จะเป็นตัวอย่างในการใช้ R ในการวิเคราะห์ข้อมูล Molecular data เบื้องต้น โดยใช้ข้อมูลจาก [GEO dataset](https://www.ncbi.nlm.nih.gov/gds) `GSE63514` ซึ่งเป็น Gene expression microarray
 
 ```{r affy_pic, fig.align="center", echo = FALSE}
 knitr::include_graphics("Picture/affymatrix.jpg")
@@ -8,7 +8,7 @@ knitr::include_graphics("Picture/affymatrix.jpg")
 
 ## Import files
 
-ไฟล์แรกที่อ่านเข้ามาคือ `GSE63514_norm.csv` ซึ่งเป็นไฟล์ microarray expression ของชิ้นเนื้อปากมดลูก ประกอบด้วย ตัวอย่าง `Normal` , `CIN1` , `CIN2` , `CIN3` , `Cancer` ในที่นี้เราจะทำการวิเคราะห์ 20,000 gene แรก
+ไฟล์แรกที่อ่านเข้ามาคือ `GSE63514_norm.csv` ซึ่งเป็นไฟล์ Microarray expression ของชิ้นเนื้อปากมดลูก ประกอบด้วย ตัวอย่าง `Normal` , `CIN1` , `CIN2` , `CIN3` , `Cancer` ในที่นี้เราจะทำการวิเคราะห์ 20,000 ยีนแรก
 
 ```{r read_file_cx, message = FALSE}
 library(tidyverse) 
@@ -21,7 +21,7 @@ GSE63514_20000 <- read_csv("Resource/GSE63514_norm.csv") |> head(2000)
 names(GSE63514_20000)
 ```
 
-ส่วนที่สองคือ metadata (ข้อมูลระบุตัวตน) ของข้อมูลนี้
+ส่วนที่สองคือ Metadata (ข้อมูลระบุตัวตน) ของข้อมูลนี้
 
 ```{r metadata_cx, message=FALSE}
 head(GSE63514_meta, 10)
@@ -50,7 +50,7 @@ head(exprs_nc, 10)
 head(meta_nc, 10)
 ```
 
-เมื่อดูในตัวแปร `exps_nc` จะพบว่า probe นั้นเป็นชื่อเฉพาะของตัวเครื่อง ไม่ใช้ชื่อสากล ในที่นี้จะทำการเปลี่ยน probe ให้เป็นชื่อ gene นั้นๆ แต่ว่าชื่อ list รายชื่อนั้นเป็นชื่อทั้งหมดของ probe สังเกตได้จากจำนวนแถวที่ไม่เท่ากัน
+เมื่อดูในตัวแปร `exps_nc` จะพบว่า probe นั้นเป็นชื่อเฉพาะของตัวเครื่อง ไม่ใช้ชื่อสากล ในที่นี้จะทำการเปลี่ยน Probe ให้เป็นชื่อยีนนั้นๆ แต่ว่าชื่อ List รายชื่อนั้นเป็นชื่อทั้งหมดของ Probe สังเกตได้จากจำนวนแถวที่ไม่เท่ากัน
 
 ```{r nrow_genenames}
 nrow(exprs_nc)
@@ -67,9 +67,9 @@ gene_nc <- exprs_nc |>
 
 ## Visualization {#top10_boxplot}
 
-ต่อไป เราจะทำการแสดงผล gene expression 10 ตัวที่มีการแสดงออกมากที่สุดในทั้ง experiment นี้
+ต่อไป จะทำการแสดงผล Gene expression 10 ตัวที่มีการแสดงออกมากที่สุดในทั้งการทดลองนี้
 
-ขั้นแรก เราจะทำการรวม intensity ทั้งหมดใน 1 gene ผ่าน function `rowSums()` และเรียง `total_intensity` จากมากไปน้อย หลังจากนั้นเลือก top10 intensity ออกมาโดยใช้ function `head()`
+ขั้นแรก เราจะทำการรวม Intensity ทั้งหมดใน 1 gene ผ่าน function `rowSums()` และเรียง `total_intensity` จากมากไปน้อย หลังจากนั้นเลือก Top 10 intensity ออกมาโดยใช้ function `head()`
 
 ```{r top_intensity}
 gene_symbol_mat <- gene_nc |> 
@@ -100,7 +100,7 @@ ggplot(top10_long, aes(x = SYMBOL, y = Intensity, fill = Group)) +
           element_text(angle = 45, vjust = 1, hjust=1)) # หมุนแกน x เพื่อความสวยงาม
 ```
 
-ท่านอาจจะอยากเพิ่มเส้นค่าเฉลี่ยเพื่อดูว่า global mean intensity เป็นเท่าไร
+ท่านอาจจะอยากเพิ่มเส้นค่าเฉลี่ยเพื่อดูว่า Global mean intensity เป็นเท่าไร
 
 ```{r global_mean}
 global_mean_intensity <- mean(top10_long$Intensity)
@@ -114,7 +114,7 @@ ggplot(top10_long, aes(x = SYMBOL, y = Intensity, fill = Group)) +
           element_text(angle = 45, vjust = 1, hjust=1))
 ```
 
-ตัวกลุ่ม `RPL` ดูน่าสนใน เนื่องจาก intensity ใน `cancer` ต่ำกว่า `global mean` แต่จะมีนัยสำคัญหรือไม่ต้องใช้การวิเคราะห์ทางสถิติเพิ่มเติมทีหลัง
+ตัวกลุ่ม `RPL` ดูน่าสนใน เนื่องจาก Intensity ใน `cancer` ต่ำกว่า `global mean` แต่จะมีนัยสำคัญหรือไม่ต้องใช้การวิเคราะห์ทางสถิติเพิ่มเติมทีหลัง
 
 ต่อไป เราอยากที่จะแบ่งว่า tissue ที่เป็น `whole section` กับ `laser captured` มีการแสดงออกที่แตกต่างกันอย่างไร เราจะใช้ `facet_wrap()` เข้ามาช่วย
 
@@ -146,7 +146,7 @@ ggplot(top10_long_dissec, aes(x = `dissection:ch1`, fill = Group)) +
 
 เมื่อข้อมูลที่ได้ถูกต้อง จะเห็นว่า มีเฉพาะกลุ่ม `cancer` เท่านั้น ที่มีการตัดแบบ `whole section`
 
-หลังจากนั้นเราจะทำการพล็อต intensity ในแต่ละ gene
+หลังจากนั้นเราจะทำการพล็อต Intensity ในแต่ละยีน
 
 ```{r top10_long_dissec_fixed_intensity}
 ggplot(top10_long_dissec, aes(x = SYMBOL, y = Intensity, fill = Group)) + 

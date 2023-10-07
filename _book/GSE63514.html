@@ -19,9 +19,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="ต่อไปนี้จะเป็นตัวอย่างในการใช้ R ในการวิเคราะห์ข้อมูล molecular data เบื้องต้น โดยใช้ข้อมูลจาก GEO dataset GSE63514 ซึ่งเป็น gene expression microarray  7.1 Import files ไฟล์แรกที่อ่านเข้ามาคือ...">
-<meta property="og:description" content="ต่อไปนี้จะเป็นตัวอย่างในการใช้ R ในการวิเคราะห์ข้อมูล molecular data เบื้องต้น โดยใช้ข้อมูลจาก GEO dataset GSE63514 ซึ่งเป็น gene expression microarray  7.1 Import files ไฟล์แรกที่อ่านเข้ามาคือ...">
-<meta name="twitter:description" content="ต่อไปนี้จะเป็นตัวอย่างในการใช้ R ในการวิเคราะห์ข้อมูล molecular data เบื้องต้น โดยใช้ข้อมูลจาก GEO dataset GSE63514 ซึ่งเป็น gene expression microarray  7.1 Import files ไฟล์แรกที่อ่านเข้ามาคือ...">
+<meta name="description" content="ต่อไปนี้จะเป็นตัวอย่างในการใช้ R ในการวิเคราะห์ข้อมูล Molecular data เบื้องต้น โดยใช้ข้อมูลจาก GEO dataset GSE63514 ซึ่งเป็น Gene expression microarray  7.1 Import files ไฟล์แรกที่อ่านเข้ามาคือ...">
+<meta property="og:description" content="ต่อไปนี้จะเป็นตัวอย่างในการใช้ R ในการวิเคราะห์ข้อมูล Molecular data เบื้องต้น โดยใช้ข้อมูลจาก GEO dataset GSE63514 ซึ่งเป็น Gene expression microarray  7.1 Import files ไฟล์แรกที่อ่านเข้ามาคือ...">
+<meta name="twitter:description" content="ต่อไปนี้จะเป็นตัวอย่างในการใช้ R ในการวิเคราะห์ข้อมูล Molecular data เบื้องต้น โดยใช้ข้อมูลจาก GEO dataset GSE63514 ซึ่งเป็น Gene expression microarray  7.1 Import files ไฟล์แรกที่อ่านเข้ามาคือ...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -59,14 +59,15 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -78,13 +79,13 @@
 <h1>
 <span class="header-section-number">7</span> Case study: Microarray visualization<a class="anchor" aria-label="anchor" href="#GSE63514"><i class="fas fa-link"></i></a>
 </h1>
-<p>ต่อไปนี้จะเป็นตัวอย่างในการใช้ R ในการวิเคราะห์ข้อมูล molecular data เบื้องต้น โดยใช้ข้อมูลจาก <a href="https://www.ncbi.nlm.nih.gov/gds">GEO dataset</a> <code>GSE63514</code> ซึ่งเป็น gene expression microarray</p>
+<p>ต่อไปนี้จะเป็นตัวอย่างในการใช้ R ในการวิเคราะห์ข้อมูล Molecular data เบื้องต้น โดยใช้ข้อมูลจาก <a href="https://www.ncbi.nlm.nih.gov/gds">GEO dataset</a> <code>GSE63514</code> ซึ่งเป็น Gene expression microarray</p>
 <div class="inline-figure"><img src="Picture/affymatrix.jpg" width="298" style="display: block; margin: auto;"></div>
 <div id="import-files" class="section level2" number="7.1">
 <h2>
 <span class="header-section-number">7.1</span> Import files<a class="anchor" aria-label="anchor" href="#import-files"><i class="fas fa-link"></i></a>
 </h2>
-<p>ไฟล์แรกที่อ่านเข้ามาคือ <code>GSE63514_norm.csv</code> ซึ่งเป็นไฟล์ microarray expression ของชิ้นเนื้อปากมดลูก ประกอบด้วย ตัวอย่าง <code>Normal</code> , <code>CIN1</code> , <code>CIN2</code> , <code>CIN3</code> , <code>Cancer</code> ในที่นี้เราจะทำการวิเคราะห์ 20,000 gene แรก</p>
+<p>ไฟล์แรกที่อ่านเข้ามาคือ <code>GSE63514_norm.csv</code> ซึ่งเป็นไฟล์ Microarray expression ของชิ้นเนื้อปากมดลูก ประกอบด้วย ตัวอย่าง <code>Normal</code> , <code>CIN1</code> , <code>CIN2</code> , <code>CIN3</code> , <code>Cancer</code> ในที่นี้เราจะทำการวิเคราะห์ 20,000 ยีนแรก</p>
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> </span>
 <span></span>
@@ -157,7 +158,7 @@
 ## [125] "GSM1551434_Cancer-24_U133_Plus2.CEL.gz" "GSM1551435_Cancer-25_U133_Plus2.CEL.gz"
 ## [127] "GSM1551436_Cancer-26_U133_Plus2.CEL.gz" "GSM1551437_Cancer-27_U133_Plus2.CEL.gz"
 ## [129] "GSM1551438_Cancer-28_U133_Plus2.CEL.gz"</code></pre>
-<p>ส่วนที่สองคือ metadata (ข้อมูลระบุตัวตน) ของข้อมูลนี้</p>
+<p>ส่วนที่สองคือ Metadata (ข้อมูลระบุตัวตน) ของข้อมูลนี้</p>
 <div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">GSE63514_meta</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -201,7 +202,7 @@
 {"columns":[{"label":["title"],"name":[1],"type":["chr"],"align":["left"]},{"label":["characteristics_ch1.1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["dissection:ch1"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Normal-01","2":"treatment: flash-frozen biopsy, cryosectioned","3":"laser-captured"},{"1":"Normal-02","2":"treatment: flash-frozen biopsy, cryosectioned","3":"laser-captured"},{"1":"Normal-03","2":"treatment: flash-frozen biopsy, cryosectioned","3":"laser-captured"},{"1":"Normal-04","2":"treatment: flash-frozen biopsy, cryosectioned","3":"laser-captured"},{"1":"Normal-05","2":"treatment: flash-frozen biopsy, cryosectioned","3":"laser-captured"},{"1":"Normal-06","2":"treatment: flash-frozen biopsy, cryosectioned","3":"laser-captured"},{"1":"Normal-07","2":"treatment: flash-frozen biopsy, cryosectioned","3":"laser-captured"},{"1":"Normal-08","2":"treatment: flash-frozen biopsy, cryosectioned","3":"laser-captured"},{"1":"Normal-09","2":"treatment: flash-frozen biopsy, cryosectioned","3":"laser-captured"},{"1":"Normal-10","2":"treatment: flash-frozen biopsy, cryosectioned","3":"laser-captured"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>เมื่อดูในตัวแปร <code>exps_nc</code> จะพบว่า probe นั้นเป็นชื่อเฉพาะของตัวเครื่อง ไม่ใช้ชื่อสากล ในที่นี้จะทำการเปลี่ยน probe ให้เป็นชื่อ gene นั้นๆ แต่ว่าชื่อ list รายชื่อนั้นเป็นชื่อทั้งหมดของ probe สังเกตได้จากจำนวนแถวที่ไม่เท่ากัน</p>
+<p>เมื่อดูในตัวแปร <code>exps_nc</code> จะพบว่า probe นั้นเป็นชื่อเฉพาะของตัวเครื่อง ไม่ใช้ชื่อสากล ในที่นี้จะทำการเปลี่ยน Probe ให้เป็นชื่อยีนนั้นๆ แต่ว่าชื่อ List รายชื่อนั้นเป็นชื่อทั้งหมดของ Probe สังเกตได้จากจำนวนแถวที่ไม่เท่ากัน</p>
 <div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">exprs_nc</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2000</code></pre>
@@ -218,8 +219,8 @@
 <h2>
 <span class="header-section-number">7.3</span> Visualization<a class="anchor" aria-label="anchor" href="#top10_boxplot"><i class="fas fa-link"></i></a>
 </h2>
-<p>ต่อไป เราจะทำการแสดงผล gene expression 10 ตัวที่มีการแสดงออกมากที่สุดในทั้ง experiment นี้</p>
-<p>ขั้นแรก เราจะทำการรวม intensity ทั้งหมดใน 1 gene ผ่าน function <code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code> และเรียง <code>total_intensity</code> จากมากไปน้อย หลังจากนั้นเลือก top10 intensity ออกมาโดยใช้ function <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code></p>
+<p>ต่อไป จะทำการแสดงผล Gene expression 10 ตัวที่มีการแสดงออกมากที่สุดในทั้งการทดลองนี้</p>
+<p>ขั้นแรก เราจะทำการรวม Intensity ทั้งหมดใน 1 gene ผ่าน function <code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code> และเรียง <code>total_intensity</code> จากมากไปน้อย หลังจากนั้นเลือก Top 10 intensity ออกมาโดยใช้ function <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code></p>
 <div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_symbol_mat</span> <span class="op">&lt;-</span> <span class="va">gene_nc</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">prob</span>, <span class="op">-</span><span class="va">ENTREZID</span>, <span class="op">-</span><span class="va">GENENAME</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -248,7 +249,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> </span>
 <span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">1</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co"># หมุนแกน x เพื่อความสวยงาม</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/top10_boxplot-1.png" width="672"></div>
-<p>ท่านอาจจะอยากเพิ่มเส้นค่าเฉลี่ยเพื่อดูว่า global mean intensity เป็นเท่าไร</p>
+<p>ท่านอาจจะอยากเพิ่มเส้นค่าเฉลี่ยเพื่อดูว่า Global mean intensity เป็นเท่าไร</p>
 <div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">global_mean_intensity</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">top10_long</span><span class="op">$</span><span class="va">Intensity</span><span class="op">)</span></span>
 <span><span class="va">global_mean_intensity</span></span></code></pre></div>
@@ -261,7 +262,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> </span>
 <span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">1</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/global_mean-1.png" width="672"></div>
-<p>ตัวกลุ่ม <code>RPL</code> ดูน่าสนใน เนื่องจาก intensity ใน <code>cancer</code> ต่ำกว่า <code>global mean</code> แต่จะมีนัยสำคัญหรือไม่ต้องใช้การวิเคราะห์ทางสถิติเพิ่มเติมทีหลัง</p>
+<p>ตัวกลุ่ม <code>RPL</code> ดูน่าสนใน เนื่องจาก Intensity ใน <code>cancer</code> ต่ำกว่า <code>global mean</code> แต่จะมีนัยสำคัญหรือไม่ต้องใช้การวิเคราะห์ทางสถิติเพิ่มเติมทีหลัง</p>
 <p>ต่อไป เราอยากที่จะแบ่งว่า tissue ที่เป็น <code>whole section</code> กับ <code>laser captured</code> มีการแสดงออกที่แตกต่างกันอย่างไร เราจะใช้ <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code> เข้ามาช่วย</p>
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">top10_long_dissec</span> <span class="op">&lt;-</span> <span class="va">top10_long</span> <span class="op">|&gt;</span> </span>
@@ -289,7 +290,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/top10_long_dissec_fixed_bar-1.png" width="672"></div>
 <p>เมื่อข้อมูลที่ได้ถูกต้อง จะเห็นว่า มีเฉพาะกลุ่ม <code>cancer</code> เท่านั้น ที่มีการตัดแบบ <code>whole section</code></p>
-<p>หลังจากนั้นเราจะทำการพล็อต intensity ในแต่ละ gene</p>
+<p>หลังจากนั้นเราจะทำการพล็อต Intensity ในแต่ละยีน</p>
 <div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">top10_long_dissec</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">SYMBOL</span>, y <span class="op">=</span> <span class="va">Intensity</span>, fill <span class="op">=</span> <span class="va">Group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -330,7 +331,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

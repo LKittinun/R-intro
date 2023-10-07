@@ -59,14 +59,15 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -82,7 +83,7 @@
 <h2>
 <span class="header-section-number">1.1</span> Basic operation<a class="anchor" aria-label="anchor" href="#basic-operation"><i class="fas fa-link"></i></a>
 </h2>
-<p>ท่านสามารถใช้ R ในการคำนวณต่างๆ ได้ เช่น บวก ลบ คูณ หาร ยกกำลัง เป็นต้น</p>
+<p>ท่านสามารถใช้ <code>R</code> ในการคำนวณต่างๆ ได้ เช่น บวก ลบ คูณ หาร ยกกำลัง เป็นต้น</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">3</span><span class="op">+</span><span class="fl">2</span></span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
@@ -116,7 +117,7 @@
 <h3>
 <span class="header-section-number">1.2.1</span> Variable assignment<a class="anchor" aria-label="anchor" href="#variable-assignment"><i class="fas fa-link"></i></a>
 </h3>
-<p>R สามารถเก็บข้อมูลต่างๆ ไว้ในตัวแปรได้ เพื่อที่สามารถนำมาใช้ในภายหลัง โดยการเก็บตัวแปรนั้นจะใช้เครื่องหมาย <code>&lt;-</code></p>
+<p><code>R</code> สามารถเก็บข้อมูลต่างๆ ไว้ในตัวแปรได้ เพื่อที่สามารถนำมาใช้ในภายหลัง โดยการเก็บตัวแปรนั้นจะใช้เครื่องหมาย <code>&lt;-</code></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">x</span></span></code></pre></div>
@@ -144,7 +145,7 @@
 <h3>
 <span class="header-section-number">1.2.2</span> Type of variable<a class="anchor" aria-label="anchor" href="#type-of-variable"><i class="fas fa-link"></i></a>
 </h3>
-<p>R นั้นสามารถรองรับตัวแปรต่างๆ ได้หลากหลาย ซึ่งเป็นได้ทั้ง ตัวเลข หรือตัวอักษร หรือแม้กระทั่งเก็บหลายข้อมูลภายในตัวแปรเดียวได้</p>
+<p><code>R</code> นั้นสามารถรองรับตัวแปรต่างๆ ได้หลากหลาย ซึ่งเป็นได้ทั้ง ตัวเลข หรือตัวอักษร หรือแม้กระทั่งเก็บหลายข้อมูลภายในตัวแปรเดียวได้</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"Hello world"</span> <span class="co"># ตัวอักษร</span></span>
 <span><span class="va">x</span></span></code></pre></div>
@@ -167,12 +168,12 @@
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># ท่านสามารถเช็คชนิดของตัวแปรได้โดยใช้ function class()</span></span></code></pre></div>
 <pre><code>## [1] "character"</code></pre>
-<p>ลักษณะตัวแปรต่างๆ ใน R มีดังนี้</p>
+<p>ลักษณะตัวแปรต่างๆ ใน <code>R</code> มีดังนี้</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="25%">
 <col width="26%">
-<col width="48%">
+<col width="26%">
+<col width="47%">
 </colgroup>
 <thead><tr class="header">
 <th>ชนิด</th>
@@ -181,63 +182,63 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>numeric</td>
+<td>Numeric</td>
 <td>
 <code>1</code>, <code>2.3</code>, <code>5</code>
 </td>
 <td>จำนวนจริง รวมทศนิยม</td>
 </tr>
 <tr class="even">
-<td>integer</td>
+<td>Integer</td>
 <td>
 <code>1</code>, <code>2</code>, <code>3</code>
 </td>
 <td>จำนวนเต็ม เป็น subset ของ numeric</td>
 </tr>
 <tr class="odd">
-<td>complex</td>
+<td>Complex</td>
 <td><code>1i</code></td>
 <td>จำนวนเชิงซ้อน</td>
 </tr>
 <tr class="even">
-<td>character</td>
+<td>Character</td>
 <td>
 <code>"สวัสดี"</code>, <code>"Hello world"</code>
 </td>
 <td>ตัวอักษร ต้องอยู่ในเครื่องหมาย ” ”</td>
 </tr>
 <tr class="odd">
-<td>factor</td>
+<td>Factor</td>
 <td>
 <code>"a"</code>, <code>"b"</code>, <code>"c"</code>
 </td>
 <td>คล้าย character แต่มีจำนวนตัวแปรจำกัด</td>
 </tr>
 <tr class="even">
-<td>logical</td>
+<td>Logical</td>
 <td>
 <code>TRUE</code>, <code>FALSE</code>
 </td>
 <td>ตามหลักตรรกศาสตร์</td>
 </tr>
 <tr class="odd">
-<td>vector</td>
+<td>Vector</td>
 <td><code>c(1,2,3)</code></td>
 <td>หลายข้อมูลใน 1 ตัวแปร โดยต้องเป็นตัวแปรชนิดเดียวกัน</td>
 </tr>
 <tr class="even">
-<td>list</td>
+<td>List</td>
 <td><code>list(1, c(1,3,4), "Hello")</code></td>
 <td>หลายข้อมูลใน 1 ตัวแปร โดยไม่จำเป้นต้องเป็นตัวแปรชนิดเดียวกัน</td>
 </tr>
 <tr class="odd">
-<td>dataframe</td>
-<td><code>data.frame(x=3, y=2)</code></td>
+<td>Dataframe</td>
+<td><code>data.frame(x = 3, y = 2)</code></td>
 <td>ตาราง</td>
 </tr>
 </tbody>
 </table></div>
-<p>ในบางครั้ง class ที่ R ทำการเดามาให้ตั้งแต่แรกอาจจะไม่ใช่ลักษณะตัวแปรที่ท่านต้องการ ท่านสามารถใช้ คำสั่ง <code>as.*()</code> ในการเปลี่ยน class ของตัวแปรนั้นได้</p>
+<p>ในบางครั้ง Class ที่ <code>R</code> ทำการเดามาให้ตั้งแต่แรกอาจจะไม่ใช่ลักษณะตัวแปรที่ท่านต้องการ ท่านสามารถใช้ คำสั่ง <code>as.*()</code> ในการเปลี่ยน Class ของตัวแปรนั้นได้</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># ไม่ต้องการให้คิดเป็นตัวเลข เช่น ตัวแปรที่จริงแล้วอาจจะเป็น กลุ่ม1 กลุ่ม2</span></span></code></pre></div>
@@ -267,7 +268,7 @@
 <h2>
 <span class="header-section-number">1.3</span> Matrix and Dataframe<a class="anchor" aria-label="anchor" href="#matrix-and-dataframe"><i class="fas fa-link"></i></a>
 </h2>
-<p>เนื่องจาก R นั้นเป็นโปรแกรมที่ส่วนมากใช้ในการวิเคราะห์ทางสถิติ ซึ่งเกี่ยวข้อมูลส่วนใหญ่จะถูกเก็บในรูปของตาราง R จึงมีตัวแปรที่เก็บข้อมูลในรูปของตารางโดยเฉพาะ เรียกว่า matrix และ dataframe ซึ่งท่านจะใช้เป็นหลักในการวิเคราะห์ข้อมูลใน R</p>
+<p>เนื่องจาก <code>R</code> นั้นเป็นโปรแกรมที่ส่วนมากใช้ในการวิเคราะห์ทางสถิติ ซึ่งเกี่ยวข้อมูลส่วนใหญ่จะถูกเก็บในรูปของตาราง <code>R</code> จึงมีตัวแปรที่เก็บข้อมูลในรูปของตารางโดยเฉพาะ เรียกวา Matrix และ Dataframe ซึ่งท่านจะใช้เป็นหลักในการวิเคราะห์ข้อมูลใน <code>R</code></p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">mat</span></span></code></pre></div>
@@ -288,18 +289,18 @@
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "data.frame"</code></pre>
-<p>โดยตารางนั้นจะประกอบด้วยสองส่วนหลักๆ คล้าย excel spreadsheet ได้แก่</p>
+<p>โดยตารางนั้นจะประกอบด้วยสองส่วนหลักๆ คล้าย Excel spreadsheet ได้แก่</p>
 <ul>
 <li>Column (คอลัมน์): คือ ข้อมูลในแนวตั้ง ซึ่งแถวบนสุดจะเป็นชื่อ column นั้นๆ</li>
 <li>Row (แถว): คือ ข้อมูลในแนวนอน</li>
 </ul>
-<p>โดย matrix นั้น สามารถเก็บ variable ในรูปแบบเดียวกันได้เท่านั้น แต่ dataframe สามารถเก็บข้อมูลต่างชนิดร่วมกันได้ โดยมีข้อแม้ว่า column เดียวกัน จะต้องเป็นข้อมูลชุดเดียวกัน</p>
+<p>โดย Matrix นั้น สามารถเก็บ Variable ในรูปแบบเดียวกันได้เท่านั้น แต่ Dataframe สามารถเก็บข้อมูลต่างชนิดร่วมกันได้ โดยมีข้อแม้ว่า Column เดียวกัน จะต้องเป็นข้อมูลชุดเดียวกัน</p>
 </div>
 <div id="subset" class="section level2" number="1.4">
 <h2>
 <span class="header-section-number">1.4</span> Subset<a class="anchor" aria-label="anchor" href="#subset"><i class="fas fa-link"></i></a>
 </h2>
-<p>ท่านสามารถดึงข้อมูลแค่บางส่วนออกมาจาก vector, list, matrix หรือ dataframe ได้ เรียกว่าการ subset</p>
+<p>ท่านสามารถดึงข้อมูลแค่บางส่วนออกมาจาก Vector, List, Matrix หรือ Dataframe ได้ เรียกว่าการ Subset</p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span><span class="op">)</span></span>
 <span><span class="va">x</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="co"># subset โดยระบุตำแหน่ง</span></span></code></pre></div>
@@ -318,7 +319,7 @@
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="co"># ดึงข้อมูลที่อยู่ใน list ออกมา</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3</code></pre>
-<p>ในส่วนของ matrix และ dataframe นั้น ท่านสามารถ subset ตามตำแหน่งได้ โดยการระบุ row และ column ตามลำดับ</p>
+<p>ในส่วนของ Matrix และ Dataframe นั้น ท่านสามารถ subset ตามตำแหน่งได้ โดยการระบุ Row และ Column ตามลำดับ</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mat</span></span></code></pre></div>
 <pre><code>##      [,1] [,2]
@@ -337,7 +338,7 @@
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">]</span> <span class="co"># 1st row, 3rd column</span></span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<p>ในส่วนของ dataframe นั้น ท่านสามารถ subset ได้โดยใช้ชื่อของ column อีกด้วย</p>
+<p>ในส่วนของ Dataframe นั้น ท่านสามารถ Subset ได้โดยใช้ชื่อของ Column อีกด้วย</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span> <span class="co"># subset เป็น column ย่อย</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -389,7 +390,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

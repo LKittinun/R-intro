@@ -19,9 +19,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="Parametric test คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง  9.1 t-test คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย...">
-<meta property="og:description" content="Parametric test คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง  9.1 t-test คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย...">
-<meta name="twitter:description" content="Parametric test คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง  9.1 t-test คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย...">
+<meta name="description" content="Parametric test คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง  9.1 \(t\)-test คือ...">
+<meta property="og:description" content="Parametric test คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง  9.1 \(t\)-test คือ...">
+<meta name="twitter:description" content="Parametric test คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง  9.1 \(t\)-test คือ...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -59,14 +59,15 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -81,18 +82,18 @@
 <p>Parametric test คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง</p>
 <div id="sec-t-test" class="section level2" number="9.1">
 <h2>
-<span class="header-section-number">9.1</span> t-test<a class="anchor" aria-label="anchor" href="#sec-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1</span> <span class="math inline">\(t\)</span>-test<a class="anchor" aria-label="anchor" href="#sec-t-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย (mean) และความแปรปรวน (sd) ระหว่างสองกลุ่ม แบ่งเป็น</p>
+<p>คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย (Mean) และความผันผวนของการวัด (Standard Error; SE) ระหว่างสองกลุ่ม แบ่งเป็น</p>
 <div id="one-t" class="section level3" number="9.1.1">
 <h3>
-<span class="header-section-number">9.1.1</span> One sample t-test<a class="anchor" aria-label="anchor" href="#one-t"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1.1</span> One sample <span class="math inline">\(t\)</span>-test<a class="anchor" aria-label="anchor" href="#one-t"><i class="fas fa-link"></i></a>
 </h3>
-<p>เป็นการเปรียบเทียบความแตกต่างของ mean ระหว่าง <code>sample</code> กับ <code>population</code></p>
+<p>เป็นการเปรียบเทียบความแตกต่างของค่าเฉลี่ยระหว่างกลุ่มตัวอย่าง (Sample) กับประชากร (Population)</p>
 <p><span class="math display">\[
 t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 \]</span></p>
-<p>เพื่อให้เห็นภาพของความต่างใน test นี้เราจะทำการสร้างกราฟเปรียบว่า sample นั้น มี mean ต่างจาก population ที่ mean = 10 และ mean = 30 หรือไม่</p>
+<p>เพื่อให้เห็นภาพของความต่างในการทดสอบนี้ เราจะทำการสร้างกราฟเปรียบว่ากลุ่มตัวอย่างนั้น มีค่าเฉลี่ยต่างจากประชากร ที่ ค่าเฉลี่ย = 10 และ ค่าเฉลี่ย = 30 หรือไม่</p>
 <div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">norm_10_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span>, mean <span class="op">=</span> <span class="fl">10</span>, sd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="co"># สร้างประชากร mean = 10, sd = 4</span></span>
@@ -111,11 +112,11 @@ t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 <span>               <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x  <span class="op">=</span> <span class="va">Values</span>, y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>, fill <span class="op">=</span> <span class="va">Samp</span><span class="op">)</span>, </span>
 <span>               color <span class="op">=</span> <span class="st">"black"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/one_t_plot-1.png" width="100%"></div>
-<p>จะเห็นว่าเมื่อดูลักษณะการกระจายตัวของข้อมูลแล้ว <code>Samp_10</code> ที่มี mean = 10 นั้น ไม่ต่างจากประชากรที่มี mean = 10 แต่ดูแตกต่างอย่างเห็นได้ชัดกับประชากรที่มี mean = 30 <code>t.test</code> จะช่วยตัดสินว่าค่าที่ได้นั้นแตกต่างกันจริงหรือไม่ hypothesis ที่ตั้งคือ</p>
-<p><strong>Case 1</strong>: Population at mean = 10</p>
+<p>จะเห็นว่าเมื่อดูลักษณะการกระจายตัวของข้อมูลแล้ว <code>Samp_10</code> ที่มี ค่าเฉลี่ย = 10 นั้น ไม่ต่างจากประชากรที่มี ค่าเฉลี่ย = 10 แต่ดูแตกต่างอย่างเห็นได้ชัดกับประชากรที่มี mean = 30 <code>t.test</code> จะช่วยตัดสินว่าค่าที่ได้นั้นแตกต่างกันจริงหรือไม่ โดยสมมติฐานที่ตั้งคือ</p>
+<p><strong>Case 1</strong>: ประชากรมีค่าเฉลี่ย = 10</p>
 <ul>
-<li><p><span class="math inline">\(H_{0}\)</span>: mean ของ sample นั้น ไม่ต่างจาก mean ของ population ที่ mean = 10</p></li>
-<li><p><span class="math inline">\(H_{a}\)</span>: mean ของ sample นั้น ต่างจาก mean ของ population ที่ mean = 10</p></li>
+<li><p><span class="math inline">\(H_{0}\)</span>: ค่าเฉลี่ยของกลุ่มตัวอย่างนั้น ไม่ต่างจากค่าเฉลี่ยของประชากร = 10</p></li>
+<li><p><span class="math inline">\(H_{a}\)</span>: ค่าเฉลี่ยของกลุ่มตัวอย่างนั้น ต่างจากค่าเฉลี่ยของประชากร = 10</p></li>
 </ul>
 <div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, mu <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># p &gt; 0.05</span></span></code></pre></div>
@@ -130,10 +131,10 @@ t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 ## sample estimates:
 ## mean of x 
 ##  10.27449</code></pre>
-<p><strong>Case 2</strong>: Population at mean = 40</p>
+<p><strong>Case 2</strong>: ประชากรมีค่าเฉลี่ย = 40</p>
 <ul>
-<li><p><span class="math inline">\(H_{0}\)</span>: mean ของ sample นั้น ไม่ต่างจาก mean ของ population ที่ mean = 40</p></li>
-<li><p><span class="math inline">\(H_{a}\)</span>: mean ของ sample นั้น ต่างจาก mean ของ population ที่ mean = 40</p></li>
+<li><p><span class="math inline">\(H_{0}\)</span>: ค่าเฉลี่ยของกลุ่มตัวอย่างนั้น ไม่ต่างจากค่าเฉลี่ยของประชากร = 40</p></li>
+<li><p><span class="math inline">\(H_{a}\)</span>: ค่าเฉลี่ยของกลุ่มตัวอย่างนั้น ต่างจากค่าเฉลี่ยของประชากร = 40</p></li>
 </ul>
 <div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, mu <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="co"># p &lt;= 0.05</span></span></code></pre></div>
@@ -148,8 +149,8 @@ t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 ## sample estimates:
 ## mean of x 
 ##  10.27449</code></pre>
-<p>จะเห็นว่าต่างจาก population ที่ mean = 30 อย่างมีนัยสำคัญ (p = <span class="math inline">\(2.2 \times 10^{-16}\)</span> &lt; critical point (0.05) )</p>
-<p>พิจารณาที่มาของ <code>p-value</code> นั้นมีที่มาจากสูตรขั้นต้น</p>
+<p>จะเห็นว่าต่างจากประชากรที่ค่าเฉลี่ย = 30 อย่างมีนัยสำคัญ (<span class="math inline">\(p\)</span> = <span class="math inline">\(2.2 \times 10^{-16}\)</span> &lt; Critical point (0.05) )</p>
+<p>พิจารณาที่มาของ <span class="math inline">\(p\)</span>-value นั้นมีที่มาจากสูตรขั้นต้น</p>
 <div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hypothesized_mean</span> <span class="op">&lt;-</span> <span class="fl">30</span></span>
 <span><span class="va">mean_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">norm_10_sample</span><span class="op">)</span></span>
@@ -162,23 +163,23 @@ t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 <div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="va">t</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span> <span class="co"># p-value</span></span></code></pre></div>
 <pre><code>## [1] 2.306252e-74</code></pre>
-<p>จะเห็นว่าค่า <code>t</code> นั้นเท่ากับ ค่าที่ได้จาก function <code>t.test</code> ขั้นต้น เมื่อสร้าง <code>t-distribution</code> ที่มี <span class="math inline">\(H_{0}\)</span> คือ mean = 0 แล้วจะพบว่าค่านี้มากกว่า critical value</p>
+<p>จะเห็นว่าค่า <span class="math inline">\(t\)</span> นั้นเท่ากับ ค่าที่ได้จาก <code>t.test</code> ขั้นต้น เมื่อสร้าง <span class="math inline">\(t\)</span>-distribution ที่มี <span class="math inline">\(H_{0}\)</span> คือ ค่าเฉลี่ย = 0 แล้วจะพบว่าค่านี้มากกว่า Critical value</p>
 </div>
 <div id="ind-t" class="section level3" number="9.1.2">
 <h3>
 <span class="header-section-number">9.1.2</span> Independent t-test<a class="anchor" aria-label="anchor" href="#ind-t"><i class="fas fa-link"></i></a>
 </h3>
-<p>เป็นการเปรียบเทียบ mean ระหว่าง <code>sample</code> สองกลุ่มที่ไม่เกี่ยวเนื่องกัน</p>
+<p>เป็นการเปรียบเทียบค่าเฉลี่ยระหว่าง ตัวอย่างสองกลุ่มที่ไม่เกี่ยวเนื่องกัน</p>
 <p><span class="math display">\[
 t = \frac{\bar{x_{1}}-\bar{x_{2}}}{\sqrt{\frac{s^{2}_1}{n_{1}}+\frac{s^{2}_2}{n_{2}}}}
 \]</span></p>
 <p><span class="math display">\[
 S_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
 \]</span></p>
-<p>กลับไปดูภาพขั้นต้น ครั้งนี้จะเทียบระหว่าง sample สองกลุ่ม คือ <code>norm_10_sample</code> และ <code>norm_30_sample</code> ว่ามี mean ที่แตกต่างกันอย่างมีนัยสำคัญหรือไม่</p>
+<p>กลับไปดูภาพขั้นต้น ครั้งนี้จะเทียบระหว่างกลุ่มตัวอย่างสองกลุ่ม คือ <code>norm_10_sample</code> และ <code>norm_30_sample</code> ว่ามี ค่าเฉลี่ยที่แตกต่างกันอย่างมีนัยสำคัญหรือไม่</p>
 <ul>
-<li><p><span class="math inline">\(H_{0}\)</span>: mean ของ <code>norm_10_sample</code> และ <code>norm_30_sample</code> นั้นไม่แตกต่างกัน (<span class="math inline">\(\text{mean difference} = 0\)</span>)</p></li>
-<li><p><span class="math inline">\(H_{a}\)</span>: mean ของ <code>norm_10_sample</code> และ <code>norm_30_sample</code> นั้นแตกต่างกัน (<span class="math inline">\(\text{mean difference} \neq 0\)</span>)</p></li>
+<li><p><span class="math inline">\(H_{0}\)</span>: ค่าเฉลี่ยของ <code>norm_10_sample</code> และ <code>norm_30_sample</code> นั้นไม่แตกต่างกัน (<span class="math inline">\(\text{Mean difference} = 0\)</span>)</p></li>
+<li><p><span class="math inline">\(H_{a}\)</span>: ค่าเฉลี่ยของ <code>norm_10_sample</code> และ <code>norm_30_sample</code> นั้นแตกต่างกัน (<span class="math inline">\(\text{Mean difference} \neq 0\)</span>)</p></li>
 </ul>
 <div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, <span class="va">norm_30_sample</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -193,18 +194,18 @@ S_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
 ## sample estimates:
 ## mean of x mean of y 
 ##  10.27449  30.18981</code></pre>
-<p>สรุปได้ว่า mean ของ <code>sample</code> ทั้งสองกลุ่มนั้นแตกต่างกันอย่างมีนัยสำคัญ</p>
-<p>ปล. บางครั้งข้อมูลอาจจะมีความแปรปรวนไม่เท่ากัน ในที่นี้มักจะใช้ <code>Welch's t-test</code> โดย <code>t.test(…, var.equal = FALSE)</code> โดยสมการนี้จะทำการปรับความแปรปรวนให้ด้วย</p>
+<p>สรุปได้ว่าค่าเฉลี่ยของกลุ่มตัวอย่างทั้งสองกลุ่มนั้นแตกต่างกันอย่างมีนัยสำคัญ</p>
+<p>ปล. บางครั้งข้อมูลอาจจะมีความแปรปรวนไม่เท่ากัน ในที่นี้มักจะใช้ Welch’s <span class="math inline">\(t\)</span>-test โดย <code>t.test(…, var.equal = FALSE)</code> โดยสมการนี้จะทำการปรับความแปรปรวนให้ด้วย</p>
 </div>
 <div id="pair-t" class="section level3" number="9.1.3">
 <h3>
 <span class="header-section-number">9.1.3</span> Paired t-test<a class="anchor" aria-label="anchor" href="#pair-t"><i class="fas fa-link"></i></a>
 </h3>
-<p>เป็นการเปรียบเทียบ mean ระหว่าง <code>sample</code> สองกลุ่มที่เกี่ยวเนื่องกัน (ก่อน-หลัง แม่-ลูก เป็นต้น)</p>
+<p>เป็นการเปรียบเทียบค่าเฉลี่ยระหว่างตัวอย่างสองกลุ่มที่เกี่ยวเนื่องกัน (ก่อน-หลัง แม่-ลูก เป็นต้น)</p>
 <p><span class="math display">\[
 t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 \]</span></p>
-<p><span class="math display">\[ s_{d} = \sqrt{\sum(x_{d}-\bar{x}_{d})/(n-1)}\]</span></p>
+<p><span class="math display">\[ S_{d} = \sqrt{\sum(x_{d}-\bar{x}_{d})/(n-1)}\]</span></p>
 <div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, <span class="va">norm_30_sample</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -218,8 +219,8 @@ t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 ## sample estimates:
 ## mean difference 
 ##       -19.91532</code></pre>
-<p>จะเห็นว่ามีความแตกต่างในส่วนของ <span class="math inline">\(DF\)</span> (degree of freedom) ซึ่งเกิดจากการจับคู่หาความต่าง 100 ครั้ง เนื่องจากค่าที่เปรียบเทียบนั้นอยู่ในตัวอย่างเดียวกัน (แม่ลูก คู่ที่ 1 แม่ลูกคู่ที่ 2 … เป็นต้น) เมื่อเปรียบเทียบกับ <code>independent t-test</code> เนื่องจากเป็นการหา mean ในกลุ่มของตัวเอง 2 ครั้ง และมาเทียบความต่างกัน</p>
-<p>ดังนั้น การเลือก <code>paired vs independent</code> นั้นมีความสำคัญ ขึ้นอยู่กับโจทย์การศึกษาของท่านด้วย</p>
+<p>จะเห็นว่ามีความแตกต่างในส่วนของ <span class="math inline">\(DF\)</span> (Degree of freedom) ซึ่งเกิดจากการจับคู่หาความต่าง 100 ครั้ง เนื่องจากค่าที่เปรียบเทียบนั้นอยู่ในตัวอย่างเดียวกัน (แม่ลูก คู่ที่ 1 แม่ลูกคู่ที่ 2 … เป็นต้น) เมื่อเปรียบเทียบกับ Independent <span class="math inline">\(t\)</span>-test เนื่องจากเป็นการหา mean ในกลุ่มของตัวเอง 2 ครั้ง และมาเทียบความต่างกัน</p>
+<p>ดังนั้น การเลือก Paired vs Independent นั้นมีความสำคัญ ขึ้นอยู่กับโจทย์การศึกษาของท่านด้วย</p>
 <hr>
 </div>
 </div>
@@ -227,20 +228,20 @@ t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 <h2>
 <span class="header-section-number">9.2</span> Analysis of Variance (ANOVA)<a class="anchor" aria-label="anchor" href="#ANOVA"><i class="fas fa-link"></i></a>
 </h2>
-<p>คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย (mean) และความแปรปรวน (sd) ระหว่างสองกลุ่มขึ้นไป โดยมีสมมติฐาน คือ</p>
+<p>คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ยและความแปรปรวนระหว่างสองกลุ่มขึ้นไป โดยมีสมมติฐาน คือ</p>
 <ul>
 <li><p><span class="math inline">\(H_{0}\)</span>: ค่าเฉลี่ยของทุกกลุ่มเท่ากัน (<span class="math inline">\(\mu_{1} = \mu_{2} = \mu_{3} = … = \mu_{k}\)</span>)</p></li>
 <li><p><span class="math inline">\(H_{a}\)</span>: ค่าเฉลี่ยของ<strong>กลุ่มใดกลุ่มหนึ่ง</strong>ต่างจากกลุ่มอื่น</p></li>
 </ul>
 <p>การวิเคราะห์ ANOVA นั้นมีหลายแบบ</p>
 <ul>
-<li><p><code>one-way ANOVA</code> เป็นการหาความแตกต่างของ 1 ตัวแปร</p></li>
-<li><p><code>two-way ANOVA</code> เป็นการหาความแตกต่างของ 2 ตัวแปร</p></li>
-<li><p><code>MANOVA</code> เป็นการหาความแตกต่างที่มากกว่า 2 ตัวแปร</p></li>
-<li><p><code>nested ANOVA</code> เป็นการหาความแตกต่างที่ใน 1 ตัวแปรนั้น มีตัวแปรย่อยอีก</p></li>
+<li><p>One-way ANOVA เป็นการหาความแตกต่างของ 1 ตัวแปร</p></li>
+<li><p>Two-way ANOVA เป็นการหาความแตกต่างของ 2 ตัวแปร</p></li>
+<li><p>MANOVA เป็นการหาความแตกต่างที่มากกว่า 2 ตัวแปร</p></li>
+<li><p>Nested ANOVA เป็นการหาความแตกต่างที่ใน 1 ตัวแปรนั้น มีตัวแปรย่อยอีก</p></li>
 </ul>
-<p>ณ ที่นี้จะกล่าวถึงแค่ <code>one-way ANOVA</code> ซึ่งมีความซับซ้อนน้อย โดยหลักการโดยง่ายของ ANOVA คือ การเปรียบเทียบความต่างของ <strong>ค่าเฉลี่ยทั้งกลุ่ม (global mean)</strong> เปรียบเทียบกับ <strong>ผลรวมของค่าเฉลี่ยแต่ละกลุ่ม (between group mean)</strong></p>
-<p>การวิเคราะห์ทางสถิติของ ANOVA นั้นใช้ <strong>F-test</strong> ซึ่งเป็นการเปรียบเทียบระหว่าง ความแปรปรวนที่อธิบายได้ และความแปรปรวนที่อธิบายไม่ได้</p>
+<p>ณ ที่นี้จะกล่าวถึงแค่ one ANOVA ซึ่งมีความซับซ้อนน้อย และนิยมใช้มากที่สุด โดยหลักการโดยง่ายของ ANOVA คือ การเปรียบเทียบความต่างของ <strong>ค่าเฉลี่ยทั้งกลุ่ม (Global mean)</strong> เปรียบเทียบกับ <strong>ผลรวมของค่าเฉลี่ยแต่ละกลุ่ม (Between group mean)</strong></p>
+<p>การวิเคราะห์ทางสถิติของ ANOVA นั้นใช้ <span class="math inline">\(F\)</span>-test ซึ่งเป็นการเปรียบเทียบระหว่าง ความแปรปรวนที่อธิบายได้ และความแปรปรวนที่อธิบายไม่ได้</p>
 <p><span class="math display">\[F^{*} = \frac{\text{Explained variance}}{\text{Unexplained variance}} =  \frac{\text{Between group variance}}{\text{Within groups variance}}\]</span></p>
 <ul>
 <li><p>Between group variance คือ ความแปรปรวนของค่าเฉลี่ยแต่ละกลุ่มกับค่าเฉลี่ยทั้งหมด</p></li>
@@ -273,8 +274,8 @@ t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 <li><p>จุดสีดำ คือ ค่า <code>Petal.Width</code> ในดอกไม้แต่ละดอก</p></li>
 <li><p>จุดสีเขียว คือ global mean (grand mean) คือ ค่าเฉลี่ย <code>Petal.Width</code> เมื่อรวมดอกไม้ทุก <code>Species</code></p></li>
 </ul>
-<p>จุดประสงค์ของ F-test คือการเปรียบเทียบอัตราส่วนระหว่าง ความแปรปรวนของค่าเฉลี่ยแต่ละกลุ่มกับค่าเฉลี่ยทั้งหมด (mean ของความต่างจุดเขียวกับสามเหลี่ยม) ใกล้กันกับความแปรปรวนของข้อมูลในกลุ่มนั้น (mean ของความต่างระหว่างจุดดำกับกับสามเหลี่ยม) หรือไม่ (ratio ~ 1) ซึ่งค่า <span class="math inline">\(F\)</span> นั้นจะถูกนำไปคิด <code>p-value</code> จาก <code>F-distribution</code> (หลักการเดียวกันกับ t-test)</p>
-<p><strong>สังเกตว่า</strong> ท่านไม่สามารถบอกได้ว่ากลุ่มไหนเป็นกลุ่มที่มีค่าเฉลี่ยที่แตกต่างจากทั้งกลุ่ม การที่จะทราบนั้นต้องทำ <code>t.test</code> เปรียบเทียบกันในแต่ละกลุ่ม <span class="math inline">\(3\choose2\)</span> = 3 ครั้ง การค้นหากลุ่มที่มีความต่างหลัง ANOVA นี้ เรียกว่า post-hoc test</p>
+<p>จุดประสงค์ของ F-test คือการเปรียบเทียบอัตราส่วนระหว่าง ความแปรปรวนของค่าเฉลี่ยแต่ละกลุ่มกับค่าเฉลี่ยทั้งหมด (mean ของความต่างจุดเขียวกับสามเหลี่ยม) ใกล้กันกับความแปรปรวนของข้อมูลในกลุ่มนั้น (mean ของความต่างระหว่างจุดดำกับกับสามเหลี่ยม) หรือไม่ (ratio ~ 1) ซึ่งค่า <span class="math inline">\(F\)</span> นั้นจะถูกนำไปคิด <span class="math inline">\(p\)</span>-value จาก <span class="math inline">\(F\)</span>-distribution (หลักการเดียวกันกับ <span class="math inline">\(t\)</span>-test)</p>
+<p><strong>สังเกตว่า</strong> ท่านไม่สามารถบอกได้ว่ากลุ่มไหนเป็นกลุ่มที่มีค่าเฉลี่ยที่แตกต่างจากทั้งกลุ่ม การที่จะทราบนั้นต้องทำ <code>t.test</code> เปรียบเทียบกันในแต่ละกลุ่ม <span class="math inline">\(3\choose2\)</span> = 3 ครั้ง การค้นหากลุ่มที่มีความต่างหลัง ANOVA นี้ เรียกว่า Post-hoc test</p>
 <div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/pairwise.t.test.html">pairwise.t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -317,7 +318,7 @@ r_{xy} = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum^{n}_{i=1
 <li><p>ระดับของความสัมพันธ์ = 0-1 ยิ่งเข้าใกล้ 1 ยิ่งสัมพันธ์กันมาก</p></li>
 <li><p>ทิศทางของความสัมพันธ์ = + ไปทิศทางเดียวกัน - ไปทิศทางตรงข้ามกัน</p></li>
 </ul>
-<p>ท่านสามารถสร้างตาราง correlation และ p-value ได้ด้วย package <code>corrplot</code></p>
+<p>ท่านสามารถสร้างตาราง Correlation และ <span class="math inline">\(p\)</span>-value ได้ด้วย package <code>corrplot</code></p>
 <div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span>
 <span></span>
@@ -355,7 +356,7 @@ r_{xy} = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum^{n}_{i=1
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">iris_cor</span>, method <span class="op">=</span> <span class="st">"shade"</span>,type <span class="op">=</span> <span class="st">"upper"</span>,order <span class="op">=</span> <span class="st">"AOE"</span>, </span>
 <span>         p.mat <span class="op">=</span> <span class="va">iris_cor_p</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"p-value"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/corrplot-1.png" width="672"></div>
-<p><strong>ข้อควรระวัง</strong> <code>p-value</code> ของ correlation test นั้นอยู่ภายใต้สมมติฐาน (<span class="math inline">\(t\)</span>-test/<span class="math inline">\(F\)</span>-test)</p>
+<p><strong>ข้อควรระวัง</strong> <span class="math inline">\(p\)</span>-value ของ Correlation test นั้นอยู่ภายใต้สมมติฐาน (<span class="math inline">\(t\)</span>-test/<span class="math inline">\(F\)</span>-test)</p>
 <ul>
 <li><p><span class="math inline">\(H_{0}\)</span>: ไม่มีความสัมพันธ์เชิงเส้นของทั้งสองตัวแปร (<span class="math inline">\(r_{xy} = 0\)</span>)</p></li>
 <li><p><span class="math inline">\(H_{0}\)</span>: มีความสัมพันธ์เชิงเส้นของทั้งสองตัวแปร (<span class="math inline">\(r_{xy} \neq 0\)</span>)</p></li>
@@ -381,8 +382,8 @@ r_{xy} = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum^{n}_{i=1
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#parametric-test"><span class="header-section-number">9</span> Parametric test</a></li>
 <li>
-<a class="nav-link" href="#sec-t-test"><span class="header-section-number">9.1</span> t-test</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#one-t"><span class="header-section-number">9.1.1</span> One sample t-test</a></li>
+<a class="nav-link" href="#sec-t-test"><span class="header-section-number">9.1</span> \(t\)-test</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#one-t"><span class="header-section-number">9.1.1</span> One sample \(t\)-test</a></li>
 <li><a class="nav-link" href="#ind-t"><span class="header-section-number">9.1.2</span> Independent t-test</a></li>
 <li><a class="nav-link" href="#pair-t"><span class="header-section-number">9.1.3</span> Paired t-test</a></li>
 </ul>
@@ -407,7 +408,7 @@ r_{xy} = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum^{n}_{i=1
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

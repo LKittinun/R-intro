@@ -1,7 +1,3 @@
-<style type='text/css'>
-  .pagedtable table {
-  width: auto;
-  }
-</style>
- 
-
+.book .book-body .page-wrapper .page-inner {
+  max-width: 1200px !important;
+}

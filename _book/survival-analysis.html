@@ -19,9 +19,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="ในงานวิจัยที่กระทำกับผู้ป่วย หรือแม้กระทั้งเซลล์นั้น บางครั้งจะมีความจำเป็นที่ต้องทำการวิเคราะห์ข้อมูลเพื่อเปรียบเทียบสร้างแบบจำลองที่สามารถทำนายเวลาที่ใช้ก่อนที่จะเกิดเหตุการณ์ที่ท่านสนใจ (event)...">
-<meta property="og:description" content="ในงานวิจัยที่กระทำกับผู้ป่วย หรือแม้กระทั้งเซลล์นั้น บางครั้งจะมีความจำเป็นที่ต้องทำการวิเคราะห์ข้อมูลเพื่อเปรียบเทียบสร้างแบบจำลองที่สามารถทำนายเวลาที่ใช้ก่อนที่จะเกิดเหตุการณ์ที่ท่านสนใจ (event)...">
-<meta name="twitter:description" content="ในงานวิจัยที่กระทำกับผู้ป่วย หรือแม้กระทั้งเซลล์นั้น บางครั้งจะมีความจำเป็นที่ต้องทำการวิเคราะห์ข้อมูลเพื่อเปรียบเทียบสร้างแบบจำลองที่สามารถทำนายเวลาที่ใช้ก่อนที่จะเกิดเหตุการณ์ที่ท่านสนใจ (event)...">
+<meta name="description" content="ในงานวิจัยที่กระทำกับผู้ป่วย หรือแม้กระทั้งเซลล์นั้น บางครั้งจะมีความจำเป็นที่ต้องทำการวิเคราะห์ข้อมูลเพื่อเปรียบเทียบสร้างแบบจำลองที่สามารถทำนายเวลาที่ใช้ก่อนที่จะเกิดเหตุการณ์ที่ท่านสนใจ (Event)...">
+<meta property="og:description" content="ในงานวิจัยที่กระทำกับผู้ป่วย หรือแม้กระทั้งเซลล์นั้น บางครั้งจะมีความจำเป็นที่ต้องทำการวิเคราะห์ข้อมูลเพื่อเปรียบเทียบสร้างแบบจำลองที่สามารถทำนายเวลาที่ใช้ก่อนที่จะเกิดเหตุการณ์ที่ท่านสนใจ (Event)...">
+<meta name="twitter:description" content="ในงานวิจัยที่กระทำกับผู้ป่วย หรือแม้กระทั้งเซลล์นั้น บางครั้งจะมีความจำเป็นที่ต้องทำการวิเคราะห์ข้อมูลเพื่อเปรียบเทียบสร้างแบบจำลองที่สามารถทำนายเวลาที่ใช้ก่อนที่จะเกิดเหตุการณ์ที่ท่านสนใจ (Event)...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -59,14 +59,15 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="active" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -78,13 +79,13 @@
 <h1>
 <span class="header-section-number">12</span> <strong>Survival analysis</strong><a class="anchor" aria-label="anchor" href="#survival-analysis"><i class="fas fa-link"></i></a>
 </h1>
-<p>ในงานวิจัยที่กระทำกับผู้ป่วย หรือแม้กระทั้งเซลล์นั้น บางครั้งจะมีความจำเป็นที่ต้องทำการวิเคราะห์ข้อมูลเพื่อเปรียบเทียบสร้างแบบจำลองที่สามารถทำนายเวลาที่ใช้ก่อนที่จะเกิดเหตุการณ์ที่ท่านสนใจ (event) เช่น เวลาที่ผู้ป่วยจะเสียชีวิตจากโรคมะเร็งนับตั้งแต่วันวินิจฉัย เวลาของเซลล์ที่จะตายหลังจากใส่สารบางอย่างที่สนใจ เป็นต้น</p>
-<p>ลักษณะพิเศษของการวิเคราะห์ survival analysis คือ มีการวิเคราะห์โดยใช้ปัจจัยที่เรียกว่า censoring ร่วม ซึ่งคือการที่ เหตุการณ์ที่คาดหวังว่าจะเกิดนั้นไม่มาถึงแม้ว่าจะครบตามเวลาที่ผู้วิจัยสังเกตการณ์แล้ว ซึ่งทำให้ไม่สามารถมั่นใจได้ว่าเหตุการณ์นั้นจะเกิดต่อไปหรือไม่ ณ เวลาหลังจากนี้</p>
+<p>ในงานวิจัยที่กระทำกับผู้ป่วย หรือแม้กระทั้งเซลล์นั้น บางครั้งจะมีความจำเป็นที่ต้องทำการวิเคราะห์ข้อมูลเพื่อเปรียบเทียบสร้างแบบจำลองที่สามารถทำนายเวลาที่ใช้ก่อนที่จะเกิดเหตุการณ์ที่ท่านสนใจ (Event) เช่น เวลาที่ผู้ป่วยจะเสียชีวิตจากโรคมะเร็งนับตั้งแต่วันวินิจฉัย เวลาของเซลล์ที่จะตายหลังจากใส่สารบางอย่างที่สนใจ เป็นต้น</p>
+<p>ลักษณะพิเศษของการวิเคราะห์ Survival analysis คือ มีการวิเคราะห์โดยใช้ปัจจัยที่เรียกว่า Censoring ร่วม ซึ่งคือการที่ เหตุการณ์ที่คาดหวังว่าจะเกิดนั้นไม่มาถึงแม้ว่าจะครบตามเวลาที่ผู้วิจัยสังเกตการณ์แล้ว ซึ่งทำให้ไม่สามารถมั่นใจได้ว่าเหตุการณ์นั้นจะเกิดต่อไปหรือไม่ ณ เวลาหลังจากนี้</p>
 <div class="inline-figure"><img src="Picture/censor.jpg" width="90%"></div>
-<p>การ censor โดยหลักมี 3 แบบ คือ</p>
+<p>การ Censor โดยหลักมี 3 แบบ คือ</p>
 <ul>
 <li><p>Right-censor (ดังรูป) คือ ไม่แน่ใจข้อมูลการเกิด event เวลาสุดท้ายที่พบ ซึ่งพบมมากที่สุด</p></li>
-<li><p>Left-censor คือ ไม่แน่ใจข้อมูลช่วงเวลาเริ่มต้น เช่น diagnosis วันไหน</p></li>
+<li><p>Left-censor คือ ไม่แน่ใจข้อมูลช่วงเวลาเริ่มต้น เช่น Diagnosis วันไหน</p></li>
 <li><p>Interval-censor คือ เวลาช่วงใดช่วงหนึ่งหายไป</p></li>
 </ul>
 <div id="kaplein-meier-estimate" class="section level2" number="12.1">
@@ -96,7 +97,7 @@
 <p><span class="math display">\[
 \text{Survival proability} = \frac{n.risk - n.event}{n.risk}
 \]</span></p>
-<p>อธิบายหลักการอย่างง่ายของ KM นั่นคือ ทุกเคสทียังไม่เกิดเหตุการณ์นั้น จะเป็น “เคสที่เสี่ยงต่อการเกิดเหตุการณ์ (at risk)” ซึ่งจำนวนเคสแรกเริ่มที่เสี่ยง (number at risk) จะเท่ากับจำนวนเคสทั้งหมด (sample size) โดยจะนับการเกิด event ตามปกติ เพียงแต่ถ้าเคสนั้นถูก censor นั้น <code>n.risk</code> จะลดลงด้วย ทำให้อัตราการเกิด event ยังไม่เปลี่ยนแปลง ดังตัวอย่างตามตาราง</p>
+<p>อธิบายหลักการอย่างง่ายของ KM นั่นคือ ทุกเคสทียังไม่เกิดเหตุการณ์นั้น จะเป็น <strong>เคสที่เสี่ยงต่อการเกิดเหตุการณ์ (At risk)</strong> ซึ่งจำนวนเคสแรกเริ่มที่เสี่ยง (Number at risk) จะเท่ากับจำนวนเคสทั้งหมด (Sample size) โดยจะนับการเกิด Event ตามปกติ เพียงแต่ถ้าเคสนั้นถูก Censor นั้น <code>n.risk</code> จะลดลงด้วย ทำให้อัตราการเกิด Event ยังไม่เปลี่ยนแปลง ดังตัวอย่างตามตาราง</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th align="right">time</th>
@@ -175,7 +176,7 @@
 </table></div>
 <p>เมื่อนำไปพล็อตกราฟแล้วจะได้ผลดังนี้</p>
 <div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
-<p>สังเกตุว่าส่วนที่ censor (มีสัญลักษณ์ <code>+</code>) จะไม่มีการตกลงของกราฟ แต่เมื่อถึงเวลาที่มี event เกิดขึ้น การตกลงของกราฟจะสูงกว่าเมื่อไม่มี censor นำมาก่อน</p>
+<p>สังเกตุว่าส่วนที่ Censor (มีสัญลักษณ์ <code>+</code>) จะไม่มีการตกลงของกราฟ แต่เมื่อถึงเวลาที่มี Event เกิดขึ้น การตกลงของกราฟจะสูงกว่าเมื่อไม่มี Censor นำมาก่อน</p>
 <div id="การสราง-km-ใน-r" class="section level3" number="12.1.1">
 <h3>
 <span class="header-section-number">12.1.1</span> การสร้าง KM ใน R<a class="anchor" aria-label="anchor" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%A3%E0%B8%B2%E0%B8%87-km-%E0%B9%83%E0%B8%99-r"><i class="fas fa-link"></i></a>
@@ -195,7 +196,7 @@
 <li><p><code>rx</code> = กลุ่มการรักษา</p></li>
 <li><p><code>ecog.ps</code> = ECOG performance status คะแนนน้อยแปลว่าผู้ป่วยมีสุขภาพโดยรวมดี</p></li>
 </ul>
-<p>เมื่อใช้ function <code><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv()</a></code> จะทำการเปลี่ยน <code>futime</code> ให้รับรู้การ censor สังเกตว่าผู้ป่วยที่ ไม่เกิดเหตุการณ์จะมีสัญลักษณ์ <code>+</code> อยู่ข้างหลัง บ่งบอกว่าข้อมูลนั้นถูก censor นั่นหมายความว่า ผู้ป่วยจะเกิดเหตุการณ์หรือไม่ก็ได้หลังจากนี้ เพียงแต่ผู้วิจัยไม่สามารถทราบได้แล้ว</p>
+<p>เมื่อใช้ Function <code><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv()</a></code> จะทำการเปลี่ยน <code>futime</code> ให้รับรู้การ Censor สังเกตว่าผู้ป่วยที่ ไม่เกิดเหตุการณ์จะมีสัญลักษณ์ <code>+</code> อยู่ข้างหลัง บ่งบอกว่าข้อมูลนั้นถูก censor นั่นหมายความว่า ผู้ป่วยจะเกิดเหตุการณ์หรือไม่ก็ได้หลังจากนี้ เพียงแต่ผู้วิจัยไม่สามารถทราบได้แล้ว</p>
 <div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">censored_df</span> <span class="op">&lt;-</span> <span class="va">ovarian</span> <span class="op">|&gt;</span>    </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>censored_futime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">ovarian</span><span class="op">$</span><span class="va">futime</span>, <span class="va">ovarian</span><span class="op">$</span><span class="va">fustat</span><span class="op">)</span><span class="op">)</span> </span>
@@ -206,7 +207,7 @@
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["futime"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["fustat"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["censored_futime"],"name":[3],"type":["Surv[,2]"],"align":["right"]}],"data":[{"1":"59","2":"1","3":"59","_rn_":"1"},{"1":"115","2":"1","3":"115","_rn_":"2"},{"1":"156","2":"1","3":"156","_rn_":"3"},{"1":"421","2":"0","3":"421+","_rn_":"4"},{"1":"431","2":"1","3":"431","_rn_":"5"},{"1":"448","2":"0","3":"448+","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>การพล็อต KM นั้นสามารถทำได้โดยใช้ package <code>survminer</code> โดยเริ่มจากการสร้างตาราง survival curve จากคำสั่ง <code><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit()</a></code></p>
+<p>การพล็อต KM นั้นสามารถทำได้โดยใช้ Package <code>survminer</code> โดยเริ่มจากการสร้างตาราง Survival curve จากคำสั่ง <code><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit()</a></code></p>
 <div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/survminer/index.html">survminer</a></span><span class="op">)</span></span>
 <span></span>
@@ -225,7 +226,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggsurvplot.html">ggsurvplot</a></span><span class="op">(</span><span class="va">ovarian_surv</span>, risk.table <span class="op">=</span> <span class="cn">TRUE</span>, break.time.by <span class="op">=</span> <span class="fl">0.25</span>, </span>
 <span>           surv.median.line <span class="op">=</span> <span class="st">"hv"</span><span class="op">)</span> </span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/ovarian_survplot-1.png" width="672"></div>
-<p>จะเห็นว่าผู้ป่วยกลุ่มนี้มี median survival อยู่ประมาณ 1.75 ปี</p>
+<p>จะเห็นว่าผู้ป่วยกลุ่มนี้มี Median survival อยู่ประมาณ 1.75 ปี</p>
 <div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_surv_resid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span><span class="op">/</span><span class="fl">365.25</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="va">resid.ds</span>, data <span class="op">=</span> <span class="va">ovarian</span></span>
@@ -241,7 +242,7 @@
 <h2>
 <span class="header-section-number">12.2</span> Log-rank test<a class="anchor" aria-label="anchor" href="#log-rank-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>Log-rank test คือ non-parametric test สำหรับ univariate analysis ที่เปรียบเทียบความแตกต่างของอัตราการเกิด event ว่าแตกต่างอย่างมีนัยสำคัญหรือไม่</p>
+<p>Log-rank test คือ non-parametric test สำหรับ Univariate analysis ที่เปรียบเทียบความแตกต่างของอัตราการเกิด Event ว่าแตกต่างอย่างมีนัยสำคัญหรือไม่</p>
 <div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_surv_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survdiff.html">survdiff</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span><span class="op">/</span><span class="fl">365.25</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="va">resid.ds</span>, data <span class="op">=</span> <span class="va">ovarian</span></span>
@@ -263,21 +264,21 @@
 <li><p><code>Chisq</code> = ผลสุดท้ายของ Chi-square statistics = <code>sum(O-E)^2/E</code></p></li>
 <li><p><code>p</code> = p-value ของ Chi-square statistics</p></li>
 </ul>
-<p>ค่า log-rank นี้ สามารถแสดงใน KM ได้โดยใช้ <code>pval</code> = <code>TRUE</code> ตามหัวข้อเบื้องต้น</p>
+<p>ค่า Log-rank นี้ สามารถแสดงใน KM ได้โดยใช้ <code>pval</code> = <code>TRUE</code> ตามหัวข้อเบื้องต้น</p>
 </div>
 <div id="cox-proportional-hazard-model" class="section level2" number="12.3">
 <h2>
 <span class="header-section-number">12.3</span> Cox-proportional hazard model<a class="anchor" aria-label="anchor" href="#cox-proportional-hazard-model"><i class="fas fa-link"></i></a>
 </h2>
-<p>Cox-proportional hazard model (CPH) เป็น semi-parametric model ซึ่งวัด risk ของการเกิด event นั้นๆ โดยมี function คือ</p>
+<p>Cox-proportional hazard model (CPH) เป็น Semi-parametric model ซึ่งวัด Risk ของการเกิด Event นั้นๆ โดยมีสมการ คือ</p>
 <p><span class="math display">\[
 h(t) = h_{0}(t) \times exp(b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p})
 \]</span></p>
 <p><span class="math display">\[
 ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 \]</span></p>
-<p>ซึ่ง <span class="math inline">\(h(t)/h_{0}(t)\)</span> นั้นคือ hazard ratio (HR) หรือ ความเสี่ยงของการเกิด event นั้นๆ</p>
-<p>การวิเคราะห์ CPH นั้นมีข้อดีกว่า log-rank คือสามารถประมาณการเชิงปริมาณ (quantitative measurement) ผ่าน HR และสามารถวิเคราะห์สมการแบบ multivariate analysis ได้</p>
+<p>ซึ่ง <span class="math inline">\(h(t)/h_{0}(t)\)</span> นั้นคือ Hazard ratio (HR) หรือ ความเสี่ยงของการเกิด event นั้นๆ</p>
+<p>การวิเคราะห์ CPH นั้นมีข้อดีกว่า Log-rank คือสามารถประมาณการเชิงปริมาณ (Quantitative measurement) ผ่าน HR และสามารถวิเคราะห์สมการแบบ Multivariate analysis ได้</p>
 <div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_cox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span><span class="op">/</span><span class="fl">365.25</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> </span>
 <span>                       <span class="va">resid.ds</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">rx</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">ovarian</span><span class="op">)</span> </span>
@@ -301,38 +302,35 @@ ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 </ul>
 <div id="การตรวจสอบ-assumption-validity-ของ-cph" class="section level3" number="12.3.1">
 <h3>
-<span class="header-section-number">12.3.1</span> การตรวจสอบ assumption validity ของ CPH<a class="anchor" aria-label="anchor" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%AD%E0%B8%9A-assumption-validity-%E0%B8%82%E0%B8%AD%E0%B8%87-cph"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3.1</span> การตรวจสอบ Assumption validity ของ CPH<a class="anchor" aria-label="anchor" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%AD%E0%B8%9A-assumption-validity-%E0%B8%82%E0%B8%AD%E0%B8%87-cph"><i class="fas fa-link"></i></a>
 </h3>
-<p>CPH นั้นมี assumption ดังนี้:</p>
+<p>CPH นั้นมี Assumption ดังนี้:</p>
 <ul>
-<li><p>ตัวแปรแต่ละกลุ่มมีอัตราการเกิด event ที่แตกต่างกัน</p></li>
+<li><p>ตัวแปรแต่ละกลุ่มมีอัตราการเกิด Event ที่แตกต่างกัน</p></li>
 <li><p>HR เท่ากันทุกช่วงเวลา เช่น ที่ 1, 2, 5 ปี อัตราส่วนการเสียชีวิตระหว่างตัวแปรเท่ากันหมด</p></li>
-<li><p>ตัวแปรมีความสัมพันธ์แบบ linear continuous variable</p></li>
-<li><p>ไม่จำเป็นต้องทราบลักษณะการกระจายตัวของข้อมูลก่อน (จึงเป็น semi-parametric model)</p></li>
+<li><p>ตัวแปรมีความสัมพันธ์แบบ Linear continuous variable</p></li>
+<li><p>ไม่จำเป็นต้องทราบลักษณะการกระจายตัวของข้อมูลก่อน (จึงเป็น Semi-parametric model)</p></li>
 </ul>
-<p>สามารถตรวจสอบ HR ได้โดยใช้ proportionality assumption test จาก Schoenfeld residuals โดย <code><a href="https://rdrr.io/pkg/survival/man/cox.zph.html">cox.zph()</a></code></p>
+<p>สามารถตรวจสอบ HR ได้โดยใช้ Proportionality assumption test จาก Schoenfeld residuals โดย <code><a href="https://rdrr.io/pkg/survival/man/cox.zph.html">cox.zph()</a></code></p>
 <div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_coxzph</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html">cox.zph</a></span><span class="op">(</span><span class="va">ovarian_cox</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggcoxzph.html">ggcoxzph</a></span><span class="op">(</span><span class="va">ovarian_coxzph</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/cox_proportion-1.png" width="672"></div>
-<p>โดย test นี้จะทำการเปรียบเทียบ residuals ระหว่าง risk-weight average กับ ตัวแปรนั้นๆ ว่ามีการเปลี่ยนแปลงไปในทิศทางใดทิศทางหนึ่งหรือไม่ ถ้ามี (p &lt; 0.05) หมายความว่า เวลาที่ผ่านไปอาจจะส่งผลให้ HR นั้นมีความแตกต่างกัน ซึ่งจะต้องทำ time-varying CPH เพิ่มเติม</p>
-<p>โดยในข้อมูล <code>ovarian</code> นี้ ไม่มีตัวใดที่ p-value &lt; 0.05 จึงถือได้ว่า อัตราส่วนนั้นคงที่ และทำให้ CPH นั้น valid</p>
-<p>ในส่วนของ linearity สามารถตวจสอบโดยใช้ function <code><a href="https://rdrr.io/pkg/survminer/man/ggcoxfunctional.html">ggcoxfunctional()</a></code></p>
+<p>โดย test นี้จะทำการเปรียบเทียบ Residuals ระหว่าง Risk-weight average กับ ตัวแปรนั้นๆ ว่ามีการเปลี่ยนแปลงไปในทิศทางใดทิศทางหนึ่งหรือไม่ ถ้ามี (<span class="math inline">\(p\)</span> &lt; 0.05) หมายความว่า เวลาที่ผ่านไปอาจจะส่งผลให้ HR นั้นมีความแตกต่างกัน ซึ่งจะต้องทำ Time-varying CPH เพิ่มเติม</p>
+<p>โดยในข้อมูล <code>ovarian</code> นี้ ไม่มีตัวใดที่ <span class="math inline">\(p\)</span>-value &lt; 0.05 จึงถือได้ว่า อัตราส่วนนั้นคงที่ และทำให้ CPH นั้น Valid</p>
+<p>ในส่วนของ Linearity สามารถตวจสอบโดยใช้ <code><a href="https://rdrr.io/pkg/survminer/man/ggcoxfunctional.html">ggcoxfunctional()</a></code></p>
 <div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_linear_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggcoxfunctional.html">ggcoxfunctional</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span><span class="op">/</span><span class="fl">365.25</span>, <span class="va">fustat</span><span class="op">)</span><span class="op">~</span>  <span class="va">age</span><span class="op">+</span>                                 <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">ovarian</span><span class="op">)</span> </span>
 <span><span class="va">ovarian_linear_age</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/cox_linearity-1.png" width="672"></div>
-<p>จะเห็นว่า age นั้นการเพิ่มขึ้นแบบ linearity โดยมี deviation เล็กน้อย</p>
+<p>จะเห็นว่า <code>age</code> นั้นการเพิ่มขึ้นแบบ Linearity โดยมี Deviation เล็กน้อย</p>
 
 </div>
 </div>
 </div>
-
-
-
   <div class="chapter-nav">
 <div class="prev"><a href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></div>
-<div class="next"><a href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></div>
+<div class="next"><a href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -342,7 +340,7 @@ ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 </li>
 <li><a class="nav-link" href="#log-rank-test"><span class="header-section-number">12.2</span> Log-rank test</a></li>
 <li>
-<a class="nav-link" href="#cox-proportional-hazard-model"><span class="header-section-number">12.3</span> Cox-proportional hazard model</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%AD%E0%B8%9A-assumption-validity-%E0%B8%82%E0%B8%AD%E0%B8%87-cph"><span class="header-section-number">12.3.1</span> การตรวจสอบ assumption validity ของ CPH</a></li></ul>
+<a class="nav-link" href="#cox-proportional-hazard-model"><span class="header-section-number">12.3</span> Cox-proportional hazard model</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%AD%E0%B8%9A-assumption-validity-%E0%B8%82%E0%B8%AD%E0%B8%87-cph"><span class="header-section-number">12.3.1</span> การตรวจสอบ Assumption validity ของ CPH</a></li></ul>
 </li>
 </ul>
 
@@ -360,7 +358,7 @@ ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

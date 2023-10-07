@@ -19,9 +19,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย ตัวแปรต้น (independent variable, \(x\)) คือ ตัวแปรที่เป็นต้นเหตุ ตัวแปรตาม (dependent variable, \(y\)) คือ...">
-<meta property="og:description" content="Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย ตัวแปรต้น (independent variable, \(x\)) คือ ตัวแปรที่เป็นต้นเหตุ ตัวแปรตาม (dependent variable, \(y\)) คือ...">
-<meta name="twitter:description" content="Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย ตัวแปรต้น (independent variable, \(x\)) คือ ตัวแปรที่เป็นต้นเหตุ ตัวแปรตาม (dependent variable, \(y\)) คือ...">
+<meta name="description" content="Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย ตัวแปรต้น (Independent variable, \(x\)) คือ ตัวแปรที่เป็นต้นเหตุ ตัวแปรตาม (Dependent variable, \(y\)) คือ...">
+<meta property="og:description" content="Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย ตัวแปรต้น (Independent variable, \(x\)) คือ ตัวแปรที่เป็นต้นเหตุ ตัวแปรตาม (Dependent variable, \(y\)) คือ...">
+<meta name="twitter:description" content="Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย ตัวแปรต้น (Independent variable, \(x\)) คือ ตัวแปรที่เป็นต้นเหตุ ตัวแปรตาม (Dependent variable, \(y\)) คือ...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -59,14 +59,15 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="active" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -80,8 +81,8 @@
 </h1>
 <p>Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย</p>
 <ul>
-<li><p>ตัวแปรต้น (independent variable, <span class="math inline">\(x\)</span>) คือ ตัวแปรที่เป็น<strong>ต้นเหตุ</strong></p></li>
-<li><p>ตัวแปรตาม (dependent variable, <span class="math inline">\(y\)</span>) คือ ตัวแปรที่เป็น<strong>ปลายเหตุ</strong> ซึ่งเป็นผลมาจากการเปลี่ยนแปลงของตัวแปรต้น</p></li>
+<li><p>ตัวแปรต้น (Independent variable, <span class="math inline">\(x\)</span>) คือ ตัวแปรที่เป็น<strong>ต้นเหตุ</strong></p></li>
+<li><p>ตัวแปรตาม (Dependent variable, <span class="math inline">\(y\)</span>) คือ ตัวแปรที่เป็น<strong>ปลายเหตุ</strong> ซึ่งเป็นผลมาจากการเปลี่ยนแปลงของตัวแปรต้น</p></li>
 </ul>
 <p>ความสัมพันธ์ของตัวแปรต้นและตัวแปรตามจะเขียนในรูปแบบ <span class="math inline">\(f(x) \sim x\)</span></p>
 <div id="linear-regression" class="section level2" number="11.1">
@@ -92,7 +93,7 @@
 <h3>
 <span class="header-section-number">11.1.1</span> Model summary<a class="anchor" aria-label="anchor" href="#model-summary"><i class="fas fa-link"></i></a>
 </h3>
-<p>คือ การสร้างความสัมพันธ์ของตัวแปรแบบเชิงเส้น ใช้กับข้อมูลแบบต่อเนื่อง (continuous data)</p>
+<p>คือ การสร้างความสัมพันธ์ของตัวแปรแบบเชิงเส้น ใช้กับข้อมูลแบบต่อเนื่อง (Continuous data)</p>
 <p><span class="math display">\[
 h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \theta_{n}x_{n} + \epsilon
 \]</span></p>
@@ -169,15 +170,15 @@ h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \the
 <p><span class="math display">\[F =\frac{MSR}{MSE} = \frac{TSS-SSE}{SSE}/\frac{DF_{TSS}-DF_{SSE}}{DF_{SSE}}\]</span></p>
 <p><span class="math inline">\(t\)</span>-test คือการเปรียบเทียบเส้น regression เมื่อมีตัวแปรนั้น ว่าอธิบายได้ดีกว่าเมื่อไม่มีตัวแปรนั้นหรือไม่</p>
 <ul>
-<li><p><span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\theta_{1} = 0\)</span></p></li>
-<li><p><span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\theta_{1} \neq 0\)</span></p></li>
+<li><p><span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\theta = 0\)</span></p></li>
+<li><p><span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\theta \neq 0\)</span></p></li>
 </ul>
 <p>จะเห็นว่าสมการนั้นเหมือน <a href="parametric-test.html#one-t">One-sample t-test</a> แต่เขียนในรูปแบบ regression</p>
 <p><span class="math display">\[
-t = \frac{\theta_{1}-\theta_{0}}{SE(\theta)}
+t = \frac{\theta_{H_{a}}-\theta_{H_0}}{SE(\theta)} = \frac{\theta-0}{SE(\theta)}
 \]</span></p>
 <p><span class="math display">\[
-SE(\theta) = \sqrt{\frac{1}{n-2} \times {\sum_{i=1}^{n}\frac{(y_{i} - \hat{y_{i}})^2}{(x_{i} - \hat{x_{i}})^2}}}
+SE(\theta) = \sqrt{\frac{1}{n-2} \times {\sum_{i=1}^{n}\frac{(y_{i} - \hat{y_{i}})^2}{(x_{i} - \bar{x})^2}}}
 \]</span></p>
 </div>
 <div id="prediction" class="section level3" number="11.1.2">
@@ -266,7 +267,7 @@ h(x) = \frac{1}{1+e^{\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + 
 <h2>
 <span class="header-section-number">11.3</span> Poisson, quassipoisson, and negative binomial regression<a class="anchor" aria-label="anchor" href="#poisson-family"><i class="fas fa-link"></i></a>
 </h2>
-<p>Poission regression คือ สมการถดถอยที่ใช้ในการทำนายความถี่ หรือค่าเฉลี่ยของการเกิดเหตุการณ์นั้นๆ มักใช้กับข้อมูลที่ไม่ต่อเนื่อง (discrete value) พิจารณาข้อมูลแบบ <a href="distribution.html#poisson-dist">Poisson distribution</a></p>
+<p>Poisson regression คือ สมการถดถอยที่ใช้ในการทำนายความถี่ หรือค่าเฉลี่ยของการเกิดเหตุการณ์นั้นๆ มักใช้กับข้อมูลที่ไม่ต่อเนื่อง (Discrete value) พิจารณาข้อมูลแบบ <a href="distribution.html#poisson-dist">Poisson distribution</a></p>
 <p><span class="math display">\[
 f(k) = P(X = k) = \frac{\lambda^{k}}{k!}e^{-\lambda}
 \]</span></p>
@@ -282,7 +283,7 @@ f(k) = P(X = k) = \frac{\lambda^{k}}{k!}e^{-\lambda}
 ln(\lambda) = \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n}
 \]</span></p>
 <ul>
-<li>สำหรับ <span class="math inline">\(k\)</span> เราจำเป็นต้องเปลี่ยน <span class="math inline">\(\lambda\)</span> ให้อยู่ในรูป <span class="math inline">\(k/t\)</span> และย้ายไปเป็นตัวแปรควบคุมเวลา (offset) ซึ่งจะมี regression coefficient = 1 เสมอ</li>
+<li>สำหรับ <span class="math inline">\(k\)</span> เราจำเป็นต้องเปลี่ยน <span class="math inline">\(\lambda\)</span> ให้อยู่ในรูป <span class="math inline">\(k/t\)</span> และย้ายไปเป็นตัวแปรควบคุมเวลา (Offset) ซึ่งจะมี Regression coefficient = 1 เสมอ</li>
 </ul>
 <p><span class="math display">\[ \lambda = \frac{k}{t} = e^{\theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n}} \]</span></p>
 <p><span class="math display">\[ ln(k) - \ln(t) = \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} \]</span></p>
@@ -327,7 +328,7 @@ ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t)
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/poisson-1.png" width="672"></div>
-<p>สังเกตว่ายิ่งอายุเยอะ อัตราการตายยิ่งน้อยลงอย่างมีนัยสำคัญ ซึ่งไม่น่าจะเป็นไปได้ ทั้งนี้ เพราะยังไม่ได้ปรับระยะเวลาติดตาม โดยการใส่ offset เป็น <code>person-month</code> เข้าไปคำนวณด้วย</p>
+<p>สังเกตว่ายิ่งอายุเยอะ อัตราการตายยิ่งน้อยลงอย่างมีนัยสำคัญ ซึ่งไม่น่าจะเป็นไปได้ ทั้งนี้ เพราะยังไม่ได้ปรับระยะเวลาติดตาม โดยการใส่ Offset เป็น <code>person-month</code> เข้าไปคำนวณด้วย</p>
 <div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pois_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">dead</span> <span class="op">~</span>  <span class="va">age_group</span> <span class="op">+</span> <span class="va">histo_major</span> <span class="op">+</span> <span class="va">stage</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">person_month</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                family <span class="op">=</span> <span class="st">"poisson"</span>, data <span class="op">=</span> <span class="va">cervix_mort</span><span class="op">)</span></span>
@@ -375,7 +376,7 @@ ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t)
 <li>ต้องเป็นจำนวนนับ</li>
 <li>การกระจายตัวของข้อมูล = Dispersion parameter (<span class="math inline">\(\phi\)</span>) = Variance/Mean = 1</li>
 </ul>
-<p>เมื่อตรวจสอบจากผลลัพธ์ของสมการถอดถอย โดยพิจารณาจาก <span class="math inline">\(\text{residuals/deviance}\)</span> แล้วพบว่า <span class="math inline">\(\phi &gt; 1\)</span> ซึ่งหมายความว่าข้อมูลตั้งต้นนั้นมีการกระจายตัวของข้อมูลสูงเกินไป (over-dispersed) จึงไม่เป็นไปตามสมมติฐานของ Poisson ณ จุดนี้จึงจำเป็นต้องใช้ ส่วนขยายสมการของ Poisson regression เรียกว่า Quasipoisson regression ซึ่งจะทำการปรับความแปรปรวน ตามการเพิ่มขึ้นของความแปรปรวนต่อค่าเฉลี่ย</p>
+<p>เมื่อตรวจสอบจากผลลัพธ์ของสมการถอดถอย โดยพิจารณาจาก <span class="math inline">\(\text{Residuals/Deviance}\)</span> แล้วพบว่า <span class="math inline">\(\phi &gt; 1\)</span> ซึ่งหมายความว่าข้อมูลตั้งต้นนั้นมีการกระจายตัวของข้อมูลสูงเกินไป (Overdispersed) จึงไม่เป็นไปตามสมมติฐานของ Poisson ณ จุดนี้จึงจำเป็นต้องใช้ ส่วนขยายสมการของ Poisson regression เรียกว่า Quasipoisson regression ซึ่งจะทำการปรับความแปรปรวน ตามการเพิ่มขึ้นของความแปรปรวนต่อค่าเฉลี่ย</p>
 <p><span class="math display">\[
 V = \phi\mu_{i}
 \]</span> <span class="math display">\[
@@ -408,7 +409,7 @@ V = \phi\mu_{i}
 ## AIC: NA
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
-<p>จะเห็นว่าหลังจากปรับ dispersion parameter แล้ว <code>age_group</code> ไม่ได้ส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญแต่อย่างใด ปัญหาของ Quasipoisson คือ อาจจะไม่มี parameter ที่ต้องการ เช่น <code>AIC</code> เป็นต้น ซึ่งสามารถใช้อีกหนึ่งสมการถดถอยที่นิยมใช้คือ Negative binomial regression จาก package <code>MASS</code> ซึ่งปรับตามอัตราส่วนความแปรปรวนเช่นกัน</p>
+<p>จะเห็นว่าหลังจากปรับ Dispersion parameter แล้ว <code>age_group</code> ไม่ได้ส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญแต่อย่างใด ปัญหาของ Quasipoisson คือ อาจจะไม่มี parameter ที่ต้องการ เช่น <code>AIC</code> เป็นต้น ซึ่งสามารถใช้อีกหนึ่งสมการถดถอยที่นิยมใช้คือ Negative binomial regression จาก package <code>MASS</code> ซึ่งปรับตามอัตราส่วนความแปรปรวนเช่นกัน</p>
 <p><span class="math display">\[
 V = u_{i}(1+\frac{u_{i}}{\phi})
 \]</span></p>
@@ -446,7 +447,7 @@ V = u_{i}(1+\frac{u_{i}}{\phi})
 ##           Std. Err.:  0.339 
 ## 
 ##  2 x log-likelihood:  -584.937</code></pre>
-<p>ผลลัพธ์ที่ได้จะใกล้เคียงกันกับสมการถดถอย Quasipoisson ทั้งสองสมการนี้จะนิยมใช้ในการตั้งสมการถดถอยในจำนวนนับจากงานทดลอง high-troughput เช่น RNA-sequencing เนื่องจากข้อมูลประเภทนี้มักมีเป็นข้อมูลจำนวนนับที่มีการกระจายตัวสูงมาก (<span class="math inline">\(\phi &gt; 1\)</span>)</p>
+<p>ผลลัพธ์ที่ได้จะใกล้เคียงกันกับสมการถดถอย Quasipoisson ทั้งสองสมการนี้จะนิยมใช้ในการตั้งสมการถดถอยในจำนวนนับจากงานทดลอง High-troughput เช่น RNA-sequencing เนื่องจากข้อมูลประเภทนี้มักมีเป็นข้อมูลจำนวนนับที่มีการกระจายตัวสูงมาก (<span class="math inline">\(\phi &gt; 1\)</span>)</p>
 
 </div>
 </div>
@@ -481,7 +482,7 @@ V = u_{i}(1+\frac{u_{i}}{\phi})
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

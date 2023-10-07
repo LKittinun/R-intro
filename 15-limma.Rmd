@@ -83,7 +83,7 @@ $$
 
 ## Example
 
-ต่อจากนี้จะยกตัวอย่างการคำนวณ DGE ระหว่างกลุ่มโดยใช้ `limma` ต่อจาก [GSE63514](#GSE6354) ซึ่งครั้งนี้จะเทียบทุกกลุ่ม และเทียบทุกยีน
+ต่อจากนี้จะยกตัวอย่างการคำนวณ DGE ระหว่างกลุ่มโดยใช้ limma ต่อจาก [GSE63514](#GSE6354) ซึ่งครั้งนี้จะเทียบทุกกลุ่ม และเทียบทุกยีน
 
 ก่อนอื่นจะต้องสร้างสมการเชิงเส้นของกลุ่มแต่ละกลุ่มขึ้นมาก่อน
 
@@ -116,32 +116,32 @@ GSE63514_fixed <- GSE63514 |>
                     column_to_rownames("prob")
 ```
 
-ต่อจากนั้นจะ fit model ด้วย `lmFit` และเทียบแต่ละกลุ่มด้วย `contrasts.fit`
+ต่อจากนั้นจะ fit model ด้วย `lmFit()` และเทียบแต่ละกลุ่มด้วย `contrasts.fit()`
 
 ```{r fit_lm}
 cx_fit <- lmFit(GSE63514_fixed, design = cx_mod)
 cx_fit_contrasts <- contrasts.fit(cx_fit, contrasts.matrix)
 ```
 
-สุดท้ายเราจะทำการคำนวณ Moderated t-test โดยใช้ `eBayes`
+สุดท้ายเราจะทำการคำนวณ Moderated t-test โดยใช้ `eBayes()`
 
 ```{r eBayes}
 cx_fit_contrasts_eB <- eBayes(cx_fit_contrasts)
 ```
 
-สุดท้ายคือการแสดงผล DGE จากการคำนวณทั้งหมดโดยใช้ `topTable`ซึ่งจะแสดง Moderated $F$-test ([ANOVA](#ANOVA)) และ $p$-value, Adjusted $p$-value
+สุดท้ายคือการแสดงผล DGE จากการคำนวณทั้งหมดโดยใช้ `topTable()` ซึ่งจะแสดง Moderated $F$-test ([ANOVA](#ANOVA)) และ $p$-value, Adjusted $p$-value
 
 ```{r f_test}
 topTable(cx_fit_contrasts_eB, n = 100) # First 100 genes
 ```
 
-และสามารถเรียกดู $t$-testแต่ละกลุ่มได้โดยการระบุ `coef`
+และสามารถเรียกดู $t$-test แต่ละกลุ่มได้โดยการระบุ `coef`
 
 ```{r one_fc}
 topTable(cx_fit_contrasts_eB, coef = 1, n = 100) # เรียงตาม contrasts.matrix
 ```
 
-โดย `logFC` log2 fold-change ของ gene expression แต่ละตัว
+โดย `logFC` คือ Log2 fold-change ของ Gene expression แต่ละตัว
 
 ```{r all_fc}
 map(1:length(colnames(contrasts.matrix)), 
@@ -149,7 +149,7 @@ map(1:length(colnames(contrasts.matrix)),
   set_names(colnames(contrasts.matrix))
 ```
 
-ท่านสามารถสรุปข้อมูล DGE ได้โดยใช้ `decideTests`
+ท่านสามารถสรุปข้อมูล DGE ได้โดยใช้ `decideTests()`
 
 ```{r decideTests}
 results <- decideTests(cx_fit_contrasts_eB, fc=log2(1.5)) 
@@ -161,7 +161,7 @@ vennDiagram(results[,1:5]) # max 5 groups
 
 ## Mean-variance relationship
 
-ในบางข้อมูลนั้นมีความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวน ซึ่งสามารถตรวจสอบได้โดยใช้ `plotSA`
+ในบางข้อมูลนั้นมีความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวน ซึ่งสามารถตรวจสอบได้โดยใช้ `plotSA()`
 
 ```{r SA_eB}
 plotSA(cx_fit_contrasts_eB) 
@@ -171,7 +171,7 @@ plotSA(cx_fit_contrasts_eB)
 
 ```{r eBayes_trend}
 cx_fit_contrasts_eB_trend <- eBayes(cx_fit_contrasts, trend = TRUE)
-results_trend <- decideTests(cx_fit_contrasts_eB, fc=log2(1.5)) 
+results_trend <- decideTests(cx_fit_contrasts_eB, fc = log2(1.5)) 
 summary(results_trend)
 ```
 

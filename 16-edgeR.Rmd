@@ -122,7 +122,7 @@ as.data.frame(bladder_mat)
 
 ### Make a design matrix
 
-ก่อนอื่นเราต้องสร้าง Condition matrix ซึ่งประกอบด้วย แต่ละ Sample ที่ต้องการศึกษา และ Condition ของตัวอย่างนั้น ซึ่งในที่นี้เราจะแบ่งเป็นสองกลุ่ม ก็คือ Normal และ Tumor
+ก่อนอื่นเราต้องสร้าง Condition matrix ซึ่งประกอบด้วย แต่ละ Sample ที่ต้องการศึกษา และ Condition ของตัวอย่างนั้น ซึ่งในที่นี้เราจะแบ่งเป็นสองกลุ่ม ก็คือ `Normal` และ `Tumor`
 
 ```{r design_matrix}
 design <- data.frame(
@@ -165,13 +165,13 @@ fit <- glmQLFit(bladder_dge, model)
 plotQLDisp(fit)
 ```
 
-ตอนนี้จะเห็นว่า BCV ของข้อมูลนั้นถูกบีบมาให้อยู่ใน Trend line จาก Empirical Bayes (**Note**: edgeR เรียก function นี้จาก package `limma`)
+ตอนนี้จะเห็นว่า BCV ของข้อมูลนั้นถูกบีบมาให้อยู่ใน Trend line จาก Empirical Bayes (**Note**: edgeR เรียก Function นี้จาก package `limma`)
 
-สุดท้าย เราจะใช้ `glmQLFTest` เพื่อวิเคราะห์ $p$-value จาก $F$-test (สามารถใช้ Likelihood-ratio test ได้ด้วย `glmLRT`) และเรียก `topTags` เพื่อทำการดึงตารางผลของ DGE ออกมา
+สุดท้าย เราจะใช้ `glmQLFTest()` เพื่อวิเคราะห์ $p$-value จาก $F$-test (สามารถใช้ Likelihood-ratio test ได้ด้วย `glmLRT()`) และเรียก `topTags()` เพื่อทำการดึงตารางผลของ DGE ออกมา
 
 ```{r result}
 genediff <- glmQLFTest(fit, contrast=c(-1,1))
 topTags(genediff, n = 100) |> as.data.frame() # First 100 genes
 ```
 
-ซึงการแปลผลท้ายสุดจะคล้ายการแปลผลของ `limma`
+ซึงการแปลผลท้ายสุดจะคล้ายการแปลผลของ limma

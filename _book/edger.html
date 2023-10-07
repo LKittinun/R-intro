@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>15 edgeR | A gentle introduction to R for biologists</title>
+<title>16 edgeR | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
-<meta property="og:title" content="15 edgeR | A gentle introduction to R for biologists">
+<meta property="og:title" content="16 edgeR | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="15 edgeR | A gentle introduction to R for biologists">
+<meta name="twitter:title" content="16 edgeR | A gentle introduction to R for biologists">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -19,9 +19,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="15.1 Principle edgeR (Empirical Analysis with Gene Expression in R) เป็น bioconductor package ที่นิยมใช้ในการศึกษา DGE ในการทดลอง RNA-seq ซึ่งตั้งอยู่บนสมมติฐานที่แตกต่างจาก limma เนื่องจากข้อมูล...">
-<meta property="og:description" content="15.1 Principle edgeR (Empirical Analysis with Gene Expression in R) เป็น bioconductor package ที่นิยมใช้ในการศึกษา DGE ในการทดลอง RNA-seq ซึ่งตั้งอยู่บนสมมติฐานที่แตกต่างจาก limma เนื่องจากข้อมูล...">
-<meta name="twitter:description" content="15.1 Principle edgeR (Empirical Analysis with Gene Expression in R) เป็น bioconductor package ที่นิยมใช้ในการศึกษา DGE ในการทดลอง RNA-seq ซึ่งตั้งอยู่บนสมมติฐานที่แตกต่างจาก limma เนื่องจากข้อมูล...">
+<meta name="description" content="16.1 Principle edgeR (Empirical Analysis with Gene Expression in R) เป็น bioconductor package ที่นิยมใช้ในการศึกษา DGE ในการทดลอง RNA-seq ซึ่งตั้งอยู่บนสมมติฐานที่แตกต่างจาก limma เนื่องจากข้อมูล...">
+<meta property="og:description" content="16.1 Principle edgeR (Empirical Analysis with Gene Expression in R) เป็น bioconductor package ที่นิยมใช้ในการศึกษา DGE ในการทดลอง RNA-seq ซึ่งตั้งอยู่บนสมมติฐานที่แตกต่างจาก limma เนื่องจากข้อมูล...">
+<meta name="twitter:description" content="16.1 Principle edgeR (Empirical Analysis with Gene Expression in R) เป็น bioconductor package ที่นิยมใช้ในการศึกษา DGE ในการทดลอง RNA-seq ซึ่งตั้งอยู่บนสมมติฐานที่แตกต่างจาก limma เนื่องจากข้อมูล...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -59,14 +59,15 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="active" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="active" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -74,13 +75,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="edger" class="section level1" number="15">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="edger" class="section level1" number="16">
 <h1>
-<span class="header-section-number">15</span> edgeR<a class="anchor" aria-label="anchor" href="#edger"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16</span> edgeR<a class="anchor" aria-label="anchor" href="#edger"><i class="fas fa-link"></i></a>
 </h1>
-<div id="principle-2" class="section level2" number="15.1">
+<div id="principle-3" class="section level2" number="16.1">
 <h2>
-<span class="header-section-number">15.1</span> Principle<a class="anchor" aria-label="anchor" href="#principle-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1</span> Principle<a class="anchor" aria-label="anchor" href="#principle-3"><i class="fas fa-link"></i></a>
 </h2>
 <p><a href="https://bioconductor.org/packages/release/bioc/html/edgeR.html">edgeR</a> (Empirical Analysis with Gene Expression in R) เป็น <code>bioconductor package</code> ที่นิยมใช้ในการศึกษา DGE ในการทดลอง RNA-seq ซึ่งตั้งอยู่บนสมมติฐานที่แตกต่างจาก limma เนื่องจากข้อมูล RNA-seq นั้นมีคุณสมบัติที่แตกต่างจากข้อมูลประเภท Microarray ดังนี้</p>
 <ul>
@@ -89,13 +90,13 @@
 </ul>
 <p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="50%"><img src="_main_files/figure-html/unnamed-chunk-6-2.png" width="50%"></p>
 <p><strong>กราฟซ้าย</strong> คือความสัมพันธ์ของค่าเฉลี่ยและความแปรปรวนของการกระจายตัวแบบ Poisson โดยทั่วไป ส่วน<strong>กราฟขวา</strong> เป็นการกระจายตัวของข้อมูล RNA-seq จะเห็นว่าเมื่อค่าเฉลี่ยเพิ่มมากขึ้นนั้น ความแปรปรวนจะเพิ่มในอัตราส่วนที่มากกว่า ทั้งนี้ เนื่องจาก มีปัจจัยของความแปรปรวนที่ไม่ใช่ความแปรปรวนของ Technical variability จากกระบวนการ RNA sequencing (ซึ่งเป็น การกระจายตัวแบบ Poisson) เพียงอย่างเดียว แต่มีความแปรปรวนของ Biological properties ในตัวอย่างมาเกี่ยวข้องด้วย</p>
-<div id="negative-binomial-model" class="section level3" number="15.1.1">
+<div id="negative-binomial-model" class="section level3" number="16.1.1">
 <h3>
-<span class="header-section-number">15.1.1</span> Negative binomial model<a class="anchor" aria-label="anchor" href="#negative-binomial-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1.1</span> Negative binomial model<a class="anchor" aria-label="anchor" href="#negative-binomial-model"><i class="fas fa-link"></i></a>
 </h3>
-<div id="handling-biological-variation" class="section level4" number="15.1.1.1">
+<div id="handling-biological-variation" class="section level4" number="16.1.1.1">
 <h4>
-<span class="header-section-number">15.1.1.1</span> Handling biological variation<a class="anchor" aria-label="anchor" href="#handling-biological-variation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1.1.1</span> Handling biological variation<a class="anchor" aria-label="anchor" href="#handling-biological-variation"><i class="fas fa-link"></i></a>
 </h4>
 <p>จากข้อมูลขั้นต้น สมมติฐานของ edgeR คือ RNA-seq มี Technical variation ซึ่งมีการกระจายตัวแบบ Poisson โดยในสถาณการณ์ไม่มี Biological variation ณ ตัวอย่าง <span class="math inline">\(i\)</span> และ ยีน <span class="math inline">\(g\)</span> จะมี จำนวนยีน <span class="math inline">\(y_{gi}\)</span> เท่ากับผลคูณจำนวนยีนทั้งหมดในตัวอย่างนั้น (Total library size; <span class="math inline">\(N_{i}\)</span>) กับ อัตราส่วนของยีนนั้นๆ ต่อยีนทั้งหมดในตัวอย่าง (<span class="math inline">\(\pi_{gi}\)</span>) ทั้งหมด <span class="math inline">\(G\)</span> ยีน ซึ่ง <span class="math inline">\(\sum_{g=1}^{G}{\pi_{gi}} = 1\)</span> จะได้ว่า</p>
 <p><span class="math display">\[
@@ -114,9 +115,9 @@ CV^{2} = 1/\mu_{gi} + \phi
 \]</span></p>
 <p>สมมติฐานของ edgeR นั้นตั้งอยู่บนพื้นฐานที่ว่า Technical CV นั้นจะลดลงเมื่อจำนวน Sequencing depth นั้นเพิ่มมากขึ้น (<span class="math inline">\(1/\mu_{gi}\)</span>) แต่ Biological CV นั้นจะยังคงอยู่ไม่ว่า Sequencing depth จะเพิ่มมากขึ้นเท่าไร ดังนั้นสิ่งสำคัญที่เป็นตัวแปรก่อกวนการวัด DGE (ซึ่ง Systemic variability) คือ Biological CV (<span class="math inline">\(\sqrt{\phi}\)</span>) นั่นเอง</p>
 </div>
-<div id="estimation-of-phi-and-dge" class="section level4" number="15.1.1.2">
+<div id="estimation-of-phi-and-dge" class="section level4" number="16.1.1.2">
 <h4>
-<span class="header-section-number">15.1.1.2</span> Estimation of <span class="math inline">\(\phi\)</span> and DGE<a class="anchor" aria-label="anchor" href="#estimation-of-phi-and-dge"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1.1.2</span> Estimation of <span class="math inline">\(\phi\)</span> and DGE<a class="anchor" aria-label="anchor" href="#estimation-of-phi-and-dge"><i class="fas fa-link"></i></a>
 </h4>
 <p>edgeR ทำการสร้างสมการถดถอย <a href="regression-model.html#poisson-family">Negative binomial</a> จากการประเมินค่า <span class="math inline">\(\phi\)</span> โดยวิธีที่เรียกว่า Quantile-adjusted maximum likelihood (qCML) ซึ่งใช้จำนวน Read ทั้งหมดในแต่ละยีนมาสร้างเป็นตาราง Pseudo-count</p>
 <p><span class="math display">\[
@@ -126,9 +127,9 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 <p>หลังจากนั้น edgeR จะคำนวณ DGE โดยการใช้ Exact test ซึ่งเป็นการรวมโอกาสทั้งหมดที่จะสุ่มได้ Condition ที่ต้องการ ซึ่งวิธีคล้าย <a href="non-parametric-test.html#fisher">Fisher’s exact test</a> ที่มีการคำนึงถึง Effective library size และใช้ Negative binomial distribution แทน Hypergeometric distribution ซึ่งเป็นวิธี Classical method ของ edgeR อย่างไรก็ตาม วิธีนี้มีข้อจำกัดคือสามารถเปรียบเทียบ DGE ได้ระหว่างสองสภาวะเท่านั้น และไม่สามารถจำลองความแปรปรวนอื่นๆ นอกเหนือจากความแปรปรวนของยีนได้</p>
 </div>
 </div>
-<div id="negative-binomial-extension" class="section level3" number="15.1.2">
+<div id="negative-binomial-extension" class="section level3" number="16.1.2">
 <h3>
-<span class="header-section-number">15.1.2</span> Negative binomial extension<a class="anchor" aria-label="anchor" href="#negative-binomial-extension"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1.2</span> Negative binomial extension<a class="anchor" aria-label="anchor" href="#negative-binomial-extension"><i class="fas fa-link"></i></a>
 </h3>
 <p>นอกจาก global BCV dispersion แล้ว edgeR ยังสามารถคำนวณ BCV ของแต่ละยีนได้โดยใช้ Quasi-likelihood ของสมการถดถอย Negative binomial</p>
 <p><span class="math display">\[
@@ -137,9 +138,9 @@ var(y_{gi}) = \sigma^{2}_{g}(\mu_{gi} + \phi\mu_{gi}^{2})
 <p>ซึ่งหมายความว่า ทุกๆ ความแปรปรวนของ <span class="math inline">\(var(y_{gi})\)</span> ที่เพิ่มขึ้นจะถูกทำนายด้วยค่า <span class="math inline">\(\phi\)</span> (Negative binomial parameter; Global BCV) และ <span class="math inline">\(\sigma^{2}\)</span> (Quasi-likelihood parameter; Gene-specific BCV) ซึ่งปัญหาของสมการนี้คือจำนวณ Replicate ที่ไม่มากพอในแต่ละยีน edgeR แก้จึงปัญหานี้โดยประยุกต์เทคนิกของ limma มาใช้ ซึ่งก็คือ Empirical Bayes ซึ่งยืมความแปรปรวนมาจากทุกยีนนั่นเอง</p>
 <div class="inline-figure"><img src="_main_files/figure-html/eBayes_dispersion-1.png" width="672"></div>
 </div>
-<div id="log-linear-model" class="section level3" number="15.1.3">
+<div id="log-linear-model" class="section level3" number="16.1.3">
 <h3>
-<span class="header-section-number">15.1.3</span> Log-linear model<a class="anchor" aria-label="anchor" href="#log-linear-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1.3</span> Log-linear model<a class="anchor" aria-label="anchor" href="#log-linear-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>สำหรับข้อมูลที่มีตัวแปรมากกว่าแค่การแสดงออกของยีน หรือมีมากกว่า 2 กลุ่มขึ้นไป จะไม่สามารถประเมิน <span class="math inline">\(\phi\)</span> โดยใช้วิธี qCML ได้ edgeR จึงทำการประเมิน <span class="math inline">\(\mu_{gi}\)</span> ด้วยสมการถดถอยเชิงเส้น ซึ่งทำให้สามารถประเมิน <span class="math inline">\(\mu_{gi}\)</span> ร่วมกับตัวแปรอื่นๆ ได้</p>
 <p><span class="math display">\[
@@ -152,17 +153,17 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 <hr>
 </div>
 </div>
-<div id="example-1" class="section level2" number="15.2">
+<div id="example-1" class="section level2" number="16.2">
 <h2>
-<span class="header-section-number">15.2</span> Example<a class="anchor" aria-label="anchor" href="#example-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2</span> Example<a class="anchor" aria-label="anchor" href="#example-1"><i class="fas fa-link"></i></a>
 </h2>
-<div id="workflow" class="section level3" number="15.2.1">
+<div id="workflow" class="section level3" number="16.2.1">
 <h3>
-<span class="header-section-number">15.2.1</span> Workflow<a class="anchor" aria-label="anchor" href="#workflow"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2.1</span> Workflow<a class="anchor" aria-label="anchor" href="#workflow"><i class="fas fa-link"></i></a>
 </h3>
 <div class="inline-figure"><img src="Picture/edgeR_workflow.png" width="781"></div>
 <p>ในตัวอย่างนี้จะใช้ Bladder gene expression ระหว่าง Tumor และ Control และใช้สมการ Generalized log-linear model</p>
-<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">bladder_mat</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -170,12 +171,12 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
   </script>
 </div>
 </div>
-<div id="make-a-design-matrix" class="section level3" number="15.2.2">
+<div id="make-a-design-matrix" class="section level3" number="16.2.2">
 <h3>
-<span class="header-section-number">15.2.2</span> Make a design matrix<a class="anchor" aria-label="anchor" href="#make-a-design-matrix"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2.2</span> Make a design matrix<a class="anchor" aria-label="anchor" href="#make-a-design-matrix"><i class="fas fa-link"></i></a>
 </h3>
-<p>ก่อนอื่นเราต้องสร้าง Condition matrix ซึ่งประกอบด้วย แต่ละ Sample ที่ต้องการศึกษา และ Condition ของตัวอย่างนั้น ซึ่งในที่นี้เราจะแบ่งเป็นสองกลุ่ม ก็คือ Normal และ Tumor</p>
-<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<p>ก่อนอื่นเราต้องสร้าง Condition matrix ซึ่งประกอบด้วย แต่ละ Sample ที่ต้องการศึกษา และ Condition ของตัวอย่างนั้น ซึ่งในที่นี้เราจะแบ่งเป็นสองกลุ่ม ก็คือ <code>Normal</code> และ <code>Tumor</code></p>
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">design</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  ID <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">bladder_mat</span><span class="op">)</span>,</span>
 <span>  condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">".{1}$"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">bladder_mat</span><span class="op">)</span><span class="op">)</span> <span class="co"># Remove number</span></span>
@@ -188,12 +189,12 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
   </script>
 </div>
 <p>หลังจากนั้นจะต้องกรองเอายีนที่แสดงออกน้อยออกไป เนื่องจาก Technical variation ของ RNA-seq นั้นมีการกระจายตัวแบบ Poisson นั่นหมายความว่า ยีนที่มีการแสดงออกต่ำนั้นย่อมมี CV ที่สูง อีกทั้ง ยีนที่มีการแสดงออกต่ำนั้นมีโอกาสที่จะถูก Translate ไปเป็นโปรตีนน้อย จึงถือว่าเป็นข้อมูลที่ไม่ค่อยเป็นประโยชน์และเพิ่ม <span class="math inline">\(\alpha\)</span> error โดยใช่เหตุ จึงสมควรที่จะตัดออกไป โดยค่า Default ของ edgeR นั้นอยู่ที่ 10 counts/sample (จาก Count-per million)</p>
-<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bladder_dge</span> <span class="op">&lt;-</span> <span class="fu">DGEList</span><span class="op">(</span><span class="va">bladder_mat</span>, group <span class="op">=</span> <span class="va">design</span><span class="op">$</span><span class="va">condition</span><span class="op">)</span> </span>
 <span><span class="va">keep</span> <span class="op">&lt;-</span> <span class="fu">filterByExpr</span><span class="op">(</span><span class="va">bladder_dge</span>, min.count <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">bladder_dge</span> <span class="op">&lt;-</span> <span class="va">bladder_dge</span><span class="op">[</span><span class="va">keep</span>,<span class="op">]</span></span></code></pre></div>
 <p>ต่อมา เราจะต้องทำการ Normalize ค่าการแสดงออกของ RNA เนื่องจากการ run RNA seq ในแต่ละ Sample นั้น สภาวะของเครื่องอาจจะมีความแตกต่างกัน ส่งผลให้ค่า Total read count ในแต่ละ Sample มีไม่เท่ากัน โดย edgeR จะใช้วิธี Normalize ที่เรียกว่า Trimmed mean of M-values (TMM) ซึ่งใช้ค่าเฉลี่ยถ่วงน้ำหนักของการแสดงออกยีนในตัวอย่างนั้นๆ หลังจากตัด Outlier ทั้งสูงและต่ำออก (30% ของค่า Log และ 5% ของค่า Absolute)</p>
-<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bladder_dge</span> <span class="op">&lt;-</span> <span class="fu">calcNormFactors</span><span class="op">(</span><span class="va">bladder_dge</span><span class="op">)</span></span>
 <span><span class="va">bladder_dge</span><span class="op">$</span><span class="va">samples</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -202,7 +203,7 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
   </script>
 </div>
 <p>หลังจากนั้นจะทำการคำนวณ <span class="math inline">\(\phi\)</span> ถ้ามี edgeR จะใช้วิธี qCML ถ้าไม่มี Design matrix และใช้วิธี cPAL ถ้ามี Design matrix</p>
-<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fl">0</span><span class="op">+</span><span class="va">condition</span>, data <span class="op">=</span> <span class="va">design</span><span class="op">)</span></span>
 <span><span class="va">model</span></span></code></pre></div>
 <pre><code>##   conditionN conditionT
@@ -217,18 +218,18 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 ## attr(,"contrasts")
 ## attr(,"contrasts")$condition
 ## [1] "contr.treatment"</code></pre>
-<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bladder_dge</span> <span class="op">&lt;-</span> <span class="fu">estimateDisp</span><span class="op">(</span><span class="va">bladder_dge</span>, design <span class="op">=</span> <span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu">plotBCV</span><span class="op">(</span><span class="va">bladder_dge</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/calculate_dispersion-1.png" width="672"></div>
 <p>ต่อไปจะทำการ ทดสอบ DGE ด้วยสมการถดถอย ql-nbglm</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">glmQLFit</span><span class="op">(</span><span class="va">bladder_dge</span>, <span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu">plotQLDisp</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/squeezvar-1.png" width="672"></div>
-<p>ตอนนี้จะเห็นว่า BCV ของข้อมูลนั้นถูกบีบมาให้อยู่ใน Trend line จาก Empirical Bayes (<strong>Note</strong>: edgeR เรียก function นี้จาก package <code>limma</code>)</p>
-<p>สุดท้าย เราจะใช้ <code>glmQLFTest</code> เพื่อวิเคราะห์ <span class="math inline">\(p\)</span>-value จาก <span class="math inline">\(F\)</span>-test (สามารถใช้ Likelihood-ratio test ได้ด้วย <code>glmLRT</code>) และเรียก <code>topTags</code> เพื่อทำการดึงตารางผลของ DGE ออกมา</p>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<p>ตอนนี้จะเห็นว่า BCV ของข้อมูลนั้นถูกบีบมาให้อยู่ใน Trend line จาก Empirical Bayes (<strong>Note</strong>: edgeR เรียก Function นี้จาก package <code>limma</code>)</p>
+<p>สุดท้าย เราจะใช้ <code>glmQLFTest()</code> เพื่อวิเคราะห์ <span class="math inline">\(p\)</span>-value จาก <span class="math inline">\(F\)</span>-test (สามารถใช้ Likelihood-ratio test ได้ด้วย <code>glmLRT()</code>) และเรียก <code>topTags()</code> เพื่อทำการดึงตารางผลของ DGE ออกมา</p>
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">genediff</span> <span class="op">&lt;-</span> <span class="fu">glmQLFTest</span><span class="op">(</span><span class="va">fit</span>, contrast<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">topTags</span><span class="op">(</span><span class="va">genediff</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># First 100 genes</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -236,7 +237,7 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["logFC"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["logCPM"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["F"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["PValue"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["FDR"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"11.688082","2":"4.2172436","3":"82.50994","4":"3.993605e-06","5":"0.01082967","_rn_":"PTK6"},{"1":"10.282658","2":"4.0507042","3":"75.97708","4":"5.768763e-06","5":"0.01082967","_rn_":"TMEM160"},{"1":"-12.685476","2":"3.4871816","3":"109.62117","4":"6.406799e-06","5":"0.01082967","_rn_":"MIR1281"},{"1":"-7.584467","2":"3.5090704","3":"69.47997","4":"8.562730e-06","5":"0.01082967","_rn_":"PSTPIP1"},{"1":"-8.442682","2":"3.4847987","3":"66.95062","4":"1.007549e-05","5":"0.01082967","_rn_":"CH507-528H12.6"},{"1":"-10.911023","2":"2.7528163","3":"66.39667","4":"1.044850e-05","5":"0.01082967","_rn_":"CHIT1"},{"1":"-10.505394","2":"8.0593190","3":"64.58739","4":"1.178804e-05","5":"0.01082967","_rn_":"ENSG00000264063"},{"1":"12.912954","2":"3.7467912","3":"92.90014","4":"1.183089e-05","5":"0.01082967","_rn_":"KLHDC3"},{"1":"12.952476","2":"3.7857242","3":"92.07806","4":"1.222474e-05","5":"0.01082967","_rn_":"MOB4"},{"1":"-9.999015","2":"3.1442437","3":"63.78540","4":"1.244735e-05","5":"0.01082967","_rn_":"KCNA3"},{"1":"-9.200325","2":"3.2897103","3":"61.27938","4":"1.481321e-05","5":"0.01082967","_rn_":"RUNX3"},{"1":"7.416327","2":"3.9204282","3":"60.81603","4":"1.530796e-05","5":"0.01082967","_rn_":"RP11-69L16.5"},{"1":"-8.725462","2":"3.0629239","3":"60.53300","4":"1.561995e-05","5":"0.01082967","_rn_":"H2AC7"},{"1":"-11.699464","2":"5.6336707","3":"59.04937","4":"1.738614e-05","5":"0.01082967","_rn_":"CH507-528H12.3"},{"1":"-8.243435","2":"3.0934469","3":"58.93549","4":"1.753137e-05","5":"0.01082967","_rn_":"MATK"},{"1":"-10.704888","2":"1.6562798","3":"58.36427","4":"1.828229e-05","5":"0.01082967","_rn_":"CTD-2047H16.3"},{"1":"-10.552054","2":"3.7670004","3":"57.87144","4":"1.896139e-05","5":"0.01082967","_rn_":"H3C13"},{"1":"-7.610628","2":"4.9709031","3":"57.49228","4":"1.950457e-05","5":"0.01082967","_rn_":"H1-4"},{"1":"-10.915521","2":"4.4305182","3":"57.05772","4":"2.015028e-05","5":"0.01082967","_rn_":"SLA"},{"1":"-8.056582","2":"3.8532503","3":"56.72992","4":"2.065441e-05","5":"0.01082967","_rn_":"TRAF3IP3"},{"1":"-8.682097","2":"2.4023739","3":"55.52039","4":"2.265061e-05","5":"0.01082967","_rn_":"HMCN2"},{"1":"-10.342194","2":"3.5329852","3":"55.20744","4":"2.320435e-05","5":"0.01082967","_rn_":"TBX21"},{"1":"-6.286580","2":"3.8630383","3":"54.87926","4":"2.380262e-05","5":"0.01082967","_rn_":"CYBB"},{"1":"-7.131990","2":"2.2801887","3":"54.49790","4":"2.452127e-05","5":"0.01082967","_rn_":"ATP10A"},{"1":"9.392176","2":"2.9467110","3":"53.95172","4":"2.559650e-05","5":"0.01082967","_rn_":"SNRNP27"},{"1":"-9.041616","2":"2.4245605","3":"53.53420","4":"2.645682e-05","5":"0.01082967","_rn_":"RFLNA"},{"1":"-12.417362","2":"3.8794984","3":"53.42700","4":"2.668327e-05","5":"0.01082967","_rn_":"FCN1"},{"1":"-11.329288","2":"4.7600974","3":"53.13500","4":"2.731207e-05","5":"0.01082967","_rn_":"PIK3R5"},{"1":"-10.912810","2":"4.5291460","3":"53.02654","4":"2.755016e-05","5":"0.01082967","_rn_":"DOCK2"},{"1":"-11.407964","2":"2.1858685","3":"71.94008","4":"3.008244e-05","5":"0.01082967","_rn_":"TAF11L10"},{"1":"-11.017814","2":"5.8356425","3":"51.64805","4":"3.080462e-05","5":"0.01082967","_rn_":"CH507-513H4.7"},{"1":"9.001593","2":"7.2737191","3":"51.35162","4":"3.156368e-05","5":"0.01082967","_rn_":"NDUFA13"},{"1":"-10.517734","2":"3.1470406","3":"50.68141","4":"3.336440e-05","5":"0.01082967","_rn_":"HRH2"},{"1":"-9.733530","2":"3.8187015","3":"50.08294","4":"3.507765e-05","5":"0.01082967","_rn_":"CHST15"},{"1":"-6.635742","2":"2.6919498","3":"49.98530","4":"3.536708e-05","5":"0.01082967","_rn_":"ZBTB20"},{"1":"-9.150258","2":"4.3032661","3":"49.92505","4":"3.554712e-05","5":"0.01082967","_rn_":"ITGAM"},{"1":"-12.345849","2":"4.9075986","3":"49.84561","4":"3.578619e-05","5":"0.01082967","_rn_":"PDE4B"},{"1":"-12.365549","2":"3.1700059","3":"68.53168","4":"3.583253e-05","5":"0.01082967","_rn_":"REXO1L1P"},{"1":"-6.855930","2":"2.4976780","3":"49.58831","4":"3.657390e-05","5":"0.01082967","_rn_":"CTD-3014M21.1"},{"1":"12.247254","2":"3.0930960","3":"67.40462","4":"3.803231e-05","5":"0.01082967","_rn_":"GKN1"},{"1":"-12.259284","2":"3.0620269","3":"66.96510","4":"3.893587e-05","5":"0.01082967","_rn_":"DHRS9"},{"1":"-10.506738","2":"1.4882600","3":"48.85419","4":"3.893867e-05","5":"0.01082967","_rn_":"AHRR"},{"1":"-8.200792","2":"1.7764469","3":"48.84620","4":"3.896538e-05","5":"0.01082967","_rn_":"RHOH"},{"1":"-11.212244","2":"1.9902314","3":"66.81242","4":"3.925602e-05","5":"0.01082967","_rn_":"MARCKSL1P1"},{"1":"-10.268604","2":"2.9402881","3":"48.71462","4":"3.940882e-05","5":"0.01082967","_rn_":"DUX4L26"},{"1":"-7.328091","2":"3.5215986","3":"48.47606","4":"4.022829e-05","5":"0.01082967","_rn_":"NCKAP1L"},{"1":"-8.348923","2":"3.4902104","3":"48.44703","4":"4.032941e-05","5":"0.01082967","_rn_":"NR4A3"},{"1":"-11.258835","2":"2.0364696","3":"65.71665","4":"4.165319e-05","5":"0.01082967","_rn_":"YBX1P4"},{"1":"11.854068","2":"2.7095939","3":"64.35055","4":"4.490449e-05","5":"0.01082967","_rn_":"RPL37AP1"},{"1":"-9.573297","2":"1.8780034","3":"47.16618","4":"4.511107e-05","5":"0.01082967","_rn_":"DPEP1"},{"1":"-11.995444","2":"4.7256107","3":"47.09213","4":"4.540777e-05","5":"0.01082967","_rn_":"OSM"},{"1":"-6.631889","2":"4.0652268","3":"46.99597","4":"4.579658e-05","5":"0.01082967","_rn_":"ASAP1"},{"1":"-8.922331","2":"2.8397343","3":"46.95919","4":"4.594636e-05","5":"0.01082967","_rn_":"OSCAR"},{"1":"-9.613693","2":"2.3526468","3":"46.80412","4":"4.658435e-05","5":"0.01082967","_rn_":"PLPPR3"},{"1":"-6.779135","2":"3.5501229","3":"46.64940","4":"4.723154e-05","5":"0.01082967","_rn_":"CD69"},{"1":"5.663011","2":"3.5968606","3":"45.96051","4":"5.024770e-05","5":"0.01082967","_rn_":"RPL26P19"},{"1":"-8.172550","2":"2.7625434","3":"45.66919","4":"5.159253e-05","5":"0.01082967","_rn_":"CD7"},{"1":"-6.637758","2":"3.6039689","3":"45.64134","4":"5.172335e-05","5":"0.01082967","_rn_":"MPEG1"},{"1":"9.003324","2":"4.4921062","3":"45.57784","4":"5.202313e-05","5":"0.01082967","_rn_":"CRIP2"},{"1":"-7.772625","2":"2.4240348","3":"45.43927","4":"5.268457e-05","5":"0.01082967","_rn_":"SHOC1"},{"1":"-6.401877","2":"2.7342976","3":"45.08284","4":"5.443291e-05","5":"0.01082967","_rn_":"MYH7B"},{"1":"-15.566744","2":"6.6935788","3":"44.96341","4":"5.503429e-05","5":"0.01082967","_rn_":"AQP9"},{"1":"-7.812632","2":"2.7545722","3":"44.79422","4":"5.589991e-05","5":"0.01082967","_rn_":"TSPAN32"},{"1":"-6.783909","2":"4.1217993","3":"44.74909","4":"5.613358e-05","5":"0.01082967","_rn_":"TMEM131L"},{"1":"-7.205485","2":"2.2830979","3":"44.33711","4":"5.832184e-05","5":"0.01082967","_rn_":"CTD-2021A8.2"},{"1":"-10.085245","2":"0.9170221","3":"44.11132","4":"5.956461e-05","5":"0.01082967","_rn_":"NKAIN1"},{"1":"-10.308355","2":"2.1542654","3":"43.98316","4":"6.028420e-05","5":"0.01082967","_rn_":"BTNL8"},{"1":"-11.430697","2":"2.2318610","3":"59.02199","4":"6.107733e-05","5":"0.01082967","_rn_":"MYT1L"},{"1":"-14.335062","2":"5.1354319","3":"58.51427","4":"6.297484e-05","5":"0.01082967","_rn_":"IKZF1"},{"1":"8.973626","2":"5.4880101","3":"43.49968","4":"6.309453e-05","5":"0.01082967","_rn_":"MIR675"},{"1":"-10.737916","2":"2.5191674","3":"43.47427","4":"6.324657e-05","5":"0.01082967","_rn_":"ELAPOR1"},{"1":"-11.925040","2":"4.0497376","3":"43.34979","4":"6.399762e-05","5":"0.01082967","_rn_":"RASGRP4"},{"1":"-9.681394","2":"2.2243430","3":"43.30594","4":"6.426476e-05","5":"0.01082967","_rn_":"ADGRG5"},{"1":"-11.024163","2":"1.8092917","3":"58.17448","4":"6.428614e-05","5":"0.01082967","_rn_":"CFAP65"},{"1":"-13.564398","2":"4.3621162","3":"58.09500","4":"6.459776e-05","5":"0.01082967","_rn_":"MIR212"},{"1":"-11.479608","2":"2.2317561","3":"58.04610","4":"6.479044e-05","5":"0.01082967","_rn_":"PDX1"},{"1":"-9.892031","2":"1.7697989","3":"43.20431","4":"6.488899e-05","5":"0.01082967","_rn_":"RELN"},{"1":"-7.526571","2":"3.8102510","3":"43.13596","4":"6.531294e-05","5":"0.01082967","_rn_":"ZEB2"},{"1":"-9.663112","2":"0.5886376","3":"43.12134","4":"6.540409e-05","5":"0.01082967","_rn_":"CTD-2013N17.1"},{"1":"-11.031218","2":"3.4055111","3":"42.99378","4":"6.620555e-05","5":"0.01082967","_rn_":"ZBP1"},{"1":"5.600426","2":"4.2835007","3":"42.93314","4":"6.659075e-05","5":"0.01082967","_rn_":"AB019441.29"},{"1":"-6.215534","2":"4.1478098","3":"42.90810","4":"6.675057e-05","5":"0.01082967","_rn_":"CD48"},{"1":"-8.731016","2":"5.3646980","3":"42.87982","4":"6.693163e-05","5":"0.01082967","_rn_":"ARHGAP9"},{"1":"-7.558399","2":"2.2641115","3":"42.86390","4":"6.703378e-05","5":"0.01082967","_rn_":"TNXB"},{"1":"-8.270120","2":"5.8682227","3":"42.85481","4":"6.709225e-05","5":"0.01082967","_rn_":"FOSB"},{"1":"-11.458458","2":"2.2572264","3":"57.45334","4":"6.718430e-05","5":"0.01082967","_rn_":"GBX1"},{"1":"-12.370004","2":"5.9090785","3":"42.75888","4":"6.771262e-05","5":"0.01082967","_rn_":"TAGAP"},{"1":"-8.201858","2":"3.6716225","3":"42.53547","4":"6.918436e-05","5":"0.01082967","_rn_":"PIK3AP1"},{"1":"-10.493878","2":"1.8358403","3":"42.43014","4":"6.989157e-05","5":"0.01082967","_rn_":"RP11-588L15.1"},{"1":"-12.041135","2":"4.3525391","3":"42.40675","4":"7.004980e-05","5":"0.01082967","_rn_":"LILRA6"},{"1":"-10.026895","2":"4.1445870","3":"42.16868","4":"7.168496e-05","5":"0.01082967","_rn_":"NFAM1"},{"1":"-7.227196","2":"3.2945279","3":"42.10934","4":"7.209970e-05","5":"0.01082967","_rn_":"NHSL2"},{"1":"-9.268953","2":"2.2166596","3":"42.09260","4":"7.221719e-05","5":"0.01082967","_rn_":"SAMD3"},{"1":"-10.312193","2":"3.7444552","3":"41.94065","4":"7.329436e-05","5":"0.01082967","_rn_":"RGS18"},{"1":"-11.974059","2":"2.7638955","3":"55.95919","4":"7.372897e-05","5":"0.01082967","_rn_":"C5orf58"},{"1":"-8.906681","2":"2.3973026","3":"41.84374","4":"7.399149e-05","5":"0.01082967","_rn_":"MLC1"},{"1":"-8.197608","2":"3.9847760","3":"41.81364","4":"7.420965e-05","5":"0.01082967","_rn_":"MYO1G"},{"1":"-10.062317","2":"6.9201492","3":"41.67131","4":"7.525167e-05","5":"0.01082967","_rn_":"PTPRC"},{"1":"-9.307911","2":"0.9666693","3":"41.61294","4":"7.568407e-05","5":"0.01082967","_rn_":"SHISA7"},{"1":"-9.533420","2":"0.6961271","3":"41.50800","4":"7.646904e-05","5":"0.01082967","_rn_":"FER1L5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>ซึงการแปลผลท้ายสุดจะคล้ายการแปลผลของ <code>limma</code></p>
+<p>ซึงการแปลผลท้ายสุดจะคล้ายการแปลผลของ limma</p>
 
 </div>
 </div>
@@ -245,23 +246,23 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="limma.html"><span class="header-section-number">14</span> Limma</a></div>
-<div class="next"><a href="distribution.html"><span class="header-section-number">16</span> Distribution</a></div>
+<div class="prev"><a href="limma.html"><span class="header-section-number">15</span> Limma</a></div>
+<div class="next"><a href="distribution.html"><span class="header-section-number">17</span> Distribution</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#edger"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="nav-link" href="#edger"><span class="header-section-number">16</span> edgeR</a></li>
 <li>
-<a class="nav-link" href="#principle-2"><span class="header-section-number">15.1</span> Principle</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#negative-binomial-model"><span class="header-section-number">15.1.1</span> Negative binomial model</a></li>
-<li><a class="nav-link" href="#negative-binomial-extension"><span class="header-section-number">15.1.2</span> Negative binomial extension</a></li>
-<li><a class="nav-link" href="#log-linear-model"><span class="header-section-number">15.1.3</span> Log-linear model</a></li>
+<a class="nav-link" href="#principle-3"><span class="header-section-number">16.1</span> Principle</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#negative-binomial-model"><span class="header-section-number">16.1.1</span> Negative binomial model</a></li>
+<li><a class="nav-link" href="#negative-binomial-extension"><span class="header-section-number">16.1.2</span> Negative binomial extension</a></li>
+<li><a class="nav-link" href="#log-linear-model"><span class="header-section-number">16.1.3</span> Log-linear model</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#example-1"><span class="header-section-number">15.2</span> Example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#workflow"><span class="header-section-number">15.2.1</span> Workflow</a></li>
-<li><a class="nav-link" href="#make-a-design-matrix"><span class="header-section-number">15.2.2</span> Make a design matrix</a></li>
+<a class="nav-link" href="#example-1"><span class="header-section-number">16.2</span> Example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#workflow"><span class="header-section-number">16.2.1</span> Workflow</a></li>
+<li><a class="nav-link" href="#make-a-design-matrix"><span class="header-section-number">16.2.2</span> Make a design matrix</a></li>
 </ul>
 </li>
 </ul>
@@ -280,7 +281,7 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

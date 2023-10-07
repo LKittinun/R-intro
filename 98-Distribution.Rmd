@@ -30,7 +30,7 @@ ggplot(norm_dist, aes(x = x, y = Norm.distribution, col = Param)) +
   labs(title = "Normal distribution", x = "Values", y = "Rate")
 ```
 
-$Z$ distribution = standard normal distribution ของประชากร ที่มี $\mu = 0$, $\sigma = 1$
+$Z$-distribution = Standard normal distribution ของประชากร ที่มี $\mu = 0$, $\sigma = 1$
 
 สามารถสร้าง $Z$ score ได้จาก
 
@@ -60,17 +60,13 @@ ggplot(z_dist) +
 
 ------------------------------------------------------------------------
 
-## $t$ distribution {#t-dist}
+## $t$-distribution {#t-dist}
 
-คือ การกระจายตัวของ**ความต่างของค่าเฉลี่ยระหว่างกลุ่มตัวอย่าง**ที่สุ่มจากประชากร ใช้ใน [t-test](#sec-t-test)
+คือ การกระจายตัวของ**อัตราส่วนของความต่างของค่าเฉลี่ยระหว่างกลุ่มตัวอย่างกับความผิดพลาดของการวัด**ที่สุ่มจากประชากร ใช้ใน [t-test](#sec-t-test)
 
 $$
 f(t) = \frac{\Gamma(\frac{v+1}{2})}{\sqrt{v\pi}\Gamma(\frac{v}{2})}(1+\frac{t^{2}}{v})^{-\frac{v+1}{2}}
 $$
-
-plot(x, dt(x, df = 10, ncp = 0), from = -4, to = +4, type = "l")
-
-for(ncp in 1:6){
 
 ```{r t_distribution, warning = FALSE, out.width= "70%", fig.align="center"}
 t_dist <- data.frame(x = x, 
@@ -86,13 +82,13 @@ ggplot(t_dist, aes(x = x, y = T.distribution, col = Param)) +
   labs(title = "t-distribution", x = "Values", y = "Rate")
 ```
 
-สามารถสร้าง $t$-score ($t$ -value ) ได้จาก
+สามารถสร้าง $t$-score ($t$ -value) ได้จาก
 
 $$
-t = \frac{\bar{x}-\mu}{s/\sqrt{n}}
+t = \frac{\bar{x}-\mu}{SE} = \frac{\bar{x}-\mu}{s/\sqrt{n}}
 $$
 
-หมายเหตุ $t$-score บางครั้งเป็นคำศัพท์เฉพาะทาง
+**Note**: $t$-score บางครั้งเป็นคำศัพท์เฉพาะทาง
 
 -   Education assessment $\mu = 50$, $\sigma = 10$
 
@@ -227,6 +223,6 @@ ggplot(pois_dist, aes(x = numb_event, y = value, col = Mean)) +
        x = "Number of events", y = "Rate", col = "Average number of events")
 ```
 
-การกระจายตัวแบบ Poisson เป็นการกระจายตัวแบบพื้นฐานในการนับจำนวน gene ที่เกิดขึ้นจาก RNA sequencing profile
+การกระจายตัวแบบ Poisson เป็นการกระจายตัวแบบพื้นฐานในการนับจำนวนต่างๆ รวมถึงจำนวนยีนที่เกิดขึ้นจาก RNA sequencing profile
 
 ------------------------------------------------------------------------

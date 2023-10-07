@@ -2,9 +2,9 @@
 
 Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย
 
--   ตัวแปรต้น (independent variable, $x$) คือ ตัวแปรที่เป็น**ต้นเหตุ**
+-   ตัวแปรต้น (Independent variable, $x$) คือ ตัวแปรที่เป็น**ต้นเหตุ**
 
--   ตัวแปรตาม (dependent variable, $y$) คือ ตัวแปรที่เป็น**ปลายเหตุ** ซึ่งเป็นผลมาจากการเปลี่ยนแปลงของตัวแปรต้น
+-   ตัวแปรตาม (Dependent variable, $y$) คือ ตัวแปรที่เป็น**ปลายเหตุ** ซึ่งเป็นผลมาจากการเปลี่ยนแปลงของตัวแปรต้น
 
 ความสัมพันธ์ของตัวแปรต้นและตัวแปรตามจะเขียนในรูปแบบ $f(x) \sim x$
 
@@ -12,7 +12,7 @@ Regression model คือการสร้างสมการถดถอย
 
 ### Model summary
 
-คือ การสร้างความสัมพันธ์ของตัวแปรแบบเชิงเส้น ใช้กับข้อมูลแบบต่อเนื่อง (continuous data)
+คือ การสร้างความสัมพันธ์ของตัวแปรแบบเชิงเส้น ใช้กับข้อมูลแบบต่อเนื่อง (Continuous data)
 
 $$
 h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \theta_{n}x_{n} + \epsilon
@@ -202,7 +202,7 @@ ggplot(new_group, aes(x = glufast, y = predicted_group)) +
 
 ## Poisson, quassipoisson, and negative binomial regression {#poisson-family}
 
-Poission regression คือ สมการถดถอยที่ใช้ในการทำนายความถี่ หรือค่าเฉลี่ยของการเกิดเหตุการณ์นั้นๆ มักใช้กับข้อมูลที่ไม่ต่อเนื่อง (discrete value) พิจารณาข้อมูลแบบ [Poisson distribution](#poisson-dist)
+Poisson regression คือ สมการถดถอยที่ใช้ในการทำนายความถี่ หรือค่าเฉลี่ยของการเกิดเหตุการณ์นั้นๆ มักใช้กับข้อมูลที่ไม่ต่อเนื่อง (Discrete value) พิจารณาข้อมูลแบบ [Poisson distribution](#poisson-dist)
 
 $$
 f(k) = P(X = k) = \frac{\lambda^{k}}{k!}e^{-\lambda}
@@ -220,7 +220,7 @@ $$
 ln(\lambda) = \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n}
 $$
 
--   สำหรับ $k$ เราจำเป็นต้องเปลี่ยน $\lambda$ ให้อยู่ในรูป $k/t$ และย้ายไปเป็นตัวแปรควบคุมเวลา (offset) ซึ่งจะมี regression coefficient = 1 เสมอ
+-   สำหรับ $k$ เราจำเป็นต้องเปลี่ยน $\lambda$ ให้อยู่ในรูป $k/t$ และย้ายไปเป็นตัวแปรควบคุมเวลา (Offset) ซึ่งจะมี Regression coefficient = 1 เสมอ
 
 $$ \lambda = \frac{k}{t} = e^{\theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n}} $$
 
@@ -247,7 +247,7 @@ ggplot(cervix_mort, aes (x = age_group, y = dead)) +
   theme_bw()
 ```
 
-สังเกตว่ายิ่งอายุเยอะ อัตราการตายยิ่งน้อยลงอย่างมีนัยสำคัญ ซึ่งไม่น่าจะเป็นไปได้ ทั้งนี้ เพราะยังไม่ได้ปรับระยะเวลาติดตาม โดยการใส่ offset เป็น `person-month` เข้าไปคำนวณด้วย
+สังเกตว่ายิ่งอายุเยอะ อัตราการตายยิ่งน้อยลงอย่างมีนัยสำคัญ ซึ่งไม่น่าจะเป็นไปได้ ทั้งนี้ เพราะยังไม่ได้ปรับระยะเวลาติดตาม โดยการใส่ Offset เป็น `person-month` เข้าไปคำนวณด้วย
 
 ```{r pois_fit}
 pois_fit <- glm(dead ~  age_group + histo_major + stage + offset(log(person_month)),
@@ -277,7 +277,7 @@ ggplot(new_data, aes (x = age_group, y = predicted_dead, col = histo_major)) +
 -   ต้องเป็นจำนวนนับ
 -   การกระจายตัวของข้อมูล = Dispersion parameter ($\phi$) = Variance/Mean = 1
 
-เมื่อตรวจสอบจากผลลัพธ์ของสมการถอดถอย โดยพิจารณาจาก $\text{residuals/deviance}$ แล้วพบว่า $\phi > 1$ ซึ่งหมายความว่าข้อมูลตั้งต้นนั้นมีการกระจายตัวของข้อมูลสูงเกินไป (over-dispersed) จึงไม่เป็นไปตามสมมติฐานของ Poisson ณ จุดนี้จึงจำเป็นต้องใช้ ส่วนขยายสมการของ Poisson regression เรียกว่า Quasipoisson regression ซึ่งจะทำการปรับความแปรปรวน ตามการเพิ่มขึ้นของความแปรปรวนต่อค่าเฉลี่ย
+เมื่อตรวจสอบจากผลลัพธ์ของสมการถอดถอย โดยพิจารณาจาก $\text{Residuals/Deviance}$ แล้วพบว่า $\phi > 1$ ซึ่งหมายความว่าข้อมูลตั้งต้นนั้นมีการกระจายตัวของข้อมูลสูงเกินไป (Overdispersed) จึงไม่เป็นไปตามสมมติฐานของ Poisson ณ จุดนี้จึงจำเป็นต้องใช้ ส่วนขยายสมการของ Poisson regression เรียกว่า Quasipoisson regression ซึ่งจะทำการปรับความแปรปรวน ตามการเพิ่มขึ้นของความแปรปรวนต่อค่าเฉลี่ย
 
 $$
 V = \phi\mu_{i}
@@ -291,7 +291,7 @@ quasipois_fit <- glm(dead ~  age_group + histo_major + stage + offset(log(person
 summary(quasipois_fit)
 ```
 
-จะเห็นว่าหลังจากปรับ dispersion parameter แล้ว `age_group` ไม่ได้ส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญแต่อย่างใด ปัญหาของ Quasipoisson คือ อาจจะไม่มี parameter ที่ต้องการ เช่น `AIC` เป็นต้น ซึ่งสามารถใช้อีกหนึ่งสมการถดถอยที่นิยมใช้คือ Negative binomial regression จาก package `MASS` ซึ่งปรับตามอัตราส่วนความแปรปรวนเช่นกัน
+จะเห็นว่าหลังจากปรับ Dispersion parameter แล้ว `age_group` ไม่ได้ส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญแต่อย่างใด ปัญหาของ Quasipoisson คือ อาจจะไม่มี parameter ที่ต้องการ เช่น `AIC` เป็นต้น ซึ่งสามารถใช้อีกหนึ่งสมการถดถอยที่นิยมใช้คือ Negative binomial regression จาก package `MASS` ซึ่งปรับตามอัตราส่วนความแปรปรวนเช่นกัน
 
 $$
 V = u_{i}(1+\frac{u_{i}}{\phi})
@@ -303,4 +303,4 @@ nb_fit <- MASS::glm.nb(dead ~  age_group + histo_major + stage + offset(log(pers
 summary(nb_fit)
 ```
 
-ผลลัพธ์ที่ได้จะใกล้เคียงกันกับสมการถดถอย Quasipoisson ทั้งสองสมการนี้จะนิยมใช้ในการตั้งสมการถดถอยในจำนวนนับจากงานทดลอง high-troughput เช่น RNA-sequencing เนื่องจากข้อมูลประเภทนี้มักมีเป็นข้อมูลจำนวนนับที่มีการกระจายตัวสูงมาก ($\phi > 1$)
+ผลลัพธ์ที่ได้จะใกล้เคียงกันกับสมการถดถอย Quasipoisson ทั้งสองสมการนี้จะนิยมใช้ในการตั้งสมการถดถอยในจำนวนนับจากงานทดลอง High-troughput เช่น RNA-sequencing เนื่องจากข้อมูลประเภทนี้มักมีเป็นข้อมูลจำนวนนับที่มีการกระจายตัวสูงมาก ($\phi > 1$)

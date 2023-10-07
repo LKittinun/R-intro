@@ -59,14 +59,15 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -119,11 +120,11 @@
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span>, y <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/blank_geom-1.png" width="672"></div>
-<p>สังเกตว่าจะยังไม่มีกราฟใดๆ ปรากฏ ท่านจำเป็นต้องใช้ function <code>geom</code> เพื่อทำการสร้างภาพนั้นขึ้น</p>
+<p>สังเกตว่าจะยังไม่มีกราฟใดๆ ปรากฏ ท่านจำเป็นต้องใช้ <code>geom</code> เพื่อทำการสร้างภาพนั้นขึ้น</p>
 </div>
-<div id="scatter-plot" class="section level3" number="6.1.2">
+<div id="scatterplot" class="section level3" number="6.1.2">
 <h3>
-<span class="header-section-number">6.1.2</span> Scatter plot<a class="anchor" aria-label="anchor" href="#scatter-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1.2</span> Scatterplot<a class="anchor" aria-label="anchor" href="#scatterplot"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span>, y <span class="op">=</span> <span class="va">Sepal.Length</span>, col <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -143,7 +144,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">2.7</span>, linetype <span class="op">=</span> <span class="st">"dotted"</span>, col <span class="op">=</span> <span class="st">"blue"</span>, linewidth <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="fl">2</span>, slope <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="st">"dotdash"</span>, col <span class="op">=</span> <span class="st">"black"</span>, linewidth <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/straight_line-1.png" width="672"></div>
-<p>สังเกตว่าท่านสามารถปรับค่าจำพวก สี ลักษณะเส้นต่างๆ ได้ โดย parameter นั้น ต้องอยู่นอก <code>aes</code> มิเช่นนั้น function จะพยายามไปดึงข้อมูลจากกราฟมา</p>
+<p>สังเกตว่าท่านสามารถปรับค่าจำพวก สี ลักษณะเส้นต่างๆ ได้ โดย Parameter นั้น ต้องอยู่นอก <code>aes</code> มิเช่นนั้น Function จะพยายามไปดึงข้อมูลจากกราฟมา</p>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span>, y <span class="op">=</span> <span class="va">Sepal.Length</span>, col <span class="op">=</span> <span class="st">"darkviolet"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># ผิด</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -164,12 +165,12 @@
 <h3>
 <span class="header-section-number">6.1.4</span> Bar chart<a class="anchor" aria-label="anchor" href="#bar-chart"><i class="fas fa-link"></i></a>
 </h3>
-<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code> ใช้สำหรับนับจำนวนของ column นั้น ไม่มีค่า y</p>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code> ใช้สำหรับนับจำนวนของ Column นั้น ไม่มีค่า <code>y</code></p>
 <div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>, fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># fill ไว้สำหรับแบ่งสีใน barchart</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="co"># ความกว้าง 50% </span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/barplot-1.png" width="672"></div>
-<p>ส่วน <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col()</a></code> จะรับค่า y ด้วย โดยข้อมูล x ที่ซ้ำกันจะถูกนำมารวมกัน</p>
+<p>ส่วน <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col()</a></code> จะรับค่า <code>y</code> ด้วย โดยข้อมูล <code>x</code> ที่ซ้ำกันจะถูกนำมารวมกัน</p>
 <div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span>, fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> </span></code></pre></div>
@@ -193,7 +194,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span>, fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> </span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/boxplot-1.png" width="672"></div>
-<p>ถ้าท่านต้องการสร้าง plot ที่แสดงหลาย metrics ท่านจะต้อง<a href="data-wrangling.html#reshape">เปลี่ยนข้อมูลเป็น long form</a> เสียก่อน</p>
+<p>ถ้าท่านต้องการสร้าง plot ที่แสดงหลาย metrics ท่านจะต้อง<a href="data-wrangling.html#reshape">เปลี่ยนข้อมูลเป็น Long form</a> เสียก่อน</p>
 <div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">long_df</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -232,7 +233,7 @@
 <h3>
 <span class="header-section-number">6.1.7</span> Fitting a statistical model<a class="anchor" aria-label="anchor" href="#fitting-a-statistical-model"><i class="fas fa-link"></i></a>
 </h3>
-<p>ท่านสามารถที่พล็อต statistical model ได้โดยใช้ <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code> ยกตัวอย่าง เช่น ถ้าอยากดูความสัมพันธ์ของ <code>Sepal.Length</code> และ <code>Petal.Length</code></p>
+<p>ท่านสามารถที่พล็อต Statistical model ได้โดยใช้ <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code> ยกตัวอย่าง เช่น ถ้าอยากดูความสัมพันธ์ของ <code>Sepal.Length</code> และ <code>Petal.Length</code></p>
 <div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Petal.Length</span>, color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># สีตาม Species</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -250,7 +251,7 @@
 <h3>
 <span class="header-section-number">6.1.8</span> Faceting<a class="anchor" aria-label="anchor" href="#faceting"><i class="fas fa-link"></i></a>
 </h3>
-<p>ในบางครั้งท่านอาจจะต้องการที่จะพล็อตกราฟแยกกันเป็นส่วนๆ มากกว่ารวมกันในกราฟเดียว ท่านสามารถแบ่ง partition ของการพล็อตแต่ละกลุ่มได้โดยใช้ <code>facet</code></p>
+<p>ในบางครั้งท่านอาจจะต้องการที่จะพล็อตกราฟแยกกันเป็นส่วนๆ มากกว่ารวมกันในกราฟเดียว ท่านสามารถแบ่ง Partition ของการพล็อตแต่ละกลุ่มได้โดยใช้ <code>facet</code></p>
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Petal.Length</span>, color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># สีตาม Species</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -282,7 +283,7 @@
 <li>
 <a class="nav-link" href="#ggplot2"><span class="header-section-number">6.1</span> General visualization with ggplot2</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#simple-anatomy-of-ggplot"><span class="header-section-number">6.1.1</span> (Simple) Anatomy of ggplot</a></li>
-<li><a class="nav-link" href="#scatter-plot"><span class="header-section-number">6.1.2</span> Scatter plot</a></li>
+<li><a class="nav-link" href="#scatterplot"><span class="header-section-number">6.1.2</span> Scatterplot</a></li>
 <li><a class="nav-link" href="#straight-line"><span class="header-section-number">6.1.3</span> Straight line</a></li>
 <li><a class="nav-link" href="#bar-chart"><span class="header-section-number">6.1.4</span> Bar chart</a></li>
 <li><a class="nav-link" href="#multi_boxplot"><span class="header-section-number">6.1.5</span> Box plot</a></li>
@@ -307,7 +308,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

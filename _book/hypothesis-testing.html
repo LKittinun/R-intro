@@ -59,14 +59,15 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -88,7 +89,7 @@
 <span class="header-section-number">8.1.1</span> สร้างสมมติฐาน (Construct the hypothesis)<a class="anchor" aria-label="anchor" href="#%E0%B8%AA%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%A1%E0%B8%A1%E0%B8%95%E0%B8%90%E0%B8%B2%E0%B8%99-construct-the-hypothesis"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
-<li>สมมติฐานว่าง (Null hypothesis; <span class="math inline">\(H_{0}\)</span>) คือสมมติฐานที่ต้องการทดสอบ ซึ่งเปรียบเทียบได้กับสิ่งที่ทุกคนมีความเชื่อกันอยู่แล้ว (default belief) หรือไม่ทราบแน่ชัดว่าเป็นอย่างไร ซึ่งจะเป็นแนวปฏิเสธไว้ก่อน คือ <strong>ไม่มีความแตกต่างกัน</strong>
+<li>สมมติฐานว่าง (Null hypothesis; <span class="math inline">\(H_{0}\)</span>) คือสมมติฐานที่ต้องการทดสอบ ซึ่งเปรียบเทียบได้กับสิ่งที่ทุกคนมีความเชื่อกันอยู่แล้ว (Default belief) หรือไม่ทราบแน่ชัดว่าเป็นอย่างไร ซึ่งจะเป็นแนวปฏิเสธไว้ก่อน คือ <strong>ไม่มีความแตกต่างกัน</strong>
 </li>
 <li>สมมติฐานทางเลือก (Alternative hypothesis; <span class="math inline">\(H_{a}\)</span>) คือสมมติฐานที่คาดหวังว่าจะเป็นการค้นพบใหม่</li>
 </ul>
@@ -97,7 +98,7 @@
 <h3>
 <span class="header-section-number">8.1.2</span> ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics)<a class="anchor" aria-label="anchor" href="#%E0%B8%97%E0%B8%B3%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A7%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B2%E0%B8%B0%E0%B8%AB%E0%B8%84%E0%B8%B2%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%96%E0%B8%95-construct-the-test-statistics"><i class="fas fa-link"></i></a>
 </h3>
-<p>โดยเครื่องมือจะมีหลายรูปแบบตามลักษณะของข้อมูล เช่น <code>t-test</code>, <code>Chi-square</code> เป็นต้น ซึ่งผลลัพธ์จากการหาค่าทางสถิติจะเป็นไปตามการทดสอบนั้นๆ เช่น <code>t-test</code>: <span class="math inline">\(t\)</span>, <code>Chi-square</code>: <span class="math inline">\(X^{2}\)</span>, <code>F-test</code>: <span class="math inline">\(F\)</span> เป็นต้น</p>
+<p>โดยเครื่องมือจะมีหลายรูปแบบตามลักษณะของข้อมูล เช่น <code>t-test</code>, <code>Chi-square</code> เป็นต้น ซึ่งผลลัพธ์จากการหาค่าทางสถิติจะเป็นไปตามการทดสอบนั้นๆ เช่น <span class="math inline">\(t\)</span>-test: <span class="math inline">\(t\)</span>, Chi-square: <span class="math inline">\(X^{2}\)</span>, <span class="math inline">\(F\)</span>-test: <span class="math inline">\(F\)</span> เป็นต้น</p>
 </div>
 <div id="หา-p-value" class="section level3" number="8.1.3">
 <h3>
@@ -140,17 +141,17 @@
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="fl">0.7345</span>, <span class="fl">99</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
 <span><span class="va">p</span> <span class="co"># p-value</span></span></code></pre></div>
 <pre><code>## [1] 0.4643803</code></pre>
-<p>โดย <code>AUC_blue</code> = <code>p-value</code> = พื้นที่ใต้กราฟสีฟ้า = ~46.4%</p>
+<p>โดย <code>AUC_blue</code> = <span class="math inline">\(p\)</span>-value = พื้นที่ใต้กราฟสีฟ้า = ~46.4%</p>
 </div>
 <div id="เปรยบเทยบ-p-value-กบ-คาวกฤต-critical-value-ทยอมรบได" class="section level3" number="8.1.4">
 <h3>
-<span class="header-section-number">8.1.4</span> เปรียบเทียบ <code>p-value</code> กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้<a class="anchor" aria-label="anchor" href="#%E0%B9%80%E0%B8%9B%E0%B8%A3%E0%B8%A2%E0%B8%9A%E0%B9%80%E0%B8%97%E0%B8%A2%E0%B8%9A-p-value-%E0%B8%81%E0%B8%9A-%E0%B8%84%E0%B8%B2%E0%B8%A7%E0%B8%81%E0%B8%A4%E0%B8%95-critical-value-%E0%B8%97%E0%B8%A2%E0%B8%AD%E0%B8%A1%E0%B8%A3%E0%B8%9A%E0%B9%84%E0%B8%94"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1.4</span> เปรียบเทียบ <span class="math inline">\(p\)</span>-value กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้<a class="anchor" aria-label="anchor" href="#%E0%B9%80%E0%B8%9B%E0%B8%A3%E0%B8%A2%E0%B8%9A%E0%B9%80%E0%B8%97%E0%B8%A2%E0%B8%9A-p-value-%E0%B8%81%E0%B8%9A-%E0%B8%84%E0%B8%B2%E0%B8%A7%E0%B8%81%E0%B8%A4%E0%B8%95-critical-value-%E0%B8%97%E0%B8%A2%E0%B8%AD%E0%B8%A1%E0%B8%A3%E0%B8%9A%E0%B9%84%E0%B8%94"><i class="fas fa-link"></i></a>
 </h3>
 <p>จุดนี้จะเป็นการตัดว่า ท่านสามารถยอมรับความบังเอิญนี้ที่กี่ % โดยทั่วไปมักใช้ที่น้อยกว่า 5% (0.05) หรือ 1% (0.01) ซึ่งแบ่งเป็น</p>
 <ul>
-<li><p><code>Left-tailed</code> คือ โอกาสที่ <code>critical value</code> <span class="math inline">\(\leq H_{0}\)</span></p></li>
-<li><p><code>Right-tailed</code> คือ โอกาสที่ <code>critical value</code> <span class="math inline">\(\geq H_{0}\)</span></p></li>
-<li><p><code>Two-tailed</code> คือ โอกาสที่ <code>critical value</code> <span class="math inline">\(\neq H_{0}\)</span> นิยมใช้วิเคราะห์มากที่สุด</p></li>
+<li><p>Left-tailed คือ โอกาสที่ Critical value <span class="math inline">\(\leq H_{0}\)</span></p></li>
+<li><p>Right-tailed คือ โอกาสที่ Critical value <span class="math inline">\(\geq H_{0}\)</span></p></li>
+<li><p>Two-tailed คือ โอกาสที่ Critical value <span class="math inline">\(\neq H_{0}\)</span> นิยมใช้วิเคราะห์มากที่สุด</p></li>
 </ul>
 <div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">crit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.05</span><span class="op">/</span><span class="fl">2</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span> <span class="co"># ตัดที่ &lt;= p 0.05, two-tailed</span></span>
@@ -174,7 +175,7 @@
 <div id="power" class="section level2 unnumbered">
 <h2>Power<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
 </h2>
-<p>คือ โอกาสการเกิดผลบวกจริง (True positive) ของ <span class="math inline">\(H_{a}\)</span> = 1 - <code>power</code></p>
+<p>คือ โอกาสการเกิดผลบวกจริง (True positive) ของ <span class="math inline">\(H_{a}\)</span> = 1 - Power</p>
 <p>พิจารณาการคำนวณทางสถิติ <a href="parametric-test.html#sec-t-test">t-test</a> ภายใต้สมมติฐาน <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\mu = 12\)</span> และ <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\mu &gt; 12\)</span> ที่ <span class="math inline">\(S = 1.7\)</span></p>
 <div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
@@ -201,7 +202,7 @@
 <span><span class="fu"><a href="https://rdrr.io/pkg/pwrss/man/0-Generic-t-Test.html">power.t.test</a></span><span class="op">(</span>ncp <span class="op">=</span> <span class="va">t_test_5</span><span class="op">$</span><span class="va">statistic</span>, df <span class="op">=</span> <span class="fl">4</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>             alternative <span class="op">=</span> <span class="st">"greater"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/t_test_5-1.png" width="672"></div>
-<p>จากกราฟ เส้นประสีแดงคือการกระจายตัวของข้อมูล <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\mu = 12\)</span> ส่วนเส้นประสีฟ้าคือ <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\mu = 12 + \frac{1.379}{4}\times2.156 = 12.743\)</span> พื้นที่สีแดงคือ critical value = <span class="math inline">\(\alpha\)</span> ที่ 0.05</p>
+<p>จากกราฟ เส้นประสีแดงคือการกระจายตัวของข้อมูล <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\mu = 12\)</span> ส่วนเส้นประสีฟ้าคือ <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\mu = 12 + \frac{1.379}{4}\times2.156 = 12.743\)</span> พื้นที่สีแดงคือ Critical value = <span class="math inline">\(\alpha\)</span> ที่ 0.05</p>
 <p>ดังนั้น พื้นที่สีฟ้าคือ พื้นที่ของกลุ่มตัวอย่างจาก <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\mu = 12.743\)</span> ซึ่งแท้จริงแล้ว สามารถอยู่ในกลุ่ม <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\mu = 12\)</span> ได้เช่นกัน ซึ่งก็คือโอกาสการเกิดผลบวกลวง (False positive) = Type-II error นั้นเอง</p>
 <p>ส่วนตรงที่เป็นเส้นแนวเฉียงสีฟ้า คือพื้นที่ๆ ไม่มีทางมาจาก <span class="math inline">\(H_{0}\)</span> ได้ ซึ่งก็คือ ความสามารถในการแยกแยะกลุ่มตัวอย่างที่เป็นความจริง เรียกว่า ผลบวกที่แท้จริง (True positive) = Power = 1 - Type-II error ดังนั้น ถ้าท่านเพิ่มค่า <span class="math inline">\(\alpha\)</span> สูงสุดที่รับได้ โอกาสการเกิด False positive ก็จะเพิ่มขึ้น แต่โอกาสการเกิด False negative ก็จะต่ำลง (= Power สูงขึ้น)</p>
 <div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
@@ -235,8 +236,8 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwrss/man/0-Generic-t-Test.html">power.t.test</a></span><span class="op">(</span>ncp <span class="op">=</span> <span class="va">t_test_20</span><span class="op">$</span><span class="va">statistic</span>, df <span class="op">=</span> <span class="fl">19</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>             alternative <span class="op">=</span> <span class="st">"greater"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/power_20-1.png" width="672"></div>
-<p>จากกราฟ เส้นประสีแดงคือการกระจายตัวของข้อมูล <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\mu = 12\)</span> ส่วนเส้นประสีฟ้าคือ <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\mu = 12 + \frac{1.654}{19}\times3.356 = 12.29\)</span> พื้นที่สีแดงคือ critical value = <span class="math inline">\(\alpha\)</span> ที่ 0.05 จะเห็นว่าการกระจายตัวของข้อมูลทั้งสองกลุ่มนั้นแคบกว่า (สังเกตตัวเลขแกน x) จึงมีส่วนที่พื้นที่ร่วมกันที่น้อยกว่าด้วย</p>
-<p>เมื่อพล็อตกราฟความสัมพันธ์ระหว่าง ขนาดตัวอย่าง, <span class="math inline">\(\alpha\)</span>, power จะได้ดังรูป</p>
+<p>จากกราฟ เส้นประสีแดงคือการกระจายตัวของข้อมูล <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\mu = 12\)</span> ส่วนเส้นประสีฟ้าคือ <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\mu = 12 + \frac{1.654}{19}\times3.356 = 12.29\)</span> พื้นที่สีแดงคือ Critical value = <span class="math inline">\(\alpha\)</span> ที่ 0.05 จะเห็นว่าการกระจายตัวของข้อมูลทั้งสองกลุ่มนั้นแคบกว่า (สังเกตตัวเลขแกน x) จึงมีส่วนที่พื้นที่ร่วมกันที่น้อยกว่าด้วย</p>
+<p>เมื่อพล็อตกราฟความสัมพันธ์ระหว่าง ขนาดตัวอย่าง, <span class="math inline">\(\alpha\)</span>, Power จะได้ดังรูป</p>
 <div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mean_diff</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># ความต่างคงที่ 1</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">50</span></span>
@@ -258,7 +259,7 @@
 <div id="trade-off-ของ-p-value-threshold" class="section level2 unnumbered">
 <h2>Trade-off ของ p-value threshold<a class="anchor" aria-label="anchor" href="#trade-off-%E0%B8%82%E0%B8%AD%E0%B8%87-p-value-threshold"><i class="fas fa-link"></i></a>
 </h2>
-<p>การตั้งค่าวิกฤตินั้นมี trade-off ระหว่าง <code>false positive</code> และ <code>false negative</code> ที่ต้องพิจารณา</p>
+<p>การตั้งค่าวิกฤตินั้นมี Trade-off ระหว่าง False positive และ False negative ที่ต้องพิจารณา</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th>Decision/Truth</th>
@@ -283,10 +284,10 @@
 </tbody>
 </table></div>
 <ul>
-<li><p><code>Type I error</code> = <code>false positive</code> = <span class="math inline">\(\alpha\)</span> = <code>critical value</code></p></li>
-<li><p><code>Type II error</code> = <code>false negative</code> = <span class="math inline">\(\beta\)</span> = 1 - <code>power</code></p></li>
+<li><p>Type I error = False positive = <span class="math inline">\(\alpha\)</span> = Critical value</p></li>
+<li><p>Type II error = False negative = <span class="math inline">\(\beta\)</span> = 1 - Power</p></li>
 </ul>
-<p><span class="math inline">\(\therefore\)</span> <code>power</code> = <code>true negative</code></p>
+<p><span class="math inline">\(\therefore\)</span> Power = True negative</p>
 
 </div>
 </div>
@@ -302,7 +303,7 @@
 <li><a class="nav-link" href="#%E0%B8%AA%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%A1%E0%B8%A1%E0%B8%95%E0%B8%90%E0%B8%B2%E0%B8%99-construct-the-hypothesis"><span class="header-section-number">8.1.1</span> สร้างสมมติฐาน (Construct the hypothesis)</a></li>
 <li><a class="nav-link" href="#%E0%B8%97%E0%B8%B3%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A7%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B2%E0%B8%B0%E0%B8%AB%E0%B8%84%E0%B8%B2%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%96%E0%B8%95-construct-the-test-statistics"><span class="header-section-number">8.1.2</span> ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics)</a></li>
 <li><a class="nav-link" href="#%E0%B8%AB%E0%B8%B2-p-value"><span class="header-section-number">8.1.3</span> หา p-value</a></li>
-<li><a class="nav-link" href="#%E0%B9%80%E0%B8%9B%E0%B8%A3%E0%B8%A2%E0%B8%9A%E0%B9%80%E0%B8%97%E0%B8%A2%E0%B8%9A-p-value-%E0%B8%81%E0%B8%9A-%E0%B8%84%E0%B8%B2%E0%B8%A7%E0%B8%81%E0%B8%A4%E0%B8%95-critical-value-%E0%B8%97%E0%B8%A2%E0%B8%AD%E0%B8%A1%E0%B8%A3%E0%B8%9A%E0%B9%84%E0%B8%94"><span class="header-section-number">8.1.4</span> เปรียบเทียบ p-value กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้</a></li>
+<li><a class="nav-link" href="#%E0%B9%80%E0%B8%9B%E0%B8%A3%E0%B8%A2%E0%B8%9A%E0%B9%80%E0%B8%97%E0%B8%A2%E0%B8%9A-p-value-%E0%B8%81%E0%B8%9A-%E0%B8%84%E0%B8%B2%E0%B8%A7%E0%B8%81%E0%B8%A4%E0%B8%95-critical-value-%E0%B8%97%E0%B8%A2%E0%B8%AD%E0%B8%A1%E0%B8%A3%E0%B8%9A%E0%B9%84%E0%B8%94"><span class="header-section-number">8.1.4</span> เปรียบเทียบ \(p\)-value กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#power">Power</a></li>
@@ -323,7 +324,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

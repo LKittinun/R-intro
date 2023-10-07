@@ -59,14 +59,15 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -78,7 +79,7 @@
 <h1>
 <strong>Preface</strong><a class="anchor" aria-label="anchor" href="#preface"><i class="fas fa-link"></i></a>
 </h1>
-<p>เอกสารนี้จัดทำขึ้นเพื่อจุดประสงค์ขึ้นเพื่อแนะนำการใช้ R เบื้องต้น สำหรับนักวิทยาศาสตร์ที่มีความสนใจในการใช้ R ในการวิเคราะห์ข้อมูล ซึ่งผู้ใช้งานจำเป็นจะต้องมีความรู้เรื่อง basic R ต่างๆ เล็กน้อย เพื่อที่จะได้ใช้งานได้อย่างไม่ติดขัด</p>
+<p>เอกสารนี้จัดทำขึ้นเพื่อจุดประสงค์ขึ้นเพื่อแนะนำการใช้ <code>R</code> เบื้องต้น สำหรับนักวิทยาศาสตร์ที่มีความสนใจในการใช้ <code>R</code> ในการวิเคราะห์ข้อมูล ซึ่งผู้ใช้งานจำเป็นจะต้องมีความรู้เรื่อง basic <code>R</code> ต่างๆ เล็กน้อย เพื่อที่จะได้ใช้งานได้อย่างไม่ติดขัด</p>
 <p>Online version: <a href="https://tmrc.psu.ac.th/RNAseq/_book/index.html" class="uri">https://tmrc.psu.ac.th/RNAseq/_book/index.html</a></p>
 <div id="r-installation" class="section level2 unnumbered">
 <h2>R installation<a class="anchor" aria-label="anchor" href="#r-installation"><i class="fas fa-link"></i></a>
@@ -86,27 +87,27 @@
 <div id="r-console" class="section level3 unnumbered">
 <h3>R console<a class="anchor" aria-label="anchor" href="#r-console"><i class="fas fa-link"></i></a>
 </h3>
-<p>ผู้ที่ต้องการใช้ R สามารถดาวน์โหลดโปรแกรม ได้ที่นี่ <a href="https://cran.r-project.org/bin/windows/base/" class="uri">https://cran.r-project.org/bin/windows/base/</a> โดยตัว R console จะมีหน้าตาดังภาพ</p>
+<p>ผู้ที่ต้องการใช้ <code>R</code> สามารถดาวน์โหลดโปรแกรม ได้ที่นี่ <a href="https://cran.r-project.org/bin/windows/base/" class="uri">https://cran.r-project.org/bin/windows/base/</a> โดยตัว <code>R</code> console จะมีหน้าตาดังภาพ</p>
 <div class="inline-figure"><img src="Picture/Rconsole%20(Custom).jpg" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="rstudio" class="section level3 unnumbered">
 <h3>Rstudio<a class="anchor" aria-label="anchor" href="#rstudio"><i class="fas fa-link"></i></a>
 </h3>
-<p>อย่างไรก็ตาม การใช้งาน R ด้วยโปรแกรมนี้จะใช้งานค่อนข้างยาก โดยส่วนใหญผู้ใช้การจะต้องดาวน์โหลด IDE (integrated development environment) มาอำนวยความสะดวกในการเขียนคำสั่ง ซึ่ง IDE ที่ได้รับความนิยมมากที่สุด คือ Rstudio สามารถดาวน์โหลดได้ที่ <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a></p>
+<p>อย่างไรก็ตาม การใช้งาน <code>R</code> ด้วยโปรแกรมนี้จะใช้งานค่อนข้างยาก โดยส่วนใหญผู้ใช้การจะต้องดาวน์โหลด IDE (integrated development environment) มาอำนวยความสะดวกในการเขียนคำสั่ง ซึ่ง IDE ที่ได้รับความนิยมมากที่สุด คือ Rstudio สามารถดาวน์โหลดได้ที่ <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a></p>
 <div class="inline-figure"><img src="Picture/Rstudio%20(Custom).jpg" width="100%" style="display: block; margin: auto;"></div>
-<p>นี่คือหน้าต่าง default ของ Rstudio โดยส่วนประกอบหลักคือ</p>
+<p>นี่คือหน้าต่างเริ่มต้นของ Rstudio โดยส่วนประกอบหลักคือ</p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Text editor</strong> มุมซ้ายบน คือ ที่ๆ เราจะเขียน script ไว้เพื่อ run</li>
+<strong>Text editor</strong> มุมซ้ายบน คือ ที่ๆ เราจะเขียน Script ไว้เพื่อ Run</li>
 <li>
-<strong>Environment</strong> มุมขวาบน คือ ส่วนที่เก็บข้อมูล variable ต่างๆ ที่เรา assign</li>
+<strong>Environment</strong> มุมขวาบน คือ ส่วนที่เก็บข้อมูล Variable ต่างๆ ที่เรา Assign</li>
 <li>
 <strong>R console</strong> มุมซ้ายล่าง คือ ส่วนที่ R ทำงานจริงๆ ซึ่งก็คือ ตัว R console ที่เราโหลดมาตอนแรกนั่นเอง</li>
 <li>
-<strong>ส่วน Output</strong> ที่จะมีไว้แสดงที่อยู่ของไฟล์ รูปภาพที่ render ออกมา และ อื่นๆ ตามที่เราจะปรับแต่ง</li>
+<strong>ส่วน Output</strong> ที่จะมีไว้แสดงที่อยู่ของไฟล์ รูปภาพที่ Render ออกมา และ อื่นๆ ตามที่เราจะปรับแต่ง</li>
 </ol>
-<p>เราสามารถเขียนไว้ script ไว้ที่ text editor และกด run คำสั่งแต่ละบรรทัดได้โดยการกด Ctrl + Enter</p>
-<p><strong>ยินดีด้วย!</strong> เท่านี้ท่านก็สามารถเริ่มใช้งาน R ได้แล้ว</p>
+<p>เราสามารถเขียนไว้ Script ไว้ที่ Text editor และกด Run คำสั่งแต่ละบรรทัดได้โดยการกด Ctrl + Enter</p>
+<p><strong>ยินดีด้วย!</strong> เท่านี้ท่านก็สามารถเริ่มใช้งาน <code>R</code> ได้แล้ว</p>
 
 </div>
 </div>
@@ -143,7 +144,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

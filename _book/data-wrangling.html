@@ -19,9 +19,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="5.1 Data manipulation with dplyr dplyr คือ package ย่อยของ tidyverse ซึ่งทำหน้าที่จัดการ dataframe ที่ท่านนำเข้าไปใน R ให้เป็นในรูปแบบที่ท่านต้องการ library(dplyr)  5.1.1 Basic dataframe...">
-<meta property="og:description" content="5.1 Data manipulation with dplyr dplyr คือ package ย่อยของ tidyverse ซึ่งทำหน้าที่จัดการ dataframe ที่ท่านนำเข้าไปใน R ให้เป็นในรูปแบบที่ท่านต้องการ library(dplyr)  5.1.1 Basic dataframe...">
-<meta name="twitter:description" content="5.1 Data manipulation with dplyr dplyr คือ package ย่อยของ tidyverse ซึ่งทำหน้าที่จัดการ dataframe ที่ท่านนำเข้าไปใน R ให้เป็นในรูปแบบที่ท่านต้องการ library(dplyr)  5.1.1 Basic dataframe...">
+<meta name="description" content="5.1 Data manipulation with dplyr dplyr คือ Package ย่อยของ tidyverse ซึ่งทำหน้าที่จัดการ Dataframe ที่ท่านนำเข้าไปใน R ให้เป็นในรูปแบบที่ท่านต้องการ library(dplyr)  5.1.1 Basic dataframe...">
+<meta property="og:description" content="5.1 Data manipulation with dplyr dplyr คือ Package ย่อยของ tidyverse ซึ่งทำหน้าที่จัดการ Dataframe ที่ท่านนำเข้าไปใน R ให้เป็นในรูปแบบที่ท่านต้องการ library(dplyr)  5.1.1 Basic dataframe...">
+<meta name="twitter:description" content="5.1 Data manipulation with dplyr dplyr คือ Package ย่อยของ tidyverse ซึ่งทำหน้าที่จัดการ Dataframe ที่ท่านนำเข้าไปใน R ให้เป็นในรูปแบบที่ท่านต้องการ library(dplyr)  5.1.1 Basic dataframe...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -59,14 +59,15 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -82,7 +83,7 @@
 <h2>
 <span class="header-section-number">5.1</span> Data manipulation with <code>dplyr</code><a class="anchor" aria-label="anchor" href="#data-manipulation-with-dplyr"><i class="fas fa-link"></i></a>
 </h2>
-<p><code>dplyr</code> คือ package ย่อยของ <code>tidyverse</code> ซึ่งทำหน้าที่จัดการ dataframe ที่ท่านนำเข้าไปใน R ให้เป็นในรูปแบบที่ท่านต้องการ</p>
+<p><code>dplyr</code> คือ Package ย่อยของ <code>tidyverse</code> ซึ่งทำหน้าที่จัดการ Dataframe ที่ท่านนำเข้าไปใน R ให้เป็นในรูปแบบที่ท่านต้องการ</p>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span> </span></code></pre></div>
 <div id="basic-dataframe-manipulation" class="section level3" number="5.1.1">
@@ -100,7 +101,7 @@
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Sepal.Length"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Petal.Length"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Petal.Width"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Species"],"name":[5],"type":["fct"],"align":["left"]}],"data":[{"1":"5.1","2":"3.5","3":"1.4","4":"0.2","5":"setosa","_rn_":"1"},{"1":"4.9","2":"3.0","3":"1.4","4":"0.2","5":"setosa","_rn_":"2"},{"1":"4.7","2":"3.2","3":"1.3","4":"0.2","5":"setosa","_rn_":"3"},{"1":"4.6","2":"3.1","3":"1.5","4":"0.2","5":"setosa","_rn_":"4"},{"1":"5.0","2":"3.6","3":"1.4","4":"0.2","5":"setosa","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>function หลักๆ ของ <code>dplyr</code> จะเกี่ยวข้องกับ data manipulation เป็นส่วนใหญ่ ในที่นี้จะแนะนำที่จำเป็นต้องใช้ในบทอื่น</p>
+<p>Function หลักๆ ของ <code>dplyr</code> จะเกี่ยวข้องกับ data manipulation เป็นส่วนใหญ่ ในที่นี้จะแนะนำที่จำเป็นต้องใช้ในบทอื่น</p>
 <ul>
 <li>
 <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> มีไว้ดูภาพรวมข้อมูล</li>
@@ -109,11 +110,11 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Rows: 150
 ## Columns: 5
-## $ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.8, 4.8, 4.3, 5.8, 5.7, 5.4, 5.1, 5.7, 5.1…
-## $ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.8, 3.8…
-## $ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4, 1.1, 1.2, 1.5, 1.3, 1.4, 1.7, 1.5…
-## $ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.3…
-## $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, se…</code></pre>
+## $ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.8, 4.8, 4.3, 5.8, 5.7, 5.4, 5.1, 5.7, 5.…
+## $ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.8, 3.…
+## $ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4, 1.1, 1.2, 1.5, 1.3, 1.4, 1.7, 1.…
+## $ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.…
+## $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, s…</code></pre>
 <ul>
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> เลือก column ที่ต้องการโดยใช้ตำแหน่งหรือชื่อ column ก็ได้</li>
@@ -199,10 +200,10 @@
 <span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">[</span><span class="st">"Species"</span><span class="op">]</span> <span class="op">==</span> <span class="st">"setosa"</span>, <span class="st">"Sepal.Length"</span><span class="op">]</span></span></code></pre></div>
 <pre><code>##  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2
 ## [30] 4.7 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0</code></pre>
-<p>บรรทัดสุดท้าย สำหรับ dataframe จะไม่สามารถดึงมาทั้ง column ได้ ซึ่งจะต้องใช้ข้อมูลอีกแบบ (tibble) แต่จะไม่กล่าวถึง ณ ที่นี่</p>
-<p><strong>Note:</strong> การ subset โดย dplyr นั้นสามารถทำใน dataframe/tibble เท่านั้น ไม่สามารถทำใน matrix ได้ (ต้องใช้วิธีของ base R)</p>
+<p>บรรทัดสุดท้าย สำหรับ Dataframe จะไม่สามารถดึงมาทั้งคอลัมน์ได้ ซึ่งจะต้องใช้ข้อมูลอีกแบบ (Tibble) แต่จะไม่กล่าวถึง ณ ที่นี่</p>
+<p><strong>Note:</strong> การ subset โดย dplyr นั้นสามารถทำใน Dataframe/Tibble เท่านั้น ไม่สามารถทำใน Matrix ได้ (ต้องใช้วิธีของ base R)</p>
 <ul>
-<li>ในส่วนการเรียงข้อมูลนั้นจะใช้ function <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code>
+<li>ในส่วนการเรียงข้อมูลนั้นจะใช้ Function <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code>
 </li>
 </ul>
 <div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
@@ -382,10 +383,8 @@
 </h3>
 <p>โดยปกติแล้วรูปแบบลักษณะของการบันทึกข้อมูลนั้นจะมีอยู่ 2 ลักษณะ</p>
 <ol style="list-style-type: decimal">
-<li>
-<code>Wide form</code> เป็นลักษณะที่ง่ายต่อการบันทึก วิเคราะห์และอ่านผลเบื้องต้น โดยมีรูปแบบคือ ในแต่ละแถวนั้น จะมี<strong>ข้อมูลหลัก</strong>ที่ไม่ซ้ำกัน (มักจะเป็นข้อมูลระบุตัวตน)</li>
-<li>
-<code>Long form</code> เป็นลักษณะที่ง่ายต่อการ visualize โดยมีรูปแบบคือ สามารถมี<strong>ข้อมูลหลัก</strong>ที่ซ้ำกันได้</li>
+<li>Wide form เป็นลักษณะที่ง่ายต่อการบันทึก วิเคราะห์และอ่านผลเบื้องต้น โดยมีรูปแบบคือ ในแต่ละแถวนั้น จะมี<strong>ข้อมูลหลัก</strong>ที่ไม่ซ้ำกัน (มักจะเป็นข้อมูลระบุตัวตน)</li>
+<li>Long form เป็นลักษณะที่ง่ายต่อการ Visualize โดยมีรูปแบบคือ สามารถมี<strong>ข้อมูลหลัก</strong>ที่ซ้ำกันได้</li>
 </ol>
 <p>ลองทำการดูที่ข้อมูล <code>iris</code> อีกครั้ง</p>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
@@ -395,7 +394,7 @@
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Sepal.Length"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Petal.Length"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Petal.Width"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Species"],"name":[5],"type":["fct"],"align":["left"]}],"data":[{"1":"5.1","2":"3.5","3":"1.4","4":"0.2","5":"setosa","_rn_":"1"},{"1":"4.9","2":"3.0","3":"1.4","4":"0.2","5":"setosa","_rn_":"2"},{"1":"4.7","2":"3.2","3":"1.3","4":"0.2","5":"setosa","_rn_":"3"},{"1":"4.6","2":"3.1","3":"1.5","4":"0.2","5":"setosa","_rn_":"4"},{"1":"5.0","2":"3.6","3":"1.4","4":"0.2","5":"setosa","_rn_":"5"},{"1":"5.4","2":"3.9","3":"1.7","4":"0.4","5":"setosa","_rn_":"6"},{"1":"4.6","2":"3.4","3":"1.4","4":"0.3","5":"setosa","_rn_":"7"},{"1":"5.0","2":"3.4","3":"1.5","4":"0.2","5":"setosa","_rn_":"8"},{"1":"4.4","2":"2.9","3":"1.4","4":"0.2","5":"setosa","_rn_":"9"},{"1":"4.9","2":"3.1","3":"1.5","4":"0.1","5":"setosa","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>จะเห็นว่า ข้อมูลในแต่ละแถวนั้น คือ <strong>ดอกไม้ 1 ดอก</strong> จำนวนคอลัมน์จะมากกว่าข้อมูลแบบ <code>long form</code></p>
+<p>จะเห็นว่า ข้อมูลในแต่ละแถวนั้น คือ <strong>ดอกไม้ 1 ดอก</strong> จำนวนคอลัมน์จะมากกว่าข้อมูลแบบ Long form</p>
 <div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_id</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>flower_id <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span>, </span>
@@ -412,7 +411,7 @@
 <h3>
 <span class="header-section-number">5.2.2</span> Wide to long<a class="anchor" aria-label="anchor" href="#wide-to-long"><i class="fas fa-link"></i></a>
 </h3>
-<p>ท่านสามารถเปลี่ยนข้อมูลจาก <code>wide form</code> เป็น <code>long form</code> ได้โดย package <code>tidyr</code> โดยใช้ function <code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code></p>
+<p>ท่านสามารถเปลี่ยนข้อมูลจาก Wide form เป็น Long form ได้โดย package <code>tidyr</code> โดยใช้ Function <code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code></p>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">long_df</span> <span class="op">&lt;-</span> <span class="va">df_id</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">flower_id</span>, <span class="va">Species</span><span class="op">)</span>, </span>
@@ -436,7 +435,7 @@
 {"columns":[{"label":["Species"],"name":[1],"type":["fct"],"align":["left"]},{"label":["Metrics"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Median (cm)"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Mean (cm)"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sd (cm)"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"setosa","2":"Petal.Length","3":"1.50","4":"1.462","5":"0.1736640"},{"1":"setosa","2":"Petal.Width","3":"0.20","4":"0.246","5":"0.1053856"},{"1":"setosa","2":"Sepal.Length","3":"5.00","4":"5.006","5":"0.3524897"},{"1":"setosa","2":"Sepal.Width","3":"3.40","4":"3.428","5":"0.3790644"},{"1":"versicolor","2":"Petal.Length","3":"4.35","4":"4.260","5":"0.4699110"},{"1":"versicolor","2":"Petal.Width","3":"1.30","4":"1.326","5":"0.1977527"},{"1":"versicolor","2":"Sepal.Length","3":"5.90","4":"5.936","5":"0.5161711"},{"1":"versicolor","2":"Sepal.Width","3":"2.80","4":"2.770","5":"0.3137983"},{"1":"virginica","2":"Petal.Length","3":"5.55","4":"5.552","5":"0.5518947"},{"1":"virginica","2":"Petal.Width","3":"2.00","4":"2.026","5":"0.2746501"},{"1":"virginica","2":"Sepal.Length","3":"6.50","4":"6.588","5":"0.6358796"},{"1":"virginica","2":"Sepal.Width","3":"3.00","4":"2.974","5":"0.3224966"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>ถ้าลองทำในข้อมูล <code>wide form</code></p>
+<p>ถ้าลองทำในข้อมูล Wide form</p>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -459,7 +458,7 @@
   </script>
 </div>
 <p>จะเห็นว่าค่อนข้าง intensive และผิดพลาดง่าย</p>
-<p>ปล. อย่างไรก็ตาม <code>dplyr</code> ในสมัยนี้มีการพัฒนาไปมาก การวิเคราะห์ ใน <code>wide form</code> ก็สามารถทำได้โดยง่าย ขึ้นอยู่กับว่าถนัดแบบใดมากกว่า</p>
+<p>ปล. อย่างไรก็ตาม <code>dplyr</code> ในปัจจุบันมีการพัฒนาไปมาก การวิเคราะห์ ใน Wide form ก็สามารถทำได้โดยง่าย ขึ้นอยู่กับว่าถนัดแบบใดมากกว่า</p>
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span>    </span>
@@ -469,14 +468,14 @@
 {"columns":[{"label":["Species"],"name":[1],"type":["fct"],"align":["left"]},{"label":["Sepal.Length_median"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Sepal.Length_mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Sepal.Length_sd"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width_median"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width_mean"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width_sd"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Petal.Length_median"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["Petal.Length_mean"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["Petal.Length_sd"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["Petal.Width_median"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["Petal.Width_mean"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["Petal.Width_sd"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"setosa","2":"5.0","3":"5.006","4":"0.3524897","5":"3.4","6":"3.428","7":"0.3790644","8":"1.50","9":"1.462","10":"0.1736640","11":"0.2","12":"0.246","13":"0.1053856"},{"1":"versicolor","2":"5.9","3":"5.936","4":"0.5161711","5":"2.8","6":"2.770","7":"0.3137983","8":"4.35","9":"4.260","10":"0.4699110","11":"1.3","12":"1.326","13":"0.1977527"},{"1":"virginica","2":"6.5","3":"6.588","4":"0.6358796","5":"3.0","6":"2.974","7":"0.3224966","8":"5.55","9":"5.552","10":"0.5518947","11":"2.0","12":"2.026","13":"0.2746501"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>อีก <strong>ประเด็นสำคัญ</strong> ของข้อมูลประเภท <code>long form</code> นั้นคือ สามารทำ <a href="data-visualization.html#ggplot2">visualization</a> ที่ซับซ้อนได้ดีกว่า <code>wide form</code> เป็นอย่างมาก ดังตัวอย่าง <a href="data-visualization.html#multi_boxplot">Boxplot1</a>, <a href="GSE63514.html#top10_boxplot">Boxplot2</a></p>
+<p>อีก <strong>ประเด็นสำคัญ</strong> ของข้อมูลประเภท Long form นั้นคือ สามารทำ <a href="data-visualization.html#ggplot2">Visualization</a> ที่ซับซ้อนได้ดีกว่า Wide form เป็นอย่างมาก ดังตัวอย่าง <a href="data-visualization.html#multi_boxplot">Boxplot1</a>, <a href="GSE63514.html#top10_boxplot">Boxplot2</a></p>
 <hr>
 </div>
 <div id="long-to-wide" class="section level3" number="5.2.3">
 <h3>
 <span class="header-section-number">5.2.3</span> Long to wide<a class="anchor" aria-label="anchor" href="#long-to-wide"><i class="fas fa-link"></i></a>
 </h3>
-<p>ท่านสามารถเปลี่ยนกลับเป็น <code>wide form</code> ได้เช่นกัน</p>
+<p>ท่านสามารถเปลี่ยนกลับเป็น Wide form ได้เช่นกัน</p>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wide_df</span> <span class="op">&lt;-</span> <span class="va">long_df</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"Metrics"</span>, values_from <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span></span>
@@ -487,7 +486,7 @@
 {"columns":[{"label":["flower_id"],"name":[1],"type":["int"],"align":["right"]},{"label":["Species"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Sepal.Length"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Petal.Length"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Petal.Width"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"setosa","3":"5.1","4":"3.5","5":"1.4","6":"0.2"},{"1":"2","2":"setosa","3":"4.9","4":"3.0","5":"1.4","6":"0.2"},{"1":"3","2":"setosa","3":"4.7","4":"3.2","5":"1.3","6":"0.2"},{"1":"4","2":"setosa","3":"4.6","4":"3.1","5":"1.5","6":"0.2"},{"1":"5","2":"setosa","3":"5.0","4":"3.6","5":"1.4","6":"0.2"},{"1":"6","2":"setosa","3":"5.4","4":"3.9","5":"1.7","6":"0.4"},{"1":"7","2":"setosa","3":"4.6","4":"3.4","5":"1.4","6":"0.3"},{"1":"8","2":"setosa","3":"5.0","4":"3.4","5":"1.5","6":"0.2"},{"1":"9","2":"setosa","3":"4.4","4":"2.9","5":"1.4","6":"0.2"},{"1":"10","2":"setosa","3":"4.9","4":"3.1","5":"1.5","6":"0.1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>หรือท่านอยากจะเปลี่ยนข้อมูลที่สรุปแล้วให้เป็น <code>wide form</code> ก็เป็นได้</p>
+<p>หรือท่านอยากจะเปลี่ยนข้อมูลที่สรุปแล้วให้เป็น Wide form ก็เป็นได้</p>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"Metrics"</span>, </span>
@@ -537,7 +536,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

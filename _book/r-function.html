@@ -19,9 +19,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัว function นั้น จะประกอบไปด้วย function ที่มีมาพร้อมกับ R ตั้งแต่ต้น (base R function) function...">
-<meta property="og:description" content="function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัว function นั้น จะประกอบไปด้วย function ที่มีมาพร้อมกับ R ตั้งแต่ต้น (base R function) function...">
-<meta name="twitter:description" content="function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัว function นั้น จะประกอบไปด้วย function ที่มีมาพร้อมกับ R ตั้งแต่ต้น (base R function) function...">
+<meta name="description" content="Function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัว Function นั้น จะประกอบไปด้วย Function ที่มีมาพร้อมกับ R ตั้งแต่ต้น (base R function) Function...">
+<meta property="og:description" content="Function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัว Function นั้น จะประกอบไปด้วย Function ที่มีมาพร้อมกับ R ตั้งแต่ต้น (base R function) Function...">
+<meta name="twitter:description" content="Function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัว Function นั้น จะประกอบไปด้วย Function ที่มีมาพร้อมกับ R ตั้งแต่ต้น (base R function) Function...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -59,14 +59,15 @@
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -78,17 +79,23 @@
 <h1>
 <span class="header-section-number">2</span> <strong>R function</strong><a class="anchor" aria-label="anchor" href="#r-function"><i class="fas fa-link"></i></a>
 </h1>
-<p>function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัว function นั้น จะประกอบไปด้วย</p>
+<p>Function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัว Function นั้น จะประกอบไปด้วย</p>
 <ul>
-<li>function ที่มีมาพร้อมกับ R ตั้งแต่ต้น (base R function)</li>
-<li>function ที่ผู้นิพนธ์ท่านอื่นเขียนไว้ และรวบรวมมาเป็น ชุดของ function เรียกว่า package</li>
-<li>function ที่ท่านเขียนขึ้นมาเอง</li>
+<li>Function ที่มีมาพร้อมกับ R ตั้งแต่ต้น (base R function)</li>
+<li>Function ที่ผู้นิพนธ์ท่านอื่นเขียนไว้ และรวบรวมมาเป็น ชุดของ Function เรียกว่า Package</li>
+<li>Function ที่ท่านเขียนขึ้นมาเอง</li>
 </ul>
 <div id="anatomy-of-function" class="section level2" number="2.1">
 <h2>
 <span class="header-section-number">2.1</span> Anatomy of function<a class="anchor" aria-label="anchor" href="#anatomy-of-function"><i class="fas fa-link"></i></a>
 </h2>
-<p>function นั้นประกอบด้วย 4 ส่วน คือ 1. Function name (ชื่อฟังก์ชัน) 2. Argument (รายละเอียดของฟังก์ชัน) 3. Function body (รายละเอียดของฟังก์ชัน) 4. Return (ผลลัพธ์ของฟังก์ชัน)</p>
+<p>Function นั้นประกอบด้วย 4 ส่วน คือ</p>
+<ol style="list-style-type: decimal">
+<li>Function name (ชื่อฟังก์ชัน)</li>
+<li>Argument (รายละเอียดของฟังก์ชัน)</li>
+<li>Function body (รายละเอียดของฟังก์ชัน)</li>
+<li>Return (ผลลัพธ์ของฟังก์ชัน)</li>
+</ol>
 <p>ยกตัวอย่างฟังก์ชันหา ค่าเฉลี่ยของข้อมูล</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">find_mean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">{</span></span>
@@ -100,14 +107,14 @@
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">find_mean</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<p>จะเห็นว่า function นี่รับข้อมูล 2 ตัวแปร คือ x และ y ซึ่งท่านจะต้องแทนค่าที่ท่านต้องการลงไปใน function หลังจากนั้น function จะทำการประมวลผลและส่งผลลัพธ์กลับมา</p>
-<p>ในผู้เริ่มต้น ส่วนใหญ่ท่านมักจะไม่ใช้ function ที่เขียนขึ้นมาเองมากนัก เนื่องจาก basic operation ส่วนใหญ่จะมีผู้นิพนธ์ขึ้นมาให้แล้ว</p>
+<p>จะเห็นว่า Function นี่รับข้อมูล 2 ตัวแปร คือ <code>x</code> และ <code>y</code> ซึ่งท่านจะต้องแทนค่าที่ท่านต้องการลงไปใน Function หลังจากนั้น Function จะทำการประมวลผลและส่งผลลัพธ์กลับมา</p>
+<p>ในผู้เริ่มต้น ส่วนใหญ่ท่านมักจะไม่ใช้ Function ที่เขียนขึ้นมาเองมากนัก เนื่องจาก Basic operation ส่วนใหญ่จะมีผู้นิพนธ์ขึ้นมาให้แล้ว</p>
 </div>
 <div id="base-r-function" class="section level2" number="2.2">
 <h2>
 <span class="header-section-number">2.2</span> Base R function<a class="anchor" aria-label="anchor" href="#base-r-function"><i class="fas fa-link"></i></a>
 </h2>
-<p>Base R function คือ function ที่ติดกับ R มาตั้งแต่แรก ซึ่งท่านสามารถเรียกใช้ได้เลยโดยไม่ต้องทำการเรียก package ขึ้นมาก่อน</p>
+<p>Base R function คือ Function ที่ติดกับ <code>R</code> มาตั้งแต่แรก ซึ่งท่านสามารถเรียกใช้ได้เลยโดยไม่ต้องทำการเรียก Package ขึ้นมาก่อน</p>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">68</span><span class="op">)</span><span class="op">)</span> <span class="co"># find max value</span></span></code></pre></div>
 <pre><code>## [1] 68</code></pre>
@@ -123,7 +130,7 @@
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="co"># display only unique values</span></span></code></pre></div>
 <pre><code>## [1] 1 2 4 5 6 7 8</code></pre>
-<p>ในส่วนของการ manipulate dataframe นั้น คำสั่งต่างๆ ที่น่ารู้มีดังนี้</p>
+<p>ในส่วนของการ Manipulate dataframe นั้น คำสั่งต่างๆ ที่น่ารู้มีดังนี้</p>
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span><span class="op">)</span>,y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span>,<span class="fl">8</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">7</span>,<span class="fl">9</span>,<span class="fl">4</span>,<span class="fl">7</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">df</span></span></code></pre></div>
@@ -160,7 +167,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="co"># ชื่อ column</span></span></code></pre></div>
 <pre><code>## [1] "x" "y" "z"</code></pre>
 <p>สามารถดู base R function ทั้งหมดได้ที่ <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html</a></p>
-<p>ถ้าท่านต้องการดูว่า function นั้นใช้งานอย่างไร ให้ใส่เครื่องหมาย ? หน้า function นั้น เช่น <code>?mean()</code> <code>?colSums()</code></p>
+<p>ถ้าท่านต้องการดูว่า Function นั้นใช้งานอย่างไร ให้ใส่เครื่องหมาย ? หน้า Function นั้น เช่น <code>?mean()</code> <code>?colSums()</code></p>
 
 </div>
 </div>
@@ -192,7 +199,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

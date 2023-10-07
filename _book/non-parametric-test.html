@@ -59,14 +59,15 @@
 <li><a class="active" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
 <li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
 <li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">13</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">14</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">15</span> edgeR</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">16</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
 <li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">17</span> Session info</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
 </ul>
 
         <div class="book-extra">
@@ -84,12 +85,12 @@
 <span class="header-section-number">10.1</span> Proportion test<a class="anchor" aria-label="anchor" href="#proportion-test"><i class="fas fa-link"></i></a>
 </h2>
 <p>คือ การทดสอบทางสถิติเพื่อทำการเปรียบเทียบอัตราส่วนของจำนวน โดยจะใช้กับข้อมูลประเภทจำนวนนับของตัวแปรจัดประเภท (Nominal variable) เช่น จำนวนคน จำนวนเซลล์ เป็นต้น</p>
-<p><strong>ข้อสังเกต</strong> การทดลองที่มีการทำ technical replicate แล้วหาค่าเฉลี่ยนั้น ตัวข้อมูลยังเป็น <strong>จำนวนนับ</strong> การจะหาความต่างค่าเฉลี่ยโดยใช้ <code>t.test</code> นั้น จำนวน sample ควรจะมากพอตาม Central limit theorem นอกเหนือจากนั้นควรใช้ proportional test หรือ ควรใช้ generalized linear model ประเภทอื่นมากกว่า</p>
+<p><strong>ข้อสังเกต</strong> การทดลองที่มีการทำ Technical replicate แล้วหาค่าเฉลี่ยนั้น ตัวข้อมูลยังเป็น <strong>จำนวนนับ</strong> การจะหาความต่างค่าเฉลี่ยโดยใช้ <code>t.test</code> นั้น จำนวน Sample ควรจะมากพอตาม Central limit theorem นอกเหนือจากนั้นควรใช้ Proportional test หรือ ควรใช้ Generalized linear model ประเภทอื่นมากกว่า</p>
 <div id="chi-square-test" class="section level3" number="10.1.1">
 <h3>
 <span class="header-section-number">10.1.1</span> Chi-square test<a class="anchor" aria-label="anchor" href="#chi-square-test"><i class="fas fa-link"></i></a>
 </h3>
-<p>คือ การทดสอบความต่างของอัตราส่วนโดยใช้การประมาณการของ ค่าที่คาดหวัง (expected value) และ ค่าที่สังเกตได้จริง (observed value)</p>
+<p>คือ การทดสอบความต่างของอัตราส่วนโดยใช้การประมาณการของ ค่าที่คาดหวัง (Expected value) และ ค่าที่สังเกตได้จริง (Observed value)</p>
 <p><span class="math display">\[
 \chi^{2} = \sum_{i=1}^{n}\frac{(O-E)^{2}}{E}
 \]</span></p>
@@ -97,7 +98,7 @@
 <h4>
 <span class="header-section-number">10.1.1.1</span> Chi-square goodness of fit<a class="anchor" aria-label="anchor" href="#chi-square-goodness-of-fit"><i class="fas fa-link"></i></a>
 </h4>
-<p>เป็นการเปรียบเทียบว่า observed value นั้นมาจากประชากรทางทฤษฎีหรือไม่ โดย expected value นั้นคำนวนจาก</p>
+<p>เป็นการเปรียบเทียบว่า Observed value นั้นมาจากประชากรทางทฤษฎีหรือไม่ โดย Expected value นั้นคำนวนจาก</p>
 <p><span class="math display">\[
 E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
 \]</span></p>
@@ -123,7 +124,7 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["O.dice"],"name":[1],"type":["fct"],"align":["left"]},{"label":["O.Freq"],"name":[2],"type":["int"],"align":["right"]},{"label":["E.Freq"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"170","3":"166.6667","_rn_":"1"},{"1":"2","2":"176","3":"166.6667","_rn_":"2"},{"1":"3","2":"171","3":"166.6667","_rn_":"3"},{"1":"4","2":"157","3":"166.6667","_rn_":"4"},{"1":"5","2":"162","3":"166.6667","_rn_":"5"},{"1":"6","2":"164","3":"166.6667","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>จะเห็นว่าความแตกต่างระหว่าง observed และ expected นั้น อยู่ในพิสัยของของ <span class="math inline">\(H_{0}\)</span></p>
+<p>จะเห็นว่าความแตกต่างระหว่าง Observed และ Expected นั้น อยู่ในพิสัยของของ <span class="math inline">\(H_{0}\)</span></p>
 <p>แต่ถ้าลูกเต๋านั้นเป็นลูกเต๋าถ่วงน้ำหนัก</p>
 <div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">weight_dice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">1000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">9</span><span class="op">)</span></span>
@@ -141,7 +142,7 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["O.weight_dice"],"name":[1],"type":["fct"],"align":["left"]},{"label":["O.Freq"],"name":[2],"type":["int"],"align":["right"]},{"label":["E.freq"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"335","3":"166.6667","_rn_":"1"},{"1":"2","2":"209","3":"166.6667","_rn_":"2"},{"1":"3","2":"122","3":"166.6667","_rn_":"3"},{"1":"4","2":"113","3":"166.6667","_rn_":"4"},{"1":"5","2":"103","3":"166.6667","_rn_":"5"},{"1":"6","2":"118","3":"166.6667","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>เมื่อวิเคราะห์ chi-square ตามการกระจายตัวของลูกเต๋าทั่วไป จะแตกต่างอย่างมีนัยสำคัญ</p>
+<p>เมื่อวิเคราะห์ Chi-square ตามการกระจายตัวของลูกเต๋าทั่วไป จะแตกต่างอย่างมีนัยสำคัญ</p>
 <div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chisq_weight_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">weight_dice</span><span class="op">)</span>, p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">9</span><span class="op">)</span></span>
 <span><span class="va">chisq_weight_weight</span></span></code></pre></div>
@@ -166,7 +167,7 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
 <p>เป็นการเปรียบเทียบข้อมูลจำนวนสองกลุ่มขึ้นไปว่า มีความสัมพันธ์ที่ทำให้การกระจายตัวของข้อมูลเปลี่ยนไปจากปกติหรือไม่</p>
 <p><span class="math inline">\(H_{0}\)</span>: ข้อมูลทั้ง 2+ กลุ่มนั้น<strong>ไม่</strong>มีความสัมพันธ์ต่อกัน</p>
 <p><span class="math inline">\(H_{a}\)</span>: ข้อมูลทั้ง 2+ กลุ่มนั้นมีความสัมพันธ์ต่อกัน</p>
-<p>โดยการวิเคราะห์นั้นจะใช้กับข้อมูลความถี่แบบ <span class="math inline">\(n \times n\)</span> โดย expected event นั้นคิดจาก</p>
+<p>โดยการวิเคราะห์นั้นจะใช้กับข้อมูลความถี่แบบ <span class="math inline">\(n \times n\)</span> โดย Expected event นั้นคิดจาก</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th>Group/Success</th>
@@ -200,7 +201,7 @@ E_{i,j} = P(G_{i,j}) \times P(Con_{i,j}) \times \text{total counts}
 \]</span> <span class="math display">\[
 E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 \]</span></p>
-<p>อย่างเช่น expected event สำหรับช่อง <span class="math inline">\(A\)</span> คือ <span class="math display">\[
+<p>อย่างเช่น Expected event สำหรับช่อง <span class="math inline">\(A\)</span> คือ <span class="math display">\[
 \frac{(A + B) \times (A + C)}{(A + B + C + D)^{2}}(A+B+C+D)
 \]</span></p>
 <p>ยกตัวอย่างว่าอยากทราบว่าเพศมีผลต่ออัตราการตายในมะเร็งปอดหรือไม่</p>
@@ -218,7 +219,7 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 ## 
 ## data:  lung_ob
 ## X-squared = 13.511, df = 1, p-value = 0.0002371</code></pre>
-<p><code>p</code> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ</p>
+<p><span class="math inline">\(p\)</span> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ</p>
 <p>ลองคำนวณเองตามสูตรขั้นต้น</p>
 <div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lung_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span><span class="op">)</span>,<span class="fl">1</span>, <span class="va">prod</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -241,11 +242,11 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 <h3>
 <span class="header-section-number">10.1.2</span> Fisher’s exact test<a class="anchor" aria-label="anchor" href="#fisher"><i class="fas fa-link"></i></a>
 </h3>
-<p>คือการทดสอบว่าข้อมูลนั้นมีความสัมพันธ์หรือไม่ โดยการเทียบกับความสัมพันธ์แบบสุ่ม การทดสอบนี้จะมีความแม่นยำกว่า chi-square เนื่องจากเป็นการคำนวณความน่าจะเป็นโดยตรง</p>
+<p>คือการทดสอบว่าข้อมูลนั้นมีความสัมพันธ์หรือไม่ โดยการเทียบกับความสัมพันธ์แบบสุ่ม การทดสอบนี้จะมีความแม่นยำกว่า Chi-square เนื่องจากเป็นการคำนวณความน่าจะเป็นโดยตรง</p>
 <p><span class="math display">\[
 p = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose B}{C+D \choose D}}{{n \choose B+D}}
 \]</span></p>
-<p>พิจารณาสูตร จุดประสงค์คือ การคำนวณความน่าจะเป็นของการหยิบสุ่มแบบไม่คืนให้ได้ตาม condition ที่ต้องการนั่นเอง</p>
+<p>พิจารณาสูตร จุดประสงค์คือ การคำนวณความน่าจะเป็นของการหยิบสุ่มแบบไม่คืนให้ได้ตาม Condition ที่ต้องการนั่นเอง</p>
 <div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">lung_ob</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -259,7 +260,7 @@ p = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose 
 ## sample estimates:
 ## odds ratio 
 ##   2.991585</code></pre>
-<p><code>p</code> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ สังเกตว่า <code>p</code> จะมากกว่า chi-square เนื่องจากการทดสอบนี้มีความ conservative กว่า</p>
+<p><span class="math inline">\(p\)</span> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ สังเกตว่า <span class="math inline">\(p\)</span> จะมากกว่า Chi-square เนื่องจากการทดสอบนี้มีความ conservative กว่า</p>
 <p>ลองคำนวณเองตามสูตรขั้นต้น</p>
 <div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alive_dead</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span></span>
@@ -282,7 +283,7 @@ p = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose 
 <span><span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">phyper</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span>,<span class="va">alive_dead</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, </span>
 <span>       <span class="va">alive_dead</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">male_female</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,lower.tail<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.0004635661</code></pre>
-<p>ปล. การใช้ <code>lung_ob[1] - 1</code> นั้นมีที่มาจากว่า เมื่อใช้ <code>lower.tail = TRUE</code> จะคำนวณโอกาสที่ ได้ <span class="math inline">\(P[X &gt; x]\)</span> ซึ่งเราต้องการ <span class="math inline">\(P[X \geq x]\)</span> จึงต้อง ลบ condition ที่ต้องการออกด้วย</p>
+<p>ปล. การใช้ <code>lung_ob[1] - 1</code> นั้นมีที่มาจากว่า เมื่อใช้ <code>lower.tail = TRUE</code> จะคำนวณโอกาสที่ ได้ <span class="math inline">\(P[X &gt; x]\)</span> ซึ่งเราต้องการ <span class="math inline">\(P[X \geq x]\)</span> จึงต้อง ลบ Condition ที่ต้องการออกด้วย</p>
 <hr>
 </div>
 </div>
@@ -290,7 +291,7 @@ p = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose 
 <h2>
 <span class="header-section-number">10.2</span> Rank test<a class="anchor" aria-label="anchor" href="#rank-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>เป็นการหาความต่างของ<strong>ลำดับ</strong> แทนที่จะหาความต่างของ mean/variance ในภาวะที่ไม่ทราบการกระจายตัวของข้อมูลที่ชัดเจน</p>
+<p>เป็นการหาความต่างของ<strong>ลำดับ</strong> แทนที่จะหาความต่างของ Mean/Variance ในภาวะที่ไม่ทราบการกระจายตัวของข้อมูลที่ชัดเจน</p>
 <div id="test-for-normality" class="section level3" number="10.2.1">
 <h3>
 <span class="header-section-number">10.2.1</span> Test for normality<a class="anchor" aria-label="anchor" href="#test-for-normality"><i class="fas fa-link"></i></a>
@@ -301,7 +302,7 @@ p = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose 
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">Metrics</span><span class="op">~</span><span class="va">Species</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/iris_hist-1.png" width="672"></div>
-<p>พิจารณาแล้ว <code>Petal.Width</code> ไม่น่าจะใช่ normal distribution จะทำการทดสอบต่อโดย <code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code> ซึ่งเป็นการทดสอบการกระจายตัวของข้อมูลว่าหลุดออกจาก normal distribution หรือไม่</p>
+<p>พิจารณาแล้ว <code>Petal.Width</code> ไม่น่าจะใช่ Normal distribution จะทำการทดสอบต่อโดย <code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code> ซึ่งเป็นการทดสอบการกระจายตัวของข้อมูลว่าหลุดออกจาก Normal distribution หรือไม่</p>
 <div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">long_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Metrics</span>, <span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -311,14 +312,14 @@ p = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose 
 {"columns":[{"label":["Metrics"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Species"],"name":[2],"type":["fct"],"align":["left"]},{"label":["normality"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Petal.Length","2":"setosa","3":"0.0548"},{"1":"Petal.Length","2":"versicolor","3":"0.1585"},{"1":"Petal.Length","2":"virginica","3":"0.1098"},{"1":"Petal.Width","2":"setosa","3":"0.0000"},{"1":"Petal.Width","2":"versicolor","3":"0.0273"},{"1":"Petal.Width","2":"virginica","3":"0.0870"},{"1":"Sepal.Length","2":"setosa","3":"0.4595"},{"1":"Sepal.Length","2":"versicolor","3":"0.4647"},{"1":"Sepal.Length","2":"virginica","3":"0.2583"},{"1":"Sepal.Width","2":"setosa","3":"0.2715"},{"1":"Sepal.Width","2":"versicolor","3":"0.3380"},{"1":"Sepal.Width","2":"virginica","3":"0.1809"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>จะเห็นว่า <code>Petal.Width</code> มี <code>p</code> &lt; 0.05 พอสมควร (ไม่เป็น normal distribution) จึงสมควรใช้ non-parametric test</p>
+<p>จะเห็นว่า <code>Petal.Width</code> มี <span class="math inline">\(p\)</span> &lt; 0.05 พอสมควร (ไม่เป็น Normal distribution) จึงสมควรใช้ Non-parametric test</p>
 </div>
 <div id="wilcox-rs" class="section level3" number="10.2.2">
 <h3>
 <span class="header-section-number">10.2.2</span> Wilcoxon’s rank sum test (Mann-Whitney U test)<a class="anchor" aria-label="anchor" href="#wilcox-rs"><i class="fas fa-link"></i></a>
 </h3>
 <p>คือ การคำนวณว่ากลุ่มตัวอย่าง 2 กลุ่มนั้นมาจากประชากรกลุ่มเดียวกันหรือไม่ จากการพิจารณาผลรวมของ<strong>ลำดับข้อมูล</strong>ทั้งสองกลุ่ม</p>
-<p>ลักษณะการใช้คล้าย <a href="parametric-test.html#ind-t">independent t-test</a> สำหรับ non-normal distribution</p>
+<p>ลักษณะการใช้คล้าย <a href="parametric-test.html#ind-t">Independent t-test</a> สำหรับ Non-normal distribution</p>
 <p><span class="math display">\[
 W_{j} = n_{1}n_{2} + \frac{n_{j}(n_{j}+1)}{2} - R_{n}
 \]</span></p>
@@ -378,7 +379,7 @@ W = min(W_{1}, W_{2})
 <span><span class="va">pval</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="va">pval</span> <span class="co"># not exactly equal due to tie adjustment in wilcox.test()</span></span></code></pre></div>
 <pre><code>## [1] 6.856641e-18</code></pre>
-<p>ปล. เมื่อจำนวนตัวอย่าง &gt;50 ค่า <span class="math inline">\(W\)</span> จะเข้าสู่ normal distribution ซึ่งสามารถเปลี่ยนเป็นค่า <span class="math inline">\(Z\)</span> ได้ ส่งผลให้การคำนวณ <code>p-value</code> จะแม่นยำขึ้น</p>
+<p>ปล. เมื่อจำนวนตัวอย่าง &gt;50 ค่า <span class="math inline">\(W\)</span> จะเข้าสู่ Normal distribution ซึ่งสามารถเปลี่ยนเป็นค่า <span class="math inline">\(Z\)</span> ได้ ส่งผลให้การคำนวณ <span class="math inline">\(p\)</span>-value จะแม่นยำขึ้น</p>
 <p><span class="math display">\[
 Z = \frac{W-m_{w}}{s_{w}}
 \]</span></p>
@@ -394,7 +395,7 @@ s_{w} = \sqrt{\frac{n_{1}n_{2}(n_{1}+n_{2}+1)}{12}}
 <span class="header-section-number">10.2.3</span> Wilcoxon’s signed-rank test<a class="anchor" aria-label="anchor" href="#wilcox-sign"><i class="fas fa-link"></i></a>
 </h3>
 <p>คือ การคำนวณว่ากลุ่มตัวอย่าง 2 กลุ่มนั้นมาจากประชากรกลุ่มเดียวกันหรือไม่ จากการคำนวณ<strong>ลำดับข้อมูล</strong>ของทั้งสองกลุ่ม</p>
-<p>ลักษณะการใช้คล้าย <a href="parametric-test.html#pair-t">paired t-test</a> สำหรับ non-normal distribution</p>
+<p>ลักษณะการใช้คล้าย <a href="parametric-test.html#pair-t">Paired t-test</a> สำหรับ non-normal distribution</p>
 <p><span class="math display">\[
 V = \sum_{i=1}^{N_{r}}[sgn(x_{2,i} - x_{1,i}) \cdot R_{i}]
 \]</span></p>
@@ -404,7 +405,7 @@ sgn(x) =\begin{cases} -1 \quad \text{if} \, x &lt; 1,  \\0 \quad \ \ \  \text{if
 <p><span class="math display">\[
 V = min(V_{-}, V_{+})
 \]</span></p>
-<p>สมมติการวัด wound healing assay (วัดการเคลื่อนที่ของเซลล์) ก่อนและหลัง treat ยา</p>
+<p>สมมติการวัด Wound healing assay (วัดการเคลื่อนที่ของเซลล์) ก่อนและหลัง Treat ยา</p>
 <div class="inline-figure"><img src="Picture/cell_migration.jpg" width="60%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
@@ -521,7 +522,7 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 <h3>
 <span class="header-section-number">10.3.1</span> Spearman’s correlation<a class="anchor" aria-label="anchor" href="#spearmans-correlation"><i class="fas fa-link"></i></a>
 </h3>
-<p>เป็นการทดสอบความสัมพันธ์ในทิศทางของตัวแปรสองตัวแปรว่าเป็นไปในทางเดียวกันหรือไม่ (monotonic relationship)</p>
+<p>เป็นการทดสอบความสัมพันธ์ในทิศทางของตัวแปรสองตัวแปรว่าเป็นไปในทางเดียวกันหรือไม่ (Monotonic relationship)</p>
 <p><span class="math display">\[ \rho_{xy} =\frac{cov(x,y)}{s(x) s(y)} \]</span></p>
 <p><span class="math display">\[
 \rho_{xy} = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum^{n}_{i=1}(x_{i}-\bar{x})^{2}}\sqrt{\sum^{n}_{i=1}(y_{i}-\bar{y})^{2}}}
@@ -541,7 +542,7 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 <div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">poly_data</span><span class="op">$</span><span class="va">x</span>, <span class="va">poly_data</span><span class="op">$</span><span class="va">y</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span> <span class="co"># monotonic</span></span></code></pre></div>
 <pre><code>## [1] 0.9993399</code></pre>
-<p>การทดสอบใน <code>R</code> ใช้ลักษณะ code เดียวกันกับ <a href="parametric-test.html#pearson">Pearson’s correlation</a> แต่เปลี่ยน argument เป็น <code>method = "pearson"</code> และข้อควรระวังก็คิดเหมือนกัน</p>
+<p>การทดสอบใน <code>R</code> ใช้ลักษณะ code เดียวกันกับ <a href="parametric-test.html#pearson">Pearson’s correlation</a> แต่เปลี่ยน Argument เป็น <code>method = "pearson"</code> และข้อควรระวังก็คิดเหมือนกัน</p>
 
 </div>
 </div>
@@ -586,7 +587,7 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-06.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

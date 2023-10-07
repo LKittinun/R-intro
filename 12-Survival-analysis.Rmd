@@ -1,18 +1,18 @@
 # **Survival analysis**
 
-ในงานวิจัยที่กระทำกับผู้ป่วย หรือแม้กระทั้งเซลล์นั้น บางครั้งจะมีความจำเป็นที่ต้องทำการวิเคราะห์ข้อมูลเพื่อเปรียบเทียบสร้างแบบจำลองที่สามารถทำนายเวลาที่ใช้ก่อนที่จะเกิดเหตุการณ์ที่ท่านสนใจ (event) เช่น เวลาที่ผู้ป่วยจะเสียชีวิตจากโรคมะเร็งนับตั้งแต่วันวินิจฉัย เวลาของเซลล์ที่จะตายหลังจากใส่สารบางอย่างที่สนใจ เป็นต้น
+ในงานวิจัยที่กระทำกับผู้ป่วย หรือแม้กระทั้งเซลล์นั้น บางครั้งจะมีความจำเป็นที่ต้องทำการวิเคราะห์ข้อมูลเพื่อเปรียบเทียบสร้างแบบจำลองที่สามารถทำนายเวลาที่ใช้ก่อนที่จะเกิดเหตุการณ์ที่ท่านสนใจ (Event) เช่น เวลาที่ผู้ป่วยจะเสียชีวิตจากโรคมะเร็งนับตั้งแต่วันวินิจฉัย เวลาของเซลล์ที่จะตายหลังจากใส่สารบางอย่างที่สนใจ เป็นต้น
 
-ลักษณะพิเศษของการวิเคราะห์ survival analysis คือ มีการวิเคราะห์โดยใช้ปัจจัยที่เรียกว่า censoring ร่วม ซึ่งคือการที่ เหตุการณ์ที่คาดหวังว่าจะเกิดนั้นไม่มาถึงแม้ว่าจะครบตามเวลาที่ผู้วิจัยสังเกตการณ์แล้ว ซึ่งทำให้ไม่สามารถมั่นใจได้ว่าเหตุการณ์นั้นจะเกิดต่อไปหรือไม่ ณ เวลาหลังจากนี้
+ลักษณะพิเศษของการวิเคราะห์ Survival analysis คือ มีการวิเคราะห์โดยใช้ปัจจัยที่เรียกว่า Censoring ร่วม ซึ่งคือการที่ เหตุการณ์ที่คาดหวังว่าจะเกิดนั้นไม่มาถึงแม้ว่าจะครบตามเวลาที่ผู้วิจัยสังเกตการณ์แล้ว ซึ่งทำให้ไม่สามารถมั่นใจได้ว่าเหตุการณ์นั้นจะเกิดต่อไปหรือไม่ ณ เวลาหลังจากนี้
 
 ```{r censor, echo = FALSE, out.width = "90%"}
 knitr::include_graphics("Picture/censor.jpg")
 ```
 
-การ censor โดยหลักมี 3 แบบ คือ
+การ Censor โดยหลักมี 3 แบบ คือ
 
 -   Right-censor (ดังรูป) คือ ไม่แน่ใจข้อมูลการเกิด event เวลาสุดท้ายที่พบ ซึ่งพบมมากที่สุด
 
--   Left-censor คือ ไม่แน่ใจข้อมูลช่วงเวลาเริ่มต้น เช่น diagnosis วันไหน
+-   Left-censor คือ ไม่แน่ใจข้อมูลช่วงเวลาเริ่มต้น เช่น Diagnosis วันไหน
 
 -   Interval-censor คือ เวลาช่วงใดช่วงหนึ่งหายไป
 
@@ -26,7 +26,7 @@ $$
 \text{Survival proability} = \frac{n.risk - n.event}{n.risk}
 $$
 
-อธิบายหลักการอย่างง่ายของ KM นั่นคือ ทุกเคสทียังไม่เกิดเหตุการณ์นั้น จะเป็น "เคสที่เสี่ยงต่อการเกิดเหตุการณ์ (at risk)" ซึ่งจำนวนเคสแรกเริ่มที่เสี่ยง (number at risk) จะเท่ากับจำนวนเคสทั้งหมด (sample size) โดยจะนับการเกิด event ตามปกติ เพียงแต่ถ้าเคสนั้นถูก censor นั้น `n.risk` จะลดลงด้วย ทำให้อัตราการเกิด event ยังไม่เปลี่ยนแปลง ดังตัวอย่างตามตาราง
+อธิบายหลักการอย่างง่ายของ KM นั่นคือ ทุกเคสทียังไม่เกิดเหตุการณ์นั้น จะเป็น **เคสที่เสี่ยงต่อการเกิดเหตุการณ์ (At risk)** ซึ่งจำนวนเคสแรกเริ่มที่เสี่ยง (Number at risk) จะเท่ากับจำนวนเคสทั้งหมด (Sample size) โดยจะนับการเกิด Event ตามปกติ เพียงแต่ถ้าเคสนั้นถูก Censor นั้น `n.risk` จะลดลงด้วย ทำให้อัตราการเกิด Event ยังไม่เปลี่ยนแปลง ดังตัวอย่างตามตาราง
 
 | time | n.risk | n.event | n.censor |   calculation | estimate |
 |-----:|-------:|--------:|---------:|--------------:|---------:|
@@ -58,7 +58,7 @@ lung_fit <- survfit(Surv(time, status)~1, data = lung2)
 ggsurvplot(lung_fit, conf.int = TRUE, risk.table = TRUE, break.time.by = 25)
 ```
 
-สังเกตุว่าส่วนที่ censor (มีสัญลักษณ์ `+`) จะไม่มีการตกลงของกราฟ แต่เมื่อถึงเวลาที่มี event เกิดขึ้น การตกลงของกราฟจะสูงกว่าเมื่อไม่มี censor นำมาก่อน
+สังเกตุว่าส่วนที่ Censor (มีสัญลักษณ์ `+`) จะไม่มีการตกลงของกราฟ แต่เมื่อถึงเวลาที่มี Event เกิดขึ้น การตกลงของกราฟจะสูงกว่าเมื่อไม่มี Censor นำมาก่อน
 
 ### การสร้าง KM ใน R
 
@@ -84,7 +84,7 @@ names(ovarian)
 
 -   `ecog.ps` = ECOG performance status คะแนนน้อยแปลว่าผู้ป่วยมีสุขภาพโดยรวมดี
 
-เมื่อใช้ function `Surv()` จะทำการเปลี่ยน `futime` ให้รับรู้การ censor สังเกตว่าผู้ป่วยที่ ไม่เกิดเหตุการณ์จะมีสัญลักษณ์ `+` อยู่ข้างหลัง บ่งบอกว่าข้อมูลนั้นถูก censor นั่นหมายความว่า ผู้ป่วยจะเกิดเหตุการณ์หรือไม่ก็ได้หลังจากนี้ เพียงแต่ผู้วิจัยไม่สามารถทราบได้แล้ว
+เมื่อใช้ Function `Surv()` จะทำการเปลี่ยน `futime` ให้รับรู้การ Censor สังเกตว่าผู้ป่วยที่ ไม่เกิดเหตุการณ์จะมีสัญลักษณ์ `+` อยู่ข้างหลัง บ่งบอกว่าข้อมูลนั้นถูก censor นั่นหมายความว่า ผู้ป่วยจะเกิดเหตุการณ์หรือไม่ก็ได้หลังจากนี้ เพียงแต่ผู้วิจัยไม่สามารถทราบได้แล้ว
 
 ```{r censored_data}
 censored_df <- ovarian |>    
@@ -93,7 +93,7 @@ censored_df <- ovarian |>
 head(select(censored_df, futime, fustat, censored_futime))
 ```
 
-การพล็อต KM นั้นสามารถทำได้โดยใช้ package `survminer` โดยเริ่มจากการสร้างตาราง survival curve จากคำสั่ง `survfit()`
+การพล็อต KM นั้นสามารถทำได้โดยใช้ Package `survminer` โดยเริ่มจากการสร้างตาราง Survival curve จากคำสั่ง `survfit()`
 
 ```{r survfit, message = FALSE, warning = FALSE}
 library(survminer)
@@ -112,7 +112,7 @@ ggsurvplot(ovarian_surv, risk.table = TRUE, break.time.by = 0.25,
            surv.median.line = "hv") 
 ```
 
-จะเห็นว่าผู้ป่วยกลุ่มนี้มี median survival อยู่ประมาณ 1.75 ปี
+จะเห็นว่าผู้ป่วยกลุ่มนี้มี Median survival อยู่ประมาณ 1.75 ปี
 
 ```{r ovarian_plot}
 ovarian_surv_resid <- survfit(
@@ -127,7 +127,7 @@ ggsurvplot(ovarian_surv_resid, risk.table = TRUE, break.time.by = 0.25,
 
 ## Log-rank test
 
-Log-rank test คือ non-parametric test สำหรับ univariate analysis ที่เปรียบเทียบความแตกต่างของอัตราการเกิด event ว่าแตกต่างอย่างมีนัยสำคัญหรือไม่
+Log-rank test คือ non-parametric test สำหรับ Univariate analysis ที่เปรียบเทียบความแตกต่างของอัตราการเกิด Event ว่าแตกต่างอย่างมีนัยสำคัญหรือไม่
 
 ```{r ovarian_diff}
 ovarian_surv_diff <- survdiff(
@@ -147,11 +147,11 @@ ovarian_surv_diff
 
 -   `p` = p-value ของ Chi-square statistics
 
-ค่า log-rank นี้ สามารถแสดงใน KM ได้โดยใช้ `pval` = `TRUE` ตามหัวข้อเบื้องต้น
+ค่า Log-rank นี้ สามารถแสดงใน KM ได้โดยใช้ `pval` = `TRUE` ตามหัวข้อเบื้องต้น
 
 ## Cox-proportional hazard model
 
-Cox-proportional hazard model (CPH) เป็น semi-parametric model ซึ่งวัด risk ของการเกิด event นั้นๆ โดยมี function คือ
+Cox-proportional hazard model (CPH) เป็น Semi-parametric model ซึ่งวัด Risk ของการเกิด Event นั้นๆ โดยมีสมการ คือ
 
 $$
 h(t) = h_{0}(t) \times exp(b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p})
@@ -161,9 +161,9 @@ $$
 ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 $$
 
-ซึ่ง $h(t)/h_{0}(t)$ นั้นคือ hazard ratio (HR) หรือ ความเสี่ยงของการเกิด event นั้นๆ
+ซึ่ง $h(t)/h_{0}(t)$ นั้นคือ Hazard ratio (HR) หรือ ความเสี่ยงของการเกิด event นั้นๆ
 
-การวิเคราะห์ CPH นั้นมีข้อดีกว่า log-rank คือสามารถประมาณการเชิงปริมาณ (quantitative measurement) ผ่าน HR และสามารถวิเคราะห์สมการแบบ multivariate analysis ได้
+การวิเคราะห์ CPH นั้นมีข้อดีกว่า Log-rank คือสามารถประมาณการเชิงปริมาณ (Quantitative measurement) ผ่าน HR และสามารถวิเคราะห์สมการแบบ Multivariate analysis ได้
 
 ```{r ovarian_cox}
 ovarian_cox <- coxph(Surv(futime/365.25, fustat) ~ 
@@ -178,34 +178,34 @@ ovarian_cox
 
 -   `p` ข้างล่าง คือ overall p จาก likelihood ratio test ว่าจากทั้งหมด มีตัวแปรใดตัวแปรหนึ่งส่งผลให้อัตรากการรอดชีวิตเปลี่ยนไปอย่างมีนัยสำคัญทางสถิติหรือไม่
 
-### การตรวจสอบ assumption validity ของ CPH
+### การตรวจสอบ Assumption validity ของ CPH
 
-CPH นั้นมี assumption ดังนี้:
+CPH นั้นมี Assumption ดังนี้:
 
--   ตัวแปรแต่ละกลุ่มมีอัตราการเกิด event ที่แตกต่างกัน
+-   ตัวแปรแต่ละกลุ่มมีอัตราการเกิด Event ที่แตกต่างกัน
 
 -   HR เท่ากันทุกช่วงเวลา เช่น ที่ 1, 2, 5 ปี อัตราส่วนการเสียชีวิตระหว่างตัวแปรเท่ากันหมด
 
--   ตัวแปรมีความสัมพันธ์แบบ linear continuous variable
+-   ตัวแปรมีความสัมพันธ์แบบ Linear continuous variable
 
--   ไม่จำเป็นต้องทราบลักษณะการกระจายตัวของข้อมูลก่อน (จึงเป็น semi-parametric model)
+-   ไม่จำเป็นต้องทราบลักษณะการกระจายตัวของข้อมูลก่อน (จึงเป็น Semi-parametric model)
 
-สามารถตรวจสอบ HR ได้โดยใช้ proportionality assumption test จาก Schoenfeld residuals โดย `cox.zph()`
+สามารถตรวจสอบ HR ได้โดยใช้ Proportionality assumption test จาก Schoenfeld residuals โดย `cox.zph()`
 
 ```{r cox_proportion}
 ovarian_coxzph <- cox.zph(ovarian_cox) 
 ggcoxzph(ovarian_coxzph)
 ```
 
-โดย test นี้จะทำการเปรียบเทียบ residuals ระหว่าง risk-weight average กับ ตัวแปรนั้นๆ ว่ามีการเปลี่ยนแปลงไปในทิศทางใดทิศทางหนึ่งหรือไม่ ถ้ามี (p \< 0.05) หมายความว่า เวลาที่ผ่านไปอาจจะส่งผลให้ HR นั้นมีความแตกต่างกัน ซึ่งจะต้องทำ time-varying CPH เพิ่มเติม
+โดย test นี้จะทำการเปรียบเทียบ Residuals ระหว่าง Risk-weight average กับ ตัวแปรนั้นๆ ว่ามีการเปลี่ยนแปลงไปในทิศทางใดทิศทางหนึ่งหรือไม่ ถ้ามี ($p$ \< 0.05) หมายความว่า เวลาที่ผ่านไปอาจจะส่งผลให้ HR นั้นมีความแตกต่างกัน ซึ่งจะต้องทำ Time-varying CPH เพิ่มเติม
 
-โดยในข้อมูล `ovarian` นี้ ไม่มีตัวใดที่ p-value \< 0.05 จึงถือได้ว่า อัตราส่วนนั้นคงที่ และทำให้ CPH นั้น valid
+โดยในข้อมูล `ovarian` นี้ ไม่มีตัวใดที่ $p$-value \< 0.05 จึงถือได้ว่า อัตราส่วนนั้นคงที่ และทำให้ CPH นั้น Valid
 
-ในส่วนของ linearity สามารถตวจสอบโดยใช้ function `ggcoxfunctional()`
+ในส่วนของ Linearity สามารถตวจสอบโดยใช้ `ggcoxfunctional()`
 
 ```{r cox_linearity, warning = FALSE}
 ovarian_linear_age <- ggcoxfunctional(Surv(futime/365.25, fustat)~  age+                                 + I(log(age)) + I(sqrt(age)), data = ovarian) 
 ovarian_linear_age
 ```
 
-จะเห็นว่า age นั้นการเพิ่มขึ้นแบบ linearity โดยมี deviation เล็กน้อย
+จะเห็นว่า `age` นั้นการเพิ่มขึ้นแบบ Linearity โดยมี Deviation เล็กน้อย

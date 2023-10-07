@@ -8,12 +8,12 @@
 
 ### สร้างสมมติฐาน (Construct the hypothesis)
 
--   สมมติฐานว่าง (Null hypothesis; $H_{0}$) คือสมมติฐานที่ต้องการทดสอบ ซึ่งเปรียบเทียบได้กับสิ่งที่ทุกคนมีความเชื่อกันอยู่แล้ว (default belief) หรือไม่ทราบแน่ชัดว่าเป็นอย่างไร ซึ่งจะเป็นแนวปฏิเสธไว้ก่อน คือ **ไม่มีความแตกต่างกัน**
+-   สมมติฐานว่าง (Null hypothesis; $H_{0}$) คือสมมติฐานที่ต้องการทดสอบ ซึ่งเปรียบเทียบได้กับสิ่งที่ทุกคนมีความเชื่อกันอยู่แล้ว (Default belief) หรือไม่ทราบแน่ชัดว่าเป็นอย่างไร ซึ่งจะเป็นแนวปฏิเสธไว้ก่อน คือ **ไม่มีความแตกต่างกัน**
 -   สมมติฐานทางเลือก (Alternative hypothesis; $H_{a}$) คือสมมติฐานที่คาดหวังว่าจะเป็นการค้นพบใหม่
 
 ### ทำการวิเคราะห์ค่าทางสถิติ (Construct the test statistics)
 
-โดยเครื่องมือจะมีหลายรูปแบบตามลักษณะของข้อมูล เช่น `t-test`, `Chi-square` เป็นต้น ซึ่งผลลัพธ์จากการหาค่าทางสถิติจะเป็นไปตามการทดสอบนั้นๆ เช่น `t-test`: $t$, `Chi-square`: $X^{2}$, `F-test`: $F$ เป็นต้น
+โดยเครื่องมือจะมีหลายรูปแบบตามลักษณะของข้อมูล เช่น `t-test`, `Chi-square` เป็นต้น ซึ่งผลลัพธ์จากการหาค่าทางสถิติจะเป็นไปตามการทดสอบนั้นๆ เช่น $t$-test: $t$, Chi-square: $X^{2}$, $F$-test: $F$ เป็นต้น
 
 ### หา `p-value`
 
@@ -56,17 +56,17 @@ p <- 2*pt(0.7345, 99, lower.tail = FALSE)
 p # p-value
 ```
 
-โดย `AUC_blue` = `p-value` = พื้นที่ใต้กราฟสีฟ้า = \~46.4%
+โดย `AUC_blue` = $p$-value = พื้นที่ใต้กราฟสีฟ้า = \~46.4%
 
-### เปรียบเทียบ `p-value` กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้
+### เปรียบเทียบ $p$-value กับ ค่าวิกฤติ (critical value) ที่ยอมรับได้
 
 จุดนี้จะเป็นการตัดว่า ท่านสามารถยอมรับความบังเอิญนี้ที่กี่ % โดยทั่วไปมักใช้ที่น้อยกว่า 5% (0.05) หรือ 1% (0.01) ซึ่งแบ่งเป็น
 
--   `Left-tailed` คือ โอกาสที่ `critical value` $\leq H_{0}$
+-   Left-tailed คือ โอกาสที่ Critical value $\leq H_{0}$
 
--   `Right-tailed` คือ โอกาสที่ `critical value` $\geq H_{0}$
+-   Right-tailed คือ โอกาสที่ Critical value $\geq H_{0}$
 
--   `Two-tailed` คือ โอกาสที่ `critical value` $\neq H_{0}$ นิยมใช้วิเคราะห์มากที่สุด
+-   Two-tailed คือ โอกาสที่ Critical value $\neq H_{0}$ นิยมใช้วิเคราะห์มากที่สุด
 
 ```{r pvalue_crit}
 crit <- qt(1-0.05/2, df = 99) # ตัดที่ <= p 0.05, two-tailed
@@ -91,7 +91,7 @@ ggplot(density_df, aes(x,y)) +
 
 ## Power {#power .unnumbered}
 
-คือ โอกาสการเกิดผลบวกจริง (True positive) ของ $H_{a}$ = 1 - `power`
+คือ โอกาสการเกิดผลบวกจริง (True positive) ของ $H_{a}$ = 1 - Power
 
 พิจารณาการคำนวณทางสถิติ [t-test](#sec-t-test) ภายใต้สมมติฐาน $H_{0}$: $\mu = 12$ และ $H_{a}$: $\mu > 12$ ที่ $S = 1.7$
 
@@ -111,7 +111,7 @@ power.t.test(ncp = t_test_5$statistic, df = 4, alpha = 0.05,
              alternative = "greater", plot = TRUE, verbose = FALSE)
 ```
 
-จากกราฟ เส้นประสีแดงคือการกระจายตัวของข้อมูล $H_{0}$: $\mu = 12$ ส่วนเส้นประสีฟ้าคือ $H_{a}$: $\mu = 12 + \frac{1.379}{4}\times2.156 = 12.743$ พื้นที่สีแดงคือ critical value = $\alpha$ ที่ 0.05
+จากกราฟ เส้นประสีแดงคือการกระจายตัวของข้อมูล $H_{0}$: $\mu = 12$ ส่วนเส้นประสีฟ้าคือ $H_{a}$: $\mu = 12 + \frac{1.379}{4}\times2.156 = 12.743$ พื้นที่สีแดงคือ Critical value = $\alpha$ ที่ 0.05
 
 ดังนั้น พื้นที่สีฟ้าคือ พื้นที่ของกลุ่มตัวอย่างจาก $H_{a}$: $\mu = 12.743$ ซึ่งแท้จริงแล้ว สามารถอยู่ในกลุ่ม $H_{0}$: $\mu = 12$ ได้เช่นกัน ซึ่งก็คือโอกาสการเกิดผลบวกลวง (False positive) = Type-II error นั้นเอง
 
@@ -139,9 +139,9 @@ power.t.test(ncp = t_test_20$statistic, df = 19, alpha = 0.05,
              alternative = "greater", plot = TRUE, verbose = FALSE) 
 ```
 
-จากกราฟ เส้นประสีแดงคือการกระจายตัวของข้อมูล $H_{0}$: $\mu = 12$ ส่วนเส้นประสีฟ้าคือ $H_{a}$: $\mu = 12 + \frac{1.654}{19}\times3.356 = 12.29$ พื้นที่สีแดงคือ critical value = $\alpha$ ที่ 0.05 จะเห็นว่าการกระจายตัวของข้อมูลทั้งสองกลุ่มนั้นแคบกว่า (สังเกตตัวเลขแกน x) จึงมีส่วนที่พื้นที่ร่วมกันที่น้อยกว่าด้วย
+จากกราฟ เส้นประสีแดงคือการกระจายตัวของข้อมูล $H_{0}$: $\mu = 12$ ส่วนเส้นประสีฟ้าคือ $H_{a}$: $\mu = 12 + \frac{1.654}{19}\times3.356 = 12.29$ พื้นที่สีแดงคือ Critical value = $\alpha$ ที่ 0.05 จะเห็นว่าการกระจายตัวของข้อมูลทั้งสองกลุ่มนั้นแคบกว่า (สังเกตตัวเลขแกน x) จึงมีส่วนที่พื้นที่ร่วมกันที่น้อยกว่าด้วย
 
-เมื่อพล็อตกราฟความสัมพันธ์ระหว่าง ขนาดตัวอย่าง, $\alpha$, power จะได้ดังรูป
+เมื่อพล็อตกราฟความสัมพันธ์ระหว่าง ขนาดตัวอย่าง, $\alpha$, Power จะได้ดังรูป
 
 ```{r power_graph}
 mean_diff <- 1 # ความต่างคงที่ 1
@@ -165,15 +165,15 @@ ggplot(power_df, aes(x = n, y = power, col = alpha, linetype = alpha)) +
 
 ## Trade-off ของ p-value threshold {.unnumbered}
 
-การตั้งค่าวิกฤตินั้นมี trade-off ระหว่าง `false positive` และ `false negative` ที่ต้องพิจารณา
+การตั้งค่าวิกฤตินั้นมี Trade-off ระหว่าง False positive และ False negative ที่ต้องพิจารณา
 
 | Decision/Truth     | $H_{0}$      | $H_{a}$       |
 |--------------------|--------------|---------------|
 | **Reject** $H_{0}$ | Type I error | Correct       |
 | **Accept** $H_{0}$ | Correct      | Type II error |
 
--   `Type I error` = `false positive` = $\alpha$ = `critical value`
+-   Type I error = False positive = $\alpha$ = Critical value
 
--   `Type II error` = `false negative` = $\beta$ = 1 - `power`
+-   Type II error = False negative = $\beta$ = 1 - Power
 
-$\therefore$ `power` = `true negative`
+$\therefore$ Power = True negative
