@@ -1,0 +1,39 @@
+# **Importing data**
+
+## Importing data with `readr`
+
+ก่อนที่ท่านจะทำการวิเคราะห์ข้อมูลได้นั้น ท่านจำเป็นที่จะต้องนำข้อมูลเข้ามาใน `R` ให้ได้ก่อน ซึ่ง `tidyverse` ได้มี Package สำหรับการนำข้อมูลจากสกุลไฟล์ที่เป็นที่นิยมส่วนใหญ่เข้าสู่ `R` ได้เกือบทั้งหมด โดยใช้ฟังก์ชัน `read_*()`
+
+```{r read_file, message = FALSE}
+library(readr) # ต้อง run ทุกครั้งที่จะใช้งาน
+
+GSE63514 <- read_csv("Resource/GSE63514_norm.csv")
+
+head(GSE63514, 10) 
+
+GSE63514_meta <- read_csv("Resource/GSE63514_meta.csv")
+
+head(GSE63514_meta, 10)
+```
+
+ไฟล์ที่ได้อ่านเข้ามานี้ คือ Gene expression ของ RNA Microarray ในชิ้นเนื้อผู้ป่วยมะเร็งปากมดลูก ซึ่งจะถูกนำไปใช้ต่อใน [ตัวอย่างท้ายบท](#GSE63514)
+
+------------------------------------------------------------------------
+
+## Other packages
+
+ท่านสามารถเขียนข้อมูลจาก R ลงไปในไฟล์ที่ท่านต้องการด้วย `write_()*` อีกด้วย อย่างไรก็ตาม แม้ว่า `readr` นั้นจะสามารถอ่านและเขียนไฟล์ได้ครอบคลุมเป็นอย่างมาก ในบางสกุลไฟล์นั้น อาจจะต้องใช้การอ่านจาก package อื่น
+
+| Extension                                          | Read                           | Write                                           | Package           |
+|----------------------|---------------|--------------------|---------------|
+| .csv (comma-separated), .csv (semicolon-separated) | `read_csv()` , `read_csv2()`   | `write_csv()`, `write_csv2()`                   | `readr`           |
+| .tsv                                               | `read_tsv()`                   | `write_tsv()`                                   | `readr`           |
+| .txt                                               | `read_delim()`                 | `write_delim()`                                 | `readr`           |
+| text table                                         | `read_table()`                 | `write_table()`                                 | `readr`           |
+| .xlsx, .xls                                        | `read_excel()` , `read.xlsx()` | `-`, `write.xlsx()`, `write.xlsx2()` (large DF) | `readxl` , `xlsx` |
+| googlesheet url                                    | `read_sheet()`                 | `write_sheet()`                                 | `googlesheets4`   |
+| .sas                                               | `read_sas()`                   | `write_sas()`                                   | `haven`           |
+| .sav (SPSS)                                        | `read_sav()`                   | `write_sav()`                                   | `haven`           |
+| .dta (STATA)                                       | `read_dta()`                   | `write_dta()`                                   | `haven`           |
+| .json                                              | `read_json()`                  | `write_json()`                                  | `jsonlite`        |
+| Very large file/No idea                            | `fread()`                      | `fwrite()`                                      | `data.table`      |

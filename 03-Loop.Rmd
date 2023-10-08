@@ -1,0 +1,125 @@
+# Loop
+
+## General loop
+
+ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน `R`
+
+```{r for}
+for(i in 1:2){
+  for (j in c("a","b"))
+  print(c(i,j))
+}
+```
+
+```{r while}
+i <- 0
+while(i <= 5){
+  print(i)
+  i <- i+1
+}
+```
+
+```{r}
+item_list <- list("apple", "banana", "fish")
+for(i in 1:length(item_list)){
+  if (item_list[[i]]== "fish"){
+    print("not fruit")
+  }
+  else(print(item_list[[i]]))
+}
+```
+
+อย่างไรก็ตาม การใช้ Loop ใน `R` มีข้อควรระวังที่มากกว่าภาษาอื่นๆ เช่น `python`, `java` ที่ออกแบบมาเพื่อ Programming โดยเฉพาะ คือ การ Loop เข้า Memory ที่ไม่ได้มีการ Pre-allocate ไว้จะช้ามาก เมื่อเทียบกับ Pre-allocate memory loop หรือ Vectorized function
+
+```{r loop_compare}
+set.seed(123)
+mat <- matrix(rnorm(10000000, 100, 200), nrow = 10000) # Large matrix
+
+system.time({
+for(i in 1:nrow(mat)){
+ res1 <- c()
+ res1[[i]] <- mean(mat[i,])
+}
+})
+
+system.time({
+res2 <- vector(length = nrow(mat)) # Pre-allocate memory
+for(i in 1:nrow(mat)){
+ res2[i] <- mean(mat[i,])
+}
+}) ## 3x faster
+
+system.time({
+rowMeans(mat)
+}) ## Instant for vectorized function
+
+```
+
+นั่นหมายความว่า การเรียกฟังก์ชันที่เร็วที่สุดควร
+
+1.  เลือกฟังก์ชันที่มีการเขียนให้รองรับ Vectorization (เรียกคำสั่งภายในพร้อมกันทุกตัวแปร) อยู่แล้ว
+2.  Pre-allocate ความจำก่อน ตามจำนวน (length) ของข้อมูลสุดท้ายที่คาดว่าจะได้
+3.  การสร้างตัวแปรใหม่ใส่เข้าไปในตัวแปรเรื่อยๆ โดยไม่ได้ Pre-allocate ไว้ ควรเป็นทางเลือกสุดท้าย
+
+อย่างไรก็ตามถ้าท่านไม่ได้เขียน `package` ใช้ หรือทำการวิเคราะห์ที่เป็นแนว Programming มากนัก ท่านอาจจะไม่ต้องใส่ใจส่วนนี้มาก
+
+------------------------------------------------------------------------
+
+## Apply family
+
+`apply` family เป็น Function สำหรับ Loop ใน `R` ซึ่งมีการ Pre-allocate memory ไว้เรียบร้อยแล้ว ซึ่งเหมาะแก่การใช้งานมากกว่าการใช้ for/while loop ตามปกติ ประกอบไปด้วย
+
+-   `lapply` จะทำการเรียก Function ตามลำดับและส่งผลออกมาเป็น List
+
+```{r lapply}
+set.seed(123)
+x <- 1:5
+lapply(x, \(x) sample(100, size = x, replace = TRUE))
+```
+
+**Note:** `\(x) ...` หรือ `function (x) ...` คือการเรียกฟังก์ชันที่จะใช้ใน Loop นั้น โดยไม่ต้องสร้าง Function ขึ้นมาใหม่ เรียกว่า Anonymous function
+
+```{r new_func}
+sample_test <- function(x){
+  sample(100, size = x, replace = TRUE)
+}
+set.seed(123)
+lapply(x , sample_test) # same result with above anonymous function
+```
+
+-   `sapply` เหมือน `lapply` แต่จะส่งผลกลับมาแบบไม่เป็น list อย่างไรก็ตาม ถ้าไม่สามารถขมวดรวมกันได้ จะส่งกลับมาเป็น list เหมือน `lapply`
+
+```{r sapply}
+set.seed(123)
+x <- c(1,1,1,1,1,1)
+sapply(x, \(x) sample(100, size = x, replace = TRUE)) # not list
+x <- 1:5
+sapply(x, \(x) sample(100, size = x, replace = TRUE)) # cant convert to vector
+```
+
+-   `apply` คือการเรียกฟังก์ชันตามมิติ โดย `1` = แถว `2` = คอลัมน์ มีไว้ใช้กับข้อมูลประเภท Matrix และ Dataframe
+
+```{r apply}
+set.seed(123)
+mat <- matrix(runif(100, 100, 200), nrow = 10) # 10x10 matrix
+apply(mat, 1, sd) # sd by row
+apply(mat, 2, sd) # sd by column
+```
+
+-   `mapply` คือ การเรียกฟังก์ชันจากหลาย List พร้อมกัน
+
+```{r mapply}
+x <- list(1,2,3)
+y <- list(2,4,6)
+z <- list(3,6,9)
+
+mapply(FUN = \(x,y,z) x*y*z, x,y,z) # x1*y1*z1, x2*y2*z2, x3*y3*z3
+mapply(FUN = rep, times = 1:4, 
+       MoreArgs = list(x = 42)) # rep(42, 1), rep(42, 2), ...
+```
+
+-   `tapply` คือ การเรียกฟังก์ชันตาม subset
+
+```{r tapply}
+tapply(iris$Sepal.Length, iris$Species, mean)
+```

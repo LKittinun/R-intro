@@ -1,0 +1,185 @@
+# Limma
+
+## Principle
+
+[Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) (Linear Model for Microarray Data) เป็นหนึ่งใน `bioconductor package` ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene expression; DGE) ในงานทดลอง Microarray
+
+หลักการสำคัญของ `limma` คือการใช้สมการถดถอยเชิงเส้นในการหา DGE โดยมีสมมติฐานเบื้องต้นว่าค่าความเข้มพื้นหลังที่อ่านได้จาก Probe ของ Microarray นั้นมีการกระจายตัวแบบ [Normal distribution](#norm-dist) ซึ่งหลักการนี้สามารถนำไปปรับใช้ในการหา Differential expression ในงานประเภทอื่นๆ ได้ด้วย เช่น RNA-seq, Proteomics
+
+-   $H_{0}$: ไม่มีความแตกต่างกันในการแสดงออกของยีน
+
+-   $H_{a}$: มีความแตกต่างกันในการแสดงออกของยีน
+
+```{r limma_diff_mech, echo = FALSE, message = FALSE, warning = FALSE}
+names(GSE63514) <-  c("prob", GSE63514_meta$title)
+GSE63514_two_group <- GSE63514 |> select(prob, contains(c("Normal", "Cancer")))
+GSE63514_long <- GSE63514_two_group |>
+  pivot_longer(-prob, names_to = "Case", values_to = "Intensity") |> 
+  mutate(Group = gsub("-\\d+", "", Case)) |> 
+  filter(prob == "202055_at") |> 
+  mutate(Group2 = case_match(Group,"Normal" ~ 0,
+                            "Cancer" ~ 1
+                            ))
+
+ggplot(GSE63514_long, aes(x = Group2, y = Intensity)) + 
+  geom_jitter(width = 0.1, alpha = 0.6, aes(col = Group)) +
+  geom_smooth(aes(group = 1), method = "lm", formula = y~x, se = FALSE,
+              color = "black", linewidth = 0.5) +
+  geom_smooth(aes(group = 1), method = "lm", formula = y~1, se = FALSE,
+              linetype = "dotdash", color = "black", linewidth = 0.5) +
+  scale_x_continuous(breaks = c(0,1)) +
+  xlab("Group") +
+  theme_bw() +
+  theme(aspect.ratio = 1)
+```
+
+จากกราฟ เส้นประคือเส้นของ $H_{0}$ หมายถึงการแสดงออกของยีนทั้งหมดสามารถหาได้โดยใช้ค่าเฉลี่ยโดยรวมของทั้งสองกลุ่ม $\text{Intensity} = \theta_{0} + \epsilon$ และ เส้นทึบคือเส้นของ $H_{a}$ หมายคือเส้นสมการถดถอยที่ลากผ่านค่าเฉลี่ยของแต่ละกลุ่ม $\text{Intensity }= \theta_{0} + \theta_{1}*\text{Group} + \epsilon$ ซึ่งทั้งหมดนี้ ก็คือเส้นสมการถดถอยเชิงเส้นตามปกติโดยทั่วไปนั่นเอง โดย limma ซึ่งความแตกต่างตามสมมติฐานนั้น จะถูกทดสอบ โดย $t$-test ($F$-test ถ้ามากกว่าสองกลุ่ม)
+
+คำถามคือ วิธีการของ limma แตกต่างอย่างไรกับการสร้างสมการถดถอยโดยทั่วไป? เนื่องจากงานประเภท Bioinformatics นั้นมักมีค่าใช้จ่ายในแต่ละการทดลองสูง จำนวนตัวอย่างที่นำมาใช้ในการทดลองนั้นมีไม่มากนัก เช่น 3-4 ตัวอย่างต่อกลุ่ม
+
+$$
+t = \frac{\theta_{1}-0}{SE} = \frac{\theta_{1}}{S/\sqrt{n}}
+$$
+
+ซึ่งเมื่อพิจารณาจากสูตรแล้ว จะเห็นว่าจำนวนตัวอย่างที่ต่ำ ส่งผลให้ $SE$ สูง มีค่า $t$ ที่แกว่ง (ตาม $S$) และมี [Power ที่ต่ำด้วย เนื่องจากมีกลุ่มตัวอย่างน้อย](#power)
+
+ผู้นิพนธ์ limma นั้นได้แก้ปัญหานี้โดยใช้หลักการสถิติแบบ Empirical Bayes ชื่อว่า Moderated $t$-test โดยหลักการคือ เนื่องจากหลักการของการอ่านข้อมูลใน Microarray ในแต่ละยีนนั้นเป็นไปโดยพร้อมกัน อัตราส่วนความแปรปรวนของยีนแต่ละตัวที่อ่านค่าได้นั้นจะเท่าๆ กันตลอดทั้ง array ดังนั้นจึงสามารถยืมข้อมูลของความแปรปรวนมาจากทุกยีนทั้งหมด มาสร้างเป็น **ความน่าจะเป็นก่อนหน้า (Prior probability)** เพื่อนำมาถ่วงน้ำหนักกับ**ยีนแต่ละตัว (Posterior probability)** ภายหลัง
+
+```{r overall_vairiance, warning = FALSE}
+cx_nc <- GSE63514 |> 
+  as.data.frame() |> 
+  dplyr::select(contains(c("Normal", "Cancer")))
+cx_var <- apply(cx_nc, 1, var)
+
+ggplot(data = NULL, aes(x = cx_var)) + 
+  geom_density(fill = "skyblue") +
+  scale_x_continuous(breaks = seq(0,3,0.25), limits = c(0,3)) +
+  annotate("text", x = mean(cx_var)+0.35, y = 4, label= "Mean variance") +
+  labs(x = "Variance") +
+  geom_vline(xintercept = mean(cx_var), linetype = "dashed") +
+  theme_bw() 
+```
+
+ค่า mean variance นี้จะถูกนำไปถ่วงน้ำหนักความแปรปรวนเดิมของแต่ละยีน และจะถูกนำไปใช้ในการคำนวณใหม่ เรียกว่า moderated $t$
+
+$$
+\tilde{t_{gj}} = \sqrt\frac{d_{0} + d_{g}}{d_{g}}\times\frac{\hat{\beta_{gj}}}{\sqrt{s^{2}_{*,g}/n_{gj}}}
+$$
+
+$$
+s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
+$$
+
+สังเกตว่า ค่า $\tilde{t}$ นั้นจะถูก Moderated ให้เข้าสู่ $d_{0}$ (Prior degree of freedom) และ $s_{0}$ (Prior variance) ส่งผลให้
+
+-   ถ้า $d_{g}$ (Degree of freedom แต่ละยีน) \> $d_{0}$ และ $s_{g}$ (ความแปรปรวนแต่ละยีน) \> $s_{0}$: $d$ และ $s^{2}$ โดยรวมจะถูกดึงให้เพิ่มขึ้น
+
+-   ถ้า $d_{g}$ \< $d_{0}$ และ $s_{g}$ \< $s_{0}$: $d$ และ $s^{2}$ โดยรวมจะถูกดึงให้ลดลง
+
+-   ถ้า $d_{g}$ = $d_{0}$ และ $s_{g}$ = $s_{0}$: $d$ จะเพิ่มขึ้นในอัตราส่วนคงที่ ($\sqrt{2}$) และ $s^{2}$ โดยรวมจะเท่าเดิม
+
+ทั้งหมดนี้จะส่งผลให้ มี Moderate effect ของการคำนวณค่า $\tilde{t}$ และมี Degree of freedom ที่เพิ่มขึ้นส่งผลให้ Power สูงขึ้น (เพราะการกระจายตัวแคบลง)
+
+------------------------------------------------------------------------
+
+## Example
+
+ต่อจากนี้จะยกตัวอย่างการคำนวณ DGE ระหว่างกลุ่มโดยใช้ limma ต่อจาก [GSE63514](#GSE6354) ซึ่งครั้งนี้จะเทียบทุกกลุ่ม และเทียบทุกยีน
+
+ก่อนอื่นจะต้องสร้างสมการเชิงเส้นของกลุ่มแต่ละกลุ่มขึ้นมาก่อน
+
+```{r pData}
+pData <- GSE63514_meta |> 
+  select(title) |> 
+  mutate(group = gsub("-\\d+", "", title))
+unique(pData$group)
+cx_mod <- model.matrix(~ 0 + group, data = pData)
+as.data.frame(cx_mod) # Display as dataframe
+```
+
+แมทริกซ์ที่เห็นนี้ ข้อมูลของ Sample แต่ละคน โดยแต่ละคอลัมน์จะเป็นตัวแทนของกลุ่มของ Sample นั้น เช่น คนที่ 1 จะมีตัวเลข `[0 0 0 0 1]` บ่งบอกว่าเป็นชิ้นเนื้อประเภท `Cancer` และคนสุดท้ายเป็น `[1 0 0 0 0]` บ่งบอกว่าชิ้นเนื้อประเภท `Normal`
+
+ต่อจากนั้นเราจะสร้าง contrast matrix ขึ้นมาเพื่อนำไปใช้อ้างอิงในการเทียบ DEG
+
+```{r contrast_matrix}
+contrasts <- apply(combn(colnames(cx_mod),2)[2:1,], 2, paste, collapse = "-")
+contrasts
+contrasts.matrix <- makeContrasts(contrasts = contrasts, levels = colnames(cx_mod)) 
+contrasts.matrix
+```
+
+สังเกตว่าแต่ละคอลัมน์ผลรวมจะเท่ากับ 0 เนื่องจาก $H_{0}$ ว่าไม่มีความแตกต่างกันในการแสดงออกของยีน (= 0) นั่นเอง
+
+เมื่อได้ design matrix ต่อไปคือการ fit linear regression ตาม model โดยข้อมูลจะต้องอยู่ในรูปตัวเลขทั้งหมด ดังนั้นจะต้องปรับแต่ง ข้อมูล expression เริ่มต้นเล็กน้อย
+
+```{r fixed_GSE}
+GSE63514_fixed <- GSE63514 |> 
+                    column_to_rownames("prob")
+```
+
+ต่อจากนั้นจะ fit model ด้วย `lmFit()` และเทียบแต่ละกลุ่มด้วย `contrasts.fit()`
+
+```{r fit_lm}
+cx_fit <- lmFit(GSE63514_fixed, design = cx_mod)
+cx_fit_contrasts <- contrasts.fit(cx_fit, contrasts.matrix)
+```
+
+สุดท้ายเราจะทำการคำนวณ Moderated t-test โดยใช้ `eBayes()`
+
+```{r eBayes}
+cx_fit_contrasts_eB <- eBayes(cx_fit_contrasts)
+```
+
+สุดท้ายคือการแสดงผล DGE จากการคำนวณทั้งหมดโดยใช้ `topTable()` ซึ่งจะแสดง Moderated $F$-test ([ANOVA](#ANOVA)) และ $p$-value, Adjusted $p$-value
+
+```{r f_test}
+topTable(cx_fit_contrasts_eB, n = 100) # First 100 genes
+```
+
+และสามารถเรียกดู $t$-test แต่ละกลุ่มได้โดยการระบุ `coef`
+
+```{r one_fc}
+topTable(cx_fit_contrasts_eB, coef = 1, n = 100) # เรียงตาม contrasts.matrix
+```
+
+โดย `logFC` คือ Log2 fold-change ของ Gene expression แต่ละตัว
+
+```{r all_fc}
+map(1:length(colnames(contrasts.matrix)), 
+    ~topTable(cx_fit_contrasts_eB, coef = .x)) |> 
+  set_names(colnames(contrasts.matrix))
+```
+
+ท่านสามารถสรุปข้อมูล DGE ได้โดยใช้ `decideTests()`
+
+```{r decideTests}
+results <- decideTests(cx_fit_contrasts_eB, fc=log2(1.5)) 
+summary(results)
+vennDiagram(results[,1:5]) # max 5 groups
+```
+
+------------------------------------------------------------------------
+
+## Mean-variance relationship
+
+ในบางข้อมูลนั้นมีความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวน ซึ่งสามารถตรวจสอบได้โดยใช้ `plotSA()`
+
+```{r SA_eB}
+plotSA(cx_fit_contrasts_eB) 
+```
+
+จากกราฟจะพบความสัมพันธ์ระหว่าง `Average log-expression` และ `sqrt(sigma)` แปลว่ามีความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวน เนื่องจาก Linear model นั้นมีสมมติฐานว่า ความแปรปรวนนั้นคงที่ตลอด (Homoscedasticity) การสร้างสมการแบบธรรมดาอาจจะทำให้เกิด False positive มากกว่าปกติ ซึ่ง limma นั้นมีฟังก์ชันที่ปรับสมการตามแนวโน้มของความแปรปรวนด้วย `eBayes(..., trend = TRUE)`
+
+```{r eBayes_trend}
+cx_fit_contrasts_eB_trend <- eBayes(cx_fit_contrasts, trend = TRUE)
+results_trend <- decideTests(cx_fit_contrasts_eB, fc = log2(1.5)) 
+summary(results_trend)
+```
+
+เมื่อทำการพล็อตความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวนอีกครั้ง จะพบว่าโมเดลนั้นถูกปรับตามความแปรปรวนแล้ว
+
+```{r SA_trend}
+plotSA(cx_fit_contrasts_eB_trend)
+```
+
+การใช้ `trend = TRUE` นี้มีความสำคัญมากในการประยุกต์ใช้ limma ในการวิเคราะห์ข้อมูลแบบอื่นๆ ที่ไม่ใช่ Microarray เช่น RNA-seq, Proteomics เนื่องจากข้อมูลมักจะมีความสัมพันธ์ระหว่างค่าเฉลี่ยกับตัวแปรสูง (Heteroscedasticity)

@@ -57,7 +57,7 @@ ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) +
   geom_abline(intercept = 2, slope = 1, linetype = "dotdash", col = "black", linewidth = 1.5)
 ```
 
-สังเกตว่าท่านสามารถปรับค่าจำพวก สี ลักษณะเส้นต่างๆ ได้ โดย Parameter นั้น ต้องอยู่นอก `aes` มิเช่นนั้น Function จะพยายามไปดึงข้อมูลจากกราฟมา
+สังเกตว่าท่านสามารถปรับค่าจำพวก สี ลักษณะเส้นต่างๆ ได้ โดย Parameter นั้น ต้องอยู่นอก `aes` มิเช่นนั้น ฟังก์ชันจะพยายามไปดึงข้อมูลจากกราฟมา
 
 ```{r wrong_aes}
 ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = "darkviolet")) + # ผิด

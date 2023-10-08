@@ -1,0 +1,158 @@
+# Example: Microarray data visualization {#GSE63514}
+
+ต่อไปนี้จะเป็นตัวอย่างในการใช้ `R` ในการวิเคราะห์ข้อมูล Molecular data เบื้องต้น โดยใช้ข้อมูลจาก [GEO dataset](https://www.ncbi.nlm.nih.gov/gds) `GSE63514` ซึ่งเป็น Gene expression microarray
+
+```{r affy_pic, fig.align="center", echo = FALSE}
+knitr::include_graphics("Picture/affymatrix.jpg")
+```
+
+## Import files
+
+ไฟล์แรกที่อ่านเข้ามาคือ `GSE63514_norm.csv` ซึ่งเป็นไฟล์ Microarray expression ของชิ้นเนื้อปากมดลูก ประกอบด้วย ตัวอย่าง `Normal` , `CIN1` , `CIN2` , `CIN3` , `Cancer` ในที่นี้เราจะทำการวิเคราะห์ 20,000 ยีนแรก
+
+```{r read_file_cx, message = FALSE}
+library(tidyverse) 
+
+GSE63514 <- read_csv("Resource/GSE63514_norm.csv") 
+GSE63514_20000 <- read_csv("Resource/GSE63514_norm.csv") |> head(2000)
+```
+
+```{r name_GSE,attr.output='style="max-height: 300px;"'}
+names(GSE63514_20000)
+```
+
+ส่วนที่สองคือ Metadata (ข้อมูลระบุตัวตน) ของข้อมูลนี้
+
+```{r metadata_cx, message=FALSE}
+head(GSE63514_meta, 10)
+```
+
+ส่วนที่สามคือไฟล์ annotation ของ probe
+
+```{r annotation, message = FALSE}
+hgu133plus2_genenames <- read_csv("Resource/hgu133plus2_genenames.csv") |> 
+  select(-1) # remove row number
+head(hgu133plus2_genenames, 10)
+```
+
+## Cleaning data
+
+สมมติว่าในตัวอย่างนี้ จะทำการวิเคราะห์แค่ระหว่าง `Normal`, `CIN1`, และ `Cancer` เท่านั้น จึงจำเป็นที่จะต้องกรองข้อมูลที่ไม่ต้องการออกไปเสียก่อน
+
+```{r clean_data}
+exprs_nc <- GSE63514_20000 |> select(probe, contains(c("Normal", "CIN1", "Cancer")))
+meta_nc <- GSE63514_meta |> 
+  filter(grepl("Normal|CIN1|Cancer", title)) |> 
+  select(title, `characteristics_ch1.1`, `dissection:ch1`)
+names(exprs_nc) <- c("prob", meta_nc$title) # เปลี่ยนชื่อให้อ่านง่าย
+
+head(exprs_nc, 10)
+head(meta_nc, 10)
+```
+
+เมื่อดูในตัวแปร `exps_nc` จะพบว่า probe นั้นเป็นชื่อเฉพาะของตัวเครื่อง ไม่ใช้ชื่อสากล ในที่นี้จะทำการเปลี่ยน Probe ให้เป็นชื่อยีนนั้นๆ แต่ว่าชื่อ List รายชื่อนั้นเป็นชื่อทั้งหมดของ Probe สังเกตได้จากจำนวนแถวที่ไม่เท่ากัน
+
+```{r nrow_genenames}
+nrow(exprs_nc)
+nrow(hgu133plus2_genenames)
+```
+
+ในที่นี้ การใช้คำสั่ง `*_join()` จะทำให้สามารถรวมแค่แถวที่ต้องการได้
+
+```{r join_df}
+gene_nc <- exprs_nc |> 
+            left_join(hgu133plus2_genenames, by = c("prob"="PROBEID")) |> 
+            relocate(c("SYMBOL", "ENTREZID", "GENENAME"), .after = "prob")
+```
+
+## Visualization {#top10_boxplot}
+
+ต่อไป จะทำการแสดงผล Gene expression 10 ตัวที่มีการแสดงออกมากที่สุดในทั้งการทดลองนี้
+
+ขั้นแรก เราจะทำการรวม Intensity ทั้งหมดใน 1 gene ผ่าน function `rowSums()` และเรียง `total_intensity` จากมากไปน้อย หลังจากนั้นเลือก Top 10 intensity ออกมาโดยใช้ function `head()`
+
+```{r top_intensity}
+gene_symbol_mat <- gene_nc |> 
+  select(-prob, -ENTREZID, -GENENAME) |> 
+  mutate(total_intensity = 
+           rowSums(select(gene_nc, -prob, -ENTREZID, -GENENAME, -SYMBOL)),
+         .before = "Normal-01") |> 
+  arrange(desc(total_intensity)) 
+
+top10_intensity <- head(gene_symbol_mat,10)
+top10_intensity
+```
+
+จะเห็นว่าข้อมูลของเรา อยู่ในลักษณะ `wide form` ในการสร้าง `boxplot` นั้น ข้อมูลจำเป็นต้องอยู่ในลักษณะ `long form` เราจะใช้ function `pivot_longer()`
+
+```{r top10_long}
+top10_long <- top10_intensity |> 
+              select(-total_intensity) |> 
+              pivot_longer(-SYMBOL, names_to = "Case", values_to = "Intensity") |> 
+              separate(Case, into = c("Group", "Number"), sep = "-", remove = FALSE)
+```
+
+```{r top10_boxplot}
+ggplot(top10_long, aes(x = SYMBOL, y = Intensity, fill = Group)) + 
+  geom_boxplot() +
+  theme_bw() +
+  theme(axis.text.x = 
+          element_text(angle = 45, vjust = 1, hjust=1)) # หมุนแกน x เพื่อความสวยงาม
+```
+
+ท่านอาจจะอยากเพิ่มเส้นค่าเฉลี่ยเพื่อดูว่า Global mean intensity เป็นเท่าไร
+
+```{r global_mean}
+global_mean_intensity <- mean(top10_long$Intensity)
+global_mean_intensity
+
+ggplot(top10_long, aes(x = SYMBOL, y = Intensity, fill = Group)) + 
+  geom_boxplot() +
+  geom_hline(yintercept = global_mean_intensity, linetype = "dashed", color = "darkviolet", linewidth = 1) +
+  theme_bw() +
+  theme(axis.text.x = 
+          element_text(angle = 45, vjust = 1, hjust=1))
+```
+
+ตัวกลุ่ม `RPL` ดูน่าสนใน เนื่องจาก Intensity ใน `cancer` ต่ำกว่า `global mean` แต่จะมีนัยสำคัญหรือไม่ต้องใช้การวิเคราะห์ทางสถิติเพิ่มเติมทีหลัง
+
+ต่อไป เราอยากที่จะแบ่งว่า tissue ที่เป็น `whole section` กับ `laser captured` มีการแสดงออกที่แตกต่างกันอย่างไร เราจะใช้ `facet_wrap()` เข้ามาช่วย
+
+```{r top10_long_dissec}
+top10_long_dissec <- top10_long |> 
+                      left_join(select(meta_nc, title, `dissection:ch1`), 
+                                by = c("Case" = "title"))
+top10_long_dissec
+```
+
+พล็อตอัตราส่วนจำนวนของ `laser capture` vs `whole section`
+
+```{r top10_barchart}
+ggplot(top10_long_dissec, aes(x = `dissection:ch1`, fill = Group)) + 
+  geom_bar(col = "black", width = 0.5, position = "dodge") + 
+  theme_bw()
+```
+
+เห็นว่าผลที่ได้ประหลาด เนื่องจาก `laser captured`และ `laser-captured` เป็นตัวแปรซ้ำ ต้องแก้ไขเสียก่อน
+
+```{r top10_long_dissec_fixed_bar}
+top10_long_dissec <- top10_long_dissec |> 
+                      mutate(`dissection:ch1` = gsub("-", " ", `dissection:ch1`))
+
+ggplot(top10_long_dissec, aes(x = `dissection:ch1`, fill = Group)) + 
+  geom_bar(col = "black", width = 0.5, position = "dodge") + 
+  theme_bw()
+```
+
+เมื่อข้อมูลที่ได้ถูกต้อง จะเห็นว่า มีเฉพาะกลุ่ม `cancer` เท่านั้น ที่มีการตัดแบบ `whole section`
+
+หลังจากนั้นเราจะทำการพล็อต Intensity ในแต่ละยีน
+
+```{r top10_long_dissec_fixed_intensity}
+ggplot(top10_long_dissec, aes(x = SYMBOL, y = Intensity, fill = Group)) + 
+  geom_boxplot() +
+  facet_wrap(~`dissection:ch1`) +
+  theme_bw() +
+  theme(axis.text.x = 
+          element_text(angle = 45, vjust = 1, hjust=1))
+```

@@ -8,10 +8,10 @@ subset
 r-function
 anatomy-of-function
 base-r-function
+loop
+general-loop
+apply-family
 what-is-tidyverse
-importing-data
-importing-data-with-readr
-other-packages
 data-wrangling
 data-manipulation-with-dplyr
 basic-dataframe-manipulation
@@ -32,6 +32,9 @@ multi_boxplot
 histogram
 fitting-a-statistical-model
 faceting
+importing-data
+importing-data-with-readr
+other-packages
 GSE63514
 import-files
 cleaning-data
@@ -93,9 +96,15 @@ handling-biological-variation
 estimation-of-phi-and-dge
 negative-binomial-extension
 log-linear-model
-example-1
 workflow
-make-a-design-matrix
+example-1
+pathway-analysis
+principle-4
+database-annotation
+statistical-analysis
+over-representation-analysis-ora
+gene-set-enrichment-analysis-gsea
+example-2
 distribution
 norm-dist
 t-dist
@@ -105,3 +114,4 @@ negative-binomial-distribution
 hypergeometric-distribution
 poisson-dist
 session-info
+references

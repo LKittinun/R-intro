@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>3 Loop | A gentle introduction to R for biologists</title>
+<meta name="author" content="Kittinun Leetanaporn">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="3 Loop | A gentle introduction to R for biologists">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3 Loop | A gentle introduction to R for biologists">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<meta name="description" content='3.1 General loop ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน R for(i in 1:2){  for (j in c("a","b"))  print(c(i,j)) } ## [1] "1" "a" ## [1] "1" "b" ## [1] "2" "a" ## [1] "2" "b" i &lt;- 0...'>
+<meta property="og:description" content='3.1 General loop ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน R for(i in 1:2){  for (j in c("a","b"))  print(c(i,j)) } ## [1] "1" "a" ## [1] "1" "b" ## [1] "2" "a" ## [1] "2" "b" i &lt;- 0...'>
+<meta name="twitter:description" content='3.1 General loop ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน R for(i in 1:2){  for (j in c("a","b"))  print(c(i,j)) } ## [1] "1" "a" ## [1] "1" "b" ## [1] "2" "a" ## [1] "2" "b" i &lt;- 0...'>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">A gentle introduction to R for biologists</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Basic R</li>
+<li><a class="" href="basic-r.html"><span class="header-section-number">1</span> Basic R</a></li>
+<li><a class="" href="r-function.html"><span class="header-section-number">2</span> R function</a></li>
+<li><a class="active" href="loop.html"><span class="header-section-number">3</span> Loop</a></li>
+<li class="book-part">Tidyverse</li>
+<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">4</span> What is tidyverse</a></li>
+<li><a class="" href="data-wrangling.html"><span class="header-section-number">5</span> Data wrangling</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
+<li><a class="" href="importing-data.html"><span class="header-section-number">7</span> Importing data</a></li>
+<li><a class="" href="GSE63514.html"><span class="header-section-number">8</span> Example: Microarray data visualization</a></li>
+<li class="book-part">Statistical analysis</li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li><a class="" href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></li>
+<li><a class="" href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">14</span> Principal component analysis</a></li>
+<li class="book-part">Bioconductor</li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">16</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">17</span> edgeR</a></li>
+<li><a class="" href="pathway-analysis.html"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li class="book-part">Supplement</li>
+<li><a class="" href="distribution.html"><span class="header-section-number">19</span> Distribution</a></li>
+<li class="book-part">Information</li>
+<li><a class="" href="session-info.html"><span class="header-section-number">20</span> Session info</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">21</span> References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="loop" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Loop<a class="anchor" aria-label="anchor" href="#loop"><i class="fas fa-link"></i></a>
+</h1>
+<div id="general-loop" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> General loop<a class="anchor" aria-label="anchor" href="#general-loop"><i class="fas fa-link"></i></a>
+</h2>
+<p>ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน <code>R</code></p>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"b"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">i</span>,<span class="va">j</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<pre><code>## [1] "1" "a"
+## [1] "1" "b"
+## [1] "2" "a"
+## [1] "2" "b"</code></pre>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">i</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="kw">while</span><span class="op">(</span><span class="va">i</span> <span class="op">&lt;=</span> <span class="fl">5</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
+<span>  <span class="va">i</span> <span class="op">&lt;-</span> <span class="va">i</span><span class="op">+</span><span class="fl">1</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<pre><code>## [1] 0
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5</code></pre>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">item_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"fish"</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">item_list</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">item_list</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">==</span> <span class="st">"fish"</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"not fruit"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">else</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">item_list</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<pre><code>## [1] "apple"
+## [1] "banana"
+## [1] "not fruit"</code></pre>
+<p>อย่างไรก็ตาม การใช้ Loop ใน <code>R</code> มีข้อควรระวังที่มากกว่าภาษาอื่นๆ เช่น <code>python</code>, <code>java</code> ที่ออกแบบมาเพื่อ Programming โดยเฉพาะ คือ การ Loop เข้า Memory ที่ไม่ได้มีการ Pre-allocate ไว้จะช้ามาก เมื่อเทียบกับ Pre-allocate memory loop หรือ Vectorized function</p>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10000000</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> <span class="co"># Large matrix</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span> <span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span></span>
+<span> <span class="va">res1</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mat</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##    user  system elapsed 
+##    0.07    0.00    0.33</code></pre>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
+<span><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span> <span class="co"># Pre-allocate memory</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span> <span class="va">res2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mat</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="op">}</span><span class="op">)</span> <span class="co">## 3x faster</span></span></code></pre></div>
+<pre><code>##    user  system elapsed 
+##    0.07    0.00    0.09</code></pre>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowMeans</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span> <span class="co">## Instant for vectorized function</span></span></code></pre></div>
+<pre><code>##    user  system elapsed 
+##    0.00    0.00    0.03</code></pre>
+<p>นั่นหมายความว่า การเรียกฟังก์ชันที่เร็วที่สุดควร</p>
+<ol style="list-style-type: decimal">
+<li>เลือกฟังก์ชันที่มีการเขียนให้รองรับ Vectorization (เรียกคำสั่งภายในพร้อมกันทุกตัวแปร) อยู่แล้ว</li>
+<li>Pre-allocate ความจำก่อน ตามจำนวน (length) ของข้อมูลสุดท้ายที่คาดว่าจะได้</li>
+<li>การสร้างตัวแปรใหม่ใส่เข้าไปในตัวแปรเรื่อยๆ โดยไม่ได้ Pre-allocate ไว้ ควรเป็นทางเลือกสุดท้าย</li>
+</ol>
+<p>อย่างไรก็ตามถ้าท่านไม่ได้เขียน <code>package</code> ใช้ หรือทำการวิเคราะห์ที่เป็นแนว Programming มากนัก ท่านอาจจะไม่ต้องใส่ใจส่วนนี้มาก</p>
+<hr>
+</div>
+<div id="apply-family" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Apply family<a class="anchor" aria-label="anchor" href="#apply-family"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>apply</code> family เป็น Function สำหรับ Loop ใน <code>R</code> ซึ่งมีการ Pre-allocate memory ไว้เรียบร้อยแล้ว ซึ่งเหมาะแก่การใช้งานมากกว่าการใช้ for/while loop ตามปกติ ประกอบไปด้วย</p>
+<ul>
+<li>
+<code>lapply</code> จะทำการเรียก Function ตามลำดับและส่งผลออกมาเป็น List</li>
+</ul>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">x</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">100</span>, size <span class="op">=</span> <span class="va">x</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 31
+## 
+## [[2]]
+## [1] 79 51
+## 
+## [[3]]
+## [1] 14 67 42
+## 
+## [[4]]
+## [1] 50 43 14 25
+## 
+## [[5]]
+## [1] 90 91 69 91 57</code></pre>
+<p><strong>Note:</strong> <code>\(x) ...</code> หรือ <code>function (x) ...</code> คือการเรียกฟังก์ชันที่จะใช้ใน Loop นั้น โดยไม่ต้องสร้าง Function ขึ้นมาใหม่ เรียกว่า Anonymous function</p>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sample_test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">100</span>, size <span class="op">=</span> <span class="va">x</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">x</span> , <span class="va">sample_test</span><span class="op">)</span> <span class="co"># same result with above anonymous function</span></span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 31
+## 
+## [[2]]
+## [1] 79 51
+## 
+## [[3]]
+## [1] 14 67 42
+## 
+## [[4]]
+## [1] 50 43 14 25
+## 
+## [[5]]
+## [1] 90 91 69 91 57</code></pre>
+<ul>
+<li>
+<code>sapply</code> เหมือน <code>lapply</code> แต่จะส่งผลกลับมาแบบไม่เป็น list อย่างไรก็ตาม ถ้าไม่สามารถขมวดรวมกันได้ จะส่งกลับมาเป็น list เหมือน <code>lapply</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">x</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">100</span>, size <span class="op">=</span> <span class="va">x</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co"># not list</span></span></code></pre></div>
+<pre><code>## [1] 31 79 51 14 67 42</code></pre>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">x</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">100</span>, size <span class="op">=</span> <span class="va">x</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co"># cant convert to vector</span></span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 50
+## 
+## [[2]]
+## [1] 43 14
+## 
+## [[3]]
+## [1] 25 90 91
+## 
+## [[4]]
+## [1] 69 91 57 92
+## 
+## [[5]]
+## [1]  9 93 99 72 26</code></pre>
+<ul>
+<li>
+<code>apply</code> คือการเรียกฟังก์ชันตามมิติ โดย <code>1</code> = แถว <code>2</code> = คอลัมน์ มีไว้ใช้กับข้อมูลประเภท Matrix และ Dataframe</li>
+</ul>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># 10x10 matrix</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">mat</span>, <span class="fl">1</span>, <span class="va">sd</span><span class="op">)</span> <span class="co"># sd by row</span></span></code></pre></div>
+<pre><code>##  [1] 37.22781 22.92317 16.93264 33.84358 32.38341 27.03874 28.94264 32.21673 25.33109 28.95514</code></pre>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">mat</span>, <span class="fl">2</span>, <span class="va">sd</span><span class="op">)</span> <span class="co"># sd by column</span></span></code></pre></div>
+<pre><code>##  [1] 29.47400 34.48212 25.09712 32.73406 21.78202 30.93267 26.08665 25.76299 32.57488 23.84909</code></pre>
+<ul>
+<li>
+<code>mapply</code> คือ การเรียกฟังก์ชันจากหลาย List พร้อมกัน</li>
+</ul>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">6</span>,<span class="fl">9</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span>FUN <span class="op">=</span> \<span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,<span class="va">z</span><span class="op">)</span> <span class="va">x</span><span class="op">*</span><span class="va">y</span><span class="op">*</span><span class="va">z</span>, <span class="va">x</span>,<span class="va">y</span>,<span class="va">z</span><span class="op">)</span> <span class="co"># x1*y1*z1, x2*y2*z2, x3*y3*z3</span></span></code></pre></div>
+<pre><code>## [1]   6  48 162</code></pre>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span>FUN <span class="op">=</span> <span class="va">rep</span>, times <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, </span>
+<span>       MoreArgs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">42</span><span class="op">)</span><span class="op">)</span> <span class="co"># rep(42, 1), rep(42, 2), ...</span></span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 42
+## 
+## [[2]]
+## [1] 42 42
+## 
+## [[3]]
+## [1] 42 42 42
+## 
+## [[4]]
+## [1] 42 42 42 42</code></pre>
+<ul>
+<li>
+<code>tapply</code> คือ การเรียกฟังก์ชันตาม subset</li>
+</ul>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, <span class="va">mean</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##     setosa versicolor  virginica 
+##      5.006      5.936      6.588</code></pre>
+
+</div>
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="r-function.html"><span class="header-section-number">2</span> R function</a></div>
+<div class="next"><a href="what-is-tidyverse.html"><span class="header-section-number">4</span> What is tidyverse</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#loop"><span class="header-section-number">3</span> Loop</a></li>
+<li><a class="nav-link" href="#general-loop"><span class="header-section-number">3.1</span> General loop</a></li>
+<li><a class="nav-link" href="#apply-family"><span class="header-section-number">3.2</span> Apply family</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-08.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

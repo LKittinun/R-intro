@@ -19,6 +19,28 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
 <meta name="description" content="A book created with bookdown.">
 <meta property="og:description" content="A book created with bookdown.">
 <meta name="twitter:description" content="A book created with bookdown.">
@@ -47,27 +69,30 @@
 <li class="book-part">Basic R</li>
 <li><a class="" href="basic-r.html"><span class="header-section-number">1</span> Basic R</a></li>
 <li><a class="" href="r-function.html"><span class="header-section-number">2</span> R function</a></li>
+<li><a class="" href="loop.html"><span class="header-section-number">3</span> Loop</a></li>
 <li class="book-part">Tidyverse</li>
-<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">3</span> What is tidyverse</a></li>
-<li><a class="" href="importing-data.html"><span class="header-section-number">4</span> Importing data</a></li>
+<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">4</span> What is tidyverse</a></li>
 <li><a class="" href="data-wrangling.html"><span class="header-section-number">5</span> Data wrangling</a></li>
 <li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
-<li><a class="" href="GSE63514.html"><span class="header-section-number">7</span> Case study: Microarray visualization</a></li>
+<li><a class="" href="importing-data.html"><span class="header-section-number">7</span> Importing data</a></li>
+<li><a class="" href="GSE63514.html"><span class="header-section-number">8</span> Example: Microarray data visualization</a></li>
 <li class="book-part">Statistical analysis</li>
-<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
-<li><a class="" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
-<li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
-<li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li><a class="" href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></li>
+<li><a class="" href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">14</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
-<li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
-<li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">16</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">17</span> edgeR</a></li>
+<li><a class="" href="pathway-analysis.html"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li class="book-part">Supplement</li>
+<li><a class="" href="distribution.html"><span class="header-section-number">19</span> Distribution</a></li>
+<li class="book-part">Information</li>
+<li><a class="" href="session-info.html"><span class="header-section-number">20</span> Session info</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">21</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -80,7 +105,7 @@
 <strong>Preface</strong><a class="anchor" aria-label="anchor" href="#preface"><i class="fas fa-link"></i></a>
 </h1>
 <p>เอกสารนี้จัดทำขึ้นเพื่อจุดประสงค์ขึ้นเพื่อแนะนำการใช้ <code>R</code> เบื้องต้น สำหรับนักวิทยาศาสตร์ที่มีความสนใจในการใช้ <code>R</code> ในการวิเคราะห์ข้อมูล ซึ่งผู้ใช้งานจำเป็นจะต้องมีความรู้เรื่อง basic <code>R</code> ต่างๆ เล็กน้อย เพื่อที่จะได้ใช้งานได้อย่างไม่ติดขัด</p>
-<p>Online version: <a href="https://tmrc.psu.ac.th/RNAseq/_book/index.html" class="uri">https://tmrc.psu.ac.th/RNAseq/_book/index.html</a></p>
+<p>ท่านสามารถ Clone github repository ได้ที่: <a href="https://github.com/LKittinun/R-intro" class="uri">https://github.com/LKittinun/R-intro</a></p>
 <div id="r-installation" class="section level2 unnumbered">
 <h2>R installation<a class="anchor" aria-label="anchor" href="#r-installation"><i class="fas fa-link"></i></a>
 </h2>
@@ -144,7 +169,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -1,0 +1,288 @@
+# Principal component analysis
+
+```{r pca, echo = FALSE}
+set.seed(123)
+data <- matrix(c(
+  rnorm(10, mean = 20, sd = 2),
+  rnorm(10, mean = 1, sd = 2)),
+  ncol = 2
+)
+colnames(data) <- c("A", "B")
+
+scaled_data <- apply(data,2, \(x) (x-mean(x))/sd(x)) |> as.data.frame()
+
+pc <- prcomp(scaled_data)
+
+slopes <- c(pc$rotation[1,1]/pc$rotation[2,1], pc$rotation[1,2]/pc$rotation[2,2])
+
+# Function credit: https://stackoverflow.com/questions/2639430/graphing-perpendicular-offsets-in-a-least-squares-regression-plot-in-r
+perp.segment.coord <- function(x0, y0, a=0,b=1){
+  x1 <- (x0+b*y0-a*b)/(1+b^2)
+  y1 <- a + b*x1
+  list(x0=x0, y0=y0, x1=x1, y1=y1)
+}
+ss1 <- perp.segment.coord(scaled_data$A, scaled_data$B, 0, slopes[1]) |> 
+  as.data.frame()
+ss2 <- perp.segment.coord(scaled_data$A, scaled_data$B, 0, slopes[2]) |> 
+  as.data.frame()
+
+scaled_data <- scaled_data |> 
+  mutate(Data = as.factor(row_number()))
+
+d <- ggplot(scaled_data, aes(x = A, y = B)) + geom_point(aes(col = Data)) + coord_fixed() +
+  ggtitle("Data")+
+  theme_bw() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        legend.position = "none")
+
+p <- ggplot(scaled_data, aes(x = A, y = B)) + geom_point(aes(col = Data)) + coord_fixed() +
+  stat_ellipse(type = "norm") +
+  theme_bw() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        legend.position = "none")
+
+p1 <- p+ ggtitle("PC1") +
+   geom_abline(intercept = 0, slope = slopes[1], col = "darkblue") +
+   geom_segment(x = 0, y = 0, linewidth = 0.8,
+               xend = (pc$sdev[1])^2, yend = slopes[1]*(pc$sdev[1])^2, 
+               colour = "darkblue", arrow = arrow(length = unit(0.2, "cm"))) +
+   geom_segment(data=ss1, aes(x = x0, y = y0, xend = x1, yend = y1), colour = "darkblue", linetype = "dotdash",arrow = arrow(length = unit(0.2, "cm"))) 
+p2 <- p + ggtitle("PC2") +
+  geom_abline(intercept = 0, slope = slopes[2], col = "darkred") +
+  geom_segment(x = 0, y = 0, linewidth = 0.8,
+               xend = (pc$sdev[2])^2, yend = slopes[2]*(pc$sdev[2])^2, 
+               colour = "darkred", arrow = arrow(length = unit(0.2, "cm"))) +
+   geom_segment(data= ss2, aes(x = x0, y = y0, xend = x1, yend = y1), colour = "darkred", linetype = "dotdash",arrow = arrow(length = unit(0.2, "cm")))  
+
+pc_p <- ggplot(as.data.frame(pc$x), aes(x = PC1, y = PC2)) + 
+  geom_point(aes(col = as.factor(1:10))) +
+  coord_fixed() +
+  ggtitle("PCA transformed") +
+  theme_bw() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        legend.position = "none")
+```
+
+## Principle
+
+Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้
+
+ยกตัวอย่างเป็นภาพ สมมติท่านต้องการที่จะวิเคราะห์แบ่งลักษณะของรูปจากสีของรูปภาพ แต่เฉดสีนั้นมีมากมาย
+
+```{r color, echo = FALSE, fig.align="center"}
+knitr::include_graphics("Picture/color.png")
+```
+
+ถ้าเป็นข้อมูลอาจจะมีรูปแบบลักษณะนี้
+
+```{r pic_df, echo = FALSE}
+set.seed(123)
+pic_df <- lapply(1:20, \(x) rnorm(25, sample(1:10, 1), sample(1:5,1))) |> 
+  as.data.frame() |> 
+  set_names(paste0("Picture_",LETTERS[1:20]))
+rownames(pic_df) <- outer(c("Pale", "Light", "Medium", "Dark", "Verydark") ,
+      c("Red", "Blue", "Green", "Yellow", "Orange"), FUN = "paste0") |> as.vector()
+pic_df
+```
+
+ซึ่งการที่จะนำข้อมูลสีทุกจุดมาวิเคราะห์นั้น อาจจะต้องใช้เครื่องคอมพิวเตอร์ที่มีสมรรถนะสูงมาก และข้อมูลส่วนใหญ่ก็ไม่ได้ต่างกันมากนัก ท่านจึงตัดสินใจรวมสีที่มีลักษณะใกล้เคียงกันเป็นกลุ่มๆ
+
+```{r group_color, echo = FALSE, fig.align="center"}
+knitr::include_graphics("Picture/colgroup (Custom).png")
+```
+
+จากกระบวนการนี้ รวมสีที่ใกล้กันเป็นกลุ่มเดียว ส่งผลให้เกิดการลดจำนวนมิติของข้อมูลลง โดยที่ยังเหลือข้อมูลที่มีความสำคัญอยู่
+
+```{r pic_df_reduced, echo = FALSE}
+set.seed(123)
+pic_df_reduced <- lapply(1:20, \(x) rnorm(5, sample(1:10, 1), sample(1:5,1))) |> 
+  as.data.frame() |> 
+  set_names(paste0("Picture_",LETTERS[1:20]))
+rownames(pic_df_reduced) <- c("Red", "Blue", "Green", "Yellow", "Orange")
+pic_df_reduced
+```
+
+ซึ่ง PCA นั้นทำการลดมิติของข้อมูลลง โดยรวมข้อมูลอื่นๆ เข้าหาข้อมูลที่มีความสำคัญมากที่สุด นั่นคือ **ข้อมูลที่มีความแปรปรวนสูงที่สุด** ยกตัวอย่างข้อมูลสองมิติชุดหนึ่ง
+
+```{r org_data, echo = FALSE, fig.align="center"}
+d
+```
+
+ในการวิเคราะห์ PCA ข้อมูลจะถูกลดมิติลงโดยการพยายามดึงเข้าสู่เส้นที่สามารถอธิบายความแปรปรวนได้ดีที่สุด ซึ่งก็คือ Principle component
+
+```{r pc1, echo = FALSE, fig.align="center"}
+p1
+```
+
+สังเกตว่า เส้นแนวเฉียงนั้น เป็นเส้นที่ข้อมูลแต่ละจุดห่างกันมากที่สุดใน 1 มิติ ซึ่งก็คือเส้นที่สามารถอธิบายความแปรปรวนได้ดีที่สุดนั่นเอง
+
+ส่วนเส้นต่อมาที่ตั้งฉาก คือเส้นที่อธิบายความแปรปรวนได้ดีที่สุดเป็นลำดับสอง
+
+```{r pc2, echo = FALSE, fig.align="center"}
+p2
+```
+
+เมื่อนำข้อมูลทั้งหมดมาสร้างเป็นกราฟใหม่ จะได้ข้อมูลที่ยังลงเหลือความแปรปรวนที่มากที่สุดไว้ทั้งสองมิติ
+
+```{r pca_transformed, echo = FALSE, fig.align="center"}
+pc_p
+```
+
+การลดมิติของข้อมูลนี้ อาจจะยังไม่เห็นผลนัก เนื่องจากข้อมูลมีแค่สองมิติเท่านั้น แต่ในสถานการณ์ซึ่งมีข้อมูลสูงมาก โดยเฉพาะเมื่อมี Feature มากกว่า Observations นั้น การลดข้อมูลจะมีประสิทธิภาพมาก โดยเฉพาะข้อมูลประเภท High-throughput (จำนวนยีนมากกว่าตัวอย่าง)
+
+Credit code: <https://stackoverflow.com/questions/2639430/graphing-perpendicular-offsets-in-a-least-squares-regression-plot-in-r>
+
+------------------------------------------------------------------------
+
+## Manually calculate PCA
+
+ต่อไปจะแสดงวิธีการคำนวณ PCA เพื่อให้เข้าใจลำดับของการวิเคราะห์
+
+```{r simulate_data}
+set.seed(123)
+data <- matrix(c(
+  rnorm(10, mean = 20, sd = 2),
+  rnorm(10, mean = 1, sd = 2),
+  rnorm(10, mean = 4, sd = 5)),
+  ncol= 3
+)
+colnames(data) <- c("A", "B", "C")
+data
+```
+
+เริ่มต้นด้วยการ Normalize ข้อมูลให้อยู่ในรูป Mean-centering
+
+```{r scale_data}
+scaled_data <- apply(data,2, \(x) (x-mean(x))/sd(x))
+scaled_data
+
+scaled_data <- scale(data, center = TRUE, scale = TRUE) # Same
+scaled_data
+```
+
+หลังจากนั้นเราจะทำการคำนวณ Covariance matrix ในที่นี้จะใช้แบบ [Pearson's](#pearson)
+
+**Note:** ถ้ากลับไปพิจารณาสูตร Covariance [Pearson's](#pearson) แล้ว จะได้ว่า
+
+$$
+cov = \frac{1}{n-1}({A^{T}A})
+$$
+
+โดย $n$ คือ จำนวนแถวของ Matrix $A$
+
+```{r cov_mat}
+cov_matrix <- t(scaled_data) %*% scaled_data / (nrow(scaled_data) - 1) # matrix multiplication
+cov_matrix
+
+cov_matrix <- cov(scaled_data)
+cov_matrix # same
+```
+
+หลังจากนั้นเราทำการแยกทิศทางของความแปรปรวนออกมาโดยวิธี Eigendecomposition ซึ่งสำหรับ PCA แล้ว ซึ่ง Eigenvectors นั้นบ่งบอกถึงทิศทางของความแปรปรวนของข้อมูลที่ตั้งฉากกัน โดยมีขนาดของการกระจายตัวของข้อมูล คือ Eigenvalue
+
+```{r eigen}
+eigen_info <- eigen(cov_matrix)
+eigen_info
+```
+
+โดย `vectors` คือ Eigenvectors หรือ ทิศทางของความแปรปรวน (เรียงตามคอลัมน์) ส่วน `values` คือ Eigenvalues หรือ ขนาดของความแปรปรวน
+
+**Note:** เราสามารถคำนวณ Eigenvalue และ Eigenvector กลับไปเป็น Covariance matrix
+
+$$
+A = VQV^{-1}
+$$
+
+```{r eigen_back}
+eigen_back <- 
+  eigen_info$vectors %*% diag(eigen_info$values) %*% solve(eigen_info$vectors)
+
+round(sum(eigen_back - cov_matrix), 10) # Diff nearly 0 due to algorithm
+```
+
+ต่อไปจะต้องเรียง Eigenvector ตามขนาดของ Eigenvalues จากน้อยไปมาก ซึ่งนั้นก็คือ Principal component ของข้อมูล (PC1, PC2, PC3, ....) นั่นหมายความว่า $n_{PC} \leq n_{Obs}$ เสมอ
+
+```{r sort_eigen}
+sorted_eigenvalues <- eigen_info$values
+sorted_eigenvectors <- eigen_info$vectors[, order(-sorted_eigenvalues)] # Decreasing order
+```
+
+```{r number_components}
+num_components <- 3  # Adjust this as needed
+selected_eigenvectors <- sorted_eigenvectors[, 1:num_components]
+```
+
+สุดท้ายเมื่อทำการคูณข้อมูลเดิมกลับไปด้วย Eigenvectors ที่เรียงแล้ว จะได้ ข้อมูลของความแปรปรวนข้อมูลแต่ละคอลัมน์ในแต่ละ PC
+
+```{r pca_result}
+pca_result <- scaled_data %*% selected_eigenvectors
+colnames(pca_result) <- paste0("PC", 1:ncol(selected_eigenvectors))
+pca_result
+```
+
+------------------------------------------------------------------------
+
+## PCA by R function
+
+ท่านไม่จำเป็นต้องคำนวณ PCA ตามทั้งหมดที่กล่าวมาขั้นต้น เนื่องจาก `R` ได้มีฟังก์ชันสำหรับวิเคราะห์ PCA ไว้ให้แล้ว ในที่นี้จะลองสร้างสถานการณ์ที่ Features \> Observations
+
+```{r data_sim}
+set.seed(123)
+
+data <- matrix(
+  sapply(1:10, \(x) rnorm(5, mean = sample(1:20, 1), sd = sample(1:10, 1))),
+  ncol = 10
+)
+colnames(data) <- LETTERS[1:10]
+
+as.data.frame(data)
+```
+
+```{r prcomp}
+pc <- prcomp(data, scale. = TRUE, center = TRUE)
+str(pc)
+```
+
+-   `rotation` คือ Eigenvectors ที่คำนวณจาก `eigen`
+
+-   `sdev` คือ รากที่สองของ Eigenvalues ที่คำนวณจาก `eigen`
+
+-   `x` คือ ข้อมูลสุดท้ายที่ถูกลดมิติแล้ว
+
+สังเกตว่าสุดท้าย PC จะไม่เกินจำนวน Observations = 5
+
+```{r pc_x}
+pc$x
+```
+
+### Biplot
+
+คือการพล็อตกราฟเพื่อบ่งบอก ว่า แต่ละ Features ดั้งเดิมนั้น มีผลต่อ PC มากน้อยเพียงใด
+
+```{r biplot}
+biplot(pc)
+```
+
+โดยทิศทางที่ชี้ไปนั้นคืออิทธิพลของ Features ดั้งเดิมที่ประกอบเป็น PC
+
+### Screeplot
+
+เป็นการพล็อตเพื่อสำรวจว่าแต่ละ PC นั้นมีอิทธิผลจากข้อมูลมากเท่าใด ซึ่งก็คือการดูขนาดของ Eigenvalues หรือ ความแปรปรวนของ PC นั้นๆ
+
+```{r screeplot_manual}
+ggplot(data = NULL, aes(x = 1:5)) + 
+  geom_col(aes(y = pc$sdev^2),fill = "skyblue", col = "black") +
+  geom_line(aes(y = cumsum(pc$sdev^2))) +
+  geom_text(aes(y = pc$sdev^2, 
+                label = paste0(round(pc$sdev^2,2),"%"), vjust = -2)) +
+  labs(x = "PC", y = "Variance (%)") +
+  theme_bw()
+```
+
+หรือท่านอาจจะเรียก `screeplot()`
+
+```{r screeplot}
+screeplot(pc)
+```
+
+สังเกตว่า PC จะเรียงจากมากไปน้อยเสมอ ตามขนาดของ Eigenvalue

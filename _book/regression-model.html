@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>11 Regression model | A gentle introduction to R for biologists</title>
+<title>12 Regression model | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
-<meta property="og:title" content="11 Regression model | A gentle introduction to R for biologists">
+<meta property="og:title" content="12 Regression model | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="11 Regression model | A gentle introduction to R for biologists">
+<meta name="twitter:title" content="12 Regression model | A gentle introduction to R for biologists">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -18,6 +18,28 @@
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
 <meta name="description" content="Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย ตัวแปรต้น (Independent variable, \(x\)) คือ ตัวแปรที่เป็นต้นเหตุ ตัวแปรตาม (Dependent variable, \(y\)) คือ...">
 <meta property="og:description" content="Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย ตัวแปรต้น (Independent variable, \(x\)) คือ ตัวแปรที่เป็นต้นเหตุ ตัวแปรตาม (Dependent variable, \(y\)) คือ...">
@@ -47,27 +69,30 @@
 <li class="book-part">Basic R</li>
 <li><a class="" href="basic-r.html"><span class="header-section-number">1</span> Basic R</a></li>
 <li><a class="" href="r-function.html"><span class="header-section-number">2</span> R function</a></li>
+<li><a class="" href="loop.html"><span class="header-section-number">3</span> Loop</a></li>
 <li class="book-part">Tidyverse</li>
-<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">3</span> What is tidyverse</a></li>
-<li><a class="" href="importing-data.html"><span class="header-section-number">4</span> Importing data</a></li>
+<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">4</span> What is tidyverse</a></li>
 <li><a class="" href="data-wrangling.html"><span class="header-section-number">5</span> Data wrangling</a></li>
 <li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
-<li><a class="" href="GSE63514.html"><span class="header-section-number">7</span> Case study: Microarray visualization</a></li>
+<li><a class="" href="importing-data.html"><span class="header-section-number">7</span> Importing data</a></li>
+<li><a class="" href="GSE63514.html"><span class="header-section-number">8</span> Example: Microarray data visualization</a></li>
 <li class="book-part">Statistical analysis</li>
-<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
-<li><a class="" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
-<li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
-<li><a class="active" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li><a class="" href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></li>
+<li><a class="" href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></li>
+<li><a class="active" href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">14</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
-<li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
-<li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">16</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">17</span> edgeR</a></li>
+<li><a class="" href="pathway-analysis.html"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li class="book-part">Supplement</li>
+<li><a class="" href="distribution.html"><span class="header-section-number">19</span> Distribution</a></li>
+<li class="book-part">Information</li>
+<li><a class="" href="session-info.html"><span class="header-section-number">20</span> Session info</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">21</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -75,29 +100,29 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="regression-model" class="section level1" number="11">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="regression-model" class="section level1" number="12">
 <h1>
-<span class="header-section-number">11</span> Regression model<a class="anchor" aria-label="anchor" href="#regression-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12</span> Regression model<a class="anchor" aria-label="anchor" href="#regression-model"><i class="fas fa-link"></i></a>
 </h1>
 <p>Regression model คือการสร้างสมการถดถอยของความสัมพันธ์ระหว่าง 2+ ตัวแปร โดยประกอบไปด้วย</p>
 <ul>
-<li><p>ตัวแปรต้น (Independent variable, <span class="math inline">\(x\)</span>) คือ ตัวแปรที่เป็น<strong>ต้นเหตุ</strong></p></li>
-<li><p>ตัวแปรตาม (Dependent variable, <span class="math inline">\(y\)</span>) คือ ตัวแปรที่เป็น<strong>ปลายเหตุ</strong> ซึ่งเป็นผลมาจากการเปลี่ยนแปลงของตัวแปรต้น</p></li>
+<li><p><strong>ตัวแปรต้น</strong> (Independent variable, <span class="math inline">\(x\)</span>) คือ ตัวแปรที่เป็น<strong>ต้นเหตุ</strong></p></li>
+<li><p><strong>ตัวแปรตาม</strong> (Dependent variable, <span class="math inline">\(y\)</span>) คือ ตัวแปรที่เป็น<strong>ปลายเหตุ</strong> ซึ่งเป็นผลมาจากการเปลี่ยนแปลงของตัวแปรต้น</p></li>
 </ul>
 <p>ความสัมพันธ์ของตัวแปรต้นและตัวแปรตามจะเขียนในรูปแบบ <span class="math inline">\(f(x) \sim x\)</span></p>
-<div id="linear-regression" class="section level2" number="11.1">
+<div id="linear-regression" class="section level2" number="12.1">
 <h2>
-<span class="header-section-number">11.1</span> Linear regression<a class="anchor" aria-label="anchor" href="#linear-regression"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1</span> Linear regression<a class="anchor" aria-label="anchor" href="#linear-regression"><i class="fas fa-link"></i></a>
 </h2>
-<div id="model-summary" class="section level3" number="11.1.1">
+<div id="model-summary" class="section level3" number="12.1.1">
 <h3>
-<span class="header-section-number">11.1.1</span> Model summary<a class="anchor" aria-label="anchor" href="#model-summary"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1.1</span> Model summary<a class="anchor" aria-label="anchor" href="#model-summary"><i class="fas fa-link"></i></a>
 </h3>
 <p>คือ การสร้างความสัมพันธ์ของตัวแปรแบบเชิงเส้น ใช้กับข้อมูลแบบต่อเนื่อง (Continuous data)</p>
 <p><span class="math display">\[
 h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \theta_{n}x_{n} + \epsilon
 \]</span></p>
-<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"Diabetes"</span>, package <span class="op">=</span> <span class="st">"heplots"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Diabetes</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">glufast</span>, y <span class="op">=</span> <span class="va">sspg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -105,7 +130,7 @@ h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \the
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/lm-1.png" width="672"></div>
-<p>ในการวัดความแม่นยำของ linear regression นั้นประกอบด้วยสามองค์ประกอบ</p>
+<p>ในการวัดความแม่นยำของ Linear regression นั้นประกอบด้วยสามองค์ประกอบ</p>
 <pre><code>## 
 ## Call:
 ## lm(formula = sspg ~ glufast, data = Diabetes)
@@ -139,7 +164,7 @@ h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \the
 <li><p><span class="math inline">\(SSR\)</span> = Explained variation = ค่าความผันผวนระหว่างค่าเฉลี่ยของข้อมูลกับเส้น regression</p></li>
 <li><p><span class="math inline">\(SSE\)</span> = Error = ค่าความผันผวนระหว่างข้อมูลกับเส้น regression</p></li>
 </ul>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">diabetes_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">sspg</span> <span class="op">~</span> <span class="va">glufast</span>, data <span class="op">=</span> <span class="va">Diabetes</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">diabetes_fit</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -181,16 +206,16 @@ t = \frac{\theta_{H_{a}}-\theta_{H_0}}{SE(\theta)} = \frac{\theta-0}{SE(\theta)}
 SE(\theta) = \sqrt{\frac{1}{n-2} \times {\sum_{i=1}^{n}\frac{(y_{i} - \hat{y_{i}})^2}{(x_{i} - \bar{x})^2}}}
 \]</span></p>
 </div>
-<div id="prediction" class="section level3" number="11.1.2">
+<div id="prediction" class="section level3" number="12.1.2">
 <h3>
-<span class="header-section-number">11.1.2</span> Prediction<a class="anchor" aria-label="anchor" href="#prediction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1.2</span> Prediction<a class="anchor" aria-label="anchor" href="#prediction"><i class="fas fa-link"></i></a>
 </h3>
 <p>ข้อดีของสมการถอดถอย คือ สามารถใช้ในการทำนายข้อมูลตัวแปรตามชุดใหม่ได้ จากผลลัพธ์ขั้นต้นในคอลัมน์ <code>coef</code> พบว่าทุกๆ <code>glufast</code> ที่เพิ่มขึ้น 1.186 หน่วย ส่งผลให้ <code>sspg</code> เพิ่มขึ้น 1 หน่วย ซึ่งเขียนเป็นสมการได้ว่า</p>
 <p><span class="math display">\[
 f(x) = 39.4354 \ + 1.1866\times(\text{glufast}) + \epsilon
 \]</span></p>
 <p>โดยสมการนี้จะอยู่ใน <code>diabetes_fit</code></p>
-<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_sspg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>glufast <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span> </span>
 <span><span class="va">new_sspg</span> <span class="op">&lt;-</span> <span class="va">new_sspg</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>predicted_sspg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">diabetes_fit</span>, newdata <span class="op">=</span> <span class="va">new_sspg</span><span class="op">)</span><span class="op">)</span></span>
@@ -201,9 +226,9 @@ f(x) = 39.4354 \ + 1.1866\times(\text{glufast}) + \epsilon
 <hr>
 </div>
 </div>
-<div id="logistic-regression" class="section level2" number="11.2">
+<div id="logistic-regression" class="section level2" number="12.2">
 <h2>
-<span class="header-section-number">11.2</span> Logistic regression<a class="anchor" aria-label="anchor" href="#logistic-regression"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2</span> Logistic regression<a class="anchor" aria-label="anchor" href="#logistic-regression"><i class="fas fa-link"></i></a>
 </h2>
 <p>คือ สมการถดถอยซึ่งมีคุณสมบัติในการจำแนกตัวแปรแบบสองตัวแปร (binary classification) ซึ่งเขียนอยู่ในรูปของ ค่าลอการิธึมของอัตราส่วนความเสี่ยง (log odds)</p>
 <p><span class="math display">\[
@@ -219,13 +244,13 @@ h(x) = \frac{1}{1+e^{z}}
 h(x) = \frac{1}{1+e^{\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + x_{n}\theta_{n} + \epsilon}}
 \]</span></p>
 <p>ความพิเศษของสมการนี้คือ ขอบเขตของ <span class="math inline">\(h(x)\)</span> จะอยู่ระหว่าง (0, 1) เสมอ ซึ่งส่งผลให้สามารถคำนวณกลับไปทำนายอัตราการเกิดเหตุการณ์จากอัตราส่วนความเสี่ยงได้</p>
-<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">log_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fl">0</span> <span class="op">+</span> <span class="fl">0.75</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">log_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"h(x)"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/logistic_regression-1.png" width="672"></div>
 <p>ต่อไปเราจะทำนายว่า <code>glufast</code> เพื่อให้ตัวแปรเป็น binary เราจะรวม <code>Overt_Diabetic</code> และ <code>Chemical_Diabetic</code> เป็นกลุ่มเดียวกัน</p>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Diabetes_mixed</span> <span class="op">&lt;-</span> <span class="va">Diabetes</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group <span class="op">=</span> </span>
 <span>                                       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span><span class="va">group</span>,</span>
 <span>                                                  <span class="st">"Normal"</span> <span class="op">~</span> <span class="fl">0</span>,</span>
@@ -238,7 +263,7 @@ h(x) = \frac{1}{1+e^{\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + 
 <span>              se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/logistc_summary-1.png" width="672"></div>
-<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">logit_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">group</span> <span class="op">~</span> <span class="va">glufast</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, </span>
 <span>                 data <span class="op">=</span> <span class="va">Diabetes_mixed</span><span class="op">)</span> </span>
 <span><span class="va">logit_fit</span></span></code></pre></div>
@@ -252,7 +277,7 @@ h(x) = \frac{1}{1+e^{\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + 
 ## Degrees of Freedom: 144 Total (i.e. Null);  143 Residual
 ## Null Deviance:       200.7 
 ## Residual Deviance: 121.9     AIC: 125.9</code></pre>
-<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>glufast <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">200</span><span class="op">)</span> </span>
 <span><span class="va">new_group</span> <span class="op">&lt;-</span> <span class="va">new_group</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>predicted_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">logit_fit</span>, </span>
@@ -263,9 +288,9 @@ h(x) = \frac{1}{1+e^{\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + 
 <div class="inline-figure"><img src="_main_files/figure-html/predicted_logit-1.png" width="672"></div>
 <hr>
 </div>
-<div id="poisson-family" class="section level2" number="11.3">
+<div id="poisson-family" class="section level2" number="12.3">
 <h2>
-<span class="header-section-number">11.3</span> Poisson, quassipoisson, and negative binomial regression<a class="anchor" aria-label="anchor" href="#poisson-family"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3</span> Poisson, quassipoisson, and negative binomial regression<a class="anchor" aria-label="anchor" href="#poisson-family"><i class="fas fa-link"></i></a>
 </h2>
 <p>Poisson regression คือ สมการถดถอยที่ใช้ในการทำนายความถี่ หรือค่าเฉลี่ยของการเกิดเหตุการณ์นั้นๆ มักใช้กับข้อมูลที่ไม่ต่อเนื่อง (Discrete value) พิจารณาข้อมูลแบบ <a href="distribution.html#poisson-dist">Poisson distribution</a></p>
 <p><span class="math display">\[
@@ -291,7 +316,7 @@ ln(\lambda) = \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n}
 ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t) \rightarrow  \text{offset}
 \]</span></p>
 <p>ซึ่งสมการนี้เป็นสมการพื้นฐานของการนับจำนวนใดๆ ดังเช่นตัวอย่างนี้ คือความสัมพันธ์ของตัวแปรต่างๆ กับอัตราการตายในโรคมะเร็งปากมดลูก</p>
-<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cervix_mort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"Resource/cervix_mort.csv"</span><span class="op">)</span> <span class="op">|&gt;</span>  <span class="co"># aggregrated data for demonstration</span></span>
 <span>                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>histo_major <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">histo_major</span>, <span class="st">"Squamous cell carcinoma"</span>,</span>
 <span>                                                 <span class="st">"Adenocarcinoma"</span>,</span>
@@ -321,7 +346,7 @@ ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t)
 ## AIC: 9832.1
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
-<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">cervix_mort</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span> <span class="op">(</span>x <span class="op">=</span> <span class="va">age_group</span>, y <span class="op">=</span> <span class="va">dead</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"glm"</span>, method.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"poisson"</span><span class="op">)</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
@@ -329,7 +354,7 @@ ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t)
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/poisson-1.png" width="672"></div>
 <p>สังเกตว่ายิ่งอายุเยอะ อัตราการตายยิ่งน้อยลงอย่างมีนัยสำคัญ ซึ่งไม่น่าจะเป็นไปได้ ทั้งนี้ เพราะยังไม่ได้ปรับระยะเวลาติดตาม โดยการใส่ Offset เป็น <code>person-month</code> เข้าไปคำนวณด้วย</p>
-<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pois_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">dead</span> <span class="op">~</span>  <span class="va">age_group</span> <span class="op">+</span> <span class="va">histo_major</span> <span class="op">+</span> <span class="va">stage</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">person_month</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                family <span class="op">=</span> <span class="st">"poisson"</span>, data <span class="op">=</span> <span class="va">cervix_mort</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">pois_fit</span><span class="op">)</span></span></code></pre></div>
@@ -357,7 +382,7 @@ ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t)
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>จะพบว่าหลังจากปรับตามระยะเวลาติดตาม กลุ่มอายุที่เพิ่มขึ้นจะส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญ</p>
-<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid</a></span><span class="op">(</span>age_group <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
 <span>                       histo_major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">cervix_mort</span><span class="op">$</span><span class="va">histo_major</span><span class="op">)</span>,</span>
 <span>                       stage <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
@@ -382,7 +407,7 @@ V = \phi\mu_{i}
 \]</span> <span class="math display">\[
 \phi = \frac{\chi^{2}}{\text{DF}} = \frac{1}{n-k}{\sum_{i=1}^{n}\frac{(Y_{i}-\hat{\mu_{i}})^{2}}{\hat{\mu_{i}}}}
 \]</span></p>
-<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">quasipois_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">dead</span> <span class="op">~</span>  <span class="va">age_group</span> <span class="op">+</span> <span class="va">histo_major</span> <span class="op">+</span> <span class="va">stage</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">person_month</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                family <span class="op">=</span> <span class="st">"quasipoisson"</span>, data <span class="op">=</span> <span class="va">cervix_mort</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">quasipois_fit</span><span class="op">)</span></span></code></pre></div>
@@ -413,7 +438,7 @@ V = \phi\mu_{i}
 <p><span class="math display">\[
 V = u_{i}(1+\frac{u_{i}}{\phi})
 \]</span></p>
-<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nb_fit</span> <span class="op">&lt;-</span> <span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html">glm.nb</a></span><span class="op">(</span><span class="va">dead</span> <span class="op">~</span>  <span class="va">age_group</span> <span class="op">+</span> <span class="va">histo_major</span> <span class="op">+</span> <span class="va">stage</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">person_month</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                 data <span class="op">=</span> <span class="va">cervix_mort</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">nb_fit</span><span class="op">)</span></span></code></pre></div>
@@ -447,25 +472,25 @@ V = u_{i}(1+\frac{u_{i}}{\phi})
 ##           Std. Err.:  0.339 
 ## 
 ##  2 x log-likelihood:  -584.937</code></pre>
-<p>ผลลัพธ์ที่ได้จะใกล้เคียงกันกับสมการถดถอย Quasipoisson ทั้งสองสมการนี้จะนิยมใช้ในการตั้งสมการถดถอยในจำนวนนับจากงานทดลอง High-troughput เช่น RNA-sequencing เนื่องจากข้อมูลประเภทนี้มักมีเป็นข้อมูลจำนวนนับที่มีการกระจายตัวสูงมาก (<span class="math inline">\(\phi &gt; 1\)</span>)</p>
+<p>ผลลัพธ์ที่ได้จะใกล้เคียงกันกับสมการถดถอย Quasipoisson ทั้งสองสมการนี้จะนิยมใช้ในการตั้งสมการถดถอยในจำนวนนับจากงานทดลอง High-throughput เช่น RNA-sequencing เนื่องจากข้อมูลประเภทนี้มักมีเป็นข้อมูลจำนวนนับที่มีการกระจายตัวสูงมาก (<span class="math inline">\(\phi &gt; 1\)</span>)</p>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></div>
-<div class="next"><a href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></div>
+<div class="prev"><a href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></div>
+<div class="next"><a href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#regression-model"><span class="header-section-number">11</span> Regression model</a></li>
+<li><a class="nav-link" href="#regression-model"><span class="header-section-number">12</span> Regression model</a></li>
 <li>
-<a class="nav-link" href="#linear-regression"><span class="header-section-number">11.1</span> Linear regression</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#model-summary"><span class="header-section-number">11.1.1</span> Model summary</a></li>
-<li><a class="nav-link" href="#prediction"><span class="header-section-number">11.1.2</span> Prediction</a></li>
+<a class="nav-link" href="#linear-regression"><span class="header-section-number">12.1</span> Linear regression</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#model-summary"><span class="header-section-number">12.1.1</span> Model summary</a></li>
+<li><a class="nav-link" href="#prediction"><span class="header-section-number">12.1.2</span> Prediction</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#logistic-regression"><span class="header-section-number">11.2</span> Logistic regression</a></li>
-<li><a class="nav-link" href="#poisson-family"><span class="header-section-number">11.3</span> Poisson, quassipoisson, and negative binomial regression</a></li>
+<li><a class="nav-link" href="#logistic-regression"><span class="header-section-number">12.2</span> Logistic regression</a></li>
+<li><a class="nav-link" href="#poisson-family"><span class="header-section-number">12.3</span> Poisson, quassipoisson, and negative binomial regression</a></li>
 </ul>
 
       <div class="book-extra">
@@ -482,7 +507,7 @@ V = u_{i}(1+\frac{u_{i}}{\phi})
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

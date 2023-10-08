@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>15 Limma | A gentle introduction to R for biologists</title>
+<title>16 Limma | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
-<meta property="og:title" content="15 Limma | A gentle introduction to R for biologists">
+<meta property="og:title" content="16 Limma | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="15 Limma | A gentle introduction to R for biologists">
+<meta name="twitter:title" content="16 Limma | A gentle introduction to R for biologists">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -19,9 +19,31 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="15.1 Principle Limma (Linear Model for Microarray Data) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene...">
-<meta property="og:description" content="15.1 Principle Limma (Linear Model for Microarray Data) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene...">
-<meta name="twitter:description" content="15.1 Principle Limma (Linear Model for Microarray Data) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene...">
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<meta name="description" content="16.1 Principle Limma (Linear Model for Microarray Data) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene...">
+<meta property="og:description" content="16.1 Principle Limma (Linear Model for Microarray Data) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene...">
+<meta name="twitter:description" content="16.1 Principle Limma (Linear Model for Microarray Data) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -47,27 +69,30 @@
 <li class="book-part">Basic R</li>
 <li><a class="" href="basic-r.html"><span class="header-section-number">1</span> Basic R</a></li>
 <li><a class="" href="r-function.html"><span class="header-section-number">2</span> R function</a></li>
+<li><a class="" href="loop.html"><span class="header-section-number">3</span> Loop</a></li>
 <li class="book-part">Tidyverse</li>
-<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">3</span> What is tidyverse</a></li>
-<li><a class="" href="importing-data.html"><span class="header-section-number">4</span> Importing data</a></li>
+<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">4</span> What is tidyverse</a></li>
 <li><a class="" href="data-wrangling.html"><span class="header-section-number">5</span> Data wrangling</a></li>
 <li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
-<li><a class="" href="GSE63514.html"><span class="header-section-number">7</span> Case study: Microarray visualization</a></li>
+<li><a class="" href="importing-data.html"><span class="header-section-number">7</span> Importing data</a></li>
+<li><a class="" href="GSE63514.html"><span class="header-section-number">8</span> Example: Microarray data visualization</a></li>
 <li class="book-part">Statistical analysis</li>
-<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
-<li><a class="" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
-<li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
-<li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li><a class="" href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></li>
+<li><a class="" href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">14</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
-<li><a class="active" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
-<li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
-<li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
+<li><a class="active" href="limma.html"><span class="header-section-number">16</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">17</span> edgeR</a></li>
+<li><a class="" href="pathway-analysis.html"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li class="book-part">Supplement</li>
+<li><a class="" href="distribution.html"><span class="header-section-number">19</span> Distribution</a></li>
+<li class="book-part">Information</li>
+<li><a class="" href="session-info.html"><span class="header-section-number">20</span> Session info</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">21</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -75,13 +100,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="limma" class="section level1" number="15">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="limma" class="section level1" number="16">
 <h1>
-<span class="header-section-number">15</span> Limma<a class="anchor" aria-label="anchor" href="#limma"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16</span> Limma<a class="anchor" aria-label="anchor" href="#limma"><i class="fas fa-link"></i></a>
 </h1>
-<div id="principle-2" class="section level2" number="15.1">
+<div id="principle-2" class="section level2" number="16.1">
 <h2>
-<span class="header-section-number">15.1</span> Principle<a class="anchor" aria-label="anchor" href="#principle-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1</span> Principle<a class="anchor" aria-label="anchor" href="#principle-2"><i class="fas fa-link"></i></a>
 </h2>
 <p><a href="https://bioconductor.org/packages/release/bioc/html/limma.html">Limma</a> (Linear Model for Microarray Data) เป็นหนึ่งใน <code>bioconductor package</code> ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene expression; DGE) ในงานทดลอง Microarray</p>
 <p>หลักการสำคัญของ <code>limma</code> คือการใช้สมการถดถอยเชิงเส้นในการหา DGE โดยมีสมมติฐานเบื้องต้นว่าค่าความเข้มพื้นหลังที่อ่านได้จาก Probe ของ Microarray นั้นมีการกระจายตัวแบบ <a href="distribution.html#norm-dist">Normal distribution</a> ซึ่งหลักการนี้สามารถนำไปปรับใช้ในการหา Differential expression ในงานประเภทอื่นๆ ได้ด้วย เช่น RNA-seq, Proteomics</p>
@@ -97,7 +122,7 @@ t = \frac{\theta_{1}-0}{SE} = \frac{\theta_{1}}{S/\sqrt{n}}
 \]</span></p>
 <p>ซึ่งเมื่อพิจารณาจากสูตรแล้ว จะเห็นว่าจำนวนตัวอย่างที่ต่ำ ส่งผลให้ <span class="math inline">\(SE\)</span> สูง มีค่า <span class="math inline">\(t\)</span> ที่แกว่ง (ตาม <span class="math inline">\(S\)</span>) และมี <a href="hypothesis-testing.html#power">Power ที่ต่ำด้วย เนื่องจากมีกลุ่มตัวอย่างน้อย</a></p>
 <p>ผู้นิพนธ์ limma นั้นได้แก้ปัญหานี้โดยใช้หลักการสถิติแบบ Empirical Bayes ชื่อว่า Moderated <span class="math inline">\(t\)</span>-test โดยหลักการคือ เนื่องจากหลักการของการอ่านข้อมูลใน Microarray ในแต่ละยีนนั้นเป็นไปโดยพร้อมกัน อัตราส่วนความแปรปรวนของยีนแต่ละตัวที่อ่านค่าได้นั้นจะเท่าๆ กันตลอดทั้ง array ดังนั้นจึงสามารถยืมข้อมูลของความแปรปรวนมาจากทุกยีนทั้งหมด มาสร้างเป็น <strong>ความน่าจะเป็นก่อนหน้า (Prior probability)</strong> เพื่อนำมาถ่วงน้ำหนักกับ<strong>ยีนแต่ละตัว (Posterior probability)</strong> ภายหลัง</p>
-<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_nc</span> <span class="op">&lt;-</span> <span class="va">GSE63514</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Normal"</span>, <span class="st">"Cancer"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -106,9 +131,10 @@ t = \frac{\theta_{1}-0}{SE} = \frac{\theta_{1}}{S/\sqrt{n}}
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="cn">NULL</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cx_var</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"skyblue"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span>,<span class="fl">0.25</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span><span class="st">"text"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cx_var</span><span class="op">)</span><span class="op">+</span><span class="fl">0.35</span>, y<span class="op">=</span><span class="fl">4</span>, label<span class="op">=</span> <span class="st">"Mean variance"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span><span class="st">"text"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cx_var</span><span class="op">)</span><span class="op">+</span><span class="fl">0.35</span>, y <span class="op">=</span> <span class="fl">4</span>, label<span class="op">=</span> <span class="st">"Mean variance"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Variance"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cx_var</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cx_var</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/overall_vairiance-1.png" width="672"></div>
 <p>ค่า mean variance นี้จะถูกนำไปถ่วงน้ำหนักความแปรปรวนเดิมของแต่ละยีน และจะถูกนำไปใช้ในการคำนวณใหม่ เรียกว่า moderated <span class="math inline">\(t\)</span></p>
 <p><span class="math display">\[
@@ -126,21 +152,21 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 <p>ทั้งหมดนี้จะส่งผลให้ มี Moderate effect ของการคำนวณค่า <span class="math inline">\(\tilde{t}\)</span> และมี Degree of freedom ที่เพิ่มขึ้นส่งผลให้ Power สูงขึ้น (เพราะการกระจายตัวแคบลง)</p>
 <hr>
 </div>
-<div id="example" class="section level2" number="15.2">
+<div id="example" class="section level2" number="16.2">
 <h2>
-<span class="header-section-number">15.2</span> Example<a class="anchor" aria-label="anchor" href="#example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2</span> Example<a class="anchor" aria-label="anchor" href="#example"><i class="fas fa-link"></i></a>
 </h2>
 <p>ต่อจากนี้จะยกตัวอย่างการคำนวณ DGE ระหว่างกลุ่มโดยใช้ limma ต่อจาก <a href="#GSE6354">GSE63514</a> ซึ่งครั้งนี้จะเทียบทุกกลุ่ม และเทียบทุกยีน</p>
 <p>ก่อนอื่นจะต้องสร้างสมการเชิงเส้นของกลุ่มแต่ละกลุ่มขึ้นมาก่อน</p>
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pData</span> <span class="op">&lt;-</span> <span class="va">GSE63514_meta</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">title</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"-\\d+"</span>, <span class="st">""</span>, <span class="va">title</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">pData</span><span class="op">$</span><span class="va">group</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Normal" "CIN1"   "CIN2"   "CIN3"   "Cancer"</code></pre>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span> <span class="fl">0</span> <span class="op">+</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">pData</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cx_mod</span><span class="op">)</span> <span class="co"># display as dataframe</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cx_mod</span><span class="op">)</span> <span class="co"># Display as dataframe</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["groupCancer"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["groupCIN1"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["groupCIN2"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["groupCIN3"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["groupNormal"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"1"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"2"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"3"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"4"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"5"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"6"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"7"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"8"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"9"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"10"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"11"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"12"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"13"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"14"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"15"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"16"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"17"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"18"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"19"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"20"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"21"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"22"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"23"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"24"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"25"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"26"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"27"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"28"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"29"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"30"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"31"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"32"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"33"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"34"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"35"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"36"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"37"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"38"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"39"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"40"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"41"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"42"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"43"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"44"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"45"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"46"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"47"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"48"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"49"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"50"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"51"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"52"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"53"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"54"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"55"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"56"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"57"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"58"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"59"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"60"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"61"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"62"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"63"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"64"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"65"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"66"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"67"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"68"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"69"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"70"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"71"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"72"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"73"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"74"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"75"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"76"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"77"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"78"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"79"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"80"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"81"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"82"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"83"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"84"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"85"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"86"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"87"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"88"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"89"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"90"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"91"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"92"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"93"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"94"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"95"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"96"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"97"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"98"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"99"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"100"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"101"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"102"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"103"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"104"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"105"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"106"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"107"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"108"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"109"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"110"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"111"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"112"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"113"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"114"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"115"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"116"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"117"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"118"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"119"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"120"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"121"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"122"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"123"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"124"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"125"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"126"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"127"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"128"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -148,13 +174,13 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 </div>
 <p>แมทริกซ์ที่เห็นนี้ ข้อมูลของ Sample แต่ละคน โดยแต่ละคอลัมน์จะเป็นตัวแทนของกลุ่มของ Sample นั้น เช่น คนที่ 1 จะมีตัวเลข <code>[0 0 0 0 1]</code> บ่งบอกว่าเป็นชิ้นเนื้อประเภท <code>Cancer</code> และคนสุดท้ายเป็น <code>[1 0 0 0 0]</code> บ่งบอกว่าชิ้นเนื้อประเภท <code>Normal</code></p>
 <p>ต่อจากนั้นเราจะสร้าง contrast matrix ขึ้นมาเพื่อนำไปใช้อ้างอิงในการเทียบ DEG</p>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">contrasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">cx_mod</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">1</span>,<span class="op">]</span>, <span class="fl">2</span>, <span class="va">paste</span>, collapse <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span></span>
 <span><span class="va">contrasts</span></span></code></pre></div>
 <pre><code>##  [1] "groupCIN1-groupCancer"   "groupCIN2-groupCancer"   "groupCIN3-groupCancer"   "groupNormal-groupCancer"
 ##  [5] "groupCIN2-groupCIN1"     "groupCIN3-groupCIN1"     "groupNormal-groupCIN1"   "groupCIN3-groupCIN2"    
 ##  [9] "groupNormal-groupCIN2"   "groupNormal-groupCIN3"</code></pre>
-<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">contrasts.matrix</span> <span class="op">&lt;-</span> <span class="fu">makeContrasts</span><span class="op">(</span>contrasts <span class="op">=</span> <span class="va">contrasts</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">cx_mod</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="va">contrasts.matrix</span></span></code></pre></div>
 <pre><code>##              Contrasts
@@ -180,18 +206,18 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 ##   groupNormal                     1</code></pre>
 <p>สังเกตว่าแต่ละคอลัมน์ผลรวมจะเท่ากับ 0 เนื่องจาก <span class="math inline">\(H_{0}\)</span> ว่าไม่มีความแตกต่างกันในการแสดงออกของยีน (= 0) นั่นเอง</p>
 <p>เมื่อได้ design matrix ต่อไปคือการ fit linear regression ตาม model โดยข้อมูลจะต้องอยู่ในรูปตัวเลขทั้งหมด ดังนั้นจะต้องปรับแต่ง ข้อมูล expression เริ่มต้นเล็กน้อย</p>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">GSE63514_fixed</span> <span class="op">&lt;-</span> <span class="va">GSE63514</span> <span class="op">|&gt;</span> </span>
 <span>                    <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"prob"</span><span class="op">)</span></span></code></pre></div>
 <p>ต่อจากนั้นจะ fit model ด้วย <code>lmFit()</code> และเทียบแต่ละกลุ่มด้วย <code>contrasts.fit()</code></p>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_fit</span> <span class="op">&lt;-</span> <span class="fu">lmFit</span><span class="op">(</span><span class="va">GSE63514_fixed</span>, design <span class="op">=</span> <span class="va">cx_mod</span><span class="op">)</span></span>
 <span><span class="va">cx_fit_contrasts</span> <span class="op">&lt;-</span> <span class="fu">contrasts.fit</span><span class="op">(</span><span class="va">cx_fit</span>, <span class="va">contrasts.matrix</span><span class="op">)</span></span></code></pre></div>
 <p>สุดท้ายเราจะทำการคำนวณ Moderated t-test โดยใช้ <code>eBayes()</code></p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_fit_contrasts_eB</span> <span class="op">&lt;-</span> <span class="fu">eBayes</span><span class="op">(</span><span class="va">cx_fit_contrasts</span><span class="op">)</span></span></code></pre></div>
 <p>สุดท้ายคือการแสดงผล DGE จากการคำนวณทั้งหมดโดยใช้ <code>topTable()</code> ซึ่งจะแสดง Moderated <span class="math inline">\(F\)</span>-test (<a href="parametric-test.html#ANOVA">ANOVA</a>) และ <span class="math inline">\(p\)</span>-value, Adjusted <span class="math inline">\(p\)</span>-value</p>
-<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">topTable</span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="co"># First 100 genes</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -199,7 +225,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
   </script>
 </div>
 <p>และสามารถเรียกดู <span class="math inline">\(t\)</span>-test แต่ละกลุ่มได้โดยการระบุ <code>coef</code></p>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">topTable</span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, coef <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="co"># เรียงตาม contrasts.matrix</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -207,7 +233,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
   </script>
 </div>
 <p>โดย <code>logFC</code> คือ Log2 fold-change ของ Gene expression แต่ละตัว</p>
-<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">contrasts.matrix</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>    <span class="op">~</span><span class="fu">topTable</span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, coef <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">contrasts.matrix</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -341,7 +367,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 ## 204603_at   -0.9813232  8.164955 -9.000435 2.930854e-15 1.649719e-11 24.03517
 ## 218039_at   -1.7300249 11.879667 -8.995189 3.017319e-15 1.649719e-11 24.00746</code></pre>
 <p>ท่านสามารถสรุปข้อมูล DGE ได้โดยใช้ <code>decideTests()</code></p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">decideTests</span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, fc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fl">1.5</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##        groupCIN1-groupCancer groupCIN2-groupCancer groupCIN3-groupCancer groupNormal-groupCancer groupCIN2-groupCIN1
@@ -352,21 +378,21 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 ## Down                    34                     0                   0                   311                  2214
 ## NotSig               54548                 54675               54675                 54333                 50612
 ## Up                      93                     0                   0                    31                  1849</code></pre>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">vennDiagram</span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span> <span class="co"># max 5 groups</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/decideTests-1.png" width="672"></div>
 <hr>
 </div>
-<div id="mean-variance-relationship" class="section level2" number="15.3">
+<div id="mean-variance-relationship" class="section level2" number="16.3">
 <h2>
-<span class="header-section-number">15.3</span> Mean-variance relationship<a class="anchor" aria-label="anchor" href="#mean-variance-relationship"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.3</span> Mean-variance relationship<a class="anchor" aria-label="anchor" href="#mean-variance-relationship"><i class="fas fa-link"></i></a>
 </h2>
 <p>ในบางข้อมูลนั้นมีความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวน ซึ่งสามารถตรวจสอบได้โดยใช้ <code>plotSA()</code></p>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">plotSA</span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span><span class="op">)</span> </span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/SA_eB-1.png" width="672"></div>
 <p>จากกราฟจะพบความสัมพันธ์ระหว่าง <code>Average log-expression</code> และ <code>sqrt(sigma)</code> แปลว่ามีความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวน เนื่องจาก Linear model นั้นมีสมมติฐานว่า ความแปรปรวนนั้นคงที่ตลอด (Homoscedasticity) การสร้างสมการแบบธรรมดาอาจจะทำให้เกิด False positive มากกว่าปกติ ซึ่ง limma นั้นมีฟังก์ชันที่ปรับสมการตามแนวโน้มของความแปรปรวนด้วย <code>eBayes(..., trend = TRUE)</code></p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_fit_contrasts_eB_trend</span> <span class="op">&lt;-</span> <span class="fu">eBayes</span><span class="op">(</span><span class="va">cx_fit_contrasts</span>, trend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">results_trend</span> <span class="op">&lt;-</span> <span class="fu">decideTests</span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, fc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fl">1.5</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">results_trend</span><span class="op">)</span></span></code></pre></div>
@@ -379,7 +405,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 ## NotSig               54548                 54675               54675                 54333                 50612
 ## Up                      93                     0                   0                    31                  1849</code></pre>
 <p>เมื่อทำการพล็อตความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวนอีกครั้ง จะพบว่าโมเดลนั้นถูกปรับตามความแปรปรวนแล้ว</p>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">plotSA</span><span class="op">(</span><span class="va">cx_fit_contrasts_eB_trend</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/SA_trend-1.png" width="672"></div>
 <p>การใช้ <code>trend = TRUE</code> นี้มีความสำคัญมากในการประยุกต์ใช้ limma ในการวิเคราะห์ข้อมูลแบบอื่นๆ ที่ไม่ใช่ Microarray เช่น RNA-seq, Proteomics เนื่องจากข้อมูลมักจะมีความสัมพันธ์ระหว่างค่าเฉลี่ยกับตัวแปรสูง (Heteroscedasticity)</p>
@@ -387,15 +413,15 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></div>
-<div class="next"><a href="edger.html"><span class="header-section-number">16</span> edgeR</a></div>
+<div class="prev"><a href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></div>
+<div class="next"><a href="edger.html"><span class="header-section-number">17</span> edgeR</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#limma"><span class="header-section-number">15</span> Limma</a></li>
-<li><a class="nav-link" href="#principle-2"><span class="header-section-number">15.1</span> Principle</a></li>
-<li><a class="nav-link" href="#example"><span class="header-section-number">15.2</span> Example</a></li>
-<li><a class="nav-link" href="#mean-variance-relationship"><span class="header-section-number">15.3</span> Mean-variance relationship</a></li>
+<li><a class="nav-link" href="#limma"><span class="header-section-number">16</span> Limma</a></li>
+<li><a class="nav-link" href="#principle-2"><span class="header-section-number">16.1</span> Principle</a></li>
+<li><a class="nav-link" href="#example"><span class="header-section-number">16.2</span> Example</a></li>
+<li><a class="nav-link" href="#mean-variance-relationship"><span class="header-section-number">16.3</span> Mean-variance relationship</a></li>
 </ul>
 
       <div class="book-extra">
@@ -412,7 +438,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

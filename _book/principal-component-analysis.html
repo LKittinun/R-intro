@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>13 Principal component analysis | A gentle introduction to R for biologists</title>
+<title>14 Principal component analysis | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
-<meta property="og:title" content="13 Principal component analysis | A gentle introduction to R for biologists">
+<meta property="og:title" content="14 Principal component analysis | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="13 Principal component analysis | A gentle introduction to R for biologists">
+<meta name="twitter:title" content="14 Principal component analysis | A gentle introduction to R for biologists">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -19,9 +19,31 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="13.1 Principle Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
-<meta property="og:description" content="13.1 Principle Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
-<meta name="twitter:description" content="13.1 Principle Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<meta name="description" content="14.1 Principle Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
+<meta property="og:description" content="14.1 Principle Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
+<meta name="twitter:description" content="14.1 Principle Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -47,27 +69,30 @@
 <li class="book-part">Basic R</li>
 <li><a class="" href="basic-r.html"><span class="header-section-number">1</span> Basic R</a></li>
 <li><a class="" href="r-function.html"><span class="header-section-number">2</span> R function</a></li>
+<li><a class="" href="loop.html"><span class="header-section-number">3</span> Loop</a></li>
 <li class="book-part">Tidyverse</li>
-<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">3</span> What is tidyverse</a></li>
-<li><a class="" href="importing-data.html"><span class="header-section-number">4</span> Importing data</a></li>
+<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">4</span> What is tidyverse</a></li>
 <li><a class="" href="data-wrangling.html"><span class="header-section-number">5</span> Data wrangling</a></li>
 <li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
-<li><a class="" href="GSE63514.html"><span class="header-section-number">7</span> Case study: Microarray visualization</a></li>
+<li><a class="" href="importing-data.html"><span class="header-section-number">7</span> Importing data</a></li>
+<li><a class="" href="GSE63514.html"><span class="header-section-number">8</span> Example: Microarray data visualization</a></li>
 <li class="book-part">Statistical analysis</li>
-<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">8</span> Hypothesis testing</a></li>
-<li><a class="" href="parametric-test.html"><span class="header-section-number">9</span> Parametric test</a></li>
-<li><a class="" href="non-parametric-test.html"><span class="header-section-number">10</span> Non-parametric test</a></li>
-<li><a class="" href="regression-model.html"><span class="header-section-number">11</span> Regression model</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></li>
-<li><a class="active" href="principal-component-analysis.html"><span class="header-section-number">13</span> Principal component analysis</a></li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li><a class="" href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></li>
+<li><a class="" href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></li>
+<li><a class="active" href="principal-component-analysis.html"><span class="header-section-number">14</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">15</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">16</span> edgeR</a></li>
-<li class="book-part">Appendix</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">17</span> Distribution</a></li>
-<li class="book-part">Session info</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">18</span> Session info</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">16</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">17</span> edgeR</a></li>
+<li><a class="" href="pathway-analysis.html"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li class="book-part">Supplement</li>
+<li><a class="" href="distribution.html"><span class="header-section-number">19</span> Distribution</a></li>
+<li class="book-part">Information</li>
+<li><a class="" href="session-info.html"><span class="header-section-number">20</span> Session info</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">21</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -75,19 +100,31 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="principal-component-analysis" class="section level1" number="13">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="principal-component-analysis" class="section level1" number="14">
 <h1>
-<span class="header-section-number">13</span> Principal component analysis<a class="anchor" aria-label="anchor" href="#principal-component-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14</span> Principal component analysis<a class="anchor" aria-label="anchor" href="#principal-component-analysis"><i class="fas fa-link"></i></a>
 </h1>
-<div id="principle-1" class="section level2" number="13.1">
+<div id="principle-1" class="section level2" number="14.1">
 <h2>
-<span class="header-section-number">13.1</span> Principle<a class="anchor" aria-label="anchor" href="#principle-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.1</span> Principle<a class="anchor" aria-label="anchor" href="#principle-1"><i class="fas fa-link"></i></a>
 </h2>
-<p>Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้ ยกตัวอย่างเป็นภาพ สมมติท่านต้องการที่จะวิเคราะห์แบ่งลักษณะของรูปจากสีของรูปภาพ แต่เฉดสีนั้นมีมากมาย</p>
+<p>Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้</p>
+<p>ยกตัวอย่างเป็นภาพ สมมติท่านต้องการที่จะวิเคราะห์แบ่งลักษณะของรูปจากสีของรูปภาพ แต่เฉดสีนั้นมีมากมาย</p>
 <div class="inline-figure"><img src="Picture/color.png" width="250" style="display: block; margin: auto;"></div>
+<p>ถ้าเป็นข้อมูลอาจจะมีรูปแบบลักษณะนี้</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Picture_A"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Picture_B"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Picture_C"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Picture_D"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Picture_E"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Picture_F"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Picture_G"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Picture_H"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["Picture_I"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["Picture_J"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["Picture_K"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["Picture_L"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["Picture_M"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["Picture_N"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["Picture_O"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["Picture_P"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["Picture_Q"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["Picture_R"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["Picture_S"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["Picture_T"],"name":[20],"type":["dbl"],"align":["right"]}],"data":[{"1":"-2.0686670","2":"7.253815","3":"9.49281009","4":"6.338540","5":"8.273959","6":"4.47989502","7":"13.7231198","8":"18.5045004","9":"-0.7646529","10":"4.018241","11":"2.1784144","12":"2.4785933","13":"-3.1093273","14":"7.260378","15":"7.294567","16":"2.301083","17":"2.5170074","18":"11.2038017","19":"3.020451","20":"1.787747","_rn_":"PaleRed"},{"1":"6.7184877","2":"6.426464","3":"-1.28027292","4":"7.995346","5":"11.823893","6":"6.81820714","7":"2.7494272","8":"12.5447722","9":"-1.8922639","10":"12.313689","11":"3.6900260","12":"9.5364456","13":"1.8736890","14":"6.714126","15":"4.144968","16":"16.444751","17":"-0.5222401","18":"0.1391609","19":"3.314058","20":"8.450360","_rn_":"LightRed"},{"1":"2.6731021","2":"5.704929","3":"9.74354898","4":"10.290517","5":"5.146352","6":"0.11221368","7":"4.8946828","8":"12.6809739","9":"-3.9450925","10":"14.858518","11":"3.9250559","12":"4.7420717","13":"5.1566364","14":"10.182327","15":"9.898090","16":"8.777518","17":"6.6640223","18":"-0.4955984","19":"4.328215","20":"7.762365","_rn_":"MediumRed"},{"1":"2.6482741","2":"6.895126","3":"2.03324093","4":"8.305544","5":"9.833314","6":"4.40356867","7":"5.9097090","8":"15.8288828","9":"-4.1388629","10":"2.639205","11":"3.3686189","12":"0.4422741","13":"1.5071357","14":"8.673190","15":"14.871654","16":"10.733626","17":"-2.1717753","18":"6.7691875","19":"3.121318","20":"7.707892","_rn_":"DarkRed"},{"1":"3.5492478","2":"6.878133","3":"1.12719809","4":"6.022205","5":"11.558222","6":"2.47560502","7":"2.5486581","8":"6.1186805","9":"-1.2958939","10":"12.644825","11":"-0.7905487","12":"7.4577794","13":"4.2067639","14":"7.370335","15":"6.686708","16":"11.041496","17":"2.7637759","18":"12.9780806","19":"3.712842","20":"8.648458","_rn_":"VerydarkRed"},{"1":"6.8416646","2":"6.821581","3":"-0.09191291","4":"10.446423","5":"10.903460","6":"-0.14428832","7":"5.5505861","8":"4.9763384","9":"3.4719433","10":"22.272002","11":"3.6992861","12":"4.5842622","13":"-3.7576675","14":"7.641856","15":"7.127497","16":"13.783629","17":"1.1689540","18":"6.3152522","19":"3.778860","20":"10.647395","_rn_":"PaleBlue"},{"1":"-2.1818119","2":"6.688640","3":"11.59967734","4":"9.980512","5":"10.317029","6":"-0.02933531","7":"5.1068936","8":"6.3246709","9":"5.4393926","10":"1.753273","11":"1.1068856","12":"8.5402158","13":"-0.1515503","14":"8.104536","15":"9.822050","16":"4.664383","17":"-0.6126291","18":"4.1242061","19":"3.914773","20":"8.616793","_rn_":"LightBlue"},{"1":"8.0705531","2":"6.553918","3":"-2.33741451","4":"8.645191","5":"8.077882","6":"-0.20307235","7":"3.3538585","8":"12.9577395","9":"3.8303534","10":"13.979026","11":"2.3496054","12":"8.7773118","13":"3.5945033","14":"9.221763","15":"5.752607","16":"4.419579","17":"3.3620744","18":"-0.9153320","19":"2.425605","20":"6.150692","_rn_":"MediumBlue"},{"1":"4.5114373","2":"5.938088","3":"4.98348192","4":"7.716195","5":"7.450887","6":"1.93818696","7":"4.1958791","8":"5.4619642","9":"-0.4546292","10":"8.293534","11":"2.1491024","12":"5.0375083","13":"2.6837510","14":"7.412407","15":"9.113297","16":"9.620875","17":"0.1347651","18":"10.2606176","19":"4.626881","20":"5.795602","_rn_":"DarkBlue"},{"1":"10.5850097","2":"5.694037","3":"7.93590496","4":"5.116282","5":"6.927614","6":"0.07648883","7":"3.8977982","8":"2.6222831","9":"1.2389997","10":"2.973731","11":"2.8563335","12":"2.0970791","13":"-3.3195112","14":"2.640568","15":"11.578366","16":"7.030994","17":"3.2061690","18":"7.9211271","19":"2.619043","20":"7.604592","_rn_":"VerydarkBlue"},{"1":"4.6472902","2":"5.619529","3":"5.53744850","4":"11.081957","5":"10.352940","6":"4.37583355","7":"10.3853557","8":"20.8773223","9":"-1.8183859","10":"5.385196","11":"2.0493500","12":"13.3787040","13":"-2.0184984","14":"5.524311","15":"13.557707","16":"18.468130","17":"4.3492529","18":"6.5499962","19":"2.894216","20":"8.930051","_rn_":"PaleGreen"},{"1":"3.7146388","2":"5.305293","3":"4.64808910","4":"5.199221","5":"7.157576","6":"7.20021788","7":"1.7759917","8":"3.5320513","9":"-1.8688726","10":"10.049491","11":"-1.3349502","12":"8.3350950","13":"-1.8210651","14":"9.153137","15":"13.474869","16":"3.265990","17":"4.5148148","18":"9.1558298","19":"4.404050","20":"4.880959","_rn_":"LightGreen"},{"1":"-0.1466794","2":"5.792083","3":"6.17434123","4":"13.561999","5":"8.528328","6":"0.42593905","7":"0.7120112","8":"9.9622079","9":"4.5386020","10":"7.955701","11":"3.4729919","12":"8.0696427","13":"1.1603540","14":"10.271781","15":"7.311833","16":"2.554057","17":"4.0102727","18":"2.6916803","19":"4.294084","20":"7.447073","_rn_":"MediumGreen"},{"1":"6.8842898","2":"4.734604","3":"2.39035747","4":"11.597832","5":"9.231723","6":"4.57547769","7":"4.1133652","8":"8.3691981","9":"-3.0623703","10":"3.058774","11":"2.7720531","12":"0.8866034","13":"-0.7218365","14":"9.388284","15":"9.061700","16":"11.499240","17":"7.2368191","18":"6.9757766","19":"1.910008","20":"10.901802","_rn_":"DarkGreen"},{"1":"5.4766195","2":"8.168956","3":"2.08441674","4":"6.292899","5":"15.531586","6":"4.53808448","7":"4.9314422","8":"2.0578393","9":"8.8211759","10":"8.677024","11":"1.4686967","12":"9.3161164","13":"1.6616465","14":"8.573142","15":"13.491172","16":"11.980600","17":"-0.1274514","18":"2.0005479","19":"2.126929","20":"7.675160","_rn_":"VerydarkGreen"},{"1":"2.8329420","2":"7.207962","3":"-0.60316700","4":"3.920737","5":"8.044150","6":"3.66440516","7":"5.3095704","8":"11.3495110","9":"0.6387216","10":"5.263509","11":"2.2362890","12":"5.0584416","13":"-1.5035472","14":"4.003865","15":"13.653345","16":"11.341359","17":"7.7309119","18":"10.5656600","19":"1.641921","20":"5.904738","_rn_":"PaleYellow"},{"1":"0.6468533","2":"4.876891","3":"0.05989538","4":"4.868780","5":"10.706160","6":"0.98324678","7":"2.6249040","8":"13.8019118","9":"1.8581553","10":"13.697607","11":"2.2680773","12":"4.9599218","13":"0.6089375","14":"10.299556","15":"11.588917","16":"9.726625","17":"1.4071185","18":"-1.9316470","19":"3.181847","20":"7.172164","_rn_":"LightYellow"},{"1":"0.7994903","2":"5.597115","3":"-2.71074313","4":"7.770651","5":"10.233883","6":"2.76109479","7":"0.8100216","8":"8.9742936","9":"-1.9541108","10":"14.483894","11":"2.4420389","12":"9.1153214","13":"2.7019883","14":"10.871721","15":"9.612058","16":"10.619563","17":"0.7125050","18":"5.9019730","19":"3.164841","20":"11.343946","_rn_":"MediumYellow"},{"1":"2.3524038","2":"5.533345","3":"5.47713414","4":"6.259924","5":"7.114430","6":"2.43920933","7":"7.7895555","8":"4.6476778","9":"-1.2975548","10":"8.269996","11":"5.2816923","12":"4.4653054","13":"4.6254005","14":"7.041120","15":"1.680475","16":"3.810229","17":"5.0867025","18":"5.1673901","19":"3.364115","20":"9.650132","_rn_":"DarkYellow"},{"1":"1.9952617","2":"6.779965","3":"2.97520695","4":"5.957372","5":"9.786076","6":"4.12597907","7":"2.9510488","8":"6.6856048","9":"-4.2680645","10":"1.089715","11":"1.5618992","12":"9.0435847","13":"1.3816589","14":"12.578213","15":"15.495832","16":"11.528336","17":"3.3506428","18":"2.0518024","19":"3.552158","20":"11.710027","_rn_":"VerydarkYellow"},{"1":"-0.2570974","2":"5.916631","3":"0.25717262","4":"4.145144","5":"14.333653","6":"2.25512249","7":"1.4034614","8":"-0.5557563","9":"0.2682984","10":"12.324709","11":"2.3361308","12":"7.8350981","13":"-1.8542286","14":"1.924436","15":"10.427255","16":"4.298630","17":"5.1108747","18":"4.3699352","19":"2.398107","20":"8.417294","_rn_":"PaleOrange"},{"1":"2.7437302","2":"6.253319","3":"1.88266589","4":"6.864917","5":"11.354512","6":"4.95394677","7":"3.2911613","8":"10.8490802","9":"2.6759296","10":"0.244847","11":"4.3367677","12":"3.6832500","13":"-0.9875433","14":"5.912948","15":"9.893985","16":"6.460516","17":"2.0906754","18":"3.9488784","19":"2.006301","20":"9.230825","_rn_":"LightOrange"},{"1":"6.2118316","2":"5.971453","3":"-0.13092110","4":"4.645287","5":"10.123699","6":"2.25083828","7":"3.4084723","8":"6.6885597","9":"2.2972174","10":"7.419433","11":"4.1083620","12":"8.0427467","13":"2.0337846","14":"8.493006","15":"9.065424","16":"-0.433116","17":"5.5024625","18":"1.9537586","19":"4.026785","20":"6.324629","_rn_":"MediumOrange"},{"1":"2.5638193","2":"5.957130","3":"-0.11598896","4":"1.996174","5":"8.732510","6":"5.10542293","7":"7.3297609","8":"10.6097795","9":"-2.1261459","10":"12.445402","11":"4.2905262","12":"5.3772496","13":"-2.2395627","14":"8.140130","15":"7.675347","16":"4.495279","17":"3.3209460","18":"-0.8256082","19":"3.751061","20":"9.816112","_rn_":"DarkOrange"},{"1":"-0.4966345","2":"7.368602","3":"1.50079963","4":"5.859320","5":"3.840258","6":"0.90164599","7":"4.2542119","8":"7.5799931","9":"-2.1544879","10":"14.510124","11":"0.8450640","12":"8.5122795","13":"1.6289578","14":"5.032424","15":"7.417299","16":"11.407831","17":"3.6330500","18":"13.1275076","19":"1.490833","20":"6.480999","_rn_":"VerydarkOrange"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <p>ซึ่งการที่จะนำข้อมูลสีทุกจุดมาวิเคราะห์นั้น อาจจะต้องใช้เครื่องคอมพิวเตอร์ที่มีสมรรถนะสูงมาก และข้อมูลส่วนใหญ่ก็ไม่ได้ต่างกันมากนัก ท่านจึงตัดสินใจรวมสีที่มีลักษณะใกล้เคียงกันเป็นกลุ่มๆ</p>
 <div class="inline-figure"><img src="Picture/colgroup%20(Custom).png" width="250" style="display: block; margin: auto;"></div>
 <p>จากกระบวนการนี้ รวมสีที่ใกล้กันเป็นกลุ่มเดียว ส่งผลให้เกิดการลดจำนวนมิติของข้อมูลลง โดยที่ยังเหลือข้อมูลที่มีความสำคัญอยู่</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Picture_A"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Picture_B"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Picture_C"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Picture_D"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Picture_E"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Picture_F"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Picture_G"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Picture_H"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["Picture_I"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["Picture_J"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["Picture_K"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["Picture_L"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["Picture_M"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["Picture_N"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["Picture_O"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["Picture_P"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["Picture_Q"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["Picture_R"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["Picture_S"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["Picture_T"],"name":[20],"type":["dbl"],"align":["right"]}],"data":[{"1":"-2.068667","2":"10.070553","3":"11.294763","4":"4.869978","5":"7.253815","6":"11.769588","7":"6.876891","8":"8.885813","9":"8.274931","10":"6.344629","11":"-1.064026","12":"7.770561","13":"9.501396","14":"6.325236","15":"4.183678","16":"1.645287","17":"9.758057","18":"13.41558","19":"9.233831","20":"9.214893","_rn_":"Red"},{"1":"6.718488","2":"6.511437","3":"10.825540","4":"6.355544","5":"6.426464","6":"8.690441","7":"7.597115","8":"8.828518","9":"7.595399","10":"5.159013","11":"4.076714","12":"6.258680","13":"8.374284","14":"8.584612","15":"5.778742","16":"-1.003826","17":"15.883049","18":"11.67519","19":"9.379674","20":"10.014103","_rn_":"Blue"},{"1":"2.673102","2":"12.585010","3":"9.944314","4":"6.874804","5":"5.704929","6":"7.470187","7":"7.533345","8":"14.474409","9":"6.681065","10":"7.766802","11":"0.145681","12":"8.288753","13":"9.031863","14":"5.072887","15":"4.037683","16":"2.859320","17":"8.098028","18":"11.35983","19":"10.790190","20":"5.010329","_rn_":"Green"},{"1":"2.648274","2":"6.647290","3":"9.215618","4":"1.566533","5":"6.895126","6":"7.097645","7":"8.779965","8":"8.096916","9":"15.449758","10":"11.150254","11":"-2.662153","12":"6.559027","13":"5.555386","14":"6.610926","15":"5.176220","16":"6.756990","17":"1.161624","18":"12.38570","19":"9.758023","20":"8.045407","_rn_":"Yellow"},{"1":"3.549248","2":"5.714639","3":"9.266497","4":"14.188935","5":"6.878133","6":"5.526465","7":"7.916631","8":"15.065882","9":"4.996939","10":"3.526907","11":"1.543910","12":"7.663564","13":"4.860242","14":"5.832023","15":"3.441464","16":"2.273959","17":"7.696371","18":"17.48567","19":"11.117486","20":"11.257138","_rn_":"Orange"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <p>ซึ่ง PCA นั้นทำการลดมิติของข้อมูลลง โดยรวมข้อมูลอื่นๆ เข้าหาข้อมูลที่มีความสำคัญมากที่สุด นั่นคือ <strong>ข้อมูลที่มีความแปรปรวนสูงที่สุด</strong> ยกตัวอย่างข้อมูลสองมิติชุดหนึ่ง</p>
 <div class="inline-figure"><img src="_main_files/figure-html/org_data-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>ในการวิเคราะห์ PCA ข้อมูลจะถูกลดมิติลงโดยการพยายามดึงเข้าสู่เส้นที่สามารถอธิบายความแปรปรวนได้ดีที่สุด ซึ่งก็คือ Principle component</p>
@@ -101,12 +138,12 @@
 <p>Credit code: <a href="https://stackoverflow.com/questions/2639430/graphing-perpendicular-offsets-in-a-least-squares-regression-plot-in-r" class="uri">https://stackoverflow.com/questions/2639430/graphing-perpendicular-offsets-in-a-least-squares-regression-plot-in-r</a></p>
 <hr>
 </div>
-<div id="manually-calculate-pca" class="section level2" number="13.2">
+<div id="manually-calculate-pca" class="section level2" number="14.2">
 <h2>
-<span class="header-section-number">13.2</span> Manually calculate PCA<a class="anchor" aria-label="anchor" href="#manually-calculate-pca"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2</span> Manually calculate PCA<a class="anchor" aria-label="anchor" href="#manually-calculate-pca"><i class="fas fa-link"></i></a>
 </h2>
 <p>ต่อไปจะแสดงวิธีการคำนวณ PCA เพื่อให้เข้าใจลำดับของการวิเคราะห์</p>
-<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">20</span>, sd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
@@ -128,7 +165,7 @@
 ##  [9,] 18.62629  2.40271180 -1.6906847
 ## [10,] 19.10868  0.05441718 10.2690746</code></pre>
 <p>เริ่มต้นด้วยการ Normalize ข้อมูลให้อยู่ในรูป Mean-centering</p>
-<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scaled_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">data</span>,<span class="fl">2</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">(</span><span class="va">x</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">scaled_data</span></span></code></pre></div>
 <pre><code>##                  A           B          C
@@ -142,7 +179,7 @@
 ##  [8,] -1.404601888 -2.09545793  0.6208920
 ##  [9,] -0.798376211  0.47466195 -0.7666212
 ## [10,] -0.545498338 -0.65642119  1.8031341</code></pre>
-<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scaled_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">data</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># Same</span></span>
 <span><span class="va">scaled_data</span></span></code></pre></div>
 <pre><code>##                  A           B          C
@@ -168,14 +205,14 @@
 cov = \frac{1}{n-1}({A^{T}A})
 \]</span></p>
 <p>โดย <span class="math inline">\(n\)</span> คือ จำนวนแถวของ Matrix <span class="math inline">\(A\)</span></p>
-<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cov_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">scaled_data</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">scaled_data</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">scaled_data</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># matrix multiplication</span></span>
 <span><span class="va">cov_matrix</span></span></code></pre></div>
 <pre><code>##            A          B          C
 ## A  1.0000000  0.5776151 -0.4059593
 ## B  0.5776151  1.0000000 -0.5673487
 ## C -0.4059593 -0.5673487  1.0000000</code></pre>
-<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cov_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov</a></span><span class="op">(</span><span class="va">scaled_data</span><span class="op">)</span></span>
 <span><span class="va">cov_matrix</span> <span class="co"># same</span></span></code></pre></div>
 <pre><code>##            A          B          C
@@ -183,7 +220,7 @@ cov = \frac{1}{n-1}({A^{T}A})
 ## B  0.5776151  1.0000000 -0.5673487
 ## C -0.4059593 -0.5673487  1.0000000</code></pre>
 <p>หลังจากนั้นเราทำการแยกทิศทางของความแปรปรวนออกมาโดยวิธี Eigendecomposition ซึ่งสำหรับ PCA แล้ว ซึ่ง Eigenvectors นั้นบ่งบอกถึงทิศทางของความแปรปรวนของข้อมูลที่ตั้งฉากกัน โดยมีขนาดของการกระจายตัวของข้อมูล คือ Eigenvalue</p>
-<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eigen_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">cov_matrix</span><span class="op">)</span></span>
 <span><span class="va">eigen_info</span></span></code></pre></div>
 <pre><code>## eigen() decomposition
@@ -200,21 +237,21 @@ cov = \frac{1}{n-1}({A^{T}A})
 <p><span class="math display">\[
 A = VQV^{-1}
 \]</span></p>
-<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eigen_back</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">eigen_info</span><span class="op">$</span><span class="va">vectors</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">eigen_info</span><span class="op">$</span><span class="va">values</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">eigen_info</span><span class="op">$</span><span class="va">vectors</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">eigen_back</span> <span class="op">-</span> <span class="va">cov_matrix</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span> <span class="co"># Diff nearly 0 due to algorithm</span></span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>ต่อไปจะต้องเรียง Eigenvector ตามขนาดของ Eigenvalues จากน้อยไปมาก ซึ่งนั้นก็คือ Principal component ของข้อมูล (PC1, PC2, PC3, ….) นั่นหมายความว่า <span class="math inline">\(n_{PC} \leq n_{Obs}\)</span> เสมอ</p>
-<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sorted_eigenvalues</span> <span class="op">&lt;-</span> <span class="va">eigen_info</span><span class="op">$</span><span class="va">values</span></span>
 <span><span class="va">sorted_eigenvectors</span> <span class="op">&lt;-</span> <span class="va">eigen_info</span><span class="op">$</span><span class="va">vectors</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">sorted_eigenvalues</span><span class="op">)</span><span class="op">]</span> <span class="co"># Decreasing order</span></span></code></pre></div>
-<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_components</span> <span class="op">&lt;-</span> <span class="fl">3</span>  <span class="co"># Adjust this as needed</span></span>
 <span><span class="va">selected_eigenvectors</span> <span class="op">&lt;-</span> <span class="va">sorted_eigenvectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="va">num_components</span><span class="op">]</span></span></code></pre></div>
 <p>สุดท้ายเมื่อทำการคูณข้อมูลเดิมกลับไปด้วย Eigenvectors ที่เรียงแล้ว จะได้ ข้อมูลของความแปรปรวนข้อมูลแต่ละคอลัมน์ในแต่ละ PC</p>
-<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca_result</span> <span class="op">&lt;-</span> <span class="va">scaled_data</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">selected_eigenvectors</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">pca_result</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"PC"</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">selected_eigenvectors</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">pca_result</span></span></code></pre></div>
@@ -231,12 +268,12 @@ A = VQV^{-1}
 ## [10,]  1.7103737  0.90706045  0.4812617</code></pre>
 <hr>
 </div>
-<div id="pca-by-r-function" class="section level2" number="13.3">
+<div id="pca-by-r-function" class="section level2" number="14.3">
 <h2>
-<span class="header-section-number">13.3</span> PCA by R function<a class="anchor" aria-label="anchor" href="#pca-by-r-function"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.3</span> PCA by R function<a class="anchor" aria-label="anchor" href="#pca-by-r-function"><i class="fas fa-link"></i></a>
 </h2>
 <p>ท่านไม่จำเป็นต้องคำนวณ PCA ตามทั้งหมดที่กล่าวมาขั้นต้น เนื่องจาก <code>R</code> ได้มีฟังก์ชันสำหรับวิเคราะห์ PCA ไว้ให้แล้ว ในที่นี้จะลองสร้างสถานการณ์ที่ Features &gt; Observations</p>
-<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
@@ -251,7 +288,7 @@ A = VQV^{-1}
 {"columns":[{"label":["A"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["B"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["C"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["D"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["E"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["F"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["G"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["H"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["I"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["J"],"name":[10],"type":["dbl"],"align":["right"]}],"data":[{"1":"18.570620","2":"10.070553","3":"21.652869","4":"2.400106","5":"17.284334","6":"8.769588","7":"0.8768292","8":"-2.594688","9":"15.131765","10":"6.000378"},{"1":"9.931333","2":"6.511437","3":"17.429859","4":"9.402037","5":"9.838178","6":"5.690441","7":"28.3516477","8":"4.144220","9":"-9.390022","10":"3.944274"},{"1":"18.718488","2":"12.585010","3":"9.498826","4":"17.494274","5":"3.344357","6":"4.470187","7":"20.6636960","8":"1.839351","9":"7.676910","10":"3.784626"},{"1":"14.673102","2":"6.647290","3":"2.940560","4":"8.982245","5":"14.056131","6":"4.097645","7":"2.0151313","8":"12.449363","9":"3.990834","10":"7.910586"},{"1":"14.648274","2":"5.714639","3":"3.398471","4":"1.841186","5":"13.903201","6":"2.526465","7":"7.7769213","8":"10.141964","9":"4.727533","10":"8.344629"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">data</span>, scale. <span class="op">=</span> <span class="cn">TRUE</span>, center <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pc</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## List of 5
@@ -275,7 +312,7 @@ A = VQV^{-1}
 <li><p><code>x</code> คือ ข้อมูลสุดท้ายที่ถูกลดมิติแล้ว</p></li>
 </ul>
 <p>สังเกตว่าสุดท้าย PC จะไม่เกินจำนวน Observations = 5</p>
-<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc</span><span class="op">$</span><span class="va">x</span></span></code></pre></div>
 <pre><code>##             PC1          PC2        PC3          PC4           PC5
 ## [1,] -1.2422037 -2.971150049 -0.8164442 -0.009920526  3.701466e-16
@@ -283,22 +320,22 @@ A = VQV^{-1}
 ## [3,] -2.3753407  0.963616858  1.7962551  0.097225061 -2.220446e-16
 ## [4,]  1.8951608 -0.003007043  0.6758462 -0.718606015  3.330669e-16
 ## [5,]  2.3218568 -0.065344065  0.3351791  0.670564995  2.220446e-16</code></pre>
-<div id="biplot" class="section level3" number="13.3.1">
+<div id="biplot" class="section level3" number="14.3.1">
 <h3>
-<span class="header-section-number">13.3.1</span> Biplot<a class="anchor" aria-label="anchor" href="#biplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.3.1</span> Biplot<a class="anchor" aria-label="anchor" href="#biplot"><i class="fas fa-link"></i></a>
 </h3>
 <p>คือการพล็อตกราฟเพื่อบ่งบอก ว่า แต่ละ Features ดั้งเดิมนั้น มีผลต่อ PC มากน้อยเพียงใด</p>
-<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html">biplot</a></span><span class="op">(</span><span class="va">pc</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/biplot-1.png" width="672"></div>
 <p>โดยทิศทางที่ชี้ไปนั้นคืออิทธิพลของ Features ดั้งเดิมที่ประกอบเป็น PC</p>
 </div>
-<div id="screeplot" class="section level3" number="13.3.2">
+<div id="screeplot" class="section level3" number="14.3.2">
 <h3>
-<span class="header-section-number">13.3.2</span> Screeplot<a class="anchor" aria-label="anchor" href="#screeplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.3.2</span> Screeplot<a class="anchor" aria-label="anchor" href="#screeplot"><i class="fas fa-link"></i></a>
 </h3>
 <p>เป็นการพล็อตเพื่อสำรวจว่าแต่ละ PC นั้นมีอิทธิผลจากข้อมูลมากเท่าใด ซึ่งก็คือการดูขนาดของ Eigenvalues หรือ ความแปรปรวนของ PC นั้นๆ</p>
-<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="cn">NULL</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">pc</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>,fill <span class="op">=</span> <span class="st">"skyblue"</span>, col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">pc</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -308,7 +345,7 @@ A = VQV^{-1}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/screeplot_manual-1.png" width="672"></div>
 <p>หรือท่านอาจจะเรียก <code><a href="https://rdrr.io/r/stats/screeplot.html">screeplot()</a></code></p>
-<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html">screeplot</a></span><span class="op">(</span><span class="va">pc</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/screeplot-1.png" width="672"></div>
 <p>สังเกตว่า PC จะเรียงจากมากไปน้อยเสมอ ตามขนาดของ Eigenvalue</p>
@@ -320,18 +357,18 @@ A = VQV^{-1}
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="survival-analysis.html"><span class="header-section-number">12</span> Survival analysis</a></div>
-<div class="next"><a href="bioconductor.html"><span class="header-section-number">14</span> Bioconductor</a></div>
+<div class="prev"><a href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></div>
+<div class="next"><a href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#principal-component-analysis"><span class="header-section-number">13</span> Principal component analysis</a></li>
-<li><a class="nav-link" href="#principle-1"><span class="header-section-number">13.1</span> Principle</a></li>
-<li><a class="nav-link" href="#manually-calculate-pca"><span class="header-section-number">13.2</span> Manually calculate PCA</a></li>
+<li><a class="nav-link" href="#principal-component-analysis"><span class="header-section-number">14</span> Principal component analysis</a></li>
+<li><a class="nav-link" href="#principle-1"><span class="header-section-number">14.1</span> Principle</a></li>
+<li><a class="nav-link" href="#manually-calculate-pca"><span class="header-section-number">14.2</span> Manually calculate PCA</a></li>
 <li>
-<a class="nav-link" href="#pca-by-r-function"><span class="header-section-number">13.3</span> PCA by R function</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#biplot"><span class="header-section-number">13.3.1</span> Biplot</a></li>
-<li><a class="nav-link" href="#screeplot"><span class="header-section-number">13.3.2</span> Screeplot</a></li>
+<a class="nav-link" href="#pca-by-r-function"><span class="header-section-number">14.3</span> PCA by R function</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#biplot"><span class="header-section-number">14.3.1</span> Biplot</a></li>
+<li><a class="nav-link" href="#screeplot"><span class="header-section-number">14.3.2</span> Screeplot</a></li>
 </ul>
 </li>
 </ul>
@@ -350,7 +387,7 @@ A = VQV^{-1}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-07.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

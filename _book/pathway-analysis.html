@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>18 Pathway analysis | A gentle introduction to R for biologists</title>
+<meta name="author" content="Kittinun Leetanaporn">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="18 Pathway analysis | A gentle introduction to R for biologists">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="18 Pathway analysis | A gentle introduction to R for biologists">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<meta name="description" content="18.1 Principle Pathway analysis คือการวิเคราะห์ข้อมูล High-throughput ให้มีความหมาย โดยการนำข้อมูลของ DNA/RNA ทั้งหมดที่ได้มาทำจัดกลุ่มร่วมกับฐานข้อมูลของยีนนั้นๆ...">
+<meta property="og:description" content="18.1 Principle Pathway analysis คือการวิเคราะห์ข้อมูล High-throughput ให้มีความหมาย โดยการนำข้อมูลของ DNA/RNA ทั้งหมดที่ได้มาทำจัดกลุ่มร่วมกับฐานข้อมูลของยีนนั้นๆ...">
+<meta name="twitter:description" content="18.1 Principle Pathway analysis คือการวิเคราะห์ข้อมูล High-throughput ให้มีความหมาย โดยการนำข้อมูลของ DNA/RNA ทั้งหมดที่ได้มาทำจัดกลุ่มร่วมกับฐานข้อมูลของยีนนั้นๆ...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">A gentle introduction to R for biologists</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li class="book-part">Basic R</li>
+<li><a class="" href="basic-r.html"><span class="header-section-number">1</span> Basic R</a></li>
+<li><a class="" href="r-function.html"><span class="header-section-number">2</span> R function</a></li>
+<li><a class="" href="loop.html"><span class="header-section-number">3</span> Loop</a></li>
+<li class="book-part">Tidyverse</li>
+<li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">4</span> What is tidyverse</a></li>
+<li><a class="" href="data-wrangling.html"><span class="header-section-number">5</span> Data wrangling</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
+<li><a class="" href="importing-data.html"><span class="header-section-number">7</span> Importing data</a></li>
+<li><a class="" href="GSE63514.html"><span class="header-section-number">8</span> Example: Microarray data visualization</a></li>
+<li class="book-part">Statistical analysis</li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li><a class="" href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></li>
+<li><a class="" href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">14</span> Principal component analysis</a></li>
+<li class="book-part">Bioconductor</li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">16</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">17</span> edgeR</a></li>
+<li><a class="active" href="pathway-analysis.html"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li class="book-part">Supplement</li>
+<li><a class="" href="distribution.html"><span class="header-section-number">19</span> Distribution</a></li>
+<li class="book-part">Information</li>
+<li><a class="" href="session-info.html"><span class="header-section-number">20</span> Session info</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">21</span> References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pathway-analysis" class="section level1" number="18">
+<h1>
+<span class="header-section-number">18</span> Pathway analysis<a class="anchor" aria-label="anchor" href="#pathway-analysis"><i class="fas fa-link"></i></a>
+</h1>
+<div id="principle-4" class="section level2" number="18.1">
+<h2>
+<span class="header-section-number">18.1</span> Principle<a class="anchor" aria-label="anchor" href="#principle-4"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Pathway analysis</strong> คือการวิเคราะห์ข้อมูล High-throughput ให้มีความหมาย โดยการนำข้อมูลของ DNA/RNA ทั้งหมดที่ได้มาทำจัดกลุ่มร่วมกับฐานข้อมูลของยีนนั้นๆ ว่าเกี่ยวข้องกับกลไกการทำงานในระดับโมเลกุล (Molecular pathway) แบบใด</p>
+<div class="inline-figure"><img src="Picture/pathway.jpg" width="80%" style="display: block; margin: auto;"></div>
+<div id="database-annotation" class="section level3" number="18.1.1">
+<h3>
+<span class="header-section-number">18.1.1</span> Database annotation<a class="anchor" aria-label="anchor" href="#database-annotation"><i class="fas fa-link"></i></a>
+</h3>
+<p>คือ การจัดกลุ่มของยีนให้ตรงกับกลุ่มของข้อมูล โดยปัจจุบันมีฐานข้อมูลดังนี้</p>
+<ul>
+<li>
+<p><a href="https://geneontology.org/">Gene ontology</a> คือ ฐานข้อมูลที่รวบรวมหน้าที่ของยีนแต่ละยีนและจัดเป็นหมวดหมู่ โดยแต่ละยีนสามารถอยู่หลายหมวดหมู่ได้ ซึ่งหมวดหมู่หลักโดยหลักนั้นแบ่งเป็น</p>
+<ul>
+<li><p><strong>Cellular component (CC)</strong> คือยีนนั้นมักอยู่ในเซลล์ หรือสภาวะแวดล้อมรอบข้างแบบใด</p></li>
+<li><p><strong>Molecular function (MF)</strong> คือ ยีนนั้นทำหน้าที่ใดบ้างในระดับโมเลกุล มักต่อท้ายด้วยคำว่า “activity”</p></li>
+<li><p><strong>Biological process (BP)</strong> คือ ยีนนั้นเป็นส่วนประกอบหลักของการทำงานในระบบชีววิทยาอย่างไร ซึ่งเป็นภาพใหญ่ของหลายโมเลกุลที่มารวมตัวกันทำหน้าที่เป็นระบบ</p></li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.genome.jp/kegg/">KEGG</a> (Kyoto Encyclopedia of Genes and Genomes) คือ ฐานข้อมูลของข้อมูล High-throughput ที่เชื่อมโยงข้อมูลของยีนเข้ากับระบบทางอื่นๆ ทางชีววิทยา โดยหมวดหมู่นั้นแบ่งเป็น</p>
+<ul>
+<li><p><strong>System information</strong> คือ ข้อมูลของความเชื่อมโยงจากข้อมูลในระบบชนิดอื่นๆ</p></li>
+<li><p><strong>Genomic information</strong> คือ ข้อมูลของยีนแล้วโปรตีนจากสิ่งมีชีวิตหลากชนิด</p></li>
+<li><p><strong>Chemical information</strong> คือ ข้อมูลของทางเคมี เช่น เอนไซม์ ปฏิกริยาทางชีวเคมี เป็นต้น</p></li>
+<li><p><strong>Health information</strong> คือ ข้อมูลของโรคและยาต่างๆ</p></li>
+</ul>
+</li>
+<li><p><a href="https://reactome.org/">Reactome</a> คือ ฐานข้อมูลที่รวบรวมหน้าที่การทำงานของยีนแต่ละโมเลกุล (Biological pathway) จากฐานข้อมูลและงานวิจัยต่างๆ ซึ่งมีการปรับแต่งให้เข้ากับการทำงานระดับโปรตีนด้วย</p></li>
+<li><p><a href="https://www.gsea-msigdb.org/gsea/msigdb">MSigDB</a> คือ ฐานข้อมูลที่รวบรวมจากฐานข้อมูลขั้นต้นทั้งหมดและนำมาจัดหมวดหมู่ใหม่ โดยทำการกำจัดข้อมูลที่ซ้ำกันออก</p></li>
+</ul>
+</div>
+<div id="statistical-analysis" class="section level3" number="18.1.2">
+<h3>
+<span class="header-section-number">18.1.2</span> Statistical analysis<a class="anchor" aria-label="anchor" href="#statistical-analysis"><i class="fas fa-link"></i></a>
+</h3>
+<p>หลังจาก Annotation แล้วผู้วิจัยมักจะทำการเปรียบเทียบว่าจากกลุ่มยีนทั้งหมด มียีนไหนที่แสดงออกมากกว่ากลุ่มอื่นอย่างมีนัยสำคัญ โดยการทดสอบนั้นมีหลายแบบ</p>
+<div id="over-representation-analysis-ora" class="section level4" number="18.1.2.1">
+<h4>
+<span class="header-section-number">18.1.2.1</span> Over-representation analysis (ORA)<a class="anchor" aria-label="anchor" href="#over-representation-analysis-ora"><i class="fas fa-link"></i></a>
+</h4>
+<p>คือ การเปรียบเทียบวจำนวนยีนที่อยู่ใน Pathway นั้นๆ กับกลุ่มยีนทั้งหมดที่มีอยู่ เรียกว่ายีนพื้นหลัง (Background) โดยยีนพื้นหลังนี้หมายถึงยีนทีมีอยู่ในกลุ่มประชากรโดยทั่วไป ซึ่งการคำนวณทางสถิตินั้นใช้วิธี <a href="non-parametric-test.html#fisher">Fisher’s exact test</a></p>
+<p>ยกตัวอย่างเช่น</p>
+<ul>
+<li><p>ในฐานข้อมูลที่ท่านเลือกมา Annotate นั้น มี Pathway <span class="math inline">\(A\)</span> อยู่ที่ท่านสนใจ</p></li>
+<li><p>ข้อมูลของของตัวท่านเองพบว่า มี DGE ทั้งหมด 5000 ยีน และมี 500 ยีน ที่อยู่ใน Pathway <span class="math inline">\(A\)</span> (500/5,000 = 10%)</p></li>
+<li><p>ส่วนข้อมูลยีนพื้นหลังของท่านนั้นมีทั้งหมด 50,000 ยีน และมี 2,000 ยีน ที่อยู่ใน Pathway <span class="math inline">\(A\)</span> และไม่ได้อยู่ใน DGE ของท่าน (2,000/50,000 = 4%)</p></li>
+</ul>
+<p>เมื่อสร้างเป็นตาราง <span class="math inline">\(2 \times 2\)</span></p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["DGE"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Ref"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"500","2":"2000","_rn_":"A"},{"1":"4500","2":"48000","_rn_":"Not A"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">ora_df</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Fisher's Exact Test for Count Data
+## 
+## data:  ora_df
+## p-value &lt; 2.2e-16
+## alternative hypothesis: true odds ratio is greater than 1
+## 95 percent confidence interval:
+##  2.442091      Inf
+## sample estimates:
+## odds ratio 
+##   2.666606</code></pre>
+<p>หมายความว่า ยีนกลุ่มนี้มีการแสดงออกมากกว่าพื้นหลังอย่างมีนัยสำคัญ</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li><p>ควรใช้ DGE ที่มีนัยสำคัญเท่านั้น (ทั้ง <code>logFC</code> และ <span class="math inline">\(p\)</span>) เนื่องจากท่านต้องการยีนที่แสดงออกมากกว่าพื้นหลัง (ซึ่งในกรณีของ GSEA ควรใช้ยีนทั้งหมด)</p></li>
+<li><p>ในการหา กลุ่มที่แสดงออกอย่างมีนัยสำคัญ จากข้อมูลยีนที่วิเคราะห์มาจาก DGE ของโปรตีนอีกครั้งหนึ่ง มักจะพบว่าหนึ่งโปรตีนมักเกิดจากหลายยีนได้ โดย ORA จะนับรวมเพิ่มเข้าไปทำให้ในกลุ่มนั้นเกิดผลบวกลวงได้เนื่องจากนับยีนที่ซ้ำกัน</p></li>
+</ul>
+</div>
+<div id="gene-set-enrichment-analysis-gsea" class="section level4" number="18.1.2.2">
+<h4>
+<span class="header-section-number">18.1.2.2</span> Gene set enrichment analysis (GSEA)<a class="anchor" aria-label="anchor" href="#gene-set-enrichment-analysis-gsea"><i class="fas fa-link"></i></a>
+</h4>
+<div class="inline-figure"><img src="Picture/GSEA.jpeg" width="70%" style="display: block; margin: auto;"></div>
+<p><em>รูปภาพจาก:</em> <span class="citation">Subramanian et al. (2005)</span></p>
+<p>คือ การหายีนที่มีการแสดงออกมากกว่ากลุ่มอื่น ซึ่งใช้วิธีที่แตกต่างจาก ORA โดยวิธีของ GSEA คือ</p>
+<ol style="list-style-type: decimal">
+<li>เรียงยีนทั้งหมดที่มีอยู่ตามความแตกต่างระหว่างกลุ่ม จากมากไปน้อย (Ranked gene) ซึ่งมักจะใช้ <span class="math inline">\(-log_{10}(p) \times sign(FC)\)</span> หรือ <span class="math inline">\(-log_{10}p \times log_{x}(FC)\)</span> (<span class="math inline">\(x\)</span> เป็นอะไรก็ได้ไม่แตกต่างกัน)</li>
+<li>ให้คะแนนของยีนเรียงตามข้อ 1. แบบบวกเพิ่มไปเรื่อยๆ (Cumulative) ถ้ามียีนไหนที่อยู่ในกลุ่มที่ต้องการ (กลุ่ม <span class="math inline">\(S\)</span> ดังรูป) จะให้คะแนนเป็น + แต่ถ้ายีนไม่อยู่ในกลุ่ม จะให้คะแนนเป็น - โดยขนาดของคะแนนนั้นจะขึ้นอยู่กับความแตกต่างด้วย</li>
+<li>คำนวณ Enrichment score (ES) จากระยะทางของคะแนนที่มากที่สุด (รูปขวาล่าง) และเปรียบเทียบทางสถิติว่ามีการเปลี่ยนแปลงของคะแนนเป็นแบบ <a href="distribution.html#norm-dist">Normal distribution</a> หรือไม่ โดยใช้วิธี Kolmogorov-Smirnov (หลักการคล้าย <a href="#chisq-f">Chi-square goodness of fit</a> สำหรับ Continuous data) ซึ่งถ้าไม่เป็น <a href="distribution.html#norm-dist">Normal distribution</a> แสดงว่าการแสดงออกของยีนกลุ่มนี้มีทิศทางอย่างชัดเจน ไม่ใช่แบบสุ่ม (Random walk)</li>
+<li>คำนวณ <span class="math inline">\(p\)</span>-value โดยการใช้ Permutation test ซึ่งคือการสุ่มสลับ Phenotype หลายๆ ครั้งและคำนวณ จำนวนครั้งที่ ES นั้นให้ผลไม่แตกต่างจาก <a href="distribution.html#norm-dist">Normal distribution</a> (เช่น ไม่แตกต่าง 5/1000 ครั้ง <span class="math inline">\(p\)</span>-value = 0.005)</li>
+</ol>
+<p><strong>Note:</strong></p>
+<ul>
+<li><p>ควรใช้ DGE <strong>ทั้งหมด</strong> เนื่องจากข้อมูลทั้งหมดจะถูกนำมาให้คำนวณ ES ดูจากข้อ 1.</p></li>
+<li><p>ใน GSEA นั้น ถ้าพบยีนซ้ำจะทำการเฉลี่ยข้อมูล ซึ่งทำให้โอกาสเกิด False positive จาก DGE ระดับโปรตีนน้อยลง</p></li>
+</ul>
+<hr>
+</div>
+</div>
+</div>
+<div id="example-2" class="section level2" number="18.2">
+<h2>
+<span class="header-section-number">18.2</span> Example<a class="anchor" aria-label="anchor" href="#example-2"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="edger.html"><span class="header-section-number">17</span> edgeR</a></div>
+<div class="next"><a href="distribution.html"><span class="header-section-number">19</span> Distribution</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pathway-analysis"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li>
+<a class="nav-link" href="#principle-4"><span class="header-section-number">18.1</span> Principle</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#database-annotation"><span class="header-section-number">18.1.1</span> Database annotation</a></li>
+<li><a class="nav-link" href="#statistical-analysis"><span class="header-section-number">18.1.2</span> Statistical analysis</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#example-2"><span class="header-section-number">18.2</span> Example</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-08.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
