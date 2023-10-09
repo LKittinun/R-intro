@@ -111,7 +111,7 @@
 </h2>
 <p><strong>Principle component analysis (PCA)</strong> คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้</p>
 <p>ยกตัวอย่างเป็นภาพ สมมติท่านต้องการที่จะวิเคราะห์แบ่งลักษณะของรูปจากสีของรูปภาพ แต่เฉดสีนั้นมีมากมาย</p>
-<div class="inline-figure"><img src="Picture/color.png" width="250" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="Picture/color.png" width="80%" style="display: block; margin: auto;"></div>
 <p>ถ้าเป็นข้อมูลอาจจะมีรูปแบบลักษณะนี้</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -119,7 +119,7 @@
   </script>
 </div>
 <p>ซึ่งการที่จะนำข้อมูลสีทุกจุดมาวิเคราะห์นั้น อาจจะต้องใช้เครื่องคอมพิวเตอร์ที่มีสมรรถนะสูงมาก และข้อมูลส่วนใหญ่ก็ไม่ได้ต่างกันมากนัก ท่านจึงตัดสินใจรวมสีที่มีลักษณะใกล้เคียงกันเป็นกลุ่มๆ</p>
-<div class="inline-figure"><img src="Picture/colgroup%20(Custom).png" width="250" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="Picture/colgroup%20(Custom).png" width="80%" style="display: block; margin: auto;"></div>
 <p>จากกระบวนการนี้ รวมสีที่ใกล้กันเป็นกลุ่มเดียว ส่งผลให้เกิดการลดจำนวนมิติของข้อมูลลง โดยที่ยังเหลือข้อมูลที่มีความสำคัญอยู่</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -127,14 +127,14 @@
   </script>
 </div>
 <p>ซึ่ง PCA นั้นทำการลดมิติของข้อมูลลง โดยรวมข้อมูลอื่นๆ เข้าหาข้อมูลที่มีความสำคัญมากที่สุด นั่นคือ <strong>ข้อมูลที่มีความแปรปรวนสูงที่สุด</strong> ยกตัวอย่างข้อมูลสองมิติชุดหนึ่ง</p>
-<div class="inline-figure"><img src="figure/org_data-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/org_data-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>ในการวิเคราะห์ PCA ข้อมูลจะถูกลดมิติลงโดยการพยายามดึงเข้าสู่เส้นที่สามารถอธิบายความแปรปรวนได้ดีที่สุด ซึ่งก็คือ Principle component</p>
-<div class="inline-figure"><img src="figure/pc1-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/pc1-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>สังเกตว่า เส้นแนวเฉียงนั้น เป็นเส้นที่ข้อมูลแต่ละจุดห่างกันมากที่สุดใน 1 มิติ ซึ่งก็คือเส้นที่สามารถอธิบายความแปรปรวนได้ดีที่สุดนั่นเอง</p>
 <p>ส่วนเส้นต่อมาที่ตั้งฉาก คือเส้นที่อธิบายความแปรปรวนได้ดีที่สุดเป็นลำดับสอง</p>
-<div class="inline-figure"><img src="figure/pc2-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/pc2-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>เมื่อนำข้อมูลทั้งหมดมาสร้างเป็นกราฟใหม่ จะได้ข้อมูลที่ยังลงเหลือความแปรปรวนที่มากที่สุดไว้ทั้งสองมิติ</p>
-<div class="inline-figure"><img src="figure/pca_transformed-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/pca_transformed-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>การลดมิติของข้อมูลนี้ อาจจะยังไม่เห็นผลนัก เนื่องจากข้อมูลมีแค่สองมิติเท่านั้น แต่ในสถานการณ์ซึ่งมีข้อมูลสูงมาก โดยเฉพาะเมื่อมี Feature มากกว่า Observations นั้น การลดข้อมูลจะมีประสิทธิภาพมาก โดยเฉพาะข้อมูลประเภท High-throughput (จำนวนยีนมากกว่าตัวอย่าง)</p>
 <p>Credit code: <a href="https://stackoverflow.com/questions/2639430/graphing-perpendicular-offsets-in-a-least-squares-regression-plot-in-r" class="uri">https://stackoverflow.com/questions/2639430/graphing-perpendicular-offsets-in-a-least-squares-regression-plot-in-r</a></p>
 <hr>
@@ -328,7 +328,7 @@ A = VQV^{-1}
 <p>คือการพล็อตกราฟเพื่อบ่งบอก ว่า แต่ละ Features ดั้งเดิมนั้น มีผลต่อ PC มากน้อยเพียงใด</p>
 <div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html">biplot</a></span><span class="op">(</span><span class="va">pc</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/biplot-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/biplot-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>โดยทิศทางที่ชี้ไปนั้นคืออิทธิพลของ Features ดั้งเดิมที่ประกอบเป็น PC</p>
 </div>
 <div id="screeplot" class="section level3" number="15.3.2">
@@ -344,11 +344,11 @@ A = VQV^{-1}
 <span>                label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">pc</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>,<span class="st">"%"</span><span class="op">)</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"PC"</span>, y <span class="op">=</span> <span class="st">"Variance (%)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/screeplot_manua-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/screeplot_manua-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>หรือท่านอาจจะเรียก <code><a href="https://rdrr.io/r/stats/screeplot.html">screeplot()</a></code></p>
 <div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html">screeplot</a></span><span class="op">(</span><span class="va">pc</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/screeplot-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/screeplot-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>สังเกตว่า PC จะเรียงจากมากไปน้อยเสมอ ตามขนาดของ Eigenvalue</p>
 
 </div>

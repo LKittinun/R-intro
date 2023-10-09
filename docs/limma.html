@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>17 Limma | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
-<meta name="description" content="17.1 Principle Limma (Linear Model for Microarray Data) (Smyth et al., 2023) เป็นหนึ่งใน bioconductor mapackage ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม...">
+<meta name="description" content="17.1 Principle Limma (Linear Model for Microarray Data) (Smyth et al., 2023) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม...">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="17 Limma | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
-<meta property="og:description" content="17.1 Principle Limma (Linear Model for Microarray Data) (Smyth et al., 2023) เป็นหนึ่งใน bioconductor mapackage ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม...">
+<meta property="og:description" content="17.1 Principle Limma (Linear Model for Microarray Data) (Smyth et al., 2023) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="17 Limma | A gentle introduction to R for biologists">
-<meta name="twitter:description" content="17.1 Principle Limma (Linear Model for Microarray Data) (Smyth et al., 2023) เป็นหนึ่งใน bioconductor mapackage ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม...">
+<meta name="twitter:description" content="17.1 Principle Limma (Linear Model for Microarray Data) (Smyth et al., 2023) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -109,13 +109,13 @@
 <h2>
 <span class="header-section-number">17.1</span> Principle<a class="anchor" aria-label="anchor" href="#principle-2"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://bioconductor.org/packages/release/bioc/html/limma.html">Limma</a> (Linear Model for Microarray Data) <span class="citation">(Smyth et al., 2023)</span> เป็นหนึ่งใน <code>bioconductor mapackage</code> ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene expression; DGE) ในงานทดลอง Microarray</p>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/limma.html">Limma</a> (Linear Model for Microarray Data) <span class="citation">(Smyth et al., 2023)</span> เป็นหนึ่งใน <code>bioconductor package</code> ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene expression; DGE) ในงานทดลอง Microarray</p>
 <p>หลักการสำคัญของ <code>limma</code> คือการใช้สมการถดถอยเชิงเส้นในการหา DGE โดยมีสมมติฐานเบื้องต้นว่าค่าความเข้มพื้นหลังที่อ่านได้จาก Probe ของ Microarray นั้นมีการกระจายตัวแบบ <a href="distribution.html#norm-dist">Normal distribution</a> ซึ่งหลักการนี้สามารถนำไปปรับใช้ในการหา Differential expression ในงานประเภทอื่นๆ ได้ด้วย เช่น RNA-seq, Proteomics</p>
 <ul>
 <li><p><span class="math inline">\(H_{0}\)</span>: ไม่มีความแตกต่างกันในการแสดงออกของยีน</p></li>
 <li><p><span class="math inline">\(H_{a}\)</span>: มีความแตกต่างกันในการแสดงออกของยีน</p></li>
 </ul>
-<div class="inline-figure"><img src="figure/limma_diff_mech-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/limma_diff_mech-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>จากกราฟ เส้นประคือเส้นของ <span class="math inline">\(H_{0}\)</span> หมายถึงการแสดงออกของยีนทั้งหมดสามารถหาได้โดยใช้ค่าเฉลี่ยโดยรวมของทั้งสองกลุ่ม <span class="math inline">\(\text{Intensity} = \theta_{0} + \epsilon\)</span> และ เส้นทึบคือเส้นของ <span class="math inline">\(H_{a}\)</span> หมายคือเส้นสมการถดถอยที่ลากผ่านค่าเฉลี่ยของแต่ละกลุ่ม <span class="math inline">\(\text{Intensity }= \theta_{0} + \theta_{1}*\text{Group} + \epsilon\)</span> ซึ่งทั้งหมดนี้ ก็คือเส้นสมการถดถอยเชิงเส้นตามปกติโดยทั่วไปนั่นเอง โดย limma ซึ่งความแตกต่างตามสมมติฐานนั้น จะถูกทดสอบ โดย <span class="math inline">\(t\)</span>-test (<span class="math inline">\(F\)</span>-test ถ้ามากกว่าสองกลุ่ม)</p>
 <p>คำถามคือ วิธีการของ limma แตกต่างอย่างไรกับการสร้างสมการถดถอยโดยทั่วไป? เนื่องจากงานประเภท Bioinformatics นั้นมักมีค่าใช้จ่ายในแต่ละการทดลองสูง จำนวนตัวอย่างที่นำมาใช้ในการทดลองนั้นมีไม่มากนัก เช่น 3-4 ตัวอย่างต่อกลุ่ม</p>
 <p><span class="math display">\[
@@ -136,7 +136,7 @@ t = \frac{\theta_{1}-0}{SE} = \frac{\theta_{1}}{S/\sqrt{n}}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Variance"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cx_var</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
-<div class="inline-figure"><img src="figure/overall_vairiance-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/overall_vairiance-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>ค่า mean variance นี้จะถูกนำไปถ่วงน้ำหนักความแปรปรวนเดิมของแต่ละยีน และจะถูกนำไปใช้ในการคำนวณใหม่ เรียกว่า moderated <span class="math inline">\(t\)</span></p>
 <p><span class="math display">\[
 \tilde{t_{gj}} = \sqrt\frac{d_{0} + d_{g}}{d_{g}}\times\frac{\hat{\beta_{gj}}}{\sqrt{s^{2}_{*,g}/n_{gj}}}
@@ -382,7 +382,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 ## Up                      93                     0                   0                    31                  1849</code></pre>
 <div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/venn.html">vennDiagram</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span> <span class="co"># max 5 groups</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/decideTests-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/decideTests-1.png" width="80%" style="display: block; margin: auto;"></div>
 <hr>
 </div>
 <div id="mean-variance-relationship" class="section level2" number="17.3">
@@ -392,7 +392,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 <p>ในบางข้อมูลนั้นมีความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวน ซึ่งสามารถตรวจสอบได้โดยใช้ <code><a href="https://rdrr.io/pkg/limma/man/plotSA.html">plotSA()</a></code></p>
 <div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/plotSA.html">plotSA</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span><span class="op">)</span> </span></code></pre></div>
-<div class="inline-figure"><img src="figure/SA_eB-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/SA_eB-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>จากกราฟจะพบความสัมพันธ์ระหว่าง <code>Average log-expression</code> และ <code>sqrt(sigma)</code> แปลว่ามีความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวน เนื่องจาก Linear model นั้นมีสมมติฐานว่า ความแปรปรวนนั้นคงที่ตลอด (Homoscedasticity) การสร้างสมการแบบธรรมดาอาจจะทำให้เกิด False positive มากกว่าปกติ ซึ่ง limma นั้นมีฟังก์ชันที่ปรับสมการตามแนวโน้มของความแปรปรวนด้วย <code>eBayes(..., trend = TRUE)</code></p>
 <div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_fit_contrasts_eB_trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/ebayes.html">eBayes</a></span><span class="op">(</span><span class="va">cx_fit_contrasts</span>, trend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -409,7 +409,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 <p>เมื่อทำการพล็อตความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวนอีกครั้ง จะพบว่าโมเดลนั้นถูกปรับตามความแปรปรวนแล้ว</p>
 <div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/plotSA.html">plotSA</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB_trend</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/SA_trend-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/SA_trend-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>การใช้ <code>trend = TRUE</code> นี้มีความสำคัญมากในการประยุกต์ใช้ limma ในการวิเคราะห์ข้อมูลแบบอื่นๆ ที่ไม่ใช่ Microarray เช่น RNA-seq, Proteomics เนื่องจากข้อมูลมักจะมีความสัมพันธ์ระหว่างค่าเฉลี่ยกับตัวแปรสูง (Heteroscedasticity)</p>
 
 </div>

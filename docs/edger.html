@@ -115,7 +115,7 @@
 <li><p><code>log(intensity)</code> ของ Microarray ซึ่งเป็นข้อมูล Continuous จึงสามารถใช้โมเดลแบบ Linear ได้ แต่ ข้อมูล RNA-seq นั้นเป็นข้อมูล <code>read count</code> ที่ได้จากการนับ Sequencing จึงเหมาะกับการใช้โมเดลแบบ Poisson มากกว่า</p></li>
 <li><p>Heteroscedasticity สูง จึงไม่สามารถใช้สมการถดถอยแบบ Poisson โดยปกติได้</p></li>
 </ul>
-<p><img src="figure/unnamed-chunk-7-1.png" width="50%"><img src="figure/unnamed-chunk-7-2.png" width="50%"></p>
+<p><img src="figure/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;"><img src="figure/unnamed-chunk-7-2.png" width="50%" style="display: block; margin: auto;"></p>
 <p><strong>กราฟซ้าย</strong> คือความสัมพันธ์ของค่าเฉลี่ยและความแปรปรวนของการกระจายตัวแบบ Poisson โดยทั่วไป ส่วน<strong>กราฟขวา</strong> เป็นการกระจายตัวของข้อมูล RNA-seq จะเห็นว่าเมื่อค่าเฉลี่ยเพิ่มมากขึ้นนั้น ความแปรปรวนจะเพิ่มในอัตราส่วนที่มากกว่า ทั้งนี้ เนื่องจาก มีปัจจัยของความแปรปรวนที่ไม่ใช่ความแปรปรวนของ Technical variability จากกระบวนการ RNA sequencing (ซึ่งเป็น การกระจายตัวแบบ Poisson) เพียงอย่างเดียว แต่มีความแปรปรวนของ Biological properties ในตัวอย่างมาเกี่ยวข้องด้วย</p>
 <div id="negative-binomial-model" class="section level3" number="18.1.1">
 <h3>
@@ -150,7 +150,7 @@ CV^{2} = 1/\mu_{gi} + \phi
 <p><span class="math display">\[
 y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 \]</span></p>
-<div class="inline-figure"><img src="figure/estimatedispersion-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/estimatedispersion-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>หลังจากนั้น edgeR จะคำนวณ DGE โดยการใช้ Exact test ซึ่งเป็นการรวมโอกาสทั้งหมดที่จะสุ่มได้ Condition ที่ต้องการ ซึ่งวิธีคล้าย <a href="non-parametric-test.html#fisher">Fisher’s exact test</a> ที่มีการคำนึงถึง Effective library size และใช้ Negative binomial distribution แทน Hypergeometric distribution ซึ่งเป็นวิธี Classical method ของ edgeR อย่างไรก็ตาม วิธีนี้มีข้อจำกัดคือสามารถเปรียบเทียบ DGE ได้ระหว่างสองสภาวะเท่านั้น และไม่สามารถจำลองความแปรปรวนอื่นๆ นอกเหนือจากความแปรปรวนของยีนได้</p>
 </div>
 </div>
@@ -163,7 +163,7 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 var(y_{gi}) = \sigma^{2}_{g}(\mu_{gi} + \phi\mu_{gi}^{2})
 \]</span></p>
 <p>ซึ่งหมายความว่า ทุกๆ ความแปรปรวนของ <span class="math inline">\(var(y_{gi})\)</span> ที่เพิ่มขึ้นจะถูกทำนายด้วยค่า <span class="math inline">\(\phi\)</span> (Negative binomial parameter; Global BCV) และ <span class="math inline">\(\sigma^{2}\)</span> (Quasi-likelihood parameter; Gene-specific BCV) ซึ่งปัญหาของสมการนี้คือจำนวณ Replicate ที่ไม่มากพอในแต่ละยีน edgeR แก้จึงปัญหานี้โดยประยุกต์เทคนิกของ limma มาใช้ ซึ่งก็คือ Empirical Bayes ซึ่งยืมความแปรปรวนมาจากทุกยีนนั่นเอง</p>
-<div class="inline-figure"><img src="figure/eBayes_dispersion-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/eBayes_dispersion-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="log-linear-model" class="section level3" number="18.1.3">
 <h3>
@@ -184,7 +184,7 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 <h2>
 <span class="header-section-number">18.2</span> Workflow<a class="anchor" aria-label="anchor" href="#workflow"><i class="fas fa-link"></i></a>
 </h2>
-<div class="inline-figure"><img src="Picture/edgeR_workflow.png" width="781"></div>
+<div class="inline-figure"><img src="Picture/edgeR_workflow.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="edgeR-ex" class="section level2" number="18.3">
 <h2>
@@ -244,12 +244,12 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 <div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bladder_dge</span> <span class="op">&lt;-</span> <span class="fu">estimateDisp</span><span class="op">(</span><span class="va">bladder_dge</span>, design <span class="op">=</span> <span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu">plotBCV</span><span class="op">(</span><span class="va">bladder_dge</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/calculate_dispersion-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/calculate_dispersion-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>ต่อไปจะทำการ ทดสอบ DGE ด้วยสมการถดถอย ql-nbglm</p>
 <div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">glmQLFit</span><span class="op">(</span><span class="va">bladder_dge</span>, <span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu">plotQLDisp</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/squeezvar-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/squeezvar-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>ตอนนี้จะเห็นว่า BCV ของข้อมูลนั้นถูกบีบมาให้อยู่ใน Trend line จาก Empirical Bayes (<strong>Note</strong>: edgeR เรียก Function นี้จาก package <code>limma</code>)</p>
 <p>สุดท้าย เราจะใช้ <code>glmQLFTest()</code> เพื่อวิเคราะห์ <span class="math inline">\(p\)</span>-value จาก <span class="math inline">\(F\)</span>-test (สามารถใช้ Likelihood-ratio test ได้ด้วย <code>glmLRT()</code>) และเรียก <code>topTags()</code> เพื่อทำการดึงตารางผลของ DGE ออกมา</p>
 <div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">

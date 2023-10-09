@@ -117,7 +117,7 @@
 <span class="header-section-number">5.1.1</span> Basic dataframe manipulation<a class="anchor" aria-label="anchor" href="#basic-dataframe-manipulation"><i class="fas fa-link"></i></a>
 </h3>
 <p>ในกรณีนี้จะใช้ข้อมูลตัวอย่าง <code>iris</code> เพื่อสาธิตการใช้ <code>dplyr</code> โดย <code>iris</code> เป็นข้อมูลของความยาวกลีบของพันธุ์ดอกไม้ต่างๆ</p>
-<div class="inline-figure"><img src="Picture/iris.png" width="638" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="Picture/iris.png" width="80%" style="display: block; margin: auto;"></div>
 <p>รูปจาก: <a href="https://www.datacamp.com/tutorial/machine-learning-in-r" class="uri">https://www.datacamp.com/tutorial/machine-learning-in-r</a></p>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="co"># โหลด dataframe ตัวอย่างที่ติดมากับ base R</span></span>
@@ -303,7 +303,7 @@
 <span class="header-section-number">5.1.2.1</span> Mutating join<a class="anchor" aria-label="anchor" href="#mutating-join"><i class="fas fa-link"></i></a>
 </h4>
 <p>Mutating join คือการรวมตารางสองตารางเข้าด้วยกันภายใต้เงื่อนไขต่างๆ ใน<strong>คอลัมน์หลัก</strong>ที่กำหนด</p>
-<div class="inline-figure"><img src="Picture/mutating_join.jpg" width="70%"></div>
+<div class="inline-figure"><img src="Picture/mutating_join.jpg" width="70%" style="display: block; margin: auto;"></div>
 <p>ต่อไปจะใช้ตารางดังต่อไปนี้ในการแสดงตัวอย่าง</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -319,7 +319,7 @@
 <li>
 <code>Inner join</code> รวมบรรทัดที่มีตัวแปรที่มีร่วมกันทั้งสองตาราง</li>
 </ul>
-<div class="inline-figure"><img src="Picture/inner_join.jpg" width="70%"></div>
+<div class="inline-figure"><img src="Picture/inner_join.jpg" width="70%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -331,7 +331,7 @@
 <li>
 <code>Outer join/Full join</code> รวมทุกบรรทัด</li>
 </ul>
-<div class="inline-figure"><img src="Picture/outer_join.jpg" width="70%"></div>
+<div class="inline-figure"><img src="Picture/outer_join.jpg" width="70%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -343,7 +343,7 @@
 <li>
 <code>Left join</code> รวมบรรทัดจากตาราง <code>y</code> ที่มีตัวแปรในตาราง <code>x</code> และคงบรรทัดในตาราง <code>x</code> ทั้งหมด</li>
 </ul>
-<div class="inline-figure"><img src="Picture/left_join.jpg" width="70%"></div>
+<div class="inline-figure"><img src="Picture/left_join.jpg" width="70%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -355,7 +355,7 @@
 <li>
 <code>Right join</code> รวมบรรทัดจากตาราง <code>x</code> ที่มีตัวแปรในตาราง <code>y</code> และคงบรรทัดในตาราง <code>y</code> ทั้งหมด</li>
 </ul>
-<div class="inline-figure"><img src="Picture/right_join.jpg" width="70%"></div>
+<div class="inline-figure"><img src="Picture/right_join.jpg" width="70%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">right_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -369,13 +369,13 @@
 <span class="header-section-number">5.1.2.2</span> Filtering join<a class="anchor" aria-label="anchor" href="#filtering-join"><i class="fas fa-link"></i></a>
 </h4>
 <p>Filtering join คือการกรองบรรทัดในตาราง <code>x</code>โดยเงื่อนไขจากตาราง <code>y</code></p>
-<div class="inline-figure"><img src="Picture/filtering_join.jpg" width="70%"></div>
+<div class="inline-figure"><img src="Picture/filtering_join.jpg" width="70%" style="display: block; margin: auto;"></div>
 <ul>
 <li>
 <code>semi join</code> กรองบรรทัดในตาราง <code>x</code> ที่<strong>มี</strong>ตัวแปรในตาราง <code>y</code>
 </li>
 </ul>
-<div class="inline-figure"><img src="Picture/semi_join.jpg" width="70%"></div>
+<div class="inline-figure"><img src="Picture/semi_join.jpg" width="70%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -388,7 +388,7 @@
 <code>anti join</code> กรองบรรทัดในตาราง <code>x</code> ที่<strong>ไม่มี</strong>ตัวแปรในตาราง <code>y</code>
 </li>
 </ul>
-<div class="inline-figure"><img src="Picture/anti_join.jpg" width="70%"></div>
+<div class="inline-figure"><img src="Picture/anti_join.jpg" width="70%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
