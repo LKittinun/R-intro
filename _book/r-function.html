@@ -6,11 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>2 R function | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
+<meta name="description" content="Function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัวฟังก์ชันนั้น จะประกอบไปด้วย ฟังก์ชันที่มีมาพร้อมกับ R ตั้งแต่ต้น (Base R function)...">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="2 R function | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
+<meta property="og:description" content="Function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัวฟังก์ชันนั้น จะประกอบไปด้วย ฟังก์ชันที่มีมาพร้อมกับ R ตั้งแต่ต้น (Base R function)...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2 R function | A gentle introduction to R for biologists">
+<meta name="twitter:description" content="Function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัวฟังก์ชันนั้น จะประกอบไปด้วย ฟังก์ชันที่มีมาพร้อมกับ R ตั้งแต่ต้น (Base R function)...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -41,9 +44,6 @@
       margin-left: 2em;
     }
   </style>
-<meta name="description" content="Function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัวฟังก์ชันนั้น จะประกอบไปด้วย ฟังก์ชันที่มีมาพร้อมกับ R ตั้งแต่ต้น (Base R function)...">
-<meta property="og:description" content="Function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัวฟังก์ชันนั้น จะประกอบไปด้วย ฟังก์ชันที่มีมาพร้อมกับ R ตั้งแต่ต้น (Base R function)...">
-<meta name="twitter:description" content="Function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัวฟังก์ชันนั้น จะประกอบไปด้วย ฟังก์ชันที่มีมาพร้อมกับ R ตั้งแต่ต้น (Base R function)...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -80,19 +80,20 @@
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
 <li><a class="" href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></li>
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></li>
-<li><a class="" href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">14</span> Principal component analysis</a></li>
+<li><a class="" href="false-discovery.html"><span class="header-section-number">12</span> False discovery</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">13</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">14</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">15</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">16</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">17</span> edgeR</a></li>
-<li><a class="" href="pathway-analysis.html"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">16</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">17</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">18</span> edgeR</a></li>
+<li><a class="" href="pathway-analysis.html"><span class="header-section-number">19</span> Pathway analysis</a></li>
 <li class="book-part">Supplement</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">19</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">20</span> Distribution</a></li>
 <li class="book-part">Information</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">20</span> Session info</a></li>
-<li><a class="" href="references.html"><span class="header-section-number">21</span> References</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">21</span> Session info</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">22</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -104,7 +105,7 @@
 <h1>
 <span class="header-section-number">2</span> <strong>R function</strong><a class="anchor" aria-label="anchor" href="#r-function"><i class="fas fa-link"></i></a>
 </h1>
-<p>Function (ฟังก์ชัน) คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัวฟังก์ชันนั้น จะประกอบไปด้วย</p>
+<p><strong>Function (ฟังก์ชัน)</strong> คือ ชุดของคำสั่งที่จะสั่งการให้ R ทำงานตามจุดประสงค์ที่ท่านตั้งไว้ โดยตัวฟังก์ชันนั้น จะประกอบไปด้วย</p>
 <ul>
 <li>ฟังก์ชันที่มีมาพร้อมกับ R ตั้งแต่ต้น (Base R function)</li>
 <li>ฟังก์ชันที่ผู้นิพนธ์ท่านอื่นเขียนไว้ และรวบรวมมาเป็น ชุดของ ฟังก์ชัน เรียกว่า Package</li>
@@ -116,12 +117,16 @@
 </h2>
 <p>ฟังก์ชันนั้นประกอบด้วย 4 ส่วน คือ</p>
 <ol style="list-style-type: decimal">
-<li>Function name (ชื่อฟังก์ชัน)</li>
-<li>Argument (รายละเอียดของฟังก์ชัน)</li>
-<li>Function body (รายละเอียดของฟังก์ชัน)</li>
-<li>Return (ผลลัพธ์ของฟังก์ชัน)</li>
+<li>
+<strong>Function name</strong> (ชื่อฟังก์ชัน)</li>
+<li>
+<strong>Argument</strong> (รายละเอียดของฟังก์ชัน)</li>
+<li>
+<strong>Function body</strong> (รายละเอียดของฟังก์ชัน)</li>
+<li>
+<strong>Return</strong> (ผลลัพธ์ของฟังก์ชัน)</li>
 </ol>
-<p>ยกตัวอย่างฟังก์ชัน หาค่าเฉลี่ยของข้อมูล</p>
+<p>ยกตัวอย่างเช่นฟังก์ชัน หาค่าเฉลี่ยของข้อมูล</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">find_mean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="op">(</span><span class="va">x</span> <span class="op">+</span> <span class="va">y</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span></span>
@@ -196,8 +201,8 @@
 <pre><code>## 
 ##     setosa versicolor  virginica 
 ##         50         50         50</code></pre>
-<p>สามารถดู base R ฟังก์ชันทั้งหมดได้ที่ <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html</a></p>
-<p>ถ้าท่านต้องการดูว่า ฟังก์ชัน นั้นใช้งานอย่างไร ให้ใส่เครื่องหมาย ? หน้า ฟังก์ชัน นั้น เช่น <code>?mean()</code> <code>?colSums()</code></p>
+<p>สามารถดูฟังก์ชันของ Base R ทั้งหมด<a href="#https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html">ได้ที่นี่</a></p>
+<p>ถ้าท่านต้องการดูว่าแต่ละฟังก์ชันนั้นใช้งานอย่างไร ให้ใส่เครื่องหมาย ? หน้า ฟังก์ชัน นั้น เช่น <code>?mean()</code> <code>?colSums()</code></p>
 
 </div>
 </div>
@@ -226,7 +231,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-08.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

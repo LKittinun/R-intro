@@ -1,0 +1,222 @@
+# False discovery
+
+## $p$-value histogram
+
+พิจารณา $p$-value histogram ที่เกิดจากการเปรียบเทียบ $t$-test ของกลุ่มตัวอย่างที่มาจากประชากรเดียวกัน ทั้งหมด 10,000 ครั้ง
+
+```{r same_dist}
+set.seed(123)
+same_dist <- sapply(1:10000, \(x) t.test(rnorm(100,10,4), 
+                                         rnorm(100,10,4))$p.value) # Mean 10 vs 10
+```
+
+```{r same_dist_plot, echo = FALSE, out.width="70%", fig.align="center"}
+ggplot(NULL, aes(x = same_dist, y = after_stat(count/sum(count)))) + 
+  geom_histogram(col = "black", fill = "skyblue", binwidth = 0.05) +
+  geom_vline(xintercept = 0.05, linetype = "dashed", col = "red") +
+  geom_hline(yintercept = 0.05, linetype = "dotdash", col = "darkblue") + 
+  scale_x_continuous(breaks = seq(0,1,0.05)) + 
+  scale_y_continuous(breaks = seq(0,1,0.01), labels = scales::percent) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust=1)) +
+  labs(x = "p-value", y = "Percentage", title = "Same distribution")
+```
+
+ท่านจะเห็นว่าการกระจายตัวของ $p$-value นั่นมีลักษณะเป็น [Uniform distribution](#unif-dist) สังเกตว่าจะมีบางส่วนที่ $p$-value น้อยกว่า Critical-value ที่ตั้งไว้ ซึ่งในที่นี้คือ $p$-value $\leq$ 0.05 ซึ่งจะเห็นว่ามีประมาณ 5% เหตุเพราะใน $H_{0}$ ที่ไม่มีความแตกต่างของค่าเฉลี่ยระหว่างประชากรนั้น มีโอกาสที่จะมีความแตกต่างที่มากกว่า 0 [ได้ประมาณ 5% อยู่แล้ว](#p-crit) ซึ่งถือว่านี่คือ False positive
+
+ส่วนอีกตัวอย่าง เป็นกลุ่มตัวอย่างสองกลุ่มที่มาจากประชากรที่ต่างกัน 100%
+
+```{r very_diff}
+set.seed(123)
+very_diff_dist <- sapply(1:10000, \(x) t.test(rnorm(100,10,4), 
+                                         rnorm(100,15,4))$p.value) # Mean 10 vs 15
+```
+
+```{r very_diff_dist, echo = FALSE, out.width="70%", fig.align="center", warning=FALSE}
+ggplot(NULL, aes(x = very_diff_dist, y = after_stat(count/sum(count)))) + 
+  geom_histogram(col = "black", fill = "skyblue", binwidth = 0.025) +
+  geom_vline(xintercept = 0.05, linetype = "dashed", col = "red") +
+  geom_hline(yintercept = 0.05, linetype = "dotdash", col = "darkblue") + 
+  scale_x_continuous(breaks = seq(0,1,0.05), limit = c(-0.05,1)) + 
+  scale_y_continuous(breaks = seq(0,1,0.1), labels = scales::percent) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust=1)) +
+  labs(x = "p-value", y = "Percentage", title = "Different distribution")
+```
+
+จะเห็นว่า $p$-value นั้นจะมีการกระจายตัวที่ไม่เป็น [Uniform distribution](#unif-dist) นั่นเพราะความต่างของข้อมูลนั้น ได้อยู่ในระดับที่จะ ปฏิเสธ $H_{0}$ ได้อยู่แล้ว การทำการทดสอบหลายๆ ครั้ง จึงได้ผลที่ $p$-value $\leq$ 0.05 นั้นอยู่ที่ระดับใกล้ 0
+
+สุดท้ายจะทำการจำลองข้อมูลจากการทดลอง 10000 ครั้งที่มี True positive 20% และทดสอบที่ $\alpha$ = 0.05
+
+```{r diff_dist}
+set.seed(123)
+
+num_tests <- 10000
+true_positives <- 2000
+alpha <- 0.05  
+
+null_pvalues <- runif(num_tests - true_positives) # Null p-value
+alt_pvalues <- runif(true_positives, 0, 0.05) # True p-value
+all_pvalues <- c(null_pvalues, alt_pvalues) # All p-value
+```
+
+เมื่อท่านคำนวณ % ของ Rejected $p$-value จะได้ว่า
+
+```{r p_prop_rejected}
+rejected_p <- sum(all_pvalues <= 0.05)/length(all_pvalues)
+rejected_p*100
+```
+
+$p$-value ที่ถูก Reject $H_{0}$ มีมากถึง 24%! เมื่อเทียบกับ True positive ซึ่งมีเพียง 20% เท่านั้น
+
+เมื่อมาลองพล็อต $p$-value histogram
+
+```{r true20, echo = FALSE, out.width="70%", fig.align="center", warning=FALSE}
+ggplot(data = NULL,aes(x = all_pvalues, y = after_stat(count/sum(count)))) + 
+  geom_histogram(col = "black", fill = "skyblue", binwidth = 0.025)+
+  scale_x_continuous(breaks = seq(0,1,0.05)) + 
+  scale_y_continuous(breaks = seq(0,1,0.05), labels = scales::percent) +
+  theme_bw() +
+  geom_vline(xintercept = 0.05, linetype = "dashed", col = "red") +
+  geom_hline(yintercept = 0.025, linetype = "dotdash", col = "darkblue") + 
+  annotate("rect",
+           xmin = -0.025, xmax = 0.05, 
+           ymin = 0.0, ymax = 0.025, fill = "darkred", alpha =.7) +
+  annotate("rect",
+           xmin = 0.05, xmax = 1.025, 
+           ymin = 0.0, ymax = 0.025, fill = "red", alpha =.2) +
+  annotate("rect",
+           xmin = -0.025, xmax = 0.05, 
+           ymin = 0.025, ymax = 0.125, fill = "darkgreen", alpha =.2) +
+  theme(axis.text.x = element_text(angle = 45, hjust=1)) +
+  labs(x = "p-value", y = "Percentage", title = "Different distribution")
+
+```
+
+ในที่นี้ **พื้นที่**สีเขียวคือ True positive สีแดงเข้มคือ False positive และสีแดงอ่อน คือ True negative จะได้ว่าอัตราส่วนผลบวกลวง (False discovery proprotion) คือ
+
+$$
+FDP = \frac{TP}{TP +FP}
+$$
+
+จะสังเกตว่าถ้าทำการทดสอบไม่กี่ครั้ง เช่น 10 ครั้ง 5% ไม่ได้มีความหมายมาก (0.05 $\times$ 10 = 0.5 ครั้ง ไม่ถึง 1 ด้วยซ้ำ) แต่ถ้าท่านทำการทดสอบนี้ 10,000 ครั้ง ท่านมีโอกาสที่จะพบ False positive ถึง 0.05 $\times$ 10,000 \~ 500 ครั้ง! ซึ่งนับว่าอันตรายกับกระเป๋าเงินของท่านมากเมื่อนำผลนี้ไป Validate ด้วยการทดลองวิธีอื่น โดยเฉพาะผลจากงาน High-throughput ที่มีการทดสอบสมมตติฐานนับพันนับหมื่นครั้ง (ตามจำนวนยีน/โปรตีน)
+
+------------------------------------------------------------------------
+
+## Dealing with false discovery
+
+จะเห็นว่าสถานการณ์ขั้นต้นเป็นสถานการณ์ที่ไม่น่าอภิรมย์นัก เมื่อจะต้องนำข้อมูลไป Validate ซึ่งนับเป็นโชคดีที่นักสถิติได้คิดค้นวิธีต่างๆ ขึ้นมาเพื่อพยายามปรับอัตราของผลบวกลวงนี้ให้ลดลงก่อนจะไปเสียหายในการทดลองจริง ซึ่งวิธีการมีดังนี้
+
+### Family-wise error rate (FWER)
+
+คือ โอกาสที่จะเกิดความผิดพลาดอย่างน้อย 1 ครั้งจากการทดสอบทั้งหมด
+
+$$
+FWER(\alpha) = 1- \prod_{j=1}^{m}(1-\alpha) = 1-(1-\alpha)^m
+$$
+
+ตัวอย่างเช่น ที่ $\alpha$ = 0.05 ถ้าท่านทำการทดลอง 100 ครั้ง ท่านมีโอกาสที่จะเกิด False positive 1 ครั้ง ถึง $1-(1-0.05)^{100} = 0.994$ = 99%
+
+เมื่อทำการเปรียบเทียบที่ $\alpha$ Threshold ต่างๆ จะได้ว่า
+
+```{r fwer_plot}
+FWER <- expand_grid(times = 1:500, alpha = c(0.001, 0.005, 0.01, 0.05, 0.1)) |> 
+  mutate(FWER = 1-(1-alpha)^times)
+
+ggplot(FWER, aes(x = times, y = FWER, col = as.factor(alpha), linetype = as.factor(alpha))) + 
+  geom_line(linewidth = 1) +
+  labs(x = "No. of hypothesis", col = "alpha", linetype = "alpha") +
+  theme_bw()
+```
+
+### Controlling FWER
+
+การควบคุม FWER นั้น คือการปรับเปลี่ยนที่ $\alpha$ โดยตรง
+
+#### Bonferroni
+
+คือการเพิ่ม Threshold ของ $\alpha$ โดยตรง
+
+$$
+FWER(\alpha) \leq m \times \frac{\alpha}{m} = \alpha
+$$
+
+กล่าวโดยง่ายก็คือการปรับ Threshold ของ $\alpha$ ตามจำนวนครั้งที่ทดสอบนั่นเอง เช่น $\alpha$ เดิม = 0.05 ทดสอบ 10 ครั้ง $\alpha$ ที่ควรจะเป็นคือ 0.005 หรือคิดในทางกลับกัน คือ $p$-value ใหม่ = $m \times p_{org}$
+
+ยกตัวอย่าง $p$-value ที่ $\alpha$ เดิม = 0.05
+
+```{r bonf}
+pval_df <- data.frame(hypo = LETTERS[1:5], 
+                      pval = c(0.01, 0.75, 0.045, 0.1, 0.012), 
+                      alpha = rep(0.05,5)) |> 
+          mutate(original_reject = pval <= 0.05)
+
+pval_df |> 
+  mutate(adj_p = pval*(n())) |>  # new treshold
+  mutate(reject = adj_p <= 0.05)
+```
+
+#### Holm's stepdown procedure
+
+คือการตั้ง Threshold ของ $\alpha$ ให้สูงขึ้นเรื่อยๆ ตามจำนวนครั้งที่ทดสอบ ซึ่งมีหลักการ คือ
+
+1.  เรียง $p$-value จากน้อยไปมาก
+2.  สร้าง $\alpha$ Criteria ใหม่โดย $\alpha_{new_{j}} = \frac{\alpha}{m+1-j}$ เมื่อ $m$ คือ จำนวน $p$ ทั้งหมด และ $j$ คือ ลำดับของ $p$-value
+
+ต่อไปจะลองใช้ข้อมูลเดิมมาปรับ $\alpha$ แบบ Holm's
+
+```{r holm}
+pval_df |> 
+  mutate(sequence = row_number()) |> 
+  arrange(pval) |>  # sort p-val
+  mutate(rank = row_number()) |> # assign rank
+  mutate(new_alpha = alpha/(n()+1-rank)) |>  # new threshold
+  mutate(reject = pval <= new_alpha) |> 
+  arrange(sequence) # sort back to original order
+```
+
+จะเห็นว่าทั้งสองวิธีขั้นต้นนั้นเป็นวิธีที่ Conservative มาก และมีข้อเสียคือ Power นั้นจะลดลงอย่างรวดเร็วตามจำนวนครั้งที่ทดสอบ
+
+## False discovery rate (FDR)
+
+จะเห็นว่า FWER นั้นมีข้อเสียมากเกินไป จึงมีวิธีการที่ Conservative น้อยกว่า โดยจะไปควบคุม FDP แทน ตามที่เคยกล่าวไปต้นบท
+
+อย่างไรก็ตาม ในการทดลองจริงนั้น ไม่มีทางที่จะสามารถประเมิน FDP ได้เนื่องจากไม่มีทางทราบว่า อัตราส่วนของ True positive เป็นเท่าไร จึงจำเป็นต้องใช้การประมาณของ FDP ภายใต้ขอบเขตความรู้ที่มีอยู่แทน จะได้ว่า
+
+$$
+FDR = E(FDP) = E(\frac{TP}{TP+FP})
+$$
+
+### Controlling FDR
+
+### Benjamini's Hochberg
+
+เป็นวิธีที่นิยมใช้ที่สุดในการควบคุม FDR โดยมีวิธีคือ
+
+1.  เรียง $p$-value จากมากไปน้อย
+2.  $p_{new}$ มากที่สุด = 1
+3.  คำนวน $p_{new_{j}} = cummin(1, \frac{m}{j} \times p)$ (Cumulative min)
+
+```{r bh}
+pval_df |> mutate(rank = order(pval)) |> # rank of pval
+  mutate(sequence = row_number()) |> # original sequence
+  arrange(desc(pval)) |> # arrange p
+  mutate(adj_p = cummin(n()*pval/rank)) |> # cumulative min
+  mutate(adj_p = ifelse(adj_p > 1, 1, adj_p)) |> # limit at 1
+  arrange(sequence) |> 
+  mutate(reject = adj_p <= 0.05)
+```
+
+ซึ่งวิธีนี้คือการควบคุมที่ระดับ FDR เนื่องจากไม่ได้เปลี่ยน $\alpha$ แต่ลดจำนวน Positive ตาม % ของข้อมูล
+
+------------------------------------------------------------------------
+
+## Adjust $p$ in R
+
+ท่านไม่ต้องทำวิธีนี้ทั้งหมดด้วยตนเอง เนื่องจาก `R` มี `p.adjust()` ไว้ให้อยู่แล้ว
+
+```{r adj_p}
+pval_df$pval
+p.adjust(pval_df$pval, method = "bonferroni") 
+p.adjust(pval_df$pval, method = "BH")
+```

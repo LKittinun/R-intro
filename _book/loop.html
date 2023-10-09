@@ -6,11 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>3 Loop | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
+<meta name="description" content='3.1 General loop ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน R for(i in 1:2){  for (j in c("a","b"))  print(c(i,j)) } ## [1] "1" "a" ## [1] "1" "b" ## [1] "2" "a" ## [1] "2" "b" i &lt;- 0...'>
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="3 Loop | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
+<meta property="og:description" content='3.1 General loop ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน R for(i in 1:2){  for (j in c("a","b"))  print(c(i,j)) } ## [1] "1" "a" ## [1] "1" "b" ## [1] "2" "a" ## [1] "2" "b" i &lt;- 0...'>
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3 Loop | A gentle introduction to R for biologists">
+<meta name="twitter:description" content='3.1 General loop ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน R for(i in 1:2){  for (j in c("a","b"))  print(c(i,j)) } ## [1] "1" "a" ## [1] "1" "b" ## [1] "2" "a" ## [1] "2" "b" i &lt;- 0...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -41,9 +44,6 @@
       margin-left: 2em;
     }
   </style>
-<meta name="description" content='3.1 General loop ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน R for(i in 1:2){  for (j in c("a","b"))  print(c(i,j)) } ## [1] "1" "a" ## [1] "1" "b" ## [1] "2" "a" ## [1] "2" "b" i &lt;- 0...'>
-<meta property="og:description" content='3.1 General loop ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน R for(i in 1:2){  for (j in c("a","b"))  print(c(i,j)) } ## [1] "1" "a" ## [1] "1" "b" ## [1] "2" "a" ## [1] "2" "b" i &lt;- 0...'>
-<meta name="twitter:description" content='3.1 General loop ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน R for(i in 1:2){  for (j in c("a","b"))  print(c(i,j)) } ## [1] "1" "a" ## [1] "1" "b" ## [1] "2" "a" ## [1] "2" "b" i &lt;- 0...'>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -80,19 +80,20 @@
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
 <li><a class="" href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></li>
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></li>
-<li><a class="" href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">14</span> Principal component analysis</a></li>
+<li><a class="" href="false-discovery.html"><span class="header-section-number">12</span> False discovery</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">13</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">14</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">15</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">16</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">17</span> edgeR</a></li>
-<li><a class="" href="pathway-analysis.html"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">16</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">17</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">18</span> edgeR</a></li>
+<li><a class="" href="pathway-analysis.html"><span class="header-section-number">19</span> Pathway analysis</a></li>
 <li class="book-part">Supplement</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">19</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">20</span> Distribution</a></li>
 <li class="book-part">Information</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">20</span> Session info</a></li>
-<li><a class="" href="references.html"><span class="header-section-number">21</span> References</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">21</span> Session info</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">22</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -153,7 +154,7 @@
 <span><span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.07    0.00    0.33</code></pre>
+##    0.17    0.05    0.44</code></pre>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span> <span class="co"># Pre-allocate memory</span></span>
@@ -162,17 +163,17 @@
 <span><span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span> <span class="co">## 3x faster</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.07    0.00    0.09</code></pre>
+##    0.11    0.00    0.17</code></pre>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowMeans</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span> <span class="co">## Instant for vectorized function</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.00    0.00    0.03</code></pre>
+##    0.01    0.00    0.02</code></pre>
 <p>นั่นหมายความว่า การเรียกฟังก์ชันที่เร็วที่สุดควร</p>
 <ol style="list-style-type: decimal">
 <li>เลือกฟังก์ชันที่มีการเขียนให้รองรับ Vectorization (เรียกคำสั่งภายในพร้อมกันทุกตัวแปร) อยู่แล้ว</li>
-<li>Pre-allocate ความจำก่อน ตามจำนวน (length) ของข้อมูลสุดท้ายที่คาดว่าจะได้</li>
+<li>Pre-allocate ความจำก่อน ตามจำนวน (Length) ของข้อมูลสุดท้ายที่คาดว่าจะได้</li>
 <li>การสร้างตัวแปรใหม่ใส่เข้าไปในตัวแปรเรื่อยๆ โดยไม่ได้ Pre-allocate ไว้ ควรเป็นทางเลือกสุดท้าย</li>
 </ol>
 <p>อย่างไรก็ตามถ้าท่านไม่ได้เขียน <code>package</code> ใช้ หรือทำการวิเคราะห์ที่เป็นแนว Programming มากนัก ท่านอาจจะไม่ต้องใส่ใจส่วนนี้มาก</p>
@@ -292,7 +293,7 @@
 ## [1] 42 42 42 42</code></pre>
 <ul>
 <li>
-<code>tapply</code> คือ การเรียกฟังก์ชันตาม subset</li>
+<code>tapply</code> คือ การเรียกฟังก์ชันตาม Subset</li>
 </ul>
 <div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, <span class="va">mean</span><span class="op">)</span></span></code></pre></div>
@@ -329,7 +330,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-08.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

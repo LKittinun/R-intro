@@ -10,15 +10,15 @@ knitr::include_graphics("Picture/censor.jpg")
 
 การ Censor โดยหลักมี 3 แบบ คือ
 
--   Right-censor (ดังรูป) คือ ไม่แน่ใจข้อมูลการเกิด event เวลาสุดท้ายที่พบ ซึ่งพบมากที่สุด
+-   **Right-censor** (ดังรูป) คือ ไม่แน่ใจข้อมูลการเกิด event เวลาสุดท้ายที่พบ ซึ่งพบมากที่สุด
 
--   Left-censor คือ ไม่แน่ใจข้อมูลช่วงเวลาเริ่มต้น เช่น Diagnosis วันไหน
+-   **Left-censor** คือ ไม่แน่ใจข้อมูลช่วงเวลาเริ่มต้น เช่น Diagnosis วันไหน
 
--   Interval-censor คือ เวลาช่วงใดช่วงหนึ่งหายไป
+-   **Interval-censor** คือ เวลาช่วงใดช่วงหนึ่งหายไป
 
-## Kaplein-Meier estimate
+## Kaplein-Meier estimate (KM)
 
-Kaplein-Meier estimate (KM) คือกราฟแสดงอัตราการเกิดของเหตุการณ์เมื่อเทียบกับเวลาที่ผ่านไป โดยหลักการคำนวณ Survival คือ
+คือ กราฟแสดงอัตราการเกิดของเหตุการณ์เมื่อเทียบกับเวลาที่ผ่านไป โดยหลักการคำนวณ Survival คือ
 
 $$ \hat{S}(t) = \prod_{i: t_{i} \leq t}(1- \frac{d_{i}}{n_{i}})$$
 
@@ -149,9 +149,9 @@ ovarian_surv_diff
 
 ค่า Log-rank นี้ สามารถแสดงใน KM ได้โดยใช้ `pval` = `TRUE` ตามหัวข้อเบื้องต้น
 
-## Cox-proportional hazard model
+## Cox-proportional hazard (CPH) model
 
-Cox-proportional hazard model (CPH) เป็น Semi-parametric model ซึ่งวัด Risk ของการเกิด Event นั้นๆ โดยมีสมการ คือ
+คือ Semi-parametric model ซึ่งวัด Risk ของการเกิด Event นั้นๆ โดยมีสมการ คือ
 
 $$
 h(t) = h_{0}(t) \times exp(b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p})
@@ -197,7 +197,7 @@ ovarian_coxzph <- cox.zph(ovarian_cox)
 ggcoxzph(ovarian_coxzph)
 ```
 
-โดย test นี้จะทำการเปรียบเทียบ Residuals ระหว่าง Risk-weight average กับ ตัวแปรนั้นๆ ว่ามีการเปลี่ยนแปลงไปในทิศทางใดทิศทางหนึ่งหรือไม่ ถ้ามี ($p$ \< 0.05) หมายความว่า เวลาที่ผ่านไปอาจจะส่งผลให้ HR นั้นมีความแตกต่างกัน ซึ่งจะต้องทำ Time-varying CPH เพิ่มเติม
+โดยการทดสอบนี้ จะทำการเปรียบเทียบ Residuals ระหว่าง Risk-weight average กับ ตัวแปรนั้นๆ ว่ามีการเปลี่ยนแปลงไปในทิศทางใดทิศทางหนึ่งหรือไม่ ถ้ามี ($p$ \< 0.05) หมายความว่า เวลาที่ผ่านไปอาจจะส่งผลให้ HR นั้นมีความแตกต่างกัน ซึ่งจะต้องทำ Time-varying CPH เพิ่มเติม
 
 โดยในข้อมูล `ovarian` นี้ ไม่มีตัวใดที่ $p$-value \< 0.05 จึงถือได้ว่า อัตราส่วนนั้นคงที่ และทำให้ CPH นั้น Valid
 

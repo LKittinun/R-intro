@@ -1,18 +1,23 @@
 ---
 title: "A gentle introduction to R for biologists"
 author: "Kittinun Leetanaporn"
+description: "Basic statistical concept and R application for biologists"
 date: "`r Sys.Date()`"
 output: 
   bookdown::bs4_book:
     df_print: paged
     config:
+      split_bib: TRUE
+      repo: "https://github.com/LKittinun/R-intro"
       download: 
        - ["_main.pdf", "PDF"]
        - ["_presentation.pptx", "PPTX"]
   css: "style.css"
   site: bookdown::bookdown_site
 documentclass: book
-bibliography: "references.bib"
+bibliography: ["references.bib"]
+csl: "apa-6th-edition.csl"
+nocite: '@*'
 delete_merged_file: true
 ---
 
@@ -23,15 +28,15 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 
 # **Preface** {.unnumbered}
 
-เอกสารนี้จัดทำขึ้นเพื่อจุดประสงค์ขึ้นเพื่อแนะนำการใช้ `R` เบื้องต้น สำหรับนักวิทยาศาสตร์ที่มีความสนใจในการใช้ `R` ในการวิเคราะห์ข้อมูล ซึ่งผู้ใช้งานจำเป็นจะต้องมีความรู้เรื่อง basic `R` ต่างๆ เล็กน้อย เพื่อที่จะได้ใช้งานได้อย่างไม่ติดขัด
+เอกสารนี้จัดทำขึ้นเพื่อจุดประสงค์ขึ้นเพื่อแนะนำการใช้ `R` [@R-base] เบื้องต้น สำหรับนักวิทยาศาสตร์ที่มีความสนใจในการใช้ `R` ในการวิเคราะห์ข้อมูล ซึ่งผู้ใช้งานจำเป็นจะต้องมีความรู้เรื่อง Basic `R` ต่างๆ เล็กน้อย เพื่อที่จะได้ใช้งานได้อย่างไม่ติดขัด
 
-ท่านสามารถ Clone github repository ได้ที่: <https://github.com/LKittinun/R-intro>
+ท่านสามารถ Clone github repository [ได้ที่นี่](#https://github.com/LKittinun/R-intro)
 
 ## R installation {.unnumbered}
 
 ### R console {.unnumbered}
 
-ผู้ที่ต้องการใช้ `R` สามารถดาวน์โหลดโปรแกรม ได้ที่นี่ <https://cran.r-project.org/bin/windows/base/> โดยตัว `R` console จะมีหน้าตาดังภาพ
+ผู้ที่ต้องการใช้ `R` สามารถดาวน์โหลดโปรแกรม [ได้ที่นี่](#https://cran.r-project.org/bin/windows/base/) โดยตัว `R` console จะมีหน้าตาดังภาพ
 
 ```{r rconsole, fig.align="center", echo=FALSE, out.width="100%"}
 knitr::include_graphics("./Picture/Rconsole (Custom).jpg")
@@ -39,7 +44,7 @@ knitr::include_graphics("./Picture/Rconsole (Custom).jpg")
 
 ### Rstudio {.unnumbered}
 
-อย่างไรก็ตาม การใช้งาน `R` ด้วยโปรแกรมนี้จะใช้งานค่อนข้างยาก โดยส่วนใหญผู้ใช้การจะต้องดาวน์โหลด IDE (integrated development environment) มาอำนวยความสะดวกในการเขียนคำสั่ง ซึ่ง IDE ที่ได้รับความนิยมมากที่สุด คือ Rstudio สามารถดาวน์โหลดได้ที่ <https://posit.co/download/rstudio-desktop/>
+อย่างไรก็ตาม การใช้งาน `R` ด้วยโปรแกรมนี้จะใช้งานค่อนข้างยาก โดยส่วนใหญผู้ใช้การจะต้องดาวน์โหลด IDE (Integrated development environment) มาอำนวยความสะดวกในการเขียนคำสั่ง ซึ่ง IDE ที่ได้รับความนิยมมากที่สุด คือ Rstudio สามารถดาวน์โหลด[ได้ที่นี่](#https://posit.co/download/rstudio-desktop/)
 
 ```{r rstudio, fig.align="center", echo=FALSE, out.width="100%"}
 knitr::include_graphics("./Picture/Rstudio (Custom).jpg")

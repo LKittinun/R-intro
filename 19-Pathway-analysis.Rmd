@@ -16,7 +16,7 @@ knitr::include_graphics("Picture/pathway.jpg")
 
 คือ การจัดกลุ่มของยีนให้ตรงกับกลุ่มของข้อมูล โดยปัจจุบันมีฐานข้อมูลดังนี้
 
--   [Gene ontology](https://geneontology.org/) คือ ฐานข้อมูลที่รวบรวมหน้าที่ของยีนแต่ละยีนและจัดเป็นหมวดหมู่ โดยแต่ละยีนสามารถอยู่หลายหมวดหมู่ได้ ซึ่งหมวดหมู่หลักโดยหลักนั้นแบ่งเป็น
+-   [Gene ontology](https://geneontology.org/) [@thomas2022] คือ ฐานข้อมูลที่รวบรวมหน้าที่ของยีนแต่ละยีนและจัดเป็นหมวดหมู่ โดยแต่ละยีนสามารถอยู่หลายหมวดหมู่ได้ ซึ่งหมวดหมู่หลักโดยหลักนั้นแบ่งเป็น
 
     -   **Cellular component (CC)** คือยีนนั้นมักอยู่ในเซลล์ หรือสภาวะแวดล้อมรอบข้างแบบใด
 
@@ -24,7 +24,7 @@ knitr::include_graphics("Picture/pathway.jpg")
 
     -   **Biological process (BP)** คือ ยีนนั้นเป็นส่วนประกอบหลักของการทำงานในระบบชีววิทยาอย่างไร ซึ่งเป็นภาพใหญ่ของหลายโมเลกุลที่มารวมตัวกันทำหน้าที่เป็นระบบ
 
--   [KEGG](https://www.genome.jp/kegg/) (Kyoto Encyclopedia of Genes and Genomes) คือ ฐานข้อมูลของข้อมูล High-throughput ที่เชื่อมโยงข้อมูลของยีนเข้ากับระบบทางอื่นๆ ทางชีววิทยา โดยหมวดหมู่นั้นแบ่งเป็น
+-   [KEGG](https://www.genome.jp/kegg/) (Kyoto Encyclopedia of Genes and Genomes) [@kanehisa2016] คือ ฐานข้อมูลของข้อมูล High-throughput ที่เชื่อมโยงข้อมูลของยีนเข้ากับระบบทางอื่นๆ ทางชีววิทยา โดยหมวดหมู่นั้นแบ่งเป็น
 
     -   **System information** คือ ข้อมูลของความเชื่อมโยงจากข้อมูลในระบบชนิดอื่นๆ
 
@@ -34,9 +34,9 @@ knitr::include_graphics("Picture/pathway.jpg")
 
     -   **Health information** คือ ข้อมูลของโรคและยาต่างๆ
 
--   [Reactome](https://reactome.org/) คือ ฐานข้อมูลที่รวบรวมหน้าที่การทำงานของยีนแต่ละโมเลกุล (Biological pathway) จากฐานข้อมูลและงานวิจัยต่างๆ ซึ่งมีการปรับแต่งให้เข้ากับการทำงานระดับโปรตีนด้วย
+-   [Reactome](https://reactome.org/) [@gillespie2022] คือ ฐานข้อมูลที่รวบรวมหน้าที่การทำงานของยีนแต่ละโมเลกุล (Biological pathway) จากฐานข้อมูลและงานวิจัยต่างๆ ซึ่งมีการปรับแต่งให้เข้ากับการทำงานระดับโปรตีนด้วย
 
--   [MSigDB](https://www.gsea-msigdb.org/gsea/msigdb) คือ ฐานข้อมูลที่รวบรวมจากฐานข้อมูลขั้นต้นทั้งหมดและนำมาจัดหมวดหมู่ใหม่ โดยทำการกำจัดข้อมูลที่ซ้ำกันออก
+-   [MSigDB](https://www.gsea-msigdb.org/gsea/msigdb) [@liberzon2011] คือ ฐานข้อมูลที่รวบรวมจากฐานข้อมูลขั้นต้นทั้งหมดและนำมาจัดหมวดหมู่ใหม่ โดยทำการกำจัดข้อมูลที่ซ้ำกันออก
 
 ### Statistical analysis
 
@@ -50,7 +50,7 @@ knitr::include_graphics("Picture/pathway.jpg")
 
 -   ในฐานข้อมูลที่ท่านเลือกมา Annotate นั้น มี Pathway $A$ อยู่ที่ท่านสนใจ
 
--   ข้อมูลของของตัวท่านเองพบว่า มี DGE ทั้งหมด 5000 ยีน และมี 500 ยีน ที่อยู่ใน Pathway $A$ (500/5,000 = 10%)
+-   ข้อมูลของของตัวท่านเองพบว่า มี DGE ทั้งหมด 5,000 ยีน และมี 500 ยีน ที่อยู่ใน Pathway $A$ (500/5,000 = 10%)
 
 -   ส่วนข้อมูลยีนพื้นหลังของท่านนั้นมีทั้งหมด 50,000 ยีน และมี 2,000 ยีน ที่อยู่ใน Pathway $A$ และไม่ได้อยู่ใน DGE ของท่าน (2,000/50,000 = 4%)
 
@@ -82,7 +82,7 @@ knitr::include_graphics("Picture/GSEA.jpeg")
 
 *รูปภาพจาก:* @subramanian2005
 
-คือ การหายีนที่มีการแสดงออกมากกว่ากลุ่มอื่น ซึ่งใช้วิธีที่แตกต่างจาก ORA โดยวิธีของ GSEA คือ
+คือ การหายีนที่มีการแสดงออกมากกว่ากลุ่มอื่น ซึ่งใช้วิธีที่แตกต่างจาก ORA โดยวิธีของ GSEA (@subramanian2005) คือ
 
 1.  เรียงยีนทั้งหมดที่มีอยู่ตามความแตกต่างระหว่างกลุ่ม จากมากไปน้อย (Ranked gene) ซึ่งมักจะใช้ $-log_{10}(p) \times sign(FC)$ หรือ $-log_{10}p \times log_{x}(FC)$ ($x$ เป็นอะไรก็ได้ไม่แตกต่างกัน)
 2.  ให้คะแนนของยีนเรียงตามข้อ 1. แบบบวกเพิ่มไปเรื่อยๆ (Cumulative) ถ้ามียีนไหนที่อยู่ในกลุ่มที่ต้องการ (กลุ่ม $S$ ดังรูป) จะให้คะแนนเป็น + แต่ถ้ายีนไม่อยู่ในกลุ่ม จะให้คะแนนเป็น - โดยขนาดของคะแนนนั้นจะขึ้นอยู่กับความแตกต่างด้วย
@@ -98,3 +98,101 @@ knitr::include_graphics("Picture/GSEA.jpeg")
 ------------------------------------------------------------------------
 
 ## Example
+
+ในตัวอย่างนี้ จะนำ DGE จาก [Bladder cancer](#edgeR-ex) มาทำการวิเคราะห์ Pathway analysis
+
+```{r clusterprofiler, message = FALSE, warning = FALSE}
+library(clusterProfiler)
+library(org.Hs.eg.db) # Homo Sapiens database
+```
+
+```{r edgeR_dge}
+gene_result <- topTags(genediff, n = Inf) |> as.data.frame()
+gene_result
+```
+
+### ORA
+
+```{r}
+gene_sig <- gene_result |> filter(FDR <= 0.05) # significant gene with FDR <= 0.01
+
+ora_entries <- mapIds(org.Hs.eg.db, rownames(gene_sig), "ENTREZID", "ALIAS") |> na.omit() |> 
+  as.character()
+head(ora_entries, 20)
+unique(ora_entries) |> length()
+```
+
+```{r enrichGO}
+ora_cc <- enrichGO(ora_entries, org.Hs.eg.db, ont = "CC")
+as.data.frame(ora_cc)
+```
+
+-   `GeneRatio` คือ อัตราส่วนยีนที่พบใน GO ต่อ ยีนทั้งหมด (มีบางส่วนถูกตัดเนื่องจากไม่มีข้อมูลในฐาน)
+
+-   `BgRatio` คือ อัตราส่วนยีนพื้นหลังที่พบใน GO ต่อ ยีนทั้งหมด
+
+-   `pvalue, p.adjust` คือ $p$-value จาก [FIsher's exact test](#fisher)
+
+-   `qvalue` คือ Adjusted $p$-value จาก Package `qvalue` ซึ่งใช้วิธีที่แตกต่างกัน
+
+ท่านสามารถสร้างกราฟจากผลนี้ได้โดย `dotplot()`, `barplot()`
+
+```{r enrichplot, warning = FALSE}
+dotplot(ora_cc, showCategory = 20)
+barplot(ora_cc, showCategory = 10, color = "qvalue")
+```
+
+หรือ สามารถพล็อต GO pathway โดยรวมได้
+
+```{r goplot, warning = FALSE}
+goplot(ora_cc)
+```
+
+นอกจากนี้ยังมีฐานข้อมูลอื่นให้วิเคราะห์ได้ เช่น `enrichKEGG()`, `enrichPathway()`
+
+### GSEA
+
+ในส่วน GSEA จะใช้ยีน**ทั้งหมด**เรียงจากมากไปน้อย
+
+```{r}
+gene_result_ranked <- gene_result |> 
+  mutate(Score = -log10(FDR)*logFC) |> 
+  arrange(desc(Score)) # arrange score max -> min
+gene_result_ranked |> dplyr::select(logFC, FDR, Score)
+```
+
+ต่อจากนั้นจะนำข้อมูลนี้ไปใช้ต่อ ซึ่งต้องเปลี่ยนเป็น Entries ID เหมือน ORA
+
+```{r rank_dge}
+dge_ranked <- gene_result_ranked$Score
+names(dge_ranked) <- rownames(gene_result_ranked)
+head(dge_ranked, 20) # gene names
+gene_entries <- mapIds(org.Hs.eg.db, names(dge_ranked), "ENTREZID", "ALIAS") 
+names(dge_ranked) <- gene_entries
+head(dge_ranked, 20) # entriesID sorted by rank
+```
+
+```{r gsea, warning = FALSE}
+gsea_bp <- gseGO(na.omit(dge_ranked), 
+                 ont = "MF", 
+                 OrgDb = org.Hs.eg.db, 
+                 keyType = "ENTREZID")
+
+as.data.frame(gsea_bp)
+```
+
+จะเห็นว่าผลลัพธ์ที่ได้เป็น ES แทน Ratio
+
+ท่านสามารถพล๋อตผลลัพธ์ได้เหมือน ORA
+
+```{r gsea_dotplot}
+dotplot(gsea_bp, showCategory = 20, font.size = 10, label_format = 50)
+```
+
+สำหรับ GSEA ท่านสามารถพล็อตการคำนวณคะแนนในแต่ละยีนได้ด้วย `gseaplot()`
+
+```{r gseaplot}
+gseaplot(gsea_bp, geneSetID = 1, title = gsea_bp$ID[1], font.size = 5)
+```
+
+โดยตำแหน่งขีดสีดำคล้ายบาร์โค้ด คือตำแหน่งของยีนที่อยู่ใน Pathway กลุ่มนั้น โดยความยาวของขีดคือ Signal-to-noise ratio

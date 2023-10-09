@@ -1,6 +1,6 @@
 # Example: Microarray data visualization {#GSE63514}
 
-ต่อไปนี้จะเป็นตัวอย่างในการใช้ `R` ในการวิเคราะห์ข้อมูล Molecular data เบื้องต้น โดยใช้ข้อมูลจาก [GEO dataset](https://www.ncbi.nlm.nih.gov/gds) `GSE63514` ซึ่งเป็น Gene expression microarray
+ต่อไปนี้จะเป็นตัวอย่างในการใช้ `R` ในการวิเคราะห์ข้อมูล Molecular data เบื้องต้น โดยใช้ข้อมูลจาก [GEO dataset](https://www.ncbi.nlm.nih.gov/gds) `GSE63514` @denboon2015 ซึ่งเป็น Gene expression microarray
 
 ```{r affy_pic, fig.align="center", echo = FALSE}
 knitr::include_graphics("Picture/affymatrix.jpg")
@@ -27,7 +27,7 @@ names(GSE63514_20000)
 head(GSE63514_meta, 10)
 ```
 
-ส่วนที่สามคือไฟล์ annotation ของ probe
+ส่วนที่สามคือไฟล์ Annotation ของ Probe
 
 ```{r annotation, message = FALSE}
 hgu133plus2_genenames <- read_csv("Resource/hgu133plus2_genenames.csv") |> 

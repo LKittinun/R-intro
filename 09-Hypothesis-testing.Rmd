@@ -58,15 +58,15 @@ p # p-value
 
 โดย `AUC_blue` = $p$-value = พื้นที่ใต้กราฟสีฟ้า = \~46.4%
 
-### เปรียบเทียบ $p$-value กับ ค่าวิกฤติ (Critical value) ที่ยอมรับได้
+### เปรียบเทียบ $p$-value กับ ค่าวิกฤติ (Critical value) ที่ยอมรับได้ {#p-crit}
 
 จุดนี้จะเป็นการตัดว่า ท่านสามารถยอมรับความบังเอิญนี้ที่กี่ % โดยทั่วไปมักใช้ที่น้อยกว่า 5% (0.05) หรือ 1% (0.01) ซึ่งแบ่งเป็น
 
--   Left-tailed คือ โอกาสที่ Critical value $\leq H_{0}$
+-   **Left-tailed** คือ โอกาสที่ Critical value $\leq H_{0}$
 
--   Right-tailed คือ โอกาสที่ Critical value $\geq H_{0}$
+-   **Right-tailed** คือ โอกาสที่ Critical value $\geq H_{0}$
 
--   Two-tailed คือ โอกาสที่ Critical value $\neq H_{0}$ นิยมใช้วิเคราะห์มากที่สุด
+-   **Two-tailed** คือ โอกาสที่ Critical value $\neq H_{0}$ นิยมใช้วิเคราะห์มากที่สุด
 
 ```{r pvalue_crit}
 crit <- qt(1-0.05/2, df = 99) # ตัดที่ <= p 0.05, two-tailed
@@ -163,7 +163,7 @@ ggplot(power_df, aes(x = n, y = power, col = alpha, linetype = alpha)) +
 
 ------------------------------------------------------------------------
 
-## Trade-off ของ p-value threshold {.unnumbered}
+## Trade-off ของ p-value threshold {#tradeoff .unnumbered}
 
 การตั้งค่าวิกฤตินั้นมี Trade-off ระหว่าง False positive และ False negative ที่ต้องพิจารณา
 

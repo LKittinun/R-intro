@@ -2,7 +2,7 @@
 
 ## Principle
 
-[Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) (Linear Model for Microarray Data) เป็นหนึ่งใน `bioconductor package` ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene expression; DGE) ในงานทดลอง Microarray
+[Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) (Linear Model for Microarray Data) [@R-limma] เป็นหนึ่งใน `bioconductor mapackage` ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene expression; DGE) ในงานทดลอง Microarray
 
 หลักการสำคัญของ `limma` คือการใช้สมการถดถอยเชิงเส้นในการหา DGE โดยมีสมมติฐานเบื้องต้นว่าค่าความเข้มพื้นหลังที่อ่านได้จาก Probe ของ Microarray นั้นมีการกระจายตัวแบบ [Normal distribution](#norm-dist) ซึ่งหลักการนี้สามารถนำไปปรับใช้ในการหา Differential expression ในงานประเภทอื่นๆ ได้ด้วย เช่น RNA-seq, Proteomics
 
@@ -101,7 +101,8 @@ as.data.frame(cx_mod) # Display as dataframe
 
 ต่อจากนั้นเราจะสร้าง contrast matrix ขึ้นมาเพื่อนำไปใช้อ้างอิงในการเทียบ DEG
 
-```{r contrast_matrix}
+```{r contrast_matrix, warning=FALSE}
+library(limma)
 contrasts <- apply(combn(colnames(cx_mod),2)[2:1,], 2, paste, collapse = "-")
 contrasts
 contrasts.matrix <- makeContrasts(contrasts = contrasts, levels = colnames(cx_mod)) 

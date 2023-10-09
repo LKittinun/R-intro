@@ -6,11 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>11 Non-parametric test | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
+<meta name="description" content="คือ การวิเคราะห์ทางสถิติที่เราไม่ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า  11.1 Proportion test คือ...">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="11 Non-parametric test | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
+<meta property="og:description" content="คือ การวิเคราะห์ทางสถิติที่เราไม่ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า  11.1 Proportion test คือ...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="11 Non-parametric test | A gentle introduction to R for biologists">
+<meta name="twitter:description" content="คือ การวิเคราะห์ทางสถิติที่เราไม่ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า  11.1 Proportion test คือ...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -41,9 +44,6 @@
       margin-left: 2em;
     }
   </style>
-<meta name="description" content="Non-parametric test คือ การวิเคราะห์ทางสถิติที่เราไม่ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า  11.1 Proportion test คือ...">
-<meta property="og:description" content="Non-parametric test คือ การวิเคราะห์ทางสถิติที่เราไม่ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า  11.1 Proportion test คือ...">
-<meta name="twitter:description" content="Non-parametric test คือ การวิเคราะห์ทางสถิติที่เราไม่ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า  11.1 Proportion test คือ...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -80,19 +80,20 @@
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
 <li><a class="" href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></li>
 <li><a class="active" href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></li>
-<li><a class="" href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">14</span> Principal component analysis</a></li>
+<li><a class="" href="false-discovery.html"><span class="header-section-number">12</span> False discovery</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">13</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">14</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">15</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">16</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">17</span> edgeR</a></li>
-<li><a class="" href="pathway-analysis.html"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">16</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">17</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">18</span> edgeR</a></li>
+<li><a class="" href="pathway-analysis.html"><span class="header-section-number">19</span> Pathway analysis</a></li>
 <li class="book-part">Supplement</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">19</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">20</span> Distribution</a></li>
 <li class="book-part">Information</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">20</span> Session info</a></li>
-<li><a class="" href="references.html"><span class="header-section-number">21</span> References</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">21</span> Session info</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">22</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -104,7 +105,7 @@
 <h1>
 <span class="header-section-number">11</span> Non-parametric test<a class="anchor" aria-label="anchor" href="#non-parametric-test"><i class="fas fa-link"></i></a>
 </h1>
-<p>Non-parametric test คือ การวิเคราะห์ทางสถิติที่เรา<strong>ไม่</strong>ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า</p>
+<p>คือ การวิเคราะห์ทางสถิติที่เรา<strong>ไม่</strong>ทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน ข้อดีคือมีความยืดหยุ่นกว่า แต่มีความแม่นยำน้อยกว่า</p>
 <div id="proportion-test" class="section level2" number="11.1">
 <h2>
 <span class="header-section-number">11.1</span> Proportion test<a class="anchor" aria-label="anchor" href="#proportion-test"><i class="fas fa-link"></i></a>
@@ -119,9 +120,9 @@
 <p><span class="math display">\[
 \chi^{2} = \sum_{i=1}^{n}\frac{(O-E)^{2}}{E}
 \]</span></p>
-<div id="chi-square-goodness-of-fit" class="section level4" number="11.1.1.1">
+<div id="chisq-f" class="section level4" number="11.1.1.1">
 <h4>
-<span class="header-section-number">11.1.1.1</span> Chi-square goodness of fit<a class="anchor" aria-label="anchor" href="#chi-square-goodness-of-fit"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1.1.1</span> Chi-square goodness of fit<a class="anchor" aria-label="anchor" href="#chisq-f"><i class="fas fa-link"></i></a>
 </h4>
 <p>เป็นการเปรียบเทียบว่า Observed value นั้นมาจากประชากรทางทฤษฎีหรือไม่ โดย Expected value นั้นคำนวนจาก</p>
 <p><span class="math display">\[
@@ -574,7 +575,7 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></div>
-<div class="next"><a href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></div>
+<div class="next"><a href="false-discovery.html"><span class="header-section-number">12</span> False discovery</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -612,7 +613,7 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-08.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

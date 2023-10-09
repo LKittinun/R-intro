@@ -6,11 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Preface | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
+<meta name="description" content="Basic statistical concept and R application for biologists">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="Preface | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
+<meta property="og:description" content="Basic statistical concept and R application for biologists">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Preface | A gentle introduction to R for biologists">
+<meta name="twitter:description" content="Basic statistical concept and R application for biologists">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -41,9 +44,6 @@
       margin-left: 2em;
     }
   </style>
-<meta name="description" content="A book created with bookdown.">
-<meta property="og:description" content="A book created with bookdown.">
-<meta name="twitter:description" content="A book created with bookdown.">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -80,19 +80,20 @@
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
 <li><a class="" href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></li>
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></li>
-<li><a class="" href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">14</span> Principal component analysis</a></li>
+<li><a class="" href="false-discovery.html"><span class="header-section-number">12</span> False discovery</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">13</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">14</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">15</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">16</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">17</span> edgeR</a></li>
-<li><a class="" href="pathway-analysis.html"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">16</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">17</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">18</span> edgeR</a></li>
+<li><a class="" href="pathway-analysis.html"><span class="header-section-number">19</span> Pathway analysis</a></li>
 <li class="book-part">Supplement</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">19</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">20</span> Distribution</a></li>
 <li class="book-part">Information</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">20</span> Session info</a></li>
-<li><a class="" href="references.html"><span class="header-section-number">21</span> References</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">21</span> Session info</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">22</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -104,21 +105,21 @@
 <h1>
 <strong>Preface</strong><a class="anchor" aria-label="anchor" href="#preface"><i class="fas fa-link"></i></a>
 </h1>
-<p>เอกสารนี้จัดทำขึ้นเพื่อจุดประสงค์ขึ้นเพื่อแนะนำการใช้ <code>R</code> เบื้องต้น สำหรับนักวิทยาศาสตร์ที่มีความสนใจในการใช้ <code>R</code> ในการวิเคราะห์ข้อมูล ซึ่งผู้ใช้งานจำเป็นจะต้องมีความรู้เรื่อง basic <code>R</code> ต่างๆ เล็กน้อย เพื่อที่จะได้ใช้งานได้อย่างไม่ติดขัด</p>
-<p>ท่านสามารถ Clone github repository ได้ที่: <a href="https://github.com/LKittinun/R-intro" class="uri">https://github.com/LKittinun/R-intro</a></p>
+<p>เอกสารนี้จัดทำขึ้นเพื่อจุดประสงค์ขึ้นเพื่อแนะนำการใช้ <code>R</code> <span class="citation">(R Core Team, 2023)</span> เบื้องต้น สำหรับนักวิทยาศาสตร์ที่มีความสนใจในการใช้ <code>R</code> ในการวิเคราะห์ข้อมูล ซึ่งผู้ใช้งานจำเป็นจะต้องมีความรู้เรื่อง Basic <code>R</code> ต่างๆ เล็กน้อย เพื่อที่จะได้ใช้งานได้อย่างไม่ติดขัด</p>
+<p>ท่านสามารถ Clone github repository <a href="#https://github.com/LKittinun/R-intro">ได้ที่นี่</a></p>
 <div id="r-installation" class="section level2 unnumbered">
 <h2>R installation<a class="anchor" aria-label="anchor" href="#r-installation"><i class="fas fa-link"></i></a>
 </h2>
 <div id="r-console" class="section level3 unnumbered">
 <h3>R console<a class="anchor" aria-label="anchor" href="#r-console"><i class="fas fa-link"></i></a>
 </h3>
-<p>ผู้ที่ต้องการใช้ <code>R</code> สามารถดาวน์โหลดโปรแกรม ได้ที่นี่ <a href="https://cran.r-project.org/bin/windows/base/" class="uri">https://cran.r-project.org/bin/windows/base/</a> โดยตัว <code>R</code> console จะมีหน้าตาดังภาพ</p>
+<p>ผู้ที่ต้องการใช้ <code>R</code> สามารถดาวน์โหลดโปรแกรม <a href="#https://cran.r-project.org/bin/windows/base/">ได้ที่นี่</a> โดยตัว <code>R</code> console จะมีหน้าตาดังภาพ</p>
 <div class="inline-figure"><img src="Picture/Rconsole%20(Custom).jpg" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="rstudio" class="section level3 unnumbered">
 <h3>Rstudio<a class="anchor" aria-label="anchor" href="#rstudio"><i class="fas fa-link"></i></a>
 </h3>
-<p>อย่างไรก็ตาม การใช้งาน <code>R</code> ด้วยโปรแกรมนี้จะใช้งานค่อนข้างยาก โดยส่วนใหญผู้ใช้การจะต้องดาวน์โหลด IDE (integrated development environment) มาอำนวยความสะดวกในการเขียนคำสั่ง ซึ่ง IDE ที่ได้รับความนิยมมากที่สุด คือ Rstudio สามารถดาวน์โหลดได้ที่ <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a></p>
+<p>อย่างไรก็ตาม การใช้งาน <code>R</code> ด้วยโปรแกรมนี้จะใช้งานค่อนข้างยาก โดยส่วนใหญผู้ใช้การจะต้องดาวน์โหลด IDE (Integrated development environment) มาอำนวยความสะดวกในการเขียนคำสั่ง ซึ่ง IDE ที่ได้รับความนิยมมากที่สุด คือ Rstudio สามารถดาวน์โหลด<a href="#https://posit.co/download/rstudio-desktop/">ได้ที่นี่</a></p>
 <div class="inline-figure"><img src="Picture/Rstudio%20(Custom).jpg" width="100%" style="display: block; margin: auto;"></div>
 <p>นี่คือหน้าต่างเริ่มต้นของ Rstudio โดยส่วนประกอบหลักคือ</p>
 <ol style="list-style-type: decimal">
@@ -169,7 +170,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-08.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

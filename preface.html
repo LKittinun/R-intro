@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Preface | A gentle introduction to R for biologists</title>
+
+    <meta name="author" content="Kittinun Leetanaporn" />
+  
+   <meta name="description" content="Basic statistical concept and R application for biologists" />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="Preface | A gentle introduction to R for biologists" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Basic statistical concept and R application for biologists" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Preface | A gentle introduction to R for biologists" />
+  
+  <meta name="twitter:description" content="Basic statistical concept and R application for biologists" />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.5.1/transition.js"></script>
+    <script src="libs/bs3compat-0.5.1/tabs.js"></script>
+    <script src="libs/bs3compat-0.5.1/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+    <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+    <style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+    
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">A gentle introduction to R for biologists</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="preface" class="section level1 unnumbered">
+<h1><strong>Preface</strong></h1>
+<p>เอกสารนี้จัดทำขึ้นเพื่อจุดประสงค์ขึ้นเพื่อแนะนำการใช้ <code>R</code> <span class="citation">(R Core Team, 2023)</span> เบื้องต้น สำหรับนักวิทยาศาสตร์ที่มีความสนใจในการใช้ <code>R</code> ในการวิเคราะห์ข้อมูล ซึ่งผู้ใช้งานจำเป็นจะต้องมีความรู้เรื่อง Basic <code>R</code> ต่างๆ เล็กน้อย เพื่อที่จะได้ใช้งานได้อย่างไม่ติดขัด</p>
+<p>ท่านสามารถ Clone github repository <a href="#https://github.com/LKittinun/R-intro">ได้ที่นี่</a></p>
+<div id="r-installation" class="section level2 unnumbered">
+<h2>R installation</h2>
+<div id="r-console" class="section level3 unnumbered">
+<h3>R console</h3>
+<p>ผู้ที่ต้องการใช้ <code>R</code> สามารถดาวน์โหลดโปรแกรม <a href="#https://cran.r-project.org/bin/windows/base/">ได้ที่นี่</a> โดยตัว <code>R</code> console จะมีหน้าตาดังภาพ</p>
+<p><img src="Picture/Rconsole%20(Custom).jpg" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="rstudio" class="section level3 unnumbered">
+<h3>Rstudio</h3>
+<p>อย่างไรก็ตาม การใช้งาน <code>R</code> ด้วยโปรแกรมนี้จะใช้งานค่อนข้างยาก โดยส่วนใหญผู้ใช้การจะต้องดาวน์โหลด IDE (Integrated development environment) มาอำนวยความสะดวกในการเขียนคำสั่ง ซึ่ง IDE ที่ได้รับความนิยมมากที่สุด คือ Rstudio สามารถดาวน์โหลด<a href="#https://posit.co/download/rstudio-desktop/">ได้ที่นี่</a></p>
+<p><img src="Picture/Rstudio%20(Custom).jpg" width="100%" style="display: block; margin: auto;" /></p>
+<p>นี่คือหน้าต่างเริ่มต้นของ Rstudio โดยส่วนประกอบหลักคือ</p>
+<ol style="list-style-type: decimal">
+<li><strong>Text editor</strong> มุมซ้ายบน คือ ที่ๆ เราจะเขียน Script ไว้เพื่อ Run</li>
+<li><strong>Environment</strong> มุมขวาบน คือ ส่วนที่เก็บข้อมูล Variable ต่างๆ ที่เรา Assign</li>
+<li><strong>R console</strong> มุมซ้ายล่าง คือ ส่วนที่ R ทำงานจริงๆ ซึ่งก็คือ ตัว R console ที่เราโหลดมาตอนแรกนั่นเอง</li>
+<li><strong>ส่วน Output</strong> ที่จะมีไว้แสดงที่อยู่ของไฟล์ รูปภาพที่ Render ออกมา และ อื่นๆ ตามที่เราจะปรับแต่ง</li>
+</ol>
+<p>เราสามารถเขียนไว้ Script ไว้ที่ Text editor และกด Run คำสั่งแต่ละบรรทัดได้โดยการกด Ctrl + Enter</p>
+<p><strong>ยินดีด้วย!</strong> เท่านี้ท่านก็สามารถเริ่มใช้งาน <code>R</code> ได้แล้ว</p>
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-burger2018" class="csl-entry">
+Burger, T. (2018). Gentle Introduction to the Statistical Foundations of False Discovery Rate in Quantitative Proteomics. <em>Journal of Proteome Research</em>, <em>17</em>(1), 12–22. <a href="https://doi.org/10.1021/acs.jproteome.7b00170">https://doi.org/10.1021/acs.jproteome.7b00170</a>
+</div>
+<div id="ref-edgeR2016" class="csl-entry">
+Chen, Y., Lun, A. A. T., &amp; Smyth, G. K. (2016). From reads to genes to pathways: Differential expression analysis of RNA-seq experiments using rsubread and the edgeR quasi-likelihood pipeline. <em>F1000Research</em>, <em>5</em>, 1438. <a href="https://doi.org/10.12688/f1000research.8987.2">https://doi.org/10.12688/f1000research.8987.2</a>
+</div>
+<div id="ref-R-edgeR" class="csl-entry">
+Chen, Y., Lun, A. T., McCarthy, D. J., Ritchie, M. E., Phipson, B., Hu, Y., … Smyth, G. K. (2023). <em>edgeR: Empirical analysis of digital gene expression data in r</em>. <a href="https://doi.org/10.18129/B9.bioc.edgeR">https://doi.org/10.18129/B9.bioc.edgeR</a>
+</div>
+<div id="ref-chicco2022" class="csl-entry">
+Chicco, D., &amp; Agapito, G. (2022). Nine quick tips for pathway enrichment analysis. <em>PLOS Computational Biology</em>, <em>18</em>(8), e1010348. <a href="https://doi.org/10.1371/journal.pcbi.1010348">https://doi.org/10.1371/journal.pcbi.1010348</a>
+</div>
+<div id="ref-denboon2015" class="csl-entry">
+Den Boon, J. A., Pyeon, D., Wang, S. S., Horswill, M., Schiffman, M., Sherman, M., … Ahlquist, P. (2015). Molecular transitions from papillomavirus infection to cervical precancer and cancer: Role of stromal estrogen receptor signaling. <em>Proceedings of the National Academy of Sciences</em>, <em>112</em>(25). <a href="https://doi.org/10.1073/pnas.1509322112">https://doi.org/10.1073/pnas.1509322112</a>
+</div>
+<div id="ref-R-msigdbr" class="csl-entry">
+Dolgalev, I. (2022). <em>Msigdbr: MSigDB gene sets for multiple organisms in a tidy data format</em>. Retrieved from <a href="https://igordot.github.io/msigdbr/">https://igordot.github.io/msigdbr/</a>
+</div>
+<div id="ref-gillespie2022" class="csl-entry">
+Gillespie, M., Jassal, B., Stephan, R., Milacic, M., Rothfels, K., Senff-Ribeiro, A., … D’Eustachio, P. (2022). The reactome pathway knowledgebase 2022. <em>Nucleic Acids Research</em>, <em>50</em>(D1), D687–D692. <a href="https://doi.org/10.1093/nar/gkab1028">https://doi.org/10.1093/nar/gkab1028</a>
+</div>
+<div id="ref-j.h." class="csl-entry">
+J. H., M. (n.d.). <em>Handbook of biological statistics</em> (3rd ed.). Baltimore, Maryland: Sparky House Publishing. Retrieved from <a href="https://www.biostathandbook.com/">https://www.biostathandbook.com/</a>
+</div>
+<div id="ref-kanehisa2016" class="csl-entry">
+Kanehisa, M., Sato, Y., Kawashima, M., Furumichi, M., &amp; Tanabe, M. (2016). KEGG as a reference resource for gene and protein annotation. <em>Nucleic Acids Research</em>, <em>44</em>(D1), D457–D462. <a href="https://doi.org/10.1093/nar/gkv1070">https://doi.org/10.1093/nar/gkv1070</a>
+</div>
+<div id="ref-liberzon2011" class="csl-entry">
+Liberzon, A., Subramanian, A., Pinchback, R., Thorvaldsdóttir, H., Tamayo, P., &amp; Mesirov, J. P. (2011). Molecular signatures database (MSigDB) 3.0. <em>Bioinformatics</em>, <em>27</em>(12), 1739–1740. <a href="https://doi.org/10.1093/bioinformatics/btr260">https://doi.org/10.1093/bioinformatics/btr260</a>
+</div>
+<div id="ref-edgeR2012" class="csl-entry">
+McCarthy, D. J., Chen, Y., &amp; Smyth, G. K. (2012). Differential expression analysis of multifactor RNA-seq experiments with respect to biological variation. <em>Nucleic Acids Research</em>, <em>40</em>(10), 4288–4297. <a href="https://doi.org/10.1093/nar/gks042">https://doi.org/10.1093/nar/gks042</a>
+</div>
+<div id="ref-R-base" class="csl-entry">
+R Core Team. (2023). <em>R: A language and environment for statistical computing</em>. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from <a href="https://www.R-project.org/">https://www.R-project.org/</a>
+</div>
+<div id="ref-R-MASS" class="csl-entry">
+Ripley, B. (2023). <em>MASS: Support functions and datasets for venables and ripley’s MASS</em>. Retrieved from <a href="http://www.stats.ox.ac.uk/pub/MASS4/">http://www.stats.ox.ac.uk/pub/MASS4/</a>
+</div>
+<div id="ref-limma2015" class="csl-entry">
+Ritchie, M. E., Phipson, B., Wu, D., Hu, Y., Law, C. W., Shi, W., &amp; Smyth, G. K. (2015). <span class="nocase">limma</span> powers differential expression analyses for <span>RNA</span>-sequencing and microarray studies. <em>Nucleic Acids Research</em>, <em>43</em>(7), e47. <a href="https://doi.org/10.1093/nar/gkv007">https://doi.org/10.1093/nar/gkv007</a>
+</div>
+<div id="ref-edgeR2010" class="csl-entry">
+Robinson, M. D., McCarthy, D. J., &amp; Smyth, G. K. (2010). edgeR: A bioconductor package for differential expression analysis of digital gene expression data. <em>Bioinformatics</em>, <em>26</em>(1), 139–140. <a href="https://doi.org/10.1093/bioinformatics/btp616">https://doi.org/10.1093/bioinformatics/btp616</a>
+</div>
+<div id="ref-smith1987" class="csl-entry">
+Smith, L. I. (1987). <em>A tutorial on Principal Components Analysis</em>. New York: Wiley.
+</div>
+<div id="ref-R-limma" class="csl-entry">
+Smyth, G., Hu, Y., Ritchie, M., Silver, J., Wettenhall, J., McCarthy, D., … Choi, D. (2023). <em>Limma: Linear models for microarray data</em>. <a href="https://doi.org/10.18129/B9.bioc.limma">https://doi.org/10.18129/B9.bioc.limma</a>
+</div>
+<div id="ref-sohil2022" class="csl-entry">
+Sohil, F., Sohali, M. U., &amp; Shabbir, J. (2022). <em>An introduction to statistical learning with applications in R</em> (Vol. 6). Retrieved from <a href="https://www.tandfonline.com/doi/full/10.1080/24754269.2021.1980261">https://www.tandfonline.com/doi/full/10.1080/24754269.2021.1980261</a>
+</div>
+<div id="ref-subramanian2005" class="csl-entry">
+Subramanian, A., Tamayo, P., Mootha, V. K., Mukherjee, S., Ebert, B. L., Gillette, M. A., … Mesirov, J. P. (2005). Gene set enrichment analysis: A knowledge-based approach for interpreting genome-wide expression profiles. <em>Proceedings of the National Academy of Sciences</em>, <em>102</em>(43), 15545–15550. <a href="https://doi.org/10.1073/pnas.0506580102">https://doi.org/10.1073/pnas.0506580102</a>
+</div>
+<div id="ref-survival-book" class="csl-entry">
+Terry M. Therneau, &amp; Patricia M. Grambsch. (2000). <em>Modeling survival data: Extending the <span>C</span>ox model</em>. New York: Springer.
+</div>
+<div id="ref-R-survival" class="csl-entry">
+Therneau, T. M. (2023). <em>Survival: Survival analysis</em>. Retrieved from <a href="https://github.com/therneau/survival">https://github.com/therneau/survival</a>
+</div>
+<div id="ref-thomas2022" class="csl-entry">
+Thomas, P. D., Ebert, D., Muruganujan, A., Mushayahama, T., Albou, L.-P., &amp; Mi, H. (2022). PANTHER: Making genome<span>-</span>scale phylogenetics accessible to all. <em>Protein Science : A Publication of the Protein Society</em>, <em>31</em>(1), 8. <a href="https://doi.org/10.1002/pro.4218">https://doi.org/10.1002/pro.4218</a>
+</div>
+<div id="ref-MASS2002" class="csl-entry">
+Venables, W. N., &amp; Ripley, B. D. (2002). <em>Modern applied statistics with s</em> (Fourth). New York: Springer. Retrieved from <a href="https://www.stats.ox.ac.uk/pub/MASS4/">https://www.stats.ox.ac.uk/pub/MASS4/</a>
+</div>
+<div id="ref-walck" class="csl-entry">
+Walck, C. (n.d.). <em>Handbook on statistical distributions for experimentalists</em>. Fysikum University of Stockholm, Stockholm: Particle Physics Group. Retrieved from <a href="https://www.stat.rice.edu/~dobelman/textfiles/DistributionsHandbook.pdf">https://www.stat.rice.edu/~dobelman/textfiles/DistributionsHandbook.pdf</a>
+</div>
+<div id="ref-R-tidyverse" class="csl-entry">
+Wickham, H. (2023). <em>Tidyverse: Easily install and load the tidyverse</em>. Retrieved from <a href="https://tidyverse.tidyverse.org">https://tidyverse.tidyverse.org</a>
+</div>
+<div id="ref-tidyverse2019" class="csl-entry">
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., … Yutani, H. (2019). Welcome to the <span class="nocase">tidyverse</span>. <em>Journal of Open Source Software</em>, <em>4</em>(43), 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>
+</div>
+<div id="ref-clusterProfiler2021" class="csl-entry">
+Wu, T., Hu, E., Xu, S., Chen, M., Guo, P., Dai, Z., … Yu, G. (2021). clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. <em>The Innovation</em>, <em>2</em>(3), 100141. <a href="https://doi.org/10.1016/j.xinn.2021.100141">https://doi.org/10.1016/j.xinn.2021.100141</a>
+</div>
+<div id="ref-R-clusterProfiler" class="csl-entry">
+Yu, G. (2023). <em>clusterProfiler: A universal enrichment tool for interpreting omics data</em>. <a href="https://doi.org/10.18129/B9.bioc.clusterProfiler">https://doi.org/10.18129/B9.bioc.clusterProfiler</a>
+</div>
+<div id="ref-clusterProfiler2012" class="csl-entry">
+Yu, G., Wang, L.-G., Han, Y., &amp; He, Q.-Y. (2012). clusterProfiler: An r package for comparing biological themes among gene clusters. <em>OMICS: A Journal of Integrative Biology</em>, <em>16</em>(5), 284–287. <a href="https://doi.org/10.1089/omi.2011.0118">https://doi.org/10.1089/omi.2011.0118</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+</body>
+
+</html>

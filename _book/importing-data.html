@@ -6,11 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>7 Importing data | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
+<meta name="description" content="7.1 Importing data with readr ก่อนที่ท่านจะทำการวิเคราะห์ข้อมูลได้นั้น ท่านจำเป็นที่จะต้องนำข้อมูลเข้ามาใน R ให้ได้ก่อน ซึ่ง tidyverse ได้มี Package...">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="7 Importing data | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
+<meta property="og:description" content="7.1 Importing data with readr ก่อนที่ท่านจะทำการวิเคราะห์ข้อมูลได้นั้น ท่านจำเป็นที่จะต้องนำข้อมูลเข้ามาใน R ให้ได้ก่อน ซึ่ง tidyverse ได้มี Package...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="7 Importing data | A gentle introduction to R for biologists">
+<meta name="twitter:description" content="7.1 Importing data with readr ก่อนที่ท่านจะทำการวิเคราะห์ข้อมูลได้นั้น ท่านจำเป็นที่จะต้องนำข้อมูลเข้ามาใน R ให้ได้ก่อน ซึ่ง tidyverse ได้มี Package...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -41,9 +44,6 @@
       margin-left: 2em;
     }
   </style>
-<meta name="description" content="7.1 Importing data with readr ก่อนที่ท่านจะทำการวิเคราะห์ข้อมูลได้นั้น ท่านจำเป็นที่จะต้องนำข้อมูลเข้ามาใน R ให้ได้ก่อน ซึ่ง tidyverse ได้มี Package...">
-<meta property="og:description" content="7.1 Importing data with readr ก่อนที่ท่านจะทำการวิเคราะห์ข้อมูลได้นั้น ท่านจำเป็นที่จะต้องนำข้อมูลเข้ามาใน R ให้ได้ก่อน ซึ่ง tidyverse ได้มี Package...">
-<meta name="twitter:description" content="7.1 Importing data with readr ก่อนที่ท่านจะทำการวิเคราะห์ข้อมูลได้นั้น ท่านจำเป็นที่จะต้องนำข้อมูลเข้ามาใน R ให้ได้ก่อน ซึ่ง tidyverse ได้มี Package...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -80,19 +80,20 @@
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
 <li><a class="" href="parametric-test.html"><span class="header-section-number">10</span> Parametric test</a></li>
 <li><a class="" href="non-parametric-test.html"><span class="header-section-number">11</span> Non-parametric test</a></li>
-<li><a class="" href="regression-model.html"><span class="header-section-number">12</span> Regression model</a></li>
-<li><a class="" href="survival-analysis.html"><span class="header-section-number">13</span> Survival analysis</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">14</span> Principal component analysis</a></li>
+<li><a class="" href="false-discovery.html"><span class="header-section-number">12</span> False discovery</a></li>
+<li><a class="" href="regression-model.html"><span class="header-section-number">13</span> Regression model</a></li>
+<li><a class="" href="survival-analysis.html"><span class="header-section-number">14</span> Survival analysis</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">15</span> Principal component analysis</a></li>
 <li class="book-part">Bioconductor</li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
-<li><a class="" href="limma.html"><span class="header-section-number">16</span> Limma</a></li>
-<li><a class="" href="edger.html"><span class="header-section-number">17</span> edgeR</a></li>
-<li><a class="" href="pathway-analysis.html"><span class="header-section-number">18</span> Pathway analysis</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">16</span> Bioconductor</a></li>
+<li><a class="" href="limma.html"><span class="header-section-number">17</span> Limma</a></li>
+<li><a class="" href="edger.html"><span class="header-section-number">18</span> edgeR</a></li>
+<li><a class="" href="pathway-analysis.html"><span class="header-section-number">19</span> Pathway analysis</a></li>
 <li class="book-part">Supplement</li>
-<li><a class="" href="distribution.html"><span class="header-section-number">19</span> Distribution</a></li>
+<li><a class="" href="distribution.html"><span class="header-section-number">20</span> Distribution</a></li>
 <li class="book-part">Information</li>
-<li><a class="" href="session-info.html"><span class="header-section-number">20</span> Session info</a></li>
-<li><a class="" href="references.html"><span class="header-section-number">21</span> References</a></li>
+<li><a class="" href="session-info.html"><span class="header-section-number">21</span> Session info</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">22</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -139,10 +140,10 @@
 <p>ท่านสามารถเขียนข้อมูลจาก R ลงไปในไฟล์ที่ท่านต้องการด้วย <code>write_()*</code> อีกด้วย อย่างไรก็ตาม แม้ว่า <code>readr</code> นั้นจะสามารถอ่านและเขียนไฟล์ได้ครอบคลุมเป็นอย่างมาก ในบางสกุลไฟล์นั้น อาจจะต้องใช้การอ่านจาก package อื่น</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="30%">
-<col width="20%">
-<col width="27%">
-<col width="20%">
+<col width="34%">
+<col width="21%">
+<col width="32%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th>Extension</th>
@@ -255,7 +256,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-08.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

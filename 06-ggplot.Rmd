@@ -18,7 +18,7 @@ ggplot(data = your_data, aes(x = x, y = y, col = col, fill = fill)) +
 ```
 
 -   `aes` คือ aesthetic ซึ่งหมายถึงการ map ข้อมูลของท่านเข้ากับตำแหน่งของกราฟ
-    -   `x` = แกน x, y = แกน y
+    -   `x` = แกน x, `y` = แกน y
     -   `col` = สี, `fill` = สีพื้นหลัง
 -   `geom_*()` คือ การกำหนดว่าท่านต้องการที่จะ plot กราฟอะไร
 -   `theme_*()` คือ การกำหนด theme ของกราฟ เพื่อความสวยงาม เช่น `theme_bw()`, `theme_classic()`

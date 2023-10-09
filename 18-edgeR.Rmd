@@ -4,7 +4,7 @@
 
 ## Principle
 
-[edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html) (Empirical Analysis with Gene Expression in R) เป็น `bioconductor package` ที่นิยมใช้ในการศึกษา DGE ในการทดลอง RNA-seq ซึ่งตั้งอยู่บนสมมติฐานที่แตกต่างจาก limma เนื่องจากข้อมูล RNA-seq นั้นมีคุณสมบัติที่แตกต่างจากข้อมูลประเภท Microarray ดังนี้
+[edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html) (Empirical Analysis with Gene Expression in R) [@R-edgeR] เป็น `bioconductor package` ที่นิยมใช้ในการศึกษา DGE ในการทดลอง RNA-seq ซึ่งตั้งอยู่บนสมมติฐานที่แตกต่างจาก limma เนื่องจากข้อมูล RNA-seq นั้นมีคุณสมบัติที่แตกต่างจากข้อมูลประเภท Microarray ดังนี้
 
 -   `log(intensity)` ของ Microarray ซึ่งเป็นข้อมูล Continuous จึงสามารถใช้โมเดลแบบ Linear ได้ แต่ ข้อมูล RNA-seq นั้นเป็นข้อมูล `read count` ที่ได้จากการนับ Sequencing จึงเหมาะกับการใช้โมเดลแบบ Poisson มากกว่า
 
@@ -114,7 +114,7 @@ $$
 knitr::include_graphics("Picture/edgeR_workflow.png")
 ```
 
-## Example
+## Example {#edgeR-ex}
 
 ในตัวอย่างนี้จะใช้ Bladder gene expression ระหว่าง Tumor และ Control และใช้สมการ Generalized log-linear model
 
