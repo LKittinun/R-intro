@@ -3,6 +3,7 @@ title: "A gentle introduction to R for biologists"
 author: "Kittinun Leetanaporn"
 description: "Basic statistical concept and R application for biologists"
 date: "`r Sys.Date()`"
+output_dir: "docs"
 output: 
   bookdown::bs4_book:
     df_print: paged
