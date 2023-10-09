@@ -137,7 +137,7 @@ t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">norm_sample_df</span>, </span>
 <span>               <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x  <span class="op">=</span> <span class="va">Values</span>, y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>, fill <span class="op">=</span> <span class="va">Samp</span><span class="op">)</span>, </span>
 <span>               color <span class="op">=</span> <span class="st">"black"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/one_t_plot-1.png" width="100%"></div>
+<div class="inline-figure"><img src="figure/one_t_plot-1.png" width="100%"></div>
 <p>จะเห็นว่าเมื่อดูลักษณะการกระจายตัวของข้อมูลแล้ว <code>Samp_10</code> ที่มี ค่าเฉลี่ย = 10 นั้น ไม่ต่างจากประชากรที่มี ค่าเฉลี่ย = 10 แต่ดูแตกต่างอย่างเห็นได้ชัดกับประชากรที่มี mean = 30 <code>t.test</code> จะช่วยตัดสินว่าค่าที่ได้นั้นแตกต่างกันจริงหรือไม่ โดยสมมติฐานที่ตั้งคือ</p>
 <p><strong>Case 1</strong>: ประชากรมีค่าเฉลี่ย = 10</p>
 <ul>
@@ -285,7 +285,7 @@ t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 <div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">granova</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/granova/man/granova.1w.html">granova.1w</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, group <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/granova-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/granova-1.png" width="672"></div>
 <pre><code>## $grandsum
 ##     Grandmean        df.bet       df.with        MS.bet       MS.with        F.stat        F.prob SS.bet/SS.tot 
 ##          3.06          2.00        147.00          5.67          0.12         49.16          0.00          0.40 
@@ -338,7 +338,7 @@ cov(x,y) = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Petal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/cor_iris-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/cor_iris-1.png" width="672"></div>
 <div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.8717538</code></pre>
@@ -384,7 +384,7 @@ cov(x,y) = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}
 <div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">iris_cor</span>, method <span class="op">=</span> <span class="st">"shade"</span>,type <span class="op">=</span> <span class="st">"upper"</span>,order <span class="op">=</span> <span class="st">"AOE"</span>, </span>
 <span>         p.mat <span class="op">=</span> <span class="va">iris_cor_p</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"p-value"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/corrplot-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/corrplot-1.png" width="672"></div>
 <p><strong>ข้อควรระวัง</strong> <span class="math inline">\(p\)</span>-value ของ Correlation test นั้นอยู่ภายใต้สมมติฐาน (<span class="math inline">\(t\)</span>-test/<span class="math inline">\(F\)</span>-test)</p>
 <ul>
 <li><p><span class="math inline">\(H_{0}\)</span>: ไม่มีความสัมพันธ์เชิงเส้นของทั้งสองตัวแปร (<span class="math inline">\(r_{xy} = 0\)</span>)</p></li>

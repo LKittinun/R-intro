@@ -113,13 +113,13 @@
 <p><span class="math display">\[
 f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^{2}}
 \]</span></p>
-<div class="inline-figure"><img src="_main_files/figure-html/norm_dist-1.png" width="70%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/norm_dist-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p><span class="math inline">\(Z\)</span>-distribution = Standard normal distribution ของประชากร ที่มี <span class="math inline">\(\mu = 0\)</span>, <span class="math inline">\(\sigma = 1\)</span></p>
 <p>สามารถสร้าง <span class="math inline">\(Z\)</span> score ได้จาก</p>
 <p><span class="math display">\[
 Z = \frac{x-\mu}{\sigma}
 \]</span></p>
-<div class="inline-figure"><img src="_main_files/figure-html/z_dist-1.png" width="70%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/z_dist-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>ค่าของ <span class="math inline">\(Z\)</span>-score ที่พบบ่อย</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
@@ -169,7 +169,7 @@ f(t) = \frac{\Gamma(\frac{v+1}{2})}{\sqrt{v\pi}\Gamma(\frac{v}{2})}(1+\frac{t^{2
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.8</span>, linewidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"t-distribution"</span>, x <span class="op">=</span> <span class="st">"Values"</span>, y <span class="op">=</span> <span class="st">"Rate"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/t_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/t_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>สามารถสร้าง <span class="math inline">\(t\)</span>-score (<span class="math inline">\(t\)</span> -value) ได้จาก</p>
 <p><span class="math display">\[
 t = \frac{\bar{x}-\mu}{SE} = \frac{\bar{x}-\mu}{s/\sqrt{n}}
@@ -204,7 +204,7 @@ f(x) = \begin{cases}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"darkblue"</span>, xend <span class="op">=</span> <span class="va">x</span>, yend <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">10</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Dice rolls"</span>, x <span class="op">=</span> <span class="st">"Face"</span>, y <span class="op">=</span> <span class="st">"Rate"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unif_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/unif_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
 <hr>
 </div>
 <div id="binomial-distribution" class="section level2" number="20.4">
@@ -227,7 +227,7 @@ f(x,n,p) = P(X = x) = {n\choose x}p^{x}(1-p)^{n-k}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">21</span>,<span class="fl">1</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">21</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Number of success"</span>, y <span class="op">=</span> <span class="st">"Rate"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/binom_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/binom_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
 <hr>
 </div>
 <div id="negative-binomial-distribution" class="section level2" number="20.5">
@@ -250,7 +250,7 @@ p(k) = {r-1+k \choose r-1}p^{r-1}(1-p)^{k}p = {r-1+k \choose k}p^{r}(1-p)^{k}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">20</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Number of failures"</span>, y <span class="op">=</span> <span class="st">"Rate"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/neg_binom_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/neg_binom_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
 <hr>
 </div>
 <div id="hypergeometric-distribution" class="section level2" number="20.6">
@@ -273,7 +273,7 @@ f(x,n,M,N) = p(X=x) = \frac{{M \choose x}{N-M \choose n-x}}{N \choose n}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">30</span>,<span class="fl">2</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">30</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Probablity of getting black balls from 30 picks"</span>, </span>
 <span>       x <span class="op">=</span> <span class="st">"Number of black balls picked"</span>, y <span class="op">=</span> <span class="st">"Rate"</span>, col <span class="op">=</span> <span class="st">"Total black balls\n in the bag"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/hyper_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/hyper_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
 <hr>
 </div>
 <div id="poisson-dist" class="section level2" number="20.7">
@@ -300,7 +300,7 @@ f(k) = P(X = k) = \frac{\lambda^{k}}{k!}e^{-\lambda}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">20</span>,<span class="fl">2</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">21</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Probablity that certain number of events will occur"</span>, </span>
 <span>       x <span class="op">=</span> <span class="st">"Number of events"</span>, y <span class="op">=</span> <span class="st">"Rate"</span>, col <span class="op">=</span> <span class="st">"Average number of events"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/poisson_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/poisson_distribution-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>การกระจายตัวแบบ Poisson เป็นการกระจายตัวแบบพื้นฐานในการนับจำนวนต่างๆ รวมถึงจำนวนยีนที่เกิดขึ้นจาก RNA sequencing profile</p>
 
 </div>

@@ -201,7 +201,7 @@
 </tbody>
 </table></div>
 <p>เมื่อนำไปพล็อตกราฟแล้วจะได้ผลดังนี้</p>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/unnamed-chunk-6-1.png" width="672"></div>
 <p>สังเกตุว่าส่วนที่ Censor (มีสัญลักษณ์ <code>+</code>) จะไม่มีการตกลงของกราฟ แต่เมื่อถึงเวลาที่มี Event เกิดขึ้น การตกลงของกราฟจะสูงกว่าเมื่อไม่มี Censor นำมาก่อน</p>
 <div id="การสราง-km-ใน-r" class="section level3" number="14.1.1">
 <h3>
@@ -251,7 +251,7 @@
 <div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggsurvplot.html">ggsurvplot</a></span><span class="op">(</span><span class="va">ovarian_surv</span>, risk.table <span class="op">=</span> <span class="cn">TRUE</span>, break.time.by <span class="op">=</span> <span class="fl">0.25</span>, </span>
 <span>           surv.median.line <span class="op">=</span> <span class="st">"hv"</span><span class="op">)</span> </span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/ovarian_survplot-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/ovarian_survplot-1.png" width="672"></div>
 <p>จะเห็นว่าผู้ป่วยกลุ่มนี้มี Median survival อยู่ประมาณ 1.75 ปี</p>
 <div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_surv_resid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span></span>
@@ -260,7 +260,7 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggsurvplot.html">ggsurvplot</a></span><span class="op">(</span><span class="va">ovarian_surv_resid</span>, risk.table <span class="op">=</span> <span class="cn">TRUE</span>, break.time.by <span class="op">=</span> <span class="fl">0.25</span>,</span>
 <span>           surv.median.line <span class="op">=</span> <span class="st">"hv"</span>, pval <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/ovarian_plot-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/ovarian_plot-1.png" width="672"></div>
 <p>จะพบว่า ถ้าผ่าตัดแล้วไม่เหลือร่องรอยของโรค จะมีอัตราการรอดชีวิตที่ดีกว่า แต่ยังไม่ถึงระดับมีนัยสำคัญ</p>
 </div>
 </div>
@@ -341,14 +341,14 @@ ln(\frac{h(t)}{h_{0}(t)}) = b_{1}X_{1} + b_{2}X_{2}+ ... + b_{s}X_{p}
 <div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_coxzph</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html">cox.zph</a></span><span class="op">(</span><span class="va">ovarian_cox</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggcoxzph.html">ggcoxzph</a></span><span class="op">(</span><span class="va">ovarian_coxzph</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/cox_proportion-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/cox_proportion-1.png" width="672"></div>
 <p>โดยการทดสอบนี้ จะทำการเปรียบเทียบ Residuals ระหว่าง Risk-weight average กับ ตัวแปรนั้นๆ ว่ามีการเปลี่ยนแปลงไปในทิศทางใดทิศทางหนึ่งหรือไม่ ถ้ามี (<span class="math inline">\(p\)</span> &lt; 0.05) หมายความว่า เวลาที่ผ่านไปอาจจะส่งผลให้ HR นั้นมีความแตกต่างกัน ซึ่งจะต้องทำ Time-varying CPH เพิ่มเติม</p>
 <p>โดยในข้อมูล <code>ovarian</code> นี้ ไม่มีตัวใดที่ <span class="math inline">\(p\)</span>-value &lt; 0.05 จึงถือได้ว่า อัตราส่วนนั้นคงที่ และทำให้ CPH นั้น Valid</p>
 <p>ในส่วนของ Linearity สามารถตวจสอบโดยใช้ <code><a href="https://rdrr.io/pkg/survminer/man/ggcoxfunctional.html">ggcoxfunctional()</a></code></p>
 <div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ovarian_linear_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggcoxfunctional.html">ggcoxfunctional</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span><span class="op">/</span><span class="fl">365.25</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span>                                 <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">ovarian</span><span class="op">)</span> </span>
 <span><span class="va">ovarian_linear_age</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/cox_linearity-1.png" width="672"></div>
+<div class="inline-figure"><img src="figure/cox_linearity-1.png" width="672"></div>
 <p>จะเห็นว่า <code>age</code> นั้นการเพิ่มขึ้นแบบ Linearity โดยมี Deviation เล็กน้อย</p>
 
 </div>
