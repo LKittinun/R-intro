@@ -24,7 +24,7 @@ norm_30_pop <- rnorm(1000, mean = 30, sd = 4)
 norm_30_sample <- sample(norm_30_pop, 100)
 ```
 
-```{r one_t_plot, out.width="100%"}
+```{r one_t_plot, out.width="100%", fig.path="figure/"}
 norm_pop_df <- data.frame(Pop_10 = norm_10_pop, Pop_30 = norm_30_pop) |>
   pivot_longer(everything(), names_to = "Pop", values_to = "Values")  
 
@@ -159,7 +159,7 @@ aov(Sepal.Width ~ Species, data = iris) |> summary()
 
 อธิบายด้วยภาพ
 
-```{r granova, message = FALSE}
+```{r granova, message = FALSE, fig.path="figure/"}
 library(granova)
 granova.1w(iris$Sepal.Width, group = iris$Species)
 ```
@@ -198,7 +198,7 @@ $$
 \therefore r_{xy} = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum^{n}_{i=1}(x_{i}-\bar{x})^{2}}\sqrt{\sum^{n}_{i=1}(y_{i}-\bar{y})^{2}}}
 $$
 
-```{r cor_iris}
+```{r cor_iris, fig.path="figure/"}
 ggplot(iris, aes(x = Sepal.Length, y = Petal.Length)) + 
   geom_point(aes(col = Species)) +
   geom_smooth(method = "lm", se = FALSE)
@@ -214,7 +214,7 @@ cor(iris$Sepal.Length, iris$Petal.Length)
 
 ท่านสามารถสร้างตาราง Correlation และ $p$-value ได้ด้วย package `corrplot`
 
-```{r corrplot, message = FALSE}
+```{r corrplot, message = FALSE, fig.path="figure/"}
 library(corrplot)
 
 iris_cor <- cor(iris[1:4])

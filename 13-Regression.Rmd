@@ -18,7 +18,7 @@ $$
 h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \theta_{n}x_{n} + \epsilon
 $$
 
-```{r lm, message = FALSE}
+```{r lm, message = FALSE, fig.path="figure/"}
 data("Diabetes", package = "heplots")
 
 ggplot(Diabetes, aes(x = glufast, y = sspg)) + 
@@ -29,7 +29,7 @@ ggplot(Diabetes, aes(x = glufast, y = sspg)) +
 
 ในการวัดความแม่นยำของ Linear regression นั้นประกอบด้วยสามองค์ประกอบ
 
-```{r residual, echo = FALSE, message = FALSE}
+```{r residual, echo = FALSE, message = FALSE, fig.path="figure/"}
 library(broom)
 library(cowplot)
 
@@ -129,7 +129,7 @@ $$
 
 โดยสมการนี้จะอยู่ใน `diabetes_fit`
 
-```{r predicted_diabetes}
+```{r predicted_diabetes, fig.path="figure/"}
 new_sspg <- data.frame(glufast = 1:400) 
 new_sspg <- new_sspg |> 
   mutate(predicted_sspg = predict(diabetes_fit, newdata = new_sspg))
@@ -162,7 +162,7 @@ $$
 
 ความพิเศษของสมการนี้คือ ขอบเขตของ $h(x)$ จะอยู่ระหว่าง (0, 1) เสมอ ซึ่งส่งผลให้สามารถคำนวณกลับไปทำนายอัตราการเกิดเหตุการณ์จากอัตราส่วนความเสี่ยงได้
 
-```{r logistic_regression}
+```{r logistic_regression, fig.path="figure/"}
 log_df <- data.frame(x = -20:20) |> mutate(y = 1/(1+exp(0 + 0.75*x)))
 ggplot(log_df, aes(x = x, y = y)) + geom_line() + theme_bw() +
   labs(y = "h(x)")
@@ -170,7 +170,7 @@ ggplot(log_df, aes(x = x, y = y)) + geom_line() + theme_bw() +
 
 ต่อไปเราจะทำนายว่า `glufast` เพื่อให้ตัวแปรเป็น binary เราจะรวม `Overt_Diabetic` และ `Chemical_Diabetic` เป็นกลุ่มเดียวกัน
 
-```{r logistc_summary, message = FALSE}
+```{r logistc_summary, message = FALSE, fig.path="figure/"}
 Diabetes_mixed <- Diabetes |> mutate(group = 
                                        case_match(group,
                                                   "Normal" ~ 0,
@@ -184,7 +184,7 @@ ggplot(Diabetes_mixed, aes(x = glufast, y = group)) +
   theme_bw()
 ```
 
-```{r predicted_logit}
+```{r predicted_logit, fig.path="figure/"}
 logit_fit <- glm(group ~ glufast, family = "binomial", 
                  data = Diabetes_mixed) 
 logit_fit
@@ -232,7 +232,7 @@ $$
 
 ซึ่งสมการนี้เป็นสมการพื้นฐานของการนับจำนวนใดๆ ดังเช่นตัวอย่างนี้ คือความสัมพันธ์ของตัวแปรต่างๆ กับอัตราการตายในโรคมะเร็งปากมดลูก
 
-```{r poisson, warning = FALSE}
+```{r poisson, warning = FALSE, fig.path="figure/"}
 cervix_mort <- read.csv("Resource/cervix_mort.csv") |>  # aggregrated data for demonstration
                 mutate(histo_major = fct_relevel(histo_major, "Squamous cell carcinoma",
                                                  "Adenocarcinoma",
@@ -257,7 +257,7 @@ summary(pois_fit)
 
 จะพบว่าหลังจากปรับตามระยะเวลาติดตาม กลุ่มอายุที่เพิ่มขึ้นจะส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญ
 
-```{r pois_plot}
+```{r pois_plot, fig.path="figure/"}
 new_data <- expand_grid(age_group = 1:4,
                        histo_major = unique(cervix_mort$histo_major),
                        stage = 1:4,

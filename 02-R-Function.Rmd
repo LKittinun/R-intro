@@ -57,6 +57,6 @@ colnames(df) # ชื่อ column
 table(iris$Species) # สร้างตารางนับจำนวน
 ```
 
-สามารถดูฟังก์ชันของ Base R ทั้งหมด[ได้ที่นี่](#https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html)
+สามารถดูฟังก์ชันของ Base R ทั้งหมด[ได้ที่นี่](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html)
 
 ถ้าท่านต้องการดูว่าแต่ละฟังก์ชันนั้นใช้งานอย่างไร ให้ใส่เครื่องหมาย ? หน้า ฟังก์ชัน นั้น เช่น `?mean()` `?colSums()`

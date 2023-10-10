@@ -82,7 +82,7 @@ knitr::include_graphics("Picture/GSEA.jpeg")
 
 *รูปภาพจาก:* @subramanian2005
 
-คือ การหายีนที่มีการแสดงออกมากกว่ากลุ่มอื่น ซึ่งใช้วิธีที่แตกต่างจาก ORA โดยวิธีของ GSEA (@subramanian2005) คือ
+คือ การหายีนที่มีการแสดงออกมากกว่ากลุ่มอื่น ซึ่งใช้วิธีที่แตกต่างจาก ORA โดยวิธีของ GSEA ([@subramanian2005]) คือ
 
 1.  เรียงยีนทั้งหมดที่มีอยู่ตามความแตกต่างระหว่างกลุ่ม จากมากไปน้อย (Ranked gene) ซึ่งมักจะใช้ $-log_{10}(p) \times sign(FC)$ หรือ $-log_{10}p \times log_{x}(FC)$ ($x$ เป็นอะไรก็ได้ไม่แตกต่างกัน)
 2.  ให้คะแนนของยีนเรียงตามข้อ 1. แบบบวกเพิ่มไปเรื่อยๆ (Cumulative) ถ้ามียีนไหนที่อยู่ในกลุ่มที่ต้องการ (กลุ่ม $S$ ดังรูป) จะให้คะแนนเป็น + แต่ถ้ายีนไม่อยู่ในกลุ่ม จะให้คะแนนเป็น - โดยขนาดของคะแนนนั้นจะขึ้นอยู่กับความแตกต่างด้วย
@@ -137,14 +137,14 @@ as.data.frame(ora_cc)
 
 ท่านสามารถสร้างกราฟจากผลนี้ได้โดย `dotplot()`, `barplot()`
 
-```{r enrichplot, warning = FALSE}
+```{r enrichplot, warning = FALSE, fig.path="figure/"}
 dotplot(ora_cc, showCategory = 20)
 barplot(ora_cc, showCategory = 10, color = "qvalue")
 ```
 
 หรือ สามารถพล็อต GO pathway โดยรวมได้
 
-```{r goplot, warning = FALSE}
+```{r goplot, warning = FALSE, fig.path="figure/"}
 goplot(ora_cc)
 ```
 
@@ -154,7 +154,7 @@ goplot(ora_cc)
 
 ในส่วน GSEA จะใช้ยีน**ทั้งหมด**เรียงจากมากไปน้อย
 
-```{r}
+```{r GSEA}
 gene_result_ranked <- gene_result |> 
   mutate(Score = -log10(FDR)*logFC) |> 
   arrange(desc(Score)) # arrange score max -> min
@@ -185,13 +185,13 @@ as.data.frame(gsea_bp)
 
 ท่านสามารถพล๋อตผลลัพธ์ได้เหมือน ORA
 
-```{r gsea_dotplot}
+```{r gsea_dotplot, fig.path="figure/"}
 dotplot(gsea_bp, showCategory = 20, font.size = 10, label_format = 50)
 ```
 
 สำหรับ GSEA ท่านสามารถพล็อตการคำนวณคะแนนในแต่ละยีนได้ด้วย `gseaplot()`
 
-```{r gseaplot}
+```{r gseaplot, fig.path="figure/"}
 gseaplot(gsea_bp, geneSetID = 1, title = gsea_bp$ID[1], font.size = 5)
 ```
 

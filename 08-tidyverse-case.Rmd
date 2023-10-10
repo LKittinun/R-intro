@@ -92,7 +92,7 @@ top10_long <- top10_intensity |>
               separate(Case, into = c("Group", "Number"), sep = "-", remove = FALSE)
 ```
 
-```{r top10_boxplot}
+```{r top10_boxplot, fig.path="figure/"}
 ggplot(top10_long, aes(x = SYMBOL, y = Intensity, fill = Group)) + 
   geom_boxplot() +
   theme_bw() +
@@ -102,7 +102,7 @@ ggplot(top10_long, aes(x = SYMBOL, y = Intensity, fill = Group)) +
 
 ท่านอาจจะอยากเพิ่มเส้นค่าเฉลี่ยเพื่อดูว่า Global mean intensity เป็นเท่าไร
 
-```{r global_mean}
+```{r global_mean, fig.path="figure/"}
 global_mean_intensity <- mean(top10_long$Intensity)
 global_mean_intensity
 
@@ -127,7 +127,7 @@ top10_long_dissec
 
 พล็อตอัตราส่วนจำนวนของ `laser capture` vs `whole section`
 
-```{r top10_barchart}
+```{r top10_barchart, fig.path="figure/"}
 ggplot(top10_long_dissec, aes(x = `dissection:ch1`, fill = Group)) + 
   geom_bar(col = "black", width = 0.5, position = "dodge") + 
   theme_bw()
@@ -135,7 +135,7 @@ ggplot(top10_long_dissec, aes(x = `dissection:ch1`, fill = Group)) +
 
 เห็นว่าผลที่ได้ประหลาด เนื่องจาก `laser captured`และ `laser-captured` เป็นตัวแปรซ้ำ ต้องแก้ไขเสียก่อน
 
-```{r top10_long_dissec_fixed_bar}
+```{r top10_long_dissec_fixed_bar, fig.path="figure/"}
 top10_long_dissec <- top10_long_dissec |> 
                       mutate(`dissection:ch1` = gsub("-", " ", `dissection:ch1`))
 
@@ -148,7 +148,7 @@ ggplot(top10_long_dissec, aes(x = `dissection:ch1`, fill = Group)) +
 
 หลังจากนั้นเราจะทำการพล็อต Intensity ในแต่ละยีน
 
-```{r top10_long_dissec_fixed_intensity}
+```{r top10_long_dissec_fixed_intensity, fig.path="figure/"}
 ggplot(top10_long_dissec, aes(x = SYMBOL, y = Intensity, fill = Group)) + 
   geom_boxplot() +
   facet_wrap(~`dissection:ch1`) +

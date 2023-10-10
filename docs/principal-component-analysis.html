@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>15 Principal component analysis | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
-<meta name="description" content="15.1 Principle Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
+<meta name="description" content="15.1 Principle Principal component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="15 Principal component analysis | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
-<meta property="og:description" content="15.1 Principle Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
+<meta property="og:description" content="15.1 Principle Principal component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="15 Principal component analysis | A gentle introduction to R for biologists">
-<meta name="twitter:description" content="15.1 Principle Principle component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
+<meta name="twitter:description" content="15.1 Principle Principal component analysis (PCA) คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -72,9 +72,9 @@
 <li><a class="" href="loop.html"><span class="header-section-number">3</span> Loop</a></li>
 <li class="book-part">Tidyverse</li>
 <li><a class="" href="what-is-tidyverse.html"><span class="header-section-number">4</span> What is tidyverse</a></li>
-<li><a class="" href="data-wrangling.html"><span class="header-section-number">5</span> Data wrangling</a></li>
-<li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
-<li><a class="" href="importing-data.html"><span class="header-section-number">7</span> Importing data</a></li>
+<li><a class="" href="importing-data.html"><span class="header-section-number">5</span> Importing data</a></li>
+<li><a class="" href="data-wrangling.html"><span class="header-section-number">6</span> Data wrangling</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">7</span> Data visualization</a></li>
 <li><a class="" href="GSE63514.html"><span class="header-section-number">8</span> Example: Microarray data visualization</a></li>
 <li class="book-part">Statistical analysis</li>
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
@@ -109,7 +109,7 @@
 <h2>
 <span class="header-section-number">15.1</span> Principle<a class="anchor" aria-label="anchor" href="#principle-1"><i class="fas fa-link"></i></a>
 </h2>
-<p><strong>Principle component analysis (PCA)</strong> คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้</p>
+<p><strong>Principal component analysis (PCA)</strong> คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้</p>
 <p>ยกตัวอย่างเป็นภาพ สมมติท่านต้องการที่จะวิเคราะห์แบ่งลักษณะของรูปจากสีของรูปภาพ แต่เฉดสีนั้นมีมากมาย</p>
 <div class="inline-figure"><img src="Picture/color.png" width="80%" style="display: block; margin: auto;"></div>
 <p>ถ้าเป็นข้อมูลอาจจะมีรูปแบบลักษณะนี้</p>
@@ -388,7 +388,7 @@ A = VQV^{-1}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-09.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

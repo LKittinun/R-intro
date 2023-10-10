@@ -12,6 +12,9 @@ loop
 general-loop
 apply-family
 what-is-tidyverse
+importing-data
+importing-data-with-readr
+other-packages
 data-wrangling
 data-manipulation-with-dplyr
 basic-dataframe-manipulation
@@ -32,9 +35,6 @@ multi_boxplot
 histogram
 fitting-a-statistical-model
 faceting
-importing-data
-importing-data-with-readr
-other-packages
 GSE63514
 import-files
 cleaning-data

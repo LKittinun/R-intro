@@ -21,7 +21,7 @@
 
 ยกตัวอย่าง เมื่อวิเคราะห์ $t$-test จะทำการสร้าง [t-distribution](#t-dist) ขึ้นมา (ตัวอย่างของการวิเคราะห์ อยู่[บทถัดไป](#sec-t-test) ) ภายใต้ $H_{0}$ ว่า mean = 10
 
-```{r t_dist}
+```{r t_dist, fig.path="figure/"}
 library(tidyverse)
 t_dist <- dt(seq(-5,5,0.01), df = 99) # t-distribution มี mean = 0 sd = 1
 
@@ -68,7 +68,7 @@ p # p-value
 
 -   **Two-tailed** คือ โอกาสที่ Critical value $\neq H_{0}$ นิยมใช้วิเคราะห์มากที่สุด
 
-```{r pvalue_crit}
+```{r pvalue_crit, fig.path="figure/"}
 crit <- qt(1-0.05/2, df = 99) # ตัดที่ <= p 0.05, two-tailed
 
 density_df <- density_df |> 
@@ -105,7 +105,7 @@ t_test_5
 
 จากการคำนวณ สามารถสรุปได้ว่าสามารถปฏิเสธ $H_{0}$ นั่นคือ ข้อมูลของกลุ่มตัวอย่างนี้มีค่าเฉลี่ยมากกว่าจาก 12 อย่างมีนัยสำคัญ แต่ว่า $H_{a}$ นั้น มีโอกาสเป็นจริงหรือไม่นั้น เมื่อพิจารณาของกระจายตัวของข้อมูล [t-distribution](#t-dist) แล้ว
 
-```{r t_test_5}
+```{r t_test_5, fig.path="figure/"}
 library(pwrss)
 power.t.test(ncp = t_test_5$statistic, df = 4, alpha = 0.05,
              alternative = "greater", plot = TRUE, verbose = FALSE)
@@ -117,7 +117,7 @@ power.t.test(ncp = t_test_5$statistic, df = 4, alpha = 0.05,
 
 ส่วนตรงที่เป็นเส้นแนวเฉียงสีฟ้า คือพื้นที่ๆ ไม่มีทางมาจาก $H_{0}$ ได้ ซึ่งก็คือ ความสามารถในการแยกแยะกลุ่มตัวอย่างที่เป็นความจริง เรียกว่า ผลบวกที่แท้จริง (True positive) = Power = 1 - Type-II error ดังนั้น ถ้าท่านเพิ่มค่า $\alpha$ สูงสุดที่รับได้ โอกาสการเกิด False positive ก็จะเพิ่มขึ้น แต่โอกาสการเกิด False negative ก็จะต่ำลง (= Power สูงขึ้น)
 
-```{r power_5}
+```{r power_5, fig.path="figure/"}
 power.t.test(ncp = t_test_5$statistic, df = 4, alpha = 0.1,
              alternative = "greater", plot = TRUE, verbose = FALSE)
 ```
@@ -134,7 +134,7 @@ t_test_20 <- t.test(mean_20_sample, mu = 12, alternative = "greater")
 t_test_20
 ```
 
-```{r power_20}
+```{r power_20, fig.path="figure/"}
 power.t.test(ncp = t_test_20$statistic, df = 19, alpha = 0.05,
              alternative = "greater", plot = TRUE, verbose = FALSE) 
 ```
@@ -143,7 +143,7 @@ power.t.test(ncp = t_test_20$statistic, df = 19, alpha = 0.05,
 
 เมื่อพล็อตกราฟความสัมพันธ์ระหว่าง ขนาดตัวอย่าง, $\alpha$, Power จะได้ดังรูป
 
-```{r power_graph}
+```{r power_graph, fig.path="figure/"}
 mean_diff <- 1 # ความต่างคงที่ 1
 n <- 3:50
 alphas <- c(0.5, 0.2, 0.1,0.05,0.01,0.001)
@@ -172,8 +172,8 @@ ggplot(power_df, aes(x = n, y = power, col = alpha, linetype = alpha)) +
 | **Reject** $H_{0}$ | Type I error | Correct       |
 | **Accept** $H_{0}$ | Correct      | Type II error |
 
--   Type I error = False positive = $\alpha$ = Critical value
+-   **Type I error** = False positive = $\alpha$ = Critical value
 
--   Type II error = False negative = $\beta$ = 1 - Power
+-   **Type II error** = False negative = $\beta$ = 1 - Power
 
-$\therefore$ Power = True negative
+$\therefore$ **Power = True positive**

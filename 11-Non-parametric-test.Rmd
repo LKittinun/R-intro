@@ -56,7 +56,6 @@ data.frame(O = chisq_weight_norm$observed, E.freq = chisq_weight_norm$expected)
 chisq_weight_weight <- chisq.test(table(weight_dice), p = c(3,2,1,1,1,1)/9)
 chisq_weight_weight
 data.frame(O = chisq_weight_weight$observed, E.freq = chisq_weight_weight$expected)
-
 ```
 
 แต่ถ้าวิเคราะห์เทียบกับการกระจายตัวเดียวกับลูกเต๋าถ่วงน้ำหนัก จะไม่แตกต่างกัน
@@ -166,7 +165,7 @@ unname(fisher_p)*2 # remove name
 
 กลับมาที่ตัวอย่าง `iris` ดูการกระจายของข้อมูล
 
-```{r iris_hist}
+```{r iris_hist, fig.path="figure/"}
   ggplot(long_df, aes(x = cm, fill = Metrics)) + geom_histogram() +
   facet_grid(Metrics~Species, scales = "free") +
   theme_bw()
@@ -366,7 +365,7 @@ $$
 
 โดย $x, y$ คือ ลำดับของข้อมูล (ไม่ใช่ตัวข้อมูลเอง) ส่งผลให้การทดสอบนี้ เป็นการทดสอบการเพิ่มขึ้นของลำดับ ไม่ใช่การเพิ่มขึ้นของข้อมูล ดังนั้น จึงไม่ใช่การทดสอบความสัมพันธ์เป็นเชิงเส้นเหมือน [Pearson's correlation](#pearson) แต่เป็นการทดสอบเพียงว่าข้อมูลไปในทิศทางเดียวันหรือไม่
 
-```{r poly_cor}
+```{r poly_cor, fig.path="figure/"}
 poly_data <- data.frame(x = seq(-10, 10, length.out = 100)) |> 
   mutate(y = x^9+x+10+rnorm(100, mean = 0, sd =3))
 

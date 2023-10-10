@@ -2,7 +2,7 @@
 
 ## Principle
 
-[Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) (Linear Model for Microarray Data) [@R-limma] เป็นหนึ่งใน `bioconductor mapackage` ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene expression; DGE) ในงานทดลอง Microarray
+[Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) (Linear Model for Microarray Data) [@R-limma] เป็นหนึ่งใน `bioconductor package` ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene expression; DGE) ในงานทดลอง Microarray
 
 หลักการสำคัญของ `limma` คือการใช้สมการถดถอยเชิงเส้นในการหา DGE โดยมีสมมติฐานเบื้องต้นว่าค่าความเข้มพื้นหลังที่อ่านได้จาก Probe ของ Microarray นั้นมีการกระจายตัวแบบ [Normal distribution](#norm-dist) ซึ่งหลักการนี้สามารถนำไปปรับใช้ในการหา Differential expression ในงานประเภทอื่นๆ ได้ด้วย เช่น RNA-seq, Proteomics
 
@@ -10,7 +10,7 @@
 
 -   $H_{a}$: มีความแตกต่างกันในการแสดงออกของยีน
 
-```{r limma_diff_mech, echo = FALSE, message = FALSE, warning = FALSE}
+```{r limma_diff_mech, echo = FALSE, message = FALSE, warning = FALSE, fig.path="figure/"}
 names(GSE63514) <-  c("prob", GSE63514_meta$title)
 GSE63514_two_group <- GSE63514 |> select(prob, contains(c("Normal", "Cancer")))
 GSE63514_long <- GSE63514_two_group |>
@@ -45,7 +45,7 @@ $$
 
 ผู้นิพนธ์ limma นั้นได้แก้ปัญหานี้โดยใช้หลักการสถิติแบบ Empirical Bayes ชื่อว่า Moderated $t$-test โดยหลักการคือ เนื่องจากหลักการของการอ่านข้อมูลใน Microarray ในแต่ละยีนนั้นเป็นไปโดยพร้อมกัน อัตราส่วนความแปรปรวนของยีนแต่ละตัวที่อ่านค่าได้นั้นจะเท่าๆ กันตลอดทั้ง array ดังนั้นจึงสามารถยืมข้อมูลของความแปรปรวนมาจากทุกยีนทั้งหมด มาสร้างเป็น **ความน่าจะเป็นก่อนหน้า (Prior probability)** เพื่อนำมาถ่วงน้ำหนักกับ**ยีนแต่ละตัว (Posterior probability)** ภายหลัง
 
-```{r overall_vairiance, warning = FALSE}
+```{r overall_vairiance, warning = FALSE, fig.path="figure/"}
 cx_nc <- GSE63514 |> 
   as.data.frame() |> 
   dplyr::select(contains(c("Normal", "Cancer")))
@@ -153,7 +153,7 @@ map(1:length(colnames(contrasts.matrix)),
 
 ท่านสามารถสรุปข้อมูล DGE ได้โดยใช้ `decideTests()`
 
-```{r decideTests}
+```{r decideTests, fig.path="figure/"}
 results <- decideTests(cx_fit_contrasts_eB, fc=log2(1.5)) 
 summary(results)
 vennDiagram(results[,1:5]) # max 5 groups
@@ -165,7 +165,7 @@ vennDiagram(results[,1:5]) # max 5 groups
 
 ในบางข้อมูลนั้นมีความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวน ซึ่งสามารถตรวจสอบได้โดยใช้ `plotSA()`
 
-```{r SA_eB}
+```{r SA_eB, fig.path="figure/"}
 plotSA(cx_fit_contrasts_eB) 
 ```
 
@@ -179,7 +179,7 @@ summary(results_trend)
 
 เมื่อทำการพล็อตความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวนอีกครั้ง จะพบว่าโมเดลนั้นถูกปรับตามความแปรปรวนแล้ว
 
-```{r SA_trend}
+```{r SA_trend, fig.path="figure/"}
 plotSA(cx_fit_contrasts_eB_trend)
 ```
 

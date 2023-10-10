@@ -10,7 +10,7 @@ same_dist <- sapply(1:10000, \(x) t.test(rnorm(100,10,4),
                                          rnorm(100,10,4))$p.value) # Mean 10 vs 10
 ```
 
-```{r same_dist_plot, echo = FALSE, out.width="70%", fig.align="center"}
+```{r same_dist_plot, echo = FALSE, out.width="70%", fig.align="center", fig.path="figure/"}
 ggplot(NULL, aes(x = same_dist, y = after_stat(count/sum(count)))) + 
   geom_histogram(col = "black", fill = "skyblue", binwidth = 0.05) +
   geom_vline(xintercept = 0.05, linetype = "dashed", col = "red") +
@@ -32,7 +32,7 @@ very_diff_dist <- sapply(1:10000, \(x) t.test(rnorm(100,10,4),
                                          rnorm(100,15,4))$p.value) # Mean 10 vs 15
 ```
 
-```{r very_diff_dist, echo = FALSE, out.width="70%", fig.align="center", warning=FALSE}
+```{r very_diff_dist, echo = FALSE, out.width="70%", fig.align="center", warning=FALSE, fig.path="figure/"}
 ggplot(NULL, aes(x = very_diff_dist, y = after_stat(count/sum(count)))) + 
   geom_histogram(col = "black", fill = "skyblue", binwidth = 0.025) +
   geom_vline(xintercept = 0.05, linetype = "dashed", col = "red") +
@@ -71,7 +71,7 @@ $p$-value ที่ถูก Reject $H_{0}$ มีมากถึง 24%! เม
 
 เมื่อมาลองพล็อต $p$-value histogram
 
-```{r true20, echo = FALSE, out.width="70%", fig.align="center", warning=FALSE}
+```{r true20, echo = FALSE, out.width="70%", fig.align="center", warning=FALSE, fig.path="figure/"}
 ggplot(data = NULL,aes(x = all_pvalues, y = after_stat(count/sum(count)))) + 
   geom_histogram(col = "black", fill = "skyblue", binwidth = 0.025)+
   scale_x_continuous(breaks = seq(0,1,0.05)) + 
@@ -119,7 +119,7 @@ $$
 
 เมื่อทำการเปรียบเทียบที่ $\alpha$ Threshold ต่างๆ จะได้ว่า
 
-```{r fwer_plot}
+```{r fwer_plot, fig.path="figure/"}
 FWER <- expand_grid(times = 1:500, alpha = c(0.001, 0.005, 0.01, 0.05, 0.1)) |> 
   mutate(FWER = 1-(1-alpha)^times)
 

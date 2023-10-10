@@ -10,7 +10,7 @@
 
 -   Heteroscedasticity สูง จึงไม่สามารถใช้สมการถดถอยแบบ Poisson โดยปกติได้
 
-```{r echo = FALSE, fig.show="hold", out.width="50%", message=FALSE, warning = FALSE}
+```{r echo = FALSE, fig.show="hold", out.width="50%", message=FALSE, warning = FALSE, fig.path="figure/"}
 library(edgeR)
 bladder <- read_csv("Resource/bladder_matrix.csv") |> 
   filter(!is.na(`...1`)) |> 
@@ -62,7 +62,7 @@ $$
 y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 $$
 
-```{r estimatedispersion, echo = FALSE, warning = FALSE}
+```{r estimatedispersion, echo = FALSE, warning = FALSE, fig.path="figure/"}
 bladder_dge <- DGEList(bladder_mat, group = c(rep("N",2), rep("T",2), rep("X",2))) 
 keep <- filterByExpr(bladder_dge, min.count = 10)
 bladder_dge <- bladder_dge[keep,] |> calcNormFactors() |>  estimateCommonDisp() |> 
@@ -88,7 +88,7 @@ $$
 
 ซึ่งหมายความว่า ทุกๆ ความแปรปรวนของ $var(y_{gi})$ ที่เพิ่มขึ้นจะถูกทำนายด้วยค่า $\phi$ (Negative binomial parameter; Global BCV) และ $\sigma^{2}$ (Quasi-likelihood parameter; Gene-specific BCV) ซึ่งปัญหาของสมการนี้คือจำนวณ Replicate ที่ไม่มากพอในแต่ละยีน edgeR แก้จึงปัญหานี้โดยประยุกต์เทคนิกของ limma มาใช้ ซึ่งก็คือ Empirical Bayes ซึ่งยืมความแปรปรวนมาจากทุกยีนนั่นเอง
 
-```{r eBayes_dispersion, echo = FALSE}
+```{r eBayes_dispersion, echo = FALSE, fig.path="figure/"}
 plotBCV(bladder_dge)
 ```
 
@@ -150,7 +150,7 @@ bladder_dge$samples
 
 หลังจากนั้นจะทำการคำนวณ $\phi$ ถ้ามี edgeR จะใช้วิธี qCML ถ้าไม่มี Design matrix และใช้วิธี cPAL ถ้ามี Design matrix
 
-```{r calculate_dispersion}
+```{r calculate_dispersion, fig.path="figure/"}
 model <- model.matrix(~0+condition, data = design)
 model
 
@@ -160,7 +160,7 @@ plotBCV(bladder_dge)
 
 ต่อไปจะทำการ ทดสอบ DGE ด้วยสมการถดถอย ql-nbglm
 
-```{r squeezvar}
+```{r squeezvar, fig.path="figure/"}
 fit <- glmQLFit(bladder_dge, model)
 plotQLDisp(fit)
 ```

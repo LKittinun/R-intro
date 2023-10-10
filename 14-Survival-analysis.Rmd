@@ -41,7 +41,7 @@ $$
 
 เมื่อนำไปพล็อตกราฟแล้วจะได้ผลดังนี้
 
-```{r echo = FALSE, message = FALSE}
+```{r echo = FALSE, message = FALSE, fig.path="figure/"}
 library(survival)
 library(survminer)
 library(dplyr) 
@@ -107,14 +107,14 @@ ovarian_surv |> tidy() |> head(10)
 
 หลังจากนั้นใช้คำสั่ง `ggsurvplot()` เพื่อทำการสร้างกราฟ
 
-```{r ovarian_survplot}
+```{r ovarian_survplot, fig.path="figure/"}
 ggsurvplot(ovarian_surv, risk.table = TRUE, break.time.by = 0.25, 
            surv.median.line = "hv") 
 ```
 
 จะเห็นว่าผู้ป่วยกลุ่มนี้มี Median survival อยู่ประมาณ 1.75 ปี
 
-```{r ovarian_plot}
+```{r ovarian_plot, fig.path="figure/"}
 ovarian_surv_resid <- survfit(
   Surv(futime/365.25, fustat) ~ resid.ds, data = ovarian
   )
@@ -192,7 +192,7 @@ CPH นั้นมี Assumption ดังนี้:
 
 สามารถตรวจสอบ HR ได้โดยใช้ Proportionality assumption test จาก Schoenfeld residuals โดย `cox.zph()`
 
-```{r cox_proportion}
+```{r cox_proportion, fig.path="figure/"}
 ovarian_coxzph <- cox.zph(ovarian_cox) 
 ggcoxzph(ovarian_coxzph)
 ```
@@ -203,7 +203,7 @@ ggcoxzph(ovarian_coxzph)
 
 ในส่วนของ Linearity สามารถตวจสอบโดยใช้ `ggcoxfunctional()`
 
-```{r cox_linearity, warning = FALSE}
+```{r cox_linearity, warning = FALSE, fig.path="figure/"}
 ovarian_linear_age <- ggcoxfunctional(Surv(futime/365.25, fustat) ~ age +                                 + I(log(age)) + I(sqrt(age)), data = ovarian) 
 ovarian_linear_age
 ```

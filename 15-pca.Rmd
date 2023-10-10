@@ -1,6 +1,6 @@
 # Principal component analysis
 
-```{r pca, echo = FALSE}
+```{r pca, echo = FALSE, fig.path="figure/"}
 set.seed(123)
 data <- matrix(c(
   rnorm(10, mean = 20, sd = 2),
@@ -65,7 +65,7 @@ pc_p <- ggplot(as.data.frame(pc$x), aes(x = PC1, y = PC2)) +
 
 ## Principle
 
-**Principle component analysis (PCA)** คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้
+**Principal component analysis (PCA)** คือ วิธีการลดจำนวนมิติของข้อมูล (Dimensional reduction) เพื่อให้ง่ายต่อการวิเคราะห์และสร้างภาพ โดยที่ PCA จะพยายามเก็บข้อมูลที่สำคัญไว้
 
 ยกตัวอย่างเป็นภาพ สมมติท่านต้องการที่จะวิเคราะห์แบ่งลักษณะของรูปจากสีของรูปภาพ แต่เฉดสีนั้นมีมากมาย
 
@@ -104,13 +104,13 @@ pic_df_reduced
 
 ซึ่ง PCA นั้นทำการลดมิติของข้อมูลลง โดยรวมข้อมูลอื่นๆ เข้าหาข้อมูลที่มีความสำคัญมากที่สุด นั่นคือ **ข้อมูลที่มีความแปรปรวนสูงที่สุด** ยกตัวอย่างข้อมูลสองมิติชุดหนึ่ง
 
-```{r org_data, echo = FALSE, fig.align="center"}
+```{r org_data, echo = FALSE, fig.align="center", fig.path="figure/"}
 d
 ```
 
 ในการวิเคราะห์ PCA ข้อมูลจะถูกลดมิติลงโดยการพยายามดึงเข้าสู่เส้นที่สามารถอธิบายความแปรปรวนได้ดีที่สุด ซึ่งก็คือ Principle component
 
-```{r pc1, echo = FALSE, fig.align="center"}
+```{r pc1, echo = FALSE, fig.align="center", fig.path="figure/"}
 p1
 ```
 
@@ -118,13 +118,13 @@ p1
 
 ส่วนเส้นต่อมาที่ตั้งฉาก คือเส้นที่อธิบายความแปรปรวนได้ดีที่สุดเป็นลำดับสอง
 
-```{r pc2, echo = FALSE, fig.align="center"}
+```{r pc2, echo = FALSE, fig.align="center", fig.path="figure/"}
 p2
 ```
 
 เมื่อนำข้อมูลทั้งหมดมาสร้างเป็นกราฟใหม่ จะได้ข้อมูลที่ยังลงเหลือความแปรปรวนที่มากที่สุดไว้ทั้งสองมิติ
 
-```{r pca_transformed, echo = FALSE, fig.align="center"}
+```{r pca_transformed, echo = FALSE, fig.align="center", fig.path="figure/"}
 pc_p
 ```
 
@@ -259,7 +259,7 @@ pc$x
 
 คือการพล็อตกราฟเพื่อบ่งบอก ว่า แต่ละ Features ดั้งเดิมนั้น มีผลต่อ PC มากน้อยเพียงใด
 
-```{r biplot}
+```{r biplot, fig.path="figure/"}
 biplot(pc)
 ```
 
@@ -269,7 +269,7 @@ biplot(pc)
 
 เป็นการพล็อตเพื่อสำรวจว่าแต่ละ PC นั้นมีอิทธิผลจากข้อมูลมากเท่าใด ซึ่งก็คือการดูขนาดของ Eigenvalues หรือ ความแปรปรวนของ PC นั้นๆ
 
-```{r screeplot_manual}
+```{r screeplot_manua, fig.path="figure/"}
 ggplot(data = NULL, aes(x = 1:5)) + 
   geom_col(aes(y = pc$sdev^2),fill = "skyblue", col = "black") +
   geom_line(aes(y = cumsum(pc$sdev^2))) +
@@ -281,7 +281,7 @@ ggplot(data = NULL, aes(x = 1:5)) +
 
 หรือท่านอาจจะเรียก `screeplot()`
 
-```{r screeplot}
+```{r screeplot, fig.path="figure/"}
 screeplot(pc)
 ```
 

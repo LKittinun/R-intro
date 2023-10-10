@@ -15,7 +15,7 @@ $$
 f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^{2}}
 $$
 
-```{r norm_dist, message = FALSE, echo = FALSE, warning = FALSE, out.width= "70%", fig.align="center"}
+```{r norm_dist, message = FALSE, echo = FALSE, warning = FALSE, out.width= "70%", fig.align="center", fig.path="figure/"}
 set.seed(123)
 x <- seq(-5,5,0.01)
 norm_dist <- data.frame(x = x,
@@ -38,7 +38,7 @@ $$
 Z = \frac{x-\mu}{\sigma}
 $$
 
-```{r z_dist, echo = FALSE, warning = FALSE, out.width= "70%", fig.align="center"}
+```{r z_dist, echo = FALSE, warning = FALSE, out.width= "70%", fig.align="center", fig.path="figure/"}
 z_dist <- data.frame(`Z distribution` = rnorm(1000, mean = 0, sd = 1))
 
 ggplot(z_dist) + 
@@ -68,7 +68,7 @@ $$
 f(t) = \frac{\Gamma(\frac{v+1}{2})}{\sqrt{v\pi}\Gamma(\frac{v}{2})}(1+\frac{t^{2}}{v})^{-\frac{v+1}{2}}
 $$
 
-```{r t_distribution, warning = FALSE, out.width= "70%", fig.align="center"}
+```{r t_distribution, warning = FALSE, out.width= "70%", fig.align="center", fig.path="figure/"}
 t_dist <- data.frame(x = x, 
                         `DF 1` = dt(x, df = 1),
                         `DF 2` = dt(x, df = 2),
@@ -107,7 +107,7 @@ f(x) = \begin{cases}
 \end{cases}
 $$
 
-```{r unif_distribution, warning = FALSE, out.width= "70%", fig.align="center"}
+```{r unif_distribution, warning = FALSE, out.width= "70%", fig.align="center", fig.path="figure/"}
 x <- seq(0,10,1)
 
 unif_dist <- data.frame(x = x, 
@@ -131,7 +131,7 @@ $$
 f(x,n,p) = P(X = x) = {n\choose x}p^{x}(1-p)^{n-k}  
 $$
 
-```{r binom_distribution, warning = FALSE, message=FALSE, out.width= "70%", fig.align="center"}
+```{r binom_distribution, warning = FALSE, message=FALSE, out.width= "70%", fig.align="center", fig.path="figure/"}
 # 20 trials, prob of success = 10% to 90%
 binom_dist <- map_dfc(c(0.1, 0.3, 0.5, 0.7, 0.9), ~dbinom(1:20, 20, .x)) |> 
   set_names(paste0("Prob = ", c(0.1, 0.3, 0.5, 0.7, 0.9) )) |> 
@@ -156,7 +156,7 @@ $$
 p(k) = {r-1+k \choose r-1}p^{r-1}(1-p)^{k}p = {r-1+k \choose k}p^{r}(1-p)^{k}
 $$
 
-```{r neg_binom_distribution, warning = FALSE, message=FALSE, out.width= "70%", fig.align="center"}
+```{r neg_binom_distribution, warning = FALSE, message=FALSE, out.width= "70%", fig.align="center", fig.path="figure/"}
 nbprob_dist <- map_dfc(c(0.1, 0.3, 0.5, 0.7, 0.9), \(x) dnbinom(1:20, 20,x)) |> 
   set_names(paste0("Prob = ", c(0.1, 0.3,0.5,0.7,0.9) )) |> 
   mutate(numb_failure = 1:20) |> 
@@ -180,7 +180,7 @@ $$
 f(x,n,M,N) = p(X=x) = \frac{{M \choose x}{N-M \choose n-x}}{N \choose n}
 $$
 
-```{r hyper_distribution, warning = FALSE, message=FALSE, out.width= "70%", fig.align="center"}
+```{r hyper_distribution, warning = FALSE, message=FALSE, out.width= "70%", fig.align="center", fig.path="figure/"}
 hyper_dist <- map_dfc(c(10,20,30), ~dhyper(1:30, .x, 30, 30)) |>  
   set_names(paste0("Black = ", c(10,20,30))) |> 
   mutate(numb_success = 1:30) |> 
@@ -208,7 +208,7 @@ $$
 \lambda = \frac{k}{t}
 $$
 
-```{r poisson_distribution, warning = FALSE, message=FALSE, out.width= "70%", fig.align="center"}
+```{r poisson_distribution, warning = FALSE, message=FALSE, out.width= "70%", fig.align="center", fig.path="figure/"}
 pois_dist <- map_dfc(c(1, 2, 4, 10), ~dpois(1:20, .x)) |>  
   set_names(paste0("Mean = ", c(1, 2, 4, 10))) |> 
   mutate(numb_event = 1:20) |> 
