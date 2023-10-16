@@ -9,9 +9,6 @@ output:
     df_print: paged
     config:
       repo: "https://github.com/LKittinun/R-intro"
-      download: 
-       - ["_main.pdf", "PDF"]
-       - ["_presentation.pptx", "PPTX"]
   css: "style.css"
 site: bookdown::bookdown_site
 bibliography: ["references.bib"]
@@ -25,8 +22,7 @@ cache:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
-                      out.width = "80%", fig.align = "center")
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 #                      tidy.opts = list(width.cutoff = 80), tidy = TRUE)
 ```
 

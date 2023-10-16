@@ -108,7 +108,7 @@ pic_df_reduced
 d
 ```
 
-ในการวิเคราะห์ PCA ข้อมูลจะถูกลดมิติลงโดยการพยายามดึงเข้าสู่เส้นที่สามารถอธิบายความแปรปรวนได้ดีที่สุด ซึ่งก็คือ Principle component
+ในการวิเคราะห์ PCA ข้อมูลจะถูกลดมิติลงโดยการพยายามดึงเข้าสู่เส้นที่สามารถอธิบายความแปรปรวนได้ดีที่สุด ซึ่งก็คือ Principal component
 
 ```{r pc1, echo = FALSE, fig.align="center", fig.path="figure/"}
 p1
@@ -130,7 +130,7 @@ pc_p
 
 การลดมิติของข้อมูลนี้ อาจจะยังไม่เห็นผลนัก เนื่องจากข้อมูลมีแค่สองมิติเท่านั้น แต่ในสถานการณ์ซึ่งมีข้อมูลสูงมาก โดยเฉพาะเมื่อมี Feature มากกว่า Observations นั้น การลดข้อมูลจะมีประสิทธิภาพมาก โดยเฉพาะข้อมูลประเภท High-throughput (จำนวนยีนมากกว่าตัวอย่าง)
 
-Credit code: <https://stackoverflow.com/questions/2639430/graphing-perpendicular-offsets-in-a-least-squares-regression-plot-in-r>
+**Credit:** <https://stackoverflow.com/questions/2639430/graphing-perpendicular-offsets-in-a-least-squares-regression-plot-in-r>
 
 ------------------------------------------------------------------------
 
@@ -144,7 +144,7 @@ data <- matrix(c(
   rnorm(10, mean = 20, sd = 2),
   rnorm(10, mean = 1, sd = 2),
   rnorm(10, mean = 4, sd = 5)),
-  ncol= 3
+  ncol = 3
 )
 colnames(data) <- c("A", "B", "C")
 data
@@ -178,14 +178,14 @@ cov_matrix <- cov(scaled_data)
 cov_matrix # same
 ```
 
-หลังจากนั้นเราทำการแยกทิศทางของความแปรปรวนออกมาโดยวิธี Eigendecomposition ซึ่งสำหรับ PCA แล้ว ซึ่ง Eigenvectors นั้นบ่งบอกถึงทิศทางของความแปรปรวนของข้อมูลที่ตั้งฉากกัน โดยมีขนาดของการกระจายตัวของข้อมูล คือ Eigenvalue
+หลังจากนั้นเราทำการแยกทิศทางของความแปรปรวนออกมาโดยวิธี Eigendecomposition ซึ่งสำหรับ PCA แล้ว ซึ่ง Eigenvector นั้นบ่งบอกถึงทิศทางของความแปรปรวนของข้อมูลที่ตั้งฉากกัน โดยมีขนาดของการกระจายตัวของข้อมูล คือ Eigenvalue
 
 ```{r eigen}
 eigen_info <- eigen(cov_matrix)
 eigen_info
 ```
 
-โดย `vectors` คือ Eigenvectors หรือ ทิศทางของความแปรปรวน (เรียงตามคอลัมน์) ส่วน `values` คือ Eigenvalues หรือ ขนาดของความแปรปรวน
+โดย `vectors` คือ Eigenvector หรือ ทิศทางของความแปรปรวน (เรียงตามคอลัมน์) ส่วน `values` คือ Eigenvalues หรือ ขนาดของความแปรปรวน
 
 **Note:** เราสามารถคำนวณ Eigenvalue และ Eigenvector กลับไปเป็น Covariance matrix
 

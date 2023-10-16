@@ -145,7 +145,7 @@
 </div>
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span>, y <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/blank_geom-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/blank_geom-1.png" width="672"></div>
 <p>สังเกตว่าจะยังไม่มีกราฟใดๆ ปรากฏ ท่านจำเป็นต้องใช้ <code>geom</code> เพื่อทำการสร้างภาพนั้นขึ้น</p>
 </div>
 <div id="scatterplot" class="section level3" number="7.1.2">
@@ -154,7 +154,7 @@
 </h3>
 <div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span>, y <span class="op">=</span> <span class="va">Sepal.Length</span>, col <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/scatterplot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/scatterplot-1.png" width="672"></div>
 <p>สังเกตการ mapping ของ <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code></p>
 <div class="inline-figure"><img src="Picture/aes.jpg" width="100%" style="display: block; margin: auto;"></div>
 </div>
@@ -169,7 +169,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">6</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, col <span class="op">=</span> <span class="st">"red"</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">2.7</span>, linetype <span class="op">=</span> <span class="st">"dotted"</span>, col <span class="op">=</span> <span class="st">"blue"</span>, linewidth <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="fl">2</span>, slope <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="st">"dotdash"</span>, col <span class="op">=</span> <span class="st">"black"</span>, linewidth <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/straight_line-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/straight_line-1.png" width="672"></div>
 <p>สังเกตว่าท่านสามารถปรับค่าจำพวก สี ลักษณะเส้นต่างๆ ได้ โดย Parameter นั้น ต้องอยู่นอก <code>aes</code> มิเช่นนั้น ฟังก์ชันจะพยายามไปดึงข้อมูลจากกราฟมา</p>
 <div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span>, y <span class="op">=</span> <span class="va">Sepal.Length</span>, col <span class="op">=</span> <span class="st">"darkviolet"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># ผิด</span></span>
@@ -177,7 +177,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">6</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, col <span class="op">=</span> <span class="st">"red"</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">2.7</span>, linetype <span class="op">=</span> <span class="st">"dotted"</span>, col <span class="op">=</span> <span class="st">"blue"</span>, linewidth <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="fl">2</span>, slope <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="st">"dotdash"</span>, col <span class="op">=</span> <span class="st">"black"</span>, linewidth <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/wrong_aes-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/wrong_aes-1.png" width="672"></div>
 <p>ที่ถูกต้อง ท่านต้องนำ <code>col</code> ไปอยู่นอก <code>aes</code> จึงจะได้สีที่ท่านต้องการ</p>
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span>, y <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># ผิด</span></span>
@@ -185,7 +185,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">6</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, col <span class="op">=</span> <span class="st">"red"</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">2.7</span>, linetype <span class="op">=</span> <span class="st">"dotted"</span>, col <span class="op">=</span> <span class="st">"blue"</span>, linewidth <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="fl">2</span>, slope <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="st">"dotdash"</span>, col <span class="op">=</span> <span class="st">"black"</span>, linewidth <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/wrong_aes_fixed-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/wrong_aes_fixed-1.png" width="672"></div>
 </div>
 <div id="bar-chart" class="section level3" number="7.1.4">
 <h3>
@@ -195,12 +195,12 @@
 <div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>, fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># fill ไว้สำหรับแบ่งสีใน barchart</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="co"># ความกว้าง 50% </span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/barplot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/barplot-1.png" width="672"></div>
 <p>ส่วน <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col()</a></code> จะรับค่า <code>y</code> ด้วย โดยข้อมูล <code>x</code> ที่ซ้ำกันจะถูกนำมารวมกัน</p>
 <div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span>, fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> </span></code></pre></div>
-<div class="inline-figure"><img src="figure/colplot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/colplot-1.png" width="672"></div>
 <p>สังเกตว่าค่าที่ได้เกิดจากการรวมกันของข้อมูลทั้งคอลัมน์ (สังเกตที่เส้นสีดำเป็นเส้นต่อๆ กัน ไม่ใช่เส้นเดียว) ซึ่งมักไม่เป็นที่ต้องการในการแสดง โดยมักเกิดจากความผิดพลาดมากกว่า (โดยเฉพาะถ้าไม่ได้ใส่ <code>col = black</code>) และส่วนใหญ่มักจะใช้ในการแสดงค่าเฉลี่ยมากกว่าผลรวม ในการนี้ ควรใช้คำสั่ง <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">dplyr::summarize()</a></code> ในการสรุปข้อมูลก่อน</p>
 <div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
@@ -208,7 +208,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span>, fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> </span></code></pre></div>
-<div class="inline-figure"><img src="figure/colplot_summarized-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/colplot_summarized-1.png" width="672"></div>
 <p>จะเห็นว่ากราฟแสดงค่าเฉลี่ยซึ่งตรงตามความต้องการทั่วไปมากกว่า (สังเกตแกน <code>y</code>)</p>
 </div>
 <div id="multi_boxplot" class="section level3" number="7.1.5">
@@ -219,7 +219,7 @@
 <div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span>, fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> </span></code></pre></div>
-<div class="inline-figure"><img src="figure/boxplot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/boxplot-1.png" width="672"></div>
 <p>ถ้าท่านต้องการสร้าง plot ที่แสดงหลาย metrics ท่านจะต้อง<a href="data-wrangling.html#reshape">เปลี่ยนข้อมูลเป็น Long form</a> เสียก่อน</p>
 <div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">long_df</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
@@ -232,7 +232,7 @@
 <code class="sourceCode R"><span><span class="va">long_df</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>, y <span class="op">=</span> <span class="va">cm</span>, fill <span class="op">=</span> <span class="va">Metrics</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
-<div class="inline-figure"><img src="figure/multi_boxplot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/multi_boxplot-1.png" width="672"></div>
 </div>
 <div id="histogram" class="section level3" number="7.1.6">
 <h3>
@@ -242,18 +242,18 @@
 <div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"skyblue"</span>, binwidth <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>  <span class="co"># binwidth = ความกว้างของแต่ละช่วงข้อมุล</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/geom_histogram-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/geom_histogram-1.png" width="672"></div>
 <div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"violet"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/geom_density-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/geom_density-1.png" width="672"></div>
 <p>ทั้งนี้ ท่านสามารถพล็อตหลายกราฟเข้าด้วยกันได้ ด้วยการ <code>+</code> ตามหลังไปเรื่อยๆ เพียงแต่ต้องระวังเรื่อง scale ที่ต้องเป็นระดับเดียวกัน</p>
 <div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">density</span><span class="op">)</span><span class="op">)</span>, binwidth <span class="op">=</span> <span class="fl">0.1</span>, fill <span class="op">=</span> <span class="st">"skyblue"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># ปรับเป็นความถี่</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"violet"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># ลบภาพพื้นหลังสีเทาออก</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/combine_density-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/combine_density-1.png" width="672"></div>
 </div>
 <div id="fitting-a-statistical-model" class="section level3" number="7.1.7">
 <h3>
@@ -265,13 +265,13 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"loess"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># fit a LOESS model</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/geom_smooth_loess-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/geom_smooth_loess-1.png" width="672"></div>
 <div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Petal.Length</span>, color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># สีตาม Species</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># fit a linear model</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/geom_smooth-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/geom_smooth-1.png" width="672"></div>
 </div>
 <div id="faceting" class="section level3" number="7.1.8">
 <h3>
@@ -284,13 +284,13 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">Species</span><span class="op">)</span> <span class="op">+</span> <span class="co"># แบ่งเป็นหลายกลุ่ม</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/facet_model-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/facet_model-1.png" width="672"></div>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>,  fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># สีตาม Species</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">Species</span>, scales <span class="op">=</span> <span class="st">"free_x"</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="co"># ทำให้แกน x ไม่ fix ค่า</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/facet_hist-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/facet_hist-1.png" width="672"></div>
 <p>ทั้งหมดที่แสดงนี้ เป็นเพียงกราฟพื้นฐานเท่านั้น ยังมีการปรับแต่งอื่นๆ ได้อีกมาก สามารถศึกษาเพิ่มเติมได้ที่</p>
 <ul>
 <li><p><strong>Function reference:</strong> <a href="https://ggplot2.tidyverse.org/reference/" class="uri">https://ggplot2.tidyverse.org/reference/</a></p></li>
@@ -334,7 +334,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-10.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

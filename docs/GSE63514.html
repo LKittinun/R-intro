@@ -106,7 +106,7 @@
 <span class="header-section-number">8</span> Example: Microarray data visualization<a class="anchor" aria-label="anchor" href="#GSE63514"><i class="fas fa-link"></i></a>
 </h1>
 <p>ต่อไปนี้จะเป็นตัวอย่างในการใช้ <code>R</code> ในการวิเคราะห์ข้อมูล Molecular data เบื้องต้น โดยใช้ข้อมูลจาก <a href="https://www.ncbi.nlm.nih.gov/gds">GEO dataset</a> <code>GSE63514</code> <span class="citation">Den Boon et al. (2015)</span> ซึ่งเป็น Gene expression microarray</p>
-<div class="inline-figure"><img src="Picture/affymatrix.jpg" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="Picture/affymatrix.jpg" width="298" style="display: block; margin: auto;"></div>
 <div id="import-files" class="section level2" number="8.1">
 <h2>
 <span class="header-section-number">8.1</span> Import files<a class="anchor" aria-label="anchor" href="#import-files"><i class="fas fa-link"></i></a>
@@ -274,7 +274,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> </span>
 <span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">1</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co"># หมุนแกน x เพื่อความสวยงาม</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/top10_boxplot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/top10_boxplot-1.png" width="672"></div>
 <p>ท่านอาจจะอยากเพิ่มเส้นค่าเฉลี่ยเพื่อดูว่า Global mean intensity เป็นเท่าไร</p>
 <div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">global_mean_intensity</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">top10_long</span><span class="op">$</span><span class="va">Intensity</span><span class="op">)</span></span>
@@ -287,7 +287,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> </span>
 <span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">1</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/global_mean-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/global_mean-1.png" width="672"></div>
 <p>ตัวกลุ่ม <code>RPL</code> ดูน่าสนใน เนื่องจาก Intensity ใน <code>cancer</code> ต่ำกว่า <code>global mean</code> แต่จะมีนัยสำคัญหรือไม่ต้องใช้การวิเคราะห์ทางสถิติเพิ่มเติมทีหลัง</p>
 <p>ต่อไป เราอยากที่จะแบ่งว่า tissue ที่เป็น <code>whole section</code> กับ <code>laser captured</code> มีการแสดงออกที่แตกต่างกันอย่างไร เราจะใช้ <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code> เข้ามาช่วย</p>
 <div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
@@ -305,7 +305,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">top10_long_dissec</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">`dissection:ch1`</span>, fill <span class="op">=</span> <span class="va">Group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span>, width <span class="op">=</span> <span class="fl">0.5</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/top10_barchart-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/top10_barchart-1.png" width="672"></div>
 <p>เห็นว่าผลที่ได้ประหลาด เนื่องจาก <code>laser captured</code>และ <code>laser-captured</code> เป็นตัวแปรซ้ำ ต้องแก้ไขเสียก่อน</p>
 <div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">top10_long_dissec</span> <span class="op">&lt;-</span> <span class="va">top10_long_dissec</span> <span class="op">|&gt;</span> </span>
@@ -314,7 +314,7 @@
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">top10_long_dissec</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">`dissection:ch1`</span>, fill <span class="op">=</span> <span class="va">Group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span>, width <span class="op">=</span> <span class="fl">0.5</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/top10_long_dissec_fixed_bar-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/top10_long_dissec_fixed_bar-1.png" width="672"></div>
 <p>เมื่อข้อมูลที่ได้ถูกต้อง จะเห็นว่า มีเฉพาะกลุ่ม <code>cancer</code> เท่านั้น ที่มีการตัดแบบ <code>whole section</code></p>
 <p>หลังจากนั้นเราจะทำการพล็อต Intensity ในแต่ละยีน</p>
 <div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
@@ -324,7 +324,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> </span>
 <span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">1</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/top10_long_dissec_fixed_intensity-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/top10_long_dissec_fixed_intensity-1.png" width="672"></div>
 
 </div>
 </div>
@@ -357,7 +357,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-10.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

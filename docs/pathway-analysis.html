@@ -251,14 +251,14 @@
 <p>ท่านสามารถสร้างกราฟจากผลนี้ได้โดย <code><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html">dotplot()</a></code>, <code><a href="https://rdrr.io/r/graphics/barplot.html">barplot()</a></code></p>
 <div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html">dotplot</a></span><span class="op">(</span><span class="va">ora_cc</span>, showCategory <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/enrichplot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/enrichplot-1.png" width="672"></div>
 <div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">ora_cc</span>, showCategory <span class="op">=</span> <span class="fl">10</span>, color <span class="op">=</span> <span class="st">"qvalue"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/enrichplot-2.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/enrichplot-2.png" width="672"></div>
 <p>หรือ สามารถพล็อต GO pathway โดยรวมได้</p>
 <div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/goplot.html">goplot</a></span><span class="op">(</span><span class="va">ora_cc</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/goplot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/goplot-1.png" width="672"></div>
 <p>นอกจากนี้ยังมีฐานข้อมูลอื่นให้วิเคราะห์ได้ เช่น <code><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG()</a></code>, <code>enrichPathway()</code></p>
 </div>
 <div id="gsea" class="section level3" number="19.2.2">
@@ -309,11 +309,11 @@
 <p>ท่านสามารถพล๋อตผลลัพธ์ได้เหมือน ORA</p>
 <div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html">dotplot</a></span><span class="op">(</span><span class="va">gsea_bp</span>, showCategory <span class="op">=</span> <span class="fl">20</span>, font.size <span class="op">=</span> <span class="fl">10</span>, label_format <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/gsea_dotplot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/gsea_dotplot-1.png" width="672"></div>
 <p>สำหรับ GSEA ท่านสามารถพล็อตการคำนวณคะแนนในแต่ละยีนได้ด้วย <code><a href="https://rdrr.io/pkg/enrichplot/man/gseaplot.html">gseaplot()</a></code></p>
 <div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/gseaplot.html">gseaplot</a></span><span class="op">(</span><span class="va">gsea_bp</span>, geneSetID <span class="op">=</span> <span class="fl">1</span>, title <span class="op">=</span> <span class="va">gsea_bp</span><span class="op">$</span><span class="va">ID</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, font.size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/gseaplot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/gseaplot-1.png" width="672"></div>
 <p>โดยตำแหน่งขีดสีดำคล้ายบาร์โค้ด คือตำแหน่งของยีนที่อยู่ใน Pathway กลุ่มนั้น โดยความยาวของขีดคือ Signal-to-noise ratio</p>
 
 </div>
@@ -357,7 +357,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-10.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

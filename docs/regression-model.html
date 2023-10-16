@@ -130,7 +130,7 @@ h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \the
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/lm-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/lm-1.png" width="672"></div>
 <p>ในการวัดความแม่นยำของ Linear regression นั้นประกอบด้วยสามองค์ประกอบ</p>
 <pre><code>## 
 ## Call:
@@ -150,7 +150,7 @@ h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \the
 ## Residual standard error: 74.33 on 143 degrees of freedom
 ## Multiple R-squared:  0.5119, Adjusted R-squared:  0.5085 
 ## F-statistic:   150 on 1 and 143 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="inline-figure"><img src="figure/residual-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/residual-1.png" width="672"></div>
 <p><span class="math display">\[
 \text{Total variation} = \text{Explained variation} + \text{Unexplained variation/Error}
 \]</span></p>
@@ -223,7 +223,7 @@ f(x) = 39.4354 \ + 1.1866\times(\text{glufast}) + \epsilon
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">new_sspg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">glufast</span>, y <span class="op">=</span> <span class="va">predicted_sspg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/predicted_diabetes-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/predicted_diabetes-1.png" width="672"></div>
 <hr>
 </div>
 </div>
@@ -249,7 +249,7 @@ h(x) = \frac{1}{1+e^{\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + 
 <code class="sourceCode R"><span><span class="va">log_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fl">0</span> <span class="op">+</span> <span class="fl">0.75</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">log_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"h(x)"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/logistic_regression-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/logistic_regression-1.png" width="672"></div>
 <p>ต่อไปเราจะทำนายว่า <code>glufast</code> เพื่อให้ตัวแปรเป็น binary เราจะรวม <code>Overt_Diabetic</code> และ <code>Chemical_Diabetic</code> เป็นกลุ่มเดียวกัน</p>
 <div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Diabetes_mixed</span> <span class="op">&lt;-</span> <span class="va">Diabetes</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group <span class="op">=</span> </span>
@@ -263,7 +263,7 @@ h(x) = \frac{1}{1+e^{\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + 
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"glm"</span>,  method.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>, </span>
 <span>              se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/logistc_summary-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/logistc_summary-1.png" width="672"></div>
 <div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">logit_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">group</span> <span class="op">~</span> <span class="va">glufast</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, </span>
 <span>                 data <span class="op">=</span> <span class="va">Diabetes_mixed</span><span class="op">)</span> </span>
@@ -286,7 +286,7 @@ h(x) = \frac{1}{1+e^{\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + 
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">new_group</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">glufast</span>, y <span class="op">=</span> <span class="va">predicted_group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/predicted_logit-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/predicted_logit-1.png" width="672"></div>
 <hr>
 </div>
 <div id="poisson-family" class="section level2" number="13.3">
@@ -353,7 +353,7 @@ ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t)
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"glm"</span>, method.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"poisson"</span><span class="op">)</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/poisson-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/poisson-1.png" width="672"></div>
 <p>สังเกตว่ายิ่งอายุเยอะ อัตราการตายยิ่งน้อยลงอย่างมีนัยสำคัญ ซึ่งไม่น่าจะเป็นไปได้ ทั้งนี้ เพราะยังไม่ได้ปรับระยะเวลาติดตาม โดยการใส่ Offset เป็น <code>person-month</code> เข้าไปคำนวณด้วย</p>
 <div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pois_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">dead</span> <span class="op">~</span>  <span class="va">age_group</span> <span class="op">+</span> <span class="va">histo_major</span> <span class="op">+</span> <span class="va">stage</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">person_month</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -396,7 +396,7 @@ ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t)
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">stage</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">60</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure/pois_plot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="figure/pois_plot-1.png" width="672"></div>
 <p>อย่างไรก็ตาม พิจารณาดูแล้วอัตราการตายไม่ได้เพิ่มขึ้นมากตามกลุ่มอายุ ซึ่งอาจจะเป็นผลบวกลวง เมื่อกลับมาพิจารณาแล้ว Poisson regression มีสมมติฐานที่สำคัญตาม <a href="distribution.html#poisson-dist">Poisson distribution</a> คือ</p>
 <ul>
 <li>ต้องเป็นจำนวนนับ</li>
@@ -508,7 +508,7 @@ V = u_{i}(1+\frac{u_{i}}{\phi})
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-10.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
