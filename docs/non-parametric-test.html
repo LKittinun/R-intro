@@ -286,7 +286,7 @@ p = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose 
 ## sample estimates:
 ## odds ratio 
 ##   2.991585</code></pre>
-<p><span class="math inline">\(p\)</span> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ สังเกตว่า <span class="math inline">\(p\)</span> จะมากกว่า Chi-square เนื่องจากการทดสอบนี้มีความ conservative กว่า</p>
+<p><span class="math inline">\(p\)</span> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ สังเกตว่า <span class="math inline">\(p\)</span> จะมากกว่า Chi-square เนื่องจากการทดสอบนี้มีความ Conservative กว่า</p>
 <p>ลองคำนวณเองตามสูตรขั้นต้น</p>
 <div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alive_dead</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span></span>
@@ -405,7 +405,7 @@ W = min(W_{1}, W_{2})
 <span><span class="va">pval</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="va">pval</span> <span class="co"># not exactly equal due to tie adjustment in wilcox.test()</span></span></code></pre></div>
 <pre><code>## [1] 6.856641e-18</code></pre>
-<p>ปล. เมื่อจำนวนตัวอย่าง &gt;50 ค่า <span class="math inline">\(W\)</span> จะเข้าสู่ Normal distribution ซึ่งสามารถเปลี่ยนเป็นค่า <span class="math inline">\(Z\)</span> ได้ ส่งผลให้การคำนวณ <span class="math inline">\(p\)</span>-value จะแม่นยำขึ้น</p>
+<p><strong>Note:</strong> เมื่อจำนวนตัวอย่าง &gt;50 ค่า <span class="math inline">\(W\)</span> จะเข้าสู่ Normal distribution ซึ่งสามารถเปลี่ยนเป็นค่า <span class="math inline">\(Z\)</span> ได้ ส่งผลให้การคำนวณ <span class="math inline">\(p\)</span>-value จะแม่นยำขึ้น</p>
 <p><span class="math display">\[
 Z = \frac{W-m_{w}}{s_{w}}
 \]</span></p>
@@ -421,7 +421,7 @@ s_{w} = \sqrt{\frac{n_{1}n_{2}(n_{1}+n_{2}+1)}{12}}
 <span class="header-section-number">11.2.3</span> Wilcoxon’s signed-rank test<a class="anchor" aria-label="anchor" href="#wilcox-sign"><i class="fas fa-link"></i></a>
 </h3>
 <p>คือ การคำนวณว่ากลุ่มตัวอย่าง 2 กลุ่มนั้นมาจากประชากรกลุ่มเดียวกันหรือไม่ จากการคำนวณ<strong>ลำดับข้อมูล</strong>ของทั้งสองกลุ่ม</p>
-<p>ลักษณะการใช้คล้าย <a href="parametric-test.html#pair-t">Paired t-test</a> สำหรับ non-normal distribution</p>
+<p>ลักษณะการใช้คล้าย <a href="parametric-test.html#pair-t">Paired t-test</a> สำหรับ Non-normal distribution</p>
 <p><span class="math display">\[
 V = \sum_{i=1}^{N_{r}}[sgn(x_{2,i} - x_{1,i}) \cdot R_{i}]
 \]</span></p>
@@ -613,7 +613,7 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-16.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

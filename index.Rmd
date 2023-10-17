@@ -24,6 +24,7 @@ cache:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 #                      tidy.opts = list(width.cutoff = 80), tidy = TRUE)
+
 ```
 
 # **Preface** {.unnumbered}

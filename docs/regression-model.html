@@ -162,8 +162,8 @@ h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \the
 \]</span></p>
 <ul>
 <li><p><span class="math inline">\(TSS\)</span> = Total variation = ค่าความผันผวนระหว่างข้อมูลกับค่าเฉลี่ยของข้อมูล</p></li>
-<li><p><span class="math inline">\(SSR\)</span> = Explained variation = ค่าความผันผวนระหว่างค่าเฉลี่ยของข้อมูลกับเส้น regression</p></li>
-<li><p><span class="math inline">\(SSE\)</span> = Error = ค่าความผันผวนระหว่างข้อมูลกับเส้น regression</p></li>
+<li><p><span class="math inline">\(SSR\)</span> = Explained variation = ค่าความผันผวนระหว่างค่าเฉลี่ยของข้อมูลกับเส้น Regression</p></li>
+<li><p><span class="math inline">\(SSE\)</span> = Error = ค่าความผันผวนระหว่างข้อมูลกับเส้น Regression</p></li>
 </ul>
 <div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">diabetes_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">sspg</span> <span class="op">~</span> <span class="va">glufast</span>, data <span class="op">=</span> <span class="va">Diabetes</span><span class="op">)</span> </span>
@@ -186,20 +186,20 @@ h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \the
 ## Residual standard error: 74.33 on 143 degrees of freedom
 ## Multiple R-squared:  0.5119, Adjusted R-squared:  0.5085 
 ## F-statistic:   150 on 1 and 143 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p><span class="math inline">\(R^{2}\)</span> คือ อัตราส่วนระหว่าง <code>Explained variation</code> กับ <code>Total variation</code> = <span class="math inline">\(\frac{SSR}{TSS} = 1-\frac{SSE}{TSS}\)</span> ซึ่งจะบ่งบอกความสามารถของเส้นถดถอย ในการอธิบายข้อมูล (goodness of fit)</p>
+<p><span class="math inline">\(R^{2}\)</span> คือ อัตราส่วนระหว่าง Explained variation กับ Total variation = <span class="math inline">\(\frac{SSR}{TSS} = 1-\frac{SSE}{TSS}\)</span> ซึ่งจะบ่งบอกความสามารถของเส้นถดถอย ในการอธิบายข้อมูล (goodness of fit)</p>
 <p><span class="math inline">\(F\)</span>-test คือการเปรียบเทียบความสามารถของเส้นถดถอย ว่าสามารถอธิบายข้อมูลได้ดีกว่า <span class="math inline">\(H_{0}\)</span> อย่างมีนัยสำคัญหรือไม่ ภายใต้สมมติฐาน</p>
 <ul>
 <li><p><span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(f(x) = \theta_{0} + c\)</span> หรือ สามารถอธิบายข้อมูลได้โดยใช้แค่ค่าเฉลี่ย</p></li>
 <li><p><span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(f(x) = \theta_{0} + x_{1}\theta_{1} + … + \epsilon\)</span></p></li>
 </ul>
-<p>ซึ่งเป็นการเทียบอัตราส่วน explained กับ unexplained variation เช่นเดียวกับ <a href="parametric-test.html#ANOVA">ANOVA</a></p>
+<p>ซึ่งเป็นการเทียบอัตราส่วน Explained กับ Unexplained variation เช่นเดียวกับ <a href="parametric-test.html#ANOVA">ANOVA</a></p>
 <p><span class="math display">\[F =\frac{MSR}{MSE} = \frac{TSS-SSE}{SSE}/\frac{DF_{TSS}-DF_{SSE}}{DF_{SSE}}\]</span></p>
-<p><span class="math inline">\(t\)</span>-test คือการเปรียบเทียบเส้น regression เมื่อมีตัวแปรนั้น ว่าอธิบายได้ดีกว่าเมื่อไม่มีตัวแปรนั้นหรือไม่</p>
+<p><span class="math inline">\(t\)</span>-test คือการเปรียบเทียบเส้น Regression เมื่อมีตัวแปรนั้น ว่าอธิบายได้ดีกว่าเมื่อไม่มีตัวแปรนั้นหรือไม่</p>
 <ul>
 <li><p><span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\theta = 0\)</span></p></li>
 <li><p><span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\theta \neq 0\)</span></p></li>
 </ul>
-<p>จะเห็นว่าสมการนั้นเหมือน <a href="parametric-test.html#one-t">One-sample t-test</a> แต่เขียนในรูปแบบ regression</p>
+<p>จะเห็นว่าสมการนั้นเหมือน <a href="parametric-test.html#one-t">One-sample t-test</a> แต่เขียนในรูปแบบ Regression</p>
 <p><span class="math display">\[
 t = \frac{\theta_{H_{a}}-\theta_{H_0}}{SE(\theta)} = \frac{\theta-0}{SE(\theta)}
 \]</span></p>
@@ -231,7 +231,7 @@ f(x) = 39.4354 \ + 1.1866\times(\text{glufast}) + \epsilon
 <h2>
 <span class="header-section-number">13.2</span> Logistic regression<a class="anchor" aria-label="anchor" href="#logistic-regression"><i class="fas fa-link"></i></a>
 </h2>
-<p>คือ สมการถดถอยซึ่งมีคุณสมบัติในการจำแนกตัวแปรแบบสองตัวแปร (binary classification) ซึ่งเขียนอยู่ในรูปของ ค่าลอการิธึมของอัตราส่วนความเสี่ยง (log odds)</p>
+<p>คือ สมการถดถอยซึ่งมีคุณสมบัติในการจำแนกตัวแปรแบบสองตัวแปร (Binary classification) ซึ่งเขียนอยู่ในรูปของ ค่าลอการิธึมของอัตราส่วนความเสี่ยง (Log odds)</p>
 <p><span class="math display">\[
 log(\frac{h(x)}{1-h(x)}) = \theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + x_{n}\theta_{n} + \epsilon = z
 \]</span></p>
@@ -435,7 +435,7 @@ V = \phi\mu_{i}
 ## AIC: NA
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
-<p>จะเห็นว่าหลังจากปรับ Dispersion parameter แล้ว <code>age_group</code> ไม่ได้ส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญแต่อย่างใด ปัญหาของ Quasipoisson คือ อาจจะไม่มี parameter ที่ต้องการ เช่น <code>AIC</code> เป็นต้น ซึ่งสามารถใช้อีกหนึ่งสมการถดถอยที่นิยมใช้คือ Negative binomial regression จาก package <code>MASS</code> ซึ่งปรับตามอัตราส่วนความแปรปรวนเช่นกัน</p>
+<p>จะเห็นว่าหลังจากปรับ Dispersion parameter แล้ว <code>age_group</code> ไม่ได้ส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญแต่อย่างใด ปัญหาของ Quasipoisson คือ อาจจะไม่มี Parameter ที่ต้องการ เช่น <code>AIC</code> เป็นต้น ซึ่งสามารถใช้อีกหนึ่งสมการถดถอยที่นิยมใช้คือ Negative binomial regression จาก Package <code>MASS</code> ซึ่งปรับตามอัตราส่วนความแปรปรวนเช่นกัน</p>
 <p><span class="math display">\[
 V = u_{i}(1+\frac{u_{i}}{\phi})
 \]</span></p>
@@ -508,7 +508,7 @@ V = u_{i}(1+\frac{u_{i}}{\phi})
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-16.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

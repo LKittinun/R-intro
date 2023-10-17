@@ -200,7 +200,7 @@ t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 t = \frac{\bar{x_{1}}-\bar{x_{2}}}{\sqrt{\frac{s^{2}_1}{n_{1}}+\frac{s^{2}_2}{n_{2}}}}
 \]</span></p>
 <p><span class="math display">\[
-S_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
+s_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
 \]</span></p>
 <p>กลับไปดูภาพขั้นต้น ครั้งนี้จะเทียบระหว่างกลุ่มตัวอย่างสองกลุ่ม คือ <code>norm_10_sample</code> และ <code>norm_30_sample</code> ว่ามี ค่าเฉลี่ยที่แตกต่างกันอย่างมีนัยสำคัญหรือไม่</p>
 <ul>
@@ -231,7 +231,7 @@ S_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
 <p><span class="math display">\[
 t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 \]</span></p>
-<p><span class="math display">\[ S_{d} = \sqrt{\sum(x_{d}-\bar{x}_{d})/(n-1)}\]</span></p>
+<p><span class="math display">\[ s_{d} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})}{(n-1)}}\]</span></p>
 <div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, <span class="va">norm_30_sample</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -314,7 +314,7 @@ t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 ## virginica  9.1e-10 0.0031    
 ## 
 ## P value adjustment method: holm</code></pre>
-<p><span class="math inline">\(p\)</span>-value น้อยกว่า 0.05 ทุกกลุ่ม หมายความว่า ทุกกลุ่มมีค่าเฉลี่ยของ <code>Petal.Width</code> ที่แตกต่างกัน</p>
+<p><span class="math inline">\(p\)</span>-value &lt; 0.05 ทุกกลุ่ม หมายความว่า ทุกกลุ่มมีค่าเฉลี่ยของ <code>Petal.Width</code> ที่แตกต่างกัน</p>
 </div>
 <div id="correlation-test" class="section level2" number="10.3">
 <h2>
@@ -347,7 +347,7 @@ cov(x,y) = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}
 <li><p>ระดับของความสัมพันธ์ = 0-1 ยิ่งเข้าใกล้ 1 ยิ่งสัมพันธ์กันมาก</p></li>
 <li><p>ทิศทางของความสัมพันธ์ = + ไปทิศทางเดียวกัน - ไปทิศทางตรงข้ามกัน</p></li>
 </ul>
-<p>ท่านสามารถสร้างตาราง Correlation และ <span class="math inline">\(p\)</span>-value ได้ด้วย package <code>corrplot</code></p>
+<p>ท่านสามารถสร้างตาราง Correlation และ <span class="math inline">\(p\)</span>-value ได้ด้วย Package <code>corrplot</code></p>
 <div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span>
 <span></span>
@@ -437,7 +437,7 @@ cov(x,y) = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-16.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

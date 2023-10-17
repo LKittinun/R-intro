@@ -86,7 +86,7 @@ t = \frac{\bar{x_{1}}-\bar{x_{2}}}{\sqrt{\frac{s^{2}_1}{n_{1}}+\frac{s^{2}_2}{n_
 $$
 
 $$
-S_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
+s_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
 $$
 
 กลับไปดูภาพขั้นต้น ครั้งนี้จะเทียบระหว่างกลุ่มตัวอย่างสองกลุ่ม คือ `norm_10_sample` และ `norm_30_sample` ว่ามี ค่าเฉลี่ยที่แตกต่างกันอย่างมีนัยสำคัญหรือไม่
@@ -111,7 +111,7 @@ $$
 t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
 $$
 
-$$ S_{d} = \sqrt{\sum(x_{d}-\bar{x}_{d})/(n-1)}$$
+$$ s_{d} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})}{(n-1)}}$$
 
 ```{r paired_t}
 t.test(norm_10_sample, norm_30_sample, paired = TRUE)
@@ -178,7 +178,7 @@ granova.1w(iris$Sepal.Width, group = iris$Species)
 pairwise.t.test(iris$Sepal.Width, iris$Species)
 ```
 
-$p$-value น้อยกว่า 0.05 ทุกกลุ่ม หมายความว่า ทุกกลุ่มมีค่าเฉลี่ยของ `Petal.Width` ที่แตกต่างกัน
+$p$-value \< 0.05 ทุกกลุ่ม หมายความว่า ทุกกลุ่มมีค่าเฉลี่ยของ `Petal.Width` ที่แตกต่างกัน
 
 ## Correlation test
 
@@ -212,7 +212,7 @@ cor(iris$Sepal.Length, iris$Petal.Length)
 
 -   ทิศทางของความสัมพันธ์ = + ไปทิศทางเดียวกัน - ไปทิศทางตรงข้ามกัน
 
-ท่านสามารถสร้างตาราง Correlation และ $p$-value ได้ด้วย package `corrplot`
+ท่านสามารถสร้างตาราง Correlation และ $p$-value ได้ด้วย Package `corrplot`
 
 ```{r corrplot, message = FALSE, fig.path="figure/"}
 library(corrplot)
