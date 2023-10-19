@@ -9,5 +9,5 @@
 | 20 Nov 2023 | Regression, dimensionality reduction and survival analysis | 2    |
 | 27 Nov 2023 | Introduction to Bioconductor                               | 2    |
 
-- [Full course syllabus](Course syllabus.pdf)
-- [ไฟล์ย้อนหลัง]("https://o365cmu-my.sharepoint.com/personal/pitiporn_noi_cmu_ac_th/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fpitiporn%5Fnoi%5Fcmu%5Fac%5Fth%2FDocuments%2FBasic%5FR&ga=1")
+- [Full course syllabus](/Course%20syllabus.pdf)
+- [ไฟล์ย้อนหลัง](https://o365cmu-my.sharepoint.com/personal/pitiporn_noi_cmu_ac_th/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fpitiporn%5Fnoi%5Fcmu%5Fac%5Fth%2FDocuments%2FBasic%5FR&ga=1)
