@@ -82,7 +82,7 @@ t
 เป็นการเปรียบเทียบค่าเฉลี่ยระหว่าง ตัวอย่างสองกลุ่มที่ไม่เกี่ยวเนื่องกัน
 
 $$
-t = \frac{\bar{x_{1}}-\bar{x_{2}}}{\sqrt{\frac{s^{2}_1}{n_{1}}+\frac{s^{2}_2}{n_{2}}}}
+t = \frac{\bar{x_{1}}-\bar{x_{2}}-\mu_{0}}{\sqrt{\frac{s^{2}_1}{n_{1}}+\frac{s^{2}_2}{n_{2}}}}
 $$
 
 $$
@@ -108,10 +108,16 @@ t.test(norm_10_sample, norm_30_sample, var.equal = TRUE)
 เป็นการเปรียบเทียบค่าเฉลี่ยระหว่างตัวอย่างสองกลุ่มที่เกี่ยวเนื่องกัน (ก่อน-หลัง แม่-ลูก เป็นต้น)
 
 $$
-t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
+t = \frac{\bar{x}_{d}-\mu_{0}}{s_{x_{d}}/\sqrt{n}}
 $$
 
-$$ s_{d} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})}{(n-1)}}$$
+$$
+x_{di} = x_{1i}-x_{2i} 
+$$
+
+$$
+s_{x_{d}} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})}{(n-1)}} 
+$$
 
 ```{r paired_t}
 t.test(norm_10_sample, norm_30_sample, paired = TRUE)

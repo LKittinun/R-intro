@@ -7,7 +7,7 @@
 <title>10 Parametric test | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
 <meta name="description" content="คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง  10.1 \(t\)-test คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย (Mean)...">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
 <meta property="og:title" content="10 Parametric test | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
 <meta property="og:description" content="คือ การวิเคราะห์ทางสถิติที่เราทราบลักษณะการกระจายตัวของข้อมูลอย่างชัดเจน แต่มีข้อดีคือการเปรียบเทียบข้อมูลจะมีความแม่นยำสูง  10.1 \(t\)-test คือ การคำนวณทางสถิติที่เปรียบเทียบค่าเฉลี่ย (Mean)...">
@@ -197,7 +197,7 @@ t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 </h3>
 <p>เป็นการเปรียบเทียบค่าเฉลี่ยระหว่าง ตัวอย่างสองกลุ่มที่ไม่เกี่ยวเนื่องกัน</p>
 <p><span class="math display">\[
-t = \frac{\bar{x_{1}}-\bar{x_{2}}}{\sqrt{\frac{s^{2}_1}{n_{1}}+\frac{s^{2}_2}{n_{2}}}}
+t = \frac{\bar{x_{1}}-\bar{x_{2}}-\mu_{0}}{\sqrt{\frac{s^{2}_1}{n_{1}}+\frac{s^{2}_2}{n_{2}}}}
 \]</span></p>
 <p><span class="math display">\[
 s_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
@@ -229,9 +229,14 @@ s_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
 </h3>
 <p>เป็นการเปรียบเทียบค่าเฉลี่ยระหว่างตัวอย่างสองกลุ่มที่เกี่ยวเนื่องกัน (ก่อน-หลัง แม่-ลูก เป็นต้น)</p>
 <p><span class="math display">\[
-t = \frac{\bar{x}_{d} -\mu_{0}}{{s_{d} / \sqrt{n}}}
+t = \frac{\bar{x}_{d}-\mu_{0}}{s_{x_{d}}/\sqrt{n}}
 \]</span></p>
-<p><span class="math display">\[ s_{d} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})}{(n-1)}}\]</span></p>
+<p><span class="math display">\[
+x_{di} = x_{1i}-x_{2i}
+\]</span></p>
+<p><span class="math display">\[
+s_{x_{d}} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})}{(n-1)}}
+\]</span></p>
 <div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, <span class="va">norm_30_sample</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -437,7 +442,7 @@ cov(x,y) = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-17.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -7,7 +7,7 @@
 <title>17 Limma | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
 <meta name="description" content="17.1 Principle Limma (Linear Model for Microarray Data) (Smyth et al., 2023) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม...">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
 <meta property="og:title" content="17 Limma | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
 <meta property="og:description" content="17.1 Principle Limma (Linear Model for Microarray Data) (Smyth et al., 2023) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม...">
@@ -193,19 +193,19 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 ##   groupCIN3                       0                     0                     1                       0
 ##   groupNormal                     0                     0                     0                       1
 ##              Contrasts
-## Levels        groupCIN2-groupCIN1 groupCIN3-groupCIN1 groupNormal-groupCIN1 groupCIN3-groupCIN2 groupNormal-groupCIN2
-##   groupCancer                   0                   0                     0                   0                     0
-##   groupCIN1                    -1                  -1                    -1                   0                     0
-##   groupCIN2                     1                   0                     0                  -1                    -1
-##   groupCIN3                     0                   1                     0                   1                     0
-##   groupNormal                   0                   0                     1                   0                     1
+## Levels        groupCIN2-groupCIN1 groupCIN3-groupCIN1 groupNormal-groupCIN1 groupCIN3-groupCIN2
+##   groupCancer                   0                   0                     0                   0
+##   groupCIN1                    -1                  -1                    -1                   0
+##   groupCIN2                     1                   0                     0                  -1
+##   groupCIN3                     0                   1                     0                   1
+##   groupNormal                   0                   0                     1                   0
 ##              Contrasts
-## Levels        groupNormal-groupCIN3
-##   groupCancer                     0
-##   groupCIN1                       0
-##   groupCIN2                       0
-##   groupCIN3                      -1
-##   groupNormal                     1</code></pre>
+## Levels        groupNormal-groupCIN2 groupNormal-groupCIN3
+##   groupCancer                     0                     0
+##   groupCIN1                       0                     0
+##   groupCIN2                      -1                     0
+##   groupCIN3                       0                    -1
+##   groupNormal                     1                     1</code></pre>
 <p>สังเกตว่าแต่ละคอลัมน์ผลรวมจะเท่ากับ 0 เนื่องจาก <span class="math inline">\(H_{0}\)</span> ว่าไม่มีความแตกต่างกันในการแสดงออกของยีน (= 0) นั่นเอง</p>
 <p>เมื่อได้ design matrix ต่อไปคือการ fit linear regression ตาม model โดยข้อมูลจะต้องอยู่ในรูปตัวเลขทั้งหมด ดังนั้นจะต้องปรับแต่ง ข้อมูล expression เริ่มต้นเล็กน้อย</p>
 <div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
@@ -372,14 +372,18 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 <div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/decideTests.html">decideTests</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, fc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fl">1.5</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##        groupCIN1-groupCancer groupCIN2-groupCancer groupCIN3-groupCancer groupNormal-groupCancer groupCIN2-groupCIN1
-## Down                    2221                  3818                  2402                    6317                   0
-## NotSig                 50408                 47570                 50026                   40811               54675
-## Up                      2046                  3287                  2247                    7547                   0
-##        groupCIN3-groupCIN1 groupNormal-groupCIN1 groupCIN3-groupCIN2 groupNormal-groupCIN2 groupNormal-groupCIN3
-## Down                    34                     0                   0                   311                  2214
-## NotSig               54548                 54675               54675                 54333                 50612
-## Up                      93                     0                   0                    31                  1849</code></pre>
+<pre><code>##        groupCIN1-groupCancer groupCIN2-groupCancer groupCIN3-groupCancer groupNormal-groupCancer
+## Down                    2221                  3818                  2402                    6317
+## NotSig                 50408                 47570                 50026                   40811
+## Up                      2046                  3287                  2247                    7547
+##        groupCIN2-groupCIN1 groupCIN3-groupCIN1 groupNormal-groupCIN1 groupCIN3-groupCIN2 groupNormal-groupCIN2
+## Down                     0                  34                     0                   0                   311
+## NotSig               54675               54548                 54675               54675                 54333
+## Up                       0                  93                     0                   0                    31
+##        groupNormal-groupCIN3
+## Down                    2214
+## NotSig                 50612
+## Up                      1849</code></pre>
 <div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/venn.html">vennDiagram</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span> <span class="co"># max 5 groups</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/decideTests-1.png" width="672"></div>
@@ -398,14 +402,18 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 <code class="sourceCode R"><span><span class="va">cx_fit_contrasts_eB_trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/ebayes.html">eBayes</a></span><span class="op">(</span><span class="va">cx_fit_contrasts</span>, trend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">results_trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/decideTests.html">decideTests</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, fc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fl">1.5</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">results_trend</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##        groupCIN1-groupCancer groupCIN2-groupCancer groupCIN3-groupCancer groupNormal-groupCancer groupCIN2-groupCIN1
-## Down                    2221                  3818                  2402                    6317                   0
-## NotSig                 50408                 47570                 50026                   40811               54675
-## Up                      2046                  3287                  2247                    7547                   0
-##        groupCIN3-groupCIN1 groupNormal-groupCIN1 groupCIN3-groupCIN2 groupNormal-groupCIN2 groupNormal-groupCIN3
-## Down                    34                     0                   0                   311                  2214
-## NotSig               54548                 54675               54675                 54333                 50612
-## Up                      93                     0                   0                    31                  1849</code></pre>
+<pre><code>##        groupCIN1-groupCancer groupCIN2-groupCancer groupCIN3-groupCancer groupNormal-groupCancer
+## Down                    2221                  3818                  2402                    6317
+## NotSig                 50408                 47570                 50026                   40811
+## Up                      2046                  3287                  2247                    7547
+##        groupCIN2-groupCIN1 groupCIN3-groupCIN1 groupNormal-groupCIN1 groupCIN3-groupCIN2 groupNormal-groupCIN2
+## Down                     0                  34                     0                   0                   311
+## NotSig               54675               54548                 54675               54675                 54333
+## Up                       0                  93                     0                   0                    31
+##        groupNormal-groupCIN3
+## Down                    2214
+## NotSig                 50612
+## Up                      1849</code></pre>
 <p>เมื่อทำการพล็อตความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวนอีกครั้ง จะพบว่าโมเดลนั้นถูกปรับตามความแปรปรวนแล้ว</p>
 <div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/plotSA.html">plotSA</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB_trend</span><span class="op">)</span></span></code></pre></div>
@@ -440,7 +448,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-17.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
