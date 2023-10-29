@@ -9,6 +9,7 @@
 | 20 Nov 2023 | Regression, dimensionality reduction and survival analysis | 2    |
 | 27 Nov 2023 | Introduction to Bioconductor                               | 2    |
 
+- [Handout](https://lkittinun.github.io/R-intro/)
 - [Full course syllabus](/Course%20syllabus.pdf)
 - [Open chat for zoom link](https://line.me/ti/g2/wzhmJ2-cVtw3zdEqpnPcMpLtt9TSvU9Eiskr1w?utm_source=invitation&utm_medium=QR_code&utm_campaign=default)
-- [ไฟล์ย้อนหลัง](https://drive.google.com/drive/folders/1hFm4wFD2IHkReJU6yZ8nYduWZjqjRBUw)
+- [Recorded files](https://drive.google.com/drive/folders/1hFm4wFD2IHkReJU6yZ8nYduWZjqjRBUw)
