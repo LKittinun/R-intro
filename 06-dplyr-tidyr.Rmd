@@ -165,7 +165,7 @@ score_df
 grade_df
 ```
 
--   `Inner join` รวมบรรทัดที่มีตัวแปรที่มีร่วมกันทั้งสองตาราง
+-   `inner_join()` รวมบรรทัดที่มีตัวแปรที่มีร่วมกันทั้งสองตาราง
 
 ```{r inner_join, echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/inner_join.jpg")
@@ -175,7 +175,7 @@ knitr::include_graphics("Picture/inner_join.jpg")
 inner_join(score_df, grade_df, by = "Name")
 ```
 
--   `Outer join/Full join` รวมทุกบรรทัด
+-   `full_join()` หรือ full outer join รวมทุกบรรทัด
 
 ```{r full_join, echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/outer_join.jpg")
@@ -185,7 +185,7 @@ knitr::include_graphics("Picture/outer_join.jpg")
 full_join(score_df, grade_df, by = "Name")
 ```
 
--   `Left join` รวมบรรทัดจากตาราง `y` ที่มีตัวแปรในตาราง `x` และคงบรรทัดในตาราง `x` ทั้งหมด
+-   `left_join()` รวมบรรทัดจากตาราง `y` ที่มีตัวแปรในตาราง `x` และคงบรรทัดในตาราง `x` ทั้งหมด
 
 ```{r left_join, echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/left_join.jpg")
@@ -195,7 +195,7 @@ knitr::include_graphics("Picture/left_join.jpg")
 left_join(score_df, grade_df, by = "Name")
 ```
 
--   `Right join` รวมบรรทัดจากตาราง `x` ที่มีตัวแปรในตาราง `y` และคงบรรทัดในตาราง `y` ทั้งหมด
+-   `right_join()` รวมบรรทัดจากตาราง `x` ที่มีตัวแปรในตาราง `y` และคงบรรทัดในตาราง `y` ทั้งหมด
 
 ```{r right_join, echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/right_join.jpg")
@@ -213,7 +213,7 @@ Filtering join คือการกรองบรรทัดในตาร�
 knitr::include_graphics("Picture/filtering_join.jpg")
 ```
 
--   `semi join` กรองบรรทัดในตาราง `x` ที่**มี**ตัวแปรในตาราง `y`
+-   `semi_join()` กรองบรรทัดในตาราง `x` ที่**มี**ตัวแปรในตาราง `y`
 
 ```{r semi_join, echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/semi_join.jpg")
@@ -223,7 +223,7 @@ knitr::include_graphics("Picture/semi_join.jpg")
 semi_join(score_df, grade_df, by = "Name")
 ```
 
--   `anti join` กรองบรรทัดในตาราง `x` ที่**ไม่มี**ตัวแปรในตาราง `y`
+-   `anti_join()` กรองบรรทัดในตาราง `x` ที่**ไม่มี**ตัวแปรในตาราง `y`
 
 ```{r anti_join, echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/anti_join.jpg")
@@ -267,7 +267,7 @@ head(df_id)
 ```{r iris_long}
 long_df <- df_id |> 
     pivot_longer(cols = !c(flower_id, Species), 
-                 names_to = "Metrics", values_to = "cm") #ไม่รวมคอลัมน์ Species
+                 names_to = "Metrics", values_to = "cm") # ไม่รวมคอลัมน์ Species
 
 head(long_df,10)
 ```

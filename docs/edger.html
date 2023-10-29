@@ -115,7 +115,7 @@
 <li><p><code>log(intensity)</code> ของ Microarray ซึ่งเป็นข้อมูล Continuous จึงสามารถใช้โมเดลแบบ Linear ได้ แต่ ข้อมูล RNA-seq นั้นเป็นข้อมูล <code>read count</code> ที่ได้จากการนับ Sequencing จึงเหมาะกับการใช้โมเดลแบบ Poisson มากกว่า</p></li>
 <li><p>Heteroscedasticity สูง จึงไม่สามารถใช้สมการถดถอยแบบ Poisson โดยปกติได้</p></li>
 </ul>
-<p><img src="figure/unnamed-chunk-18-1.png" width="50%"><img src="figure/unnamed-chunk-18-2.png" width="50%"></p>
+<p><img src="figure/unnamed-chunk-6-1.png" width="50%"><img src="figure/unnamed-chunk-6-2.png" width="50%"></p>
 <p><strong>กราฟซ้าย</strong> คือความสัมพันธ์ของค่าเฉลี่ยและความแปรปรวนของการกระจายตัวแบบ Poisson โดยทั่วไป ส่วน<strong>กราฟขวา</strong> เป็นการกระจายตัวของข้อมูล RNA-seq จะเห็นว่าเมื่อค่าเฉลี่ยเพิ่มมากขึ้นนั้น ความแปรปรวนจะเพิ่มในอัตราส่วนที่มากกว่า ทั้งนี้ เนื่องจาก มีปัจจัยของความแปรปรวนที่ไม่ใช่ความแปรปรวนของ Technical variability จากกระบวนการ RNA sequencing (ซึ่งเป็น การกระจายตัวแบบ Poisson) เพียงอย่างเดียว แต่มีความแปรปรวนของ Biological properties ในตัวอย่างมาเกี่ยวข้องด้วย</p>
 <div id="negative-binomial-model" class="section level3" number="18.1.1">
 <h3>
