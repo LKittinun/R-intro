@@ -160,7 +160,7 @@
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["DGE"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Ref"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"500","2":"2000","_rn_":"A"},{"1":"4500","2":"48000","_rn_":"Not A"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">ora_df</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Fisher's Exact Test for Count Data
@@ -207,10 +207,10 @@
 <span class="header-section-number">19.2</span> Example<a class="anchor" aria-label="anchor" href="#example-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>ในตัวอย่างนี้ จะนำ DGE จาก <a href="edger.html#edgeR-ex">Bladder cancer</a> มาทำการวิเคราะห์ Pathway analysis</p>
-<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span> <span class="co"># Homo Sapiens database</span></span></code></pre></div>
-<div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_result</span> <span class="op">&lt;-</span> <span class="fu">topTags</span><span class="op">(</span><span class="va">genediff</span>, n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">gene_result</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -222,19 +222,19 @@
 <h3>
 <span class="header-section-number">19.2.1</span> ORA<a class="anchor" aria-label="anchor" href="#ora"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb442"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_sig</span> <span class="op">&lt;-</span> <span class="va">gene_result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">FDR</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="co"># significant gene with FDR &lt;= 0.01</span></span>
 <span></span>
 <span><span class="va">ora_entries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">mapIds</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">gene_sig</span><span class="op">)</span>, <span class="st">"ENTREZID"</span>, <span class="st">"ALIAS"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ora_entries</span>, <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1] "5753"      "54958"     "100302237" "9051"      "1118"      "116138"    "25843"     "3738"      "864"      
-## [10] "3013"      "4145"      "126961"    "3008"      "6503"      "80342"     "256158"    "30009"     "1536"     
-## [19] "57194"     "11017"</code></pre>
-<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
+<pre><code>##  [1] "5753"      "54958"     "100302237" "9051"      "1118"      "116138"    "25843"     "3738"     
+##  [9] "864"       "3013"      "4145"      "126961"    "3008"      "6503"      "80342"     "256158"   
+## [17] "30009"     "1536"      "57194"     "11017"</code></pre>
+<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ora_entries</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2103</code></pre>
-<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ora_cc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichGO.html">enrichGO</a></span><span class="op">(</span><span class="va">ora_entries</span>, <span class="va">org.Hs.eg.db</span>, ont <span class="op">=</span> <span class="st">"CC"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">ora_cc</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -249,14 +249,14 @@
 <li><p><code>qvalue</code> คือ Adjusted <span class="math inline">\(p\)</span>-value จาก Package <code>qvalue</code> ซึ่งใช้วิธีที่แตกต่างกัน</p></li>
 </ul>
 <p>ท่านสามารถสร้างกราฟจากผลนี้ได้โดย <code><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html">dotplot()</a></code>, <code><a href="https://rdrr.io/r/graphics/barplot.html">barplot()</a></code></p>
-<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb453"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html">dotplot</a></span><span class="op">(</span><span class="va">ora_cc</span>, showCategory <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/enrichplot-1.png" width="672"></div>
-<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">ora_cc</span>, showCategory <span class="op">=</span> <span class="fl">10</span>, color <span class="op">=</span> <span class="st">"qvalue"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/enrichplot-2.png" width="672"></div>
 <p>หรือ สามารถพล็อต GO pathway โดยรวมได้</p>
-<div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/goplot.html">goplot</a></span><span class="op">(</span><span class="va">ora_cc</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/goplot-1.png" width="672"></div>
 <p>นอกจากนี้ยังมีฐานข้อมูลอื่นให้วิเคราะห์ได้ เช่น <code><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG()</a></code>, <code>enrichPathway()</code></p>
@@ -266,7 +266,7 @@
 <span class="header-section-number">19.2.2</span> GSEA<a class="anchor" aria-label="anchor" href="#gsea"><i class="fas fa-link"></i></a>
 </h3>
 <p>ในส่วน GSEA จะใช้ยีน<strong>ทั้งหมด</strong>เรียงจากมากไปน้อย</p>
-<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_result_ranked</span> <span class="op">&lt;-</span> <span class="va">gene_result</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Score <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">FDR</span><span class="op">)</span><span class="op">*</span><span class="va">logFC</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Score</span><span class="op">)</span><span class="op">)</span> <span class="co"># arrange score max -&gt; min</span></span>
@@ -277,23 +277,23 @@
   </script>
 </div>
 <p>ต่อจากนั้นจะนำข้อมูลนี้ไปใช้ต่อ ซึ่งต้องเปลี่ยนเป็น Entries ID เหมือน ORA</p>
-<div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dge_ranked</span> <span class="op">&lt;-</span> <span class="va">gene_result_ranked</span><span class="op">$</span><span class="va">Score</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dge_ranked</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">gene_result_ranked</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dge_ranked</span>, <span class="fl">20</span><span class="op">)</span> <span class="co"># gene names</span></span></code></pre></div>
-<pre><code>##      MOB4    KLHDC3      GKN1  RPL37AP1      PTK6      TFF1   TMEM160   MT-ATP8   TGFB1I1     ZBTB9   SNRNP27 
-##  25.45660  25.37892  24.07057  23.29780  22.97158  20.83893  20.20938  19.99603  18.58928  18.52797  18.45924 
-##     CRIP2   NDUFA13    MIR675       MDK RNA5SP392    MRPL12   PLA2G2A  C19orf33     MTCP1 
-##  17.69500  17.69159  17.63663  16.37928  16.15418  16.03922  15.85577  15.11291  15.03821</code></pre>
-<div class="sourceCode" id="cb453"><pre class="downlit sourceCode r">
+<pre><code>##      MOB4    KLHDC3      GKN1  RPL37AP1      PTK6      TFF1   TMEM160   MT-ATP8   TGFB1I1     ZBTB9 
+##  25.45660  25.37892  24.07057  23.29780  22.97158  20.83893  20.20938  19.99603  18.58928  18.52797 
+##   SNRNP27     CRIP2   NDUFA13    MIR675       MDK RNA5SP392    MRPL12   PLA2G2A  C19orf33     MTCP1 
+##  18.45924  17.69500  17.69159  17.63663  16.37928  16.15418  16.03922  15.85577  15.11291  15.03821</code></pre>
+<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_entries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">mapIds</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dge_ranked</span><span class="op">)</span>, <span class="st">"ENTREZID"</span>, <span class="st">"ALIAS"</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dge_ranked</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">gene_entries</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dge_ranked</span>, <span class="fl">20</span><span class="op">)</span> <span class="co"># entriesID sorted by rank</span></span></code></pre></div>
-<pre><code>##     25843    116138     56287    140717      5753      7031     54958      &lt;NA&gt;      7041    221504     11017 
-##  25.45660  25.37892  24.07057  23.29780  22.97158  20.83893  20.20938  19.99603  18.58928  18.52797  18.45924 
-##      1397     51079 100033819      4192 100873645      6182      5320     64073      4068 
-##  17.69500  17.69159  17.63663  16.37928  16.15418  16.03922  15.85577  15.11291  15.03821</code></pre>
-<div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
+<pre><code>##     25843    116138     56287    140717      5753      7031     54958      &lt;NA&gt;      7041    221504 
+##  25.45660  25.37892  24.07057  23.29780  22.97158  20.83893  20.20938  19.99603  18.58928  18.52797 
+##     11017      1397     51079 100033819      4192 100873645      6182      5320     64073      4068 
+##  18.45924  17.69500  17.69159  17.63663  16.37928  16.15418  16.03922  15.85577  15.11291  15.03821</code></pre>
+<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gsea_bp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/gseGO.html">gseGO</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">dge_ranked</span><span class="op">)</span>, </span>
 <span>                 ont <span class="op">=</span> <span class="st">"MF"</span>, </span>
 <span>                 OrgDb <span class="op">=</span> <span class="va">org.Hs.eg.db</span>, </span>
@@ -307,11 +307,11 @@
 </div>
 <p>จะเห็นว่าผลลัพธ์ที่ได้เป็น ES แทน Ratio</p>
 <p>ท่านสามารถพล๋อตผลลัพธ์ได้เหมือน ORA</p>
-<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html">dotplot</a></span><span class="op">(</span><span class="va">gsea_bp</span>, showCategory <span class="op">=</span> <span class="fl">20</span>, font.size <span class="op">=</span> <span class="fl">10</span>, label_format <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/gsea_dotplot-1.png" width="672"></div>
 <p>สำหรับ GSEA ท่านสามารถพล็อตการคำนวณคะแนนในแต่ละยีนได้ด้วย <code><a href="https://rdrr.io/pkg/enrichplot/man/gseaplot.html">gseaplot()</a></code></p>
-<div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/gseaplot.html">gseaplot</a></span><span class="op">(</span><span class="va">gsea_bp</span>, geneSetID <span class="op">=</span> <span class="fl">1</span>, title <span class="op">=</span> <span class="va">gsea_bp</span><span class="op">$</span><span class="va">ID</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, font.size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/gseaplot-1.png" width="672"></div>
 <p>โดยตำแหน่งขีดสีดำคล้ายบาร์โค้ด คือตำแหน่งของยีนที่อยู่ใน Pathway กลุ่มนั้น โดยความยาวของขีดคือ Signal-to-noise ratio</p>
@@ -357,7 +357,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-26.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

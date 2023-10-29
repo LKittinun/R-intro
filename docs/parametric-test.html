@@ -120,13 +120,13 @@
 t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 \]</span></p>
 <p>เพื่อให้เห็นภาพของความต่างในการทดสอบนี้ เราจะทำการสร้างกราฟเปรียบว่ากลุ่มตัวอย่างนั้น มีค่าเฉลี่ยต่างจากประชากร ที่ ค่าเฉลี่ย = 10 และ ค่าเฉลี่ย = 30 หรือไม่</p>
-<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">norm_10_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span>, mean <span class="op">=</span> <span class="fl">10</span>, sd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="co"># สร้างประชากร mean = 10, sd = 4</span></span>
 <span><span class="va">norm_10_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">norm_10_pop</span>, <span class="fl">100</span><span class="op">)</span> <span class="co"># สุ่มตัวอย่างมาจากประชากร 100 ราย</span></span>
 <span><span class="va">norm_30_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span>, mean <span class="op">=</span> <span class="fl">30</span>, sd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">norm_30_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">norm_30_pop</span>, <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">norm_pop_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Pop_10 <span class="op">=</span> <span class="va">norm_10_pop</span>, Pop_30 <span class="op">=</span> <span class="va">norm_30_pop</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"Pop"</span>, values_to <span class="op">=</span> <span class="st">"Values"</span><span class="op">)</span>  </span>
 <span></span>
@@ -144,7 +144,7 @@ t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 <li><p><span class="math inline">\(H_{0}\)</span>: ค่าเฉลี่ยของกลุ่มตัวอย่างนั้น ไม่ต่างจากค่าเฉลี่ยของประชากร = 10</p></li>
 <li><p><span class="math inline">\(H_{a}\)</span>: ค่าเฉลี่ยของกลุ่มตัวอย่างนั้น ต่างจากค่าเฉลี่ยของประชากร = 10</p></li>
 </ul>
-<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, mu <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># p &gt; 0.05</span></span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
@@ -162,7 +162,7 @@ t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 <li><p><span class="math inline">\(H_{0}\)</span>: ค่าเฉลี่ยของกลุ่มตัวอย่างนั้น ไม่ต่างจากค่าเฉลี่ยของประชากร = 40</p></li>
 <li><p><span class="math inline">\(H_{a}\)</span>: ค่าเฉลี่ยของกลุ่มตัวอย่างนั้น ต่างจากค่าเฉลี่ยของประชากร = 40</p></li>
 </ul>
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, mu <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="co"># p &lt;= 0.05</span></span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
@@ -177,7 +177,7 @@ t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 ##  10.27449</code></pre>
 <p>จะเห็นว่าต่างจากประชากรที่ค่าเฉลี่ย = 30 อย่างมีนัยสำคัญ (<span class="math inline">\(p\)</span> = <span class="math inline">\(2.2 \times 10^{-16}\)</span> &lt; Critical point = 0.05)</p>
 <p>พิจารณาที่มาของ <span class="math inline">\(p\)</span>-value นั้นมีที่มาจากสูตรขั้นต้น</p>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hypothesized_mean</span> <span class="op">&lt;-</span> <span class="fl">30</span></span>
 <span><span class="va">mean_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">norm_10_sample</span><span class="op">)</span></span>
 <span><span class="va">sd_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">norm_10_sample</span><span class="op">)</span></span>
@@ -186,7 +186,7 @@ t = \frac{\bar{x} - \mu_{0}}{SE} = \frac{\bar{x} - \mu_{0}}{s/\sqrt{n}}
 <span></span>
 <span><span class="va">t</span></span></code></pre></div>
 <pre><code>## [1] -52.85159</code></pre>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="va">t</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span> <span class="co"># p-value</span></span></code></pre></div>
 <pre><code>## [1] 2.306252e-74</code></pre>
 <p>จะเห็นว่าค่า <span class="math inline">\(t\)</span> นั้นเท่ากับ ค่าที่ได้จาก <code>t.test</code> ขั้นต้น เมื่อสร้าง <span class="math inline">\(t\)</span>-distribution ที่มี <span class="math inline">\(H_{0}\)</span> คือ ค่าเฉลี่ย = 0 แล้วจะพบว่าค่านี้มากกว่า Critical value</p>
@@ -207,7 +207,7 @@ s_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
 <li><p><span class="math inline">\(H_{0}\)</span>: ค่าเฉลี่ยของ <code>norm_10_sample</code> และ <code>norm_30_sample</code> นั้นไม่แตกต่างกัน (<span class="math inline">\(\bar{x_{1}} - \bar{x_{2}} = 0\)</span>)</p></li>
 <li><p><span class="math inline">\(H_{a}\)</span>: ค่าเฉลี่ยของ <code>norm_10_sample</code> และ <code>norm_30_sample</code> นั้นแตกต่างกัน (<span class="math inline">\(\bar{x_{1}} - \bar{x_{2}} \neq 0\)</span>)</p></li>
 </ul>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, <span class="va">norm_30_sample</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
@@ -237,7 +237,7 @@ x_{di} = x_{1i}-x_{2i}
 <p><span class="math display">\[
 s_{x_{d}} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})}{(n-1)}}
 \]</span></p>
-<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">norm_10_sample</span>, <span class="va">norm_30_sample</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
@@ -279,7 +279,7 @@ s_{x_{d}} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})}{(n-1)}}
 <li><p><strong>Within group variance</strong> คือ ความแปรปรวนของข้อมูลในกลุ่มนั้น ซึ่งไม่สามารถอธิบายได้ภายใต้สมมติฐานงานวิจัยนั้น</p></li>
 </ul>
 <p>อธิบายโดยใช้ตัวอย่าง iris ในที่นี้เราจะเปรียบเทียบตวามต่างของ <code>Sepal.Width</code> ในแต่ละ <code>Species</code></p>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
 ## Species       2  11.35   5.672   49.16 &lt;2e-16 ***
@@ -287,13 +287,15 @@ s_{x_{d}} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})}{(n-1)}}
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>อธิบายด้วยภาพ</p>
-<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">granova</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/granova/man/granova.1w.html">granova.1w</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, group <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/granova-1.png" width="672"></div>
 <pre><code>## $grandsum
-##     Grandmean        df.bet       df.with        MS.bet       MS.with        F.stat        F.prob SS.bet/SS.tot 
-##          3.06          2.00        147.00          5.67          0.12         49.16          0.00          0.40 
+##     Grandmean        df.bet       df.with        MS.bet       MS.with        F.stat        F.prob 
+##          3.06          2.00        147.00          5.67          0.12         49.16          0.00 
+## SS.bet/SS.tot 
+##          0.40 
 ## 
 ## $stats
 ##            Size Contrast Coef Wt'd Mean Mean Trim'd Mean Var. St. Dev.
@@ -307,7 +309,7 @@ s_{x_{d}} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})}{(n-1)}}
 </ul>
 <p>จุดประสงค์ของ F-test คือการเปรียบเทียบอัตราส่วนระหว่าง ความแปรปรวนของค่าเฉลี่ยแต่ละกลุ่มกับค่าเฉลี่ยทั้งหมด (mean ของความต่างจุดเขียวกับสามเหลี่ยม) ใกล้กันกับความแปรปรวนของข้อมูลในกลุ่มนั้น (mean ของความต่างระหว่างจุดดำกับกับสามเหลี่ยม) หรือไม่ (ratio ~ 1) ซึ่งค่า <span class="math inline">\(F\)</span> นั้นจะถูกนำไปคิด <span class="math inline">\(p\)</span>-value จาก <span class="math inline">\(F\)</span>-distribution (หลักการเดียวกันกับ <span class="math inline">\(t\)</span>-test)</p>
 <p><strong>สังเกตว่า</strong> ท่านไม่สามารถบอกได้ว่ากลุ่มไหนเป็นกลุ่มที่มีค่าเฉลี่ยที่แตกต่างจากทั้งกลุ่ม การที่จะทราบนั้นต้องทำ <code>t.test</code> เปรียบเทียบกันในแต่ละกลุ่ม <span class="math inline">\(3\choose2\)</span> = 3 ครั้ง การค้นหากลุ่มที่มีความต่างหลัง ANOVA นี้ เรียกว่า Post-hoc test</p>
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/pairwise.t.test.html">pairwise.t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
@@ -339,12 +341,12 @@ cov(x,y) = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}
 <p><span class="math display">\[
 \therefore r_{xy} = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum^{n}_{i=1}(x_{i}-\bar{x})^{2}}\sqrt{\sum^{n}_{i=1}(y_{i}-\bar{y})^{2}}}
 \]</span></p>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Petal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/cor_iris-1.png" width="672"></div>
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.8717538</code></pre>
 <p>การแปลผลของ Correlation ขึ้นอยู่กับ</p>
@@ -353,7 +355,7 @@ cov(x,y) = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}
 <li><p>ทิศทางของความสัมพันธ์ = + ไปทิศทางเดียวกัน - ไปทิศทางตรงข้ามกัน</p></li>
 </ul>
 <p>ท่านสามารถสร้างตาราง Correlation และ <span class="math inline">\(p\)</span>-value ได้ด้วย Package <code>corrplot</code></p>
-<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">iris_cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
@@ -363,7 +365,7 @@ cov(x,y) = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}
 ## Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
 ## Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
 ## Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000</code></pre>
-<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris_cor_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/cor.mtest.html">cor.mtest</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">iris_cor_p</span></span></code></pre></div>
 <pre><code>## $p
@@ -386,7 +388,7 @@ cov(x,y) = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}
 ## Sepal.Width    0.04351158  1.00000000   -0.2879499  -0.2186966
 ## Petal.Length   0.90550805 -0.28794993    1.0000000   0.9729853
 ## Petal.Width    0.86483606 -0.21869663    0.9729853   1.0000000</code></pre>
-<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">iris_cor</span>, method <span class="op">=</span> <span class="st">"shade"</span>,type <span class="op">=</span> <span class="st">"upper"</span>,order <span class="op">=</span> <span class="st">"AOE"</span>, </span>
 <span>         p.mat <span class="op">=</span> <span class="va">iris_cor_p</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"p-value"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/corrplot-1.png" width="672"></div>
@@ -442,7 +444,7 @@ cov(x,y) = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-26.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -16,7 +16,7 @@ library(dplyr)
 knitr::include_graphics("Picture/iris.png")
 ```
 
-รูปจาก: <https://www.datacamp.com/tutorial/machine-learning-in-r>
+**รูปจาก:** <https://www.datacamp.com/tutorial/machine-learning-in-r>
 
 ```{r load_iris}
 df <- iris # โหลด dataframe ตัวอย่างที่ติดมากับ base R
@@ -93,19 +93,54 @@ df |>
   mutate(Sepal.Length = log10(Sepal.Length)) # สามารถแทนที่ column เดิมได้ด้วย
 ```
 
--   ท่านสามารถจัดกลุ่มตัวแปรได้โดยใช้ `group_by()` โดยมักจะใช้คู่กับ `summarize()` ซึ่งเป็นคำสั่งที่ใช้ในการสรุปข้อมูลทั้งหมดตามที่ต้องการ
+-   ท่านสามารถจัดกลุ่มตัวแปรได้โดยใช้ `group_by()` โดยมักจะใช้คู่กับ `summarize()` ซึ่งเป็นคำสั่งที่ใช้ในการสรุปข้อมูลทั้งหมดตามที่ต้องการ หรือใน `dplyr` 1.1.0 ขึ้นไปท่านสามารถใช้ `.by = …` ได้
 
 ```{r summarize}
 df |>  
   group_by(Species) |>  # จัดกลุ่มตาม Species
-  summarize(Sepal.Length = sum(Sepal.Length), Sepal.Width = mean(Sepal.Width)) # รวมความยาวทั้งหมด และเฉลี่ยความกว้าง
+  summarize(Sepal.Length = sum(Sepal.Length), 
+            Sepal.Width = mean(Sepal.Width)) # รวมความยาวทั้งหมด และเฉลี่ยความกว้าง
+
+df |>  
+  summarize(Sepal.Length = sum(Sepal.Length), 
+            Sepal.Width = mean(Sepal.Width),
+            .by = Species) 
 ```
 
 -   `rename()` สามารถใช้ในการเปลี่ยนชื่อคอลัมน์ ระวังว่าชื่อที่ต้องการจะอยู่ด้านซ้ายของเครื่องหมาย `=` ซึ่งไม่เหมือนคำสั่งอื่น
 
-```{r}
+```{r rename}
 df |> 
   rename("Sepal_length" = "Sepal.Length", "Sepal_width" = "Sepal.Width") 
+```
+
+### Tidyselect
+
+ในหลายๆ ฟังก์ชัน เช่น `select()` ,`mutate()`, `summarize()` ท่านสามารถใช้**คำสั่งตัวช่วย (Selection helper)** เพื่อให้การเลือกคอลัมน์ที่ต้องการเป็นไปได้สะดวกยิ่งขึ้น
+
+```{r tidyselect}
+df |> 
+  select(contains("Length")) # เลือกคอลัมน์ที่มีคำว่า "Length"
+
+df |> 
+  select(last_col()) # เลือกคอลัมน์สุดท้าย
+```
+
+| คำสั่ง                            | การทำงาน                                 |
+|---------------------------------|------------------------------------------|
+| `starts_with()`, `ends_width()` | เริ่มหรือจบลงด้วยตัวอักษรที่ต้องการ               |
+| `contains()`                    | มีตัวอักษรที่ต้องการ                           |
+| `matches()`                     | Regular expression                       |
+| `num_range()`                   | ช่วงของตัวเลข เช่น 1,2,3,4, ....,10         |
+| `where()`                       | คำสั่งตรวจสอบทางตรรกศาสตร์ เช่น `is.numeric` |
+| `last_col()`                    | คอลัมน์สุดท้าย                               |
+| `everything()`                  | ทุกคอลัมน์                                  |
+
+ในส่วนของการใช้ `mutate()` และ `summarise()` ร่วมกับคำสั่งตัวช่วยนั้น ท่านต้องใช้ภายในคำสั่ง `across()`
+
+```{r tidyselect_summarize}
+df |> 
+  summarize(across(where(is.numeric), .fns = mean))
 ```
 
 ### Joining data
@@ -198,14 +233,16 @@ knitr::include_graphics("Picture/anti_join.jpg")
 anti_join(score_df, grade_df, by = "Name")
 ```
 
+------------------------------------------------------------------------
+
 ## Reshaping data with `tidyr` {#reshape}
 
 ### Data structure
 
 โดยปกติแล้วรูปแบบลักษณะของการบันทึกข้อมูลนั้นจะมีอยู่ 2 ลักษณะ
 
-1.  Wide form เป็นลักษณะที่ง่ายต่อการบันทึก วิเคราะห์และอ่านผลเบื้องต้น โดยมีรูปแบบคือ ในแต่ละแถวนั้น จะมี**ข้อมูลหลัก**ที่ไม่ซ้ำกัน (มักจะเป็นข้อมูลระบุตัวตน)
-2.  Long form เป็นลักษณะที่ง่ายต่อการ Visualize โดยมีรูปแบบคือ สามารถมี**ข้อมูลหลัก**ที่ซ้ำกันได้
+1.  **Wide form** เป็นลักษณะที่ง่ายต่อการบันทึก วิเคราะห์และอ่านผลเบื้องต้น โดยมีรูปแบบคือ ในแต่ละแถวนั้น จะมี**ข้อมูลหลัก**ที่ไม่ซ้ำกัน (มักจะเป็นข้อมูลระบุตัวตน)
+2.  **Long form** เป็นลักษณะที่ง่ายต่อการ Visualize โดยมีรูปแบบคือ สามารถมี**ข้อมูลหลัก**ที่ซ้ำกันได้
 
 ลองทำการดูที่ข้อมูล `iris` อีกครั้ง
 
@@ -267,12 +304,13 @@ df |>
 
 จะเห็นว่าค่อนข้าง intensive และผิดพลาดง่าย
 
-ปล. อย่างไรก็ตาม `dplyr` ในปัจจุบันมีการพัฒนาไปมาก การวิเคราะห์ ใน Wide form ก็สามารถทำได้โดยง่าย ขึ้นอยู่กับว่าถนัดแบบใดมากกว่า
+ปล. อย่างไรก็ตาม `dplyr` ในปัจจุบันมีการพัฒนาไปมาก การวิเคราะห์ ใน Wide form ก็สามารถทำได้โดยง่ายอย่างที่เคยกล่าวไปขั้นต้น ขึ้นอยู่กับว่าถนัดแบบใดมากกว่า
 
 ```{r summarize_wide_easy}
 df |> 
   group_by(Species) |>    
-  dplyr::summarize(across(everything(), list(median = median, mean = mean, sd = sd)))
+  summarize(across(everything(), 
+                   list(median = median, mean = mean, sd = sd)))
 ```
 
 อีก **ประเด็นสำคัญ** ของข้อมูลประเภท Long form นั้นคือ สามารทำ [Visualization](#ggplot2) ที่ซับซ้อนได้ดีกว่า Wide form เป็นอย่างมาก ดังตัวอย่าง [Boxplot1](#multi_boxplot), [Boxplot2](#top10_boxplot)
@@ -296,4 +334,31 @@ head(wide_df, 10)
 summary_df |> 
   pivot_wider(names_from = "Metrics", 
               values_from = c("Median (cm)" ,"Mean (cm)", "sd (cm)"))
+```
+
+------------------------------------------------------------------------
+
+## Separate and unite column with tidyr
+
+ท่านสามารถแยกคอลัมน์ที่มีช่องว่างออกจากกันได้โดยใช้คำสั่ง `separate()`
+
+```{r randomnames, message = FALSE, echo = FALSE}
+set.seed(123)
+name_df <- data.frame(Names = 
+                        randomNames::randomNames(100, ethnicity = 2)
+)
+name_df
+```
+
+```{r separate}
+sep_name_df <- name_df |> 
+  separate(Names, into = c("First", "Last"), sep = ", ")
+sep_name_df
+```
+
+ถ้าท่านต้องการรวมคอลัมน์เข้าด้วยสามารถใช้คำสั่ง `unite()`
+
+```{r unite}
+sep_name_df |> 
+  unite(col = "Full", c("First", "Last"), sep = " ")
 ```

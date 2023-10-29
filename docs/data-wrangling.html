@@ -118,7 +118,7 @@
 </h3>
 <p>ในกรณีนี้จะใช้ข้อมูลตัวอย่าง <code>iris</code> เพื่อสาธิตการใช้ <code>dplyr</code> โดย <code>iris</code> เป็นข้อมูลของความยาวกลีบของพันธุ์ดอกไม้ต่างๆ</p>
 <div class="inline-figure"><img src="Picture/iris.png" width="638" style="display: block; margin: auto;"></div>
-<p>รูปจาก: <a href="https://www.datacamp.com/tutorial/machine-learning-in-r" class="uri">https://www.datacamp.com/tutorial/machine-learning-in-r</a></p>
+<p><strong>รูปจาก:</strong> <a href="https://www.datacamp.com/tutorial/machine-learning-in-r" class="uri">https://www.datacamp.com/tutorial/machine-learning-in-r</a></p>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="co"># โหลด dataframe ตัวอย่างที่ติดมากับ base R</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
@@ -136,11 +136,11 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Rows: 150
 ## Columns: 5
-## $ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.8, 4.8, 4.3, 5.8, 5.7, 5.4, 5.1, 5.…
-## $ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.…
-## $ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4, 1.1, 1.2, 1.5, 1.3, 1.4, 1.…
-## $ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.…
-## $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, seto…</code></pre>
+## $ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.8, 4.8, 4.3, 5.8, 5.…
+## $ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.…
+## $ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4, 1.1, 1.2, 1.…
+## $ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.…
+## $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setos…</code></pre>
 <ul>
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> เลือก column ที่ต้องการโดยใช้ตำแหน่งหรือชื่อ column ก็ได้</li>
@@ -224,8 +224,9 @@
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ใช้แค่ base R solution จะไม่สามารถดึงออกมาเป็น dataframe ได้</span></span>
 <span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">[</span><span class="st">"Species"</span><span class="op">]</span> <span class="op">==</span> <span class="st">"setosa"</span>, <span class="st">"Sepal.Length"</span><span class="op">]</span></span></code></pre></div>
-<pre><code>##  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0
-## [28] 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0</code></pre>
+<pre><code>##  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1 5.7 5.1 5.4 5.1 4.6 5.1
+## [25] 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6
+## [49] 5.3 5.0</code></pre>
 <p>บรรทัดสุดท้าย สำหรับ Dataframe จะไม่สามารถดึงมาทั้งคอลัมน์ได้ ซึ่งจะต้องใช้ข้อมูลอีกแบบ (Tibble) แต่จะไม่กล่าวถึง ณ ที่นี่</p>
 <p><strong>Note:</strong> การ subset โดย dplyr นั้นสามารถทำใน Dataframe/Tibble เท่านั้น ไม่สามารถทำใน Matrix ได้ (ต้องใช้วิธีของ base R)</p>
 <ul>
@@ -269,12 +270,23 @@
   </script>
 </div>
 <ul>
-<li>ท่านสามารถจัดกลุ่มตัวแปรได้โดยใช้ <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> โดยมักจะใช้คู่กับ <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> ซึ่งเป็นคำสั่งที่ใช้ในการสรุปข้อมูลทั้งหมดตามที่ต้องการ</li>
+<li>ท่านสามารถจัดกลุ่มตัวแปรได้โดยใช้ <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> โดยมักจะใช้คู่กับ <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> ซึ่งเป็นคำสั่งที่ใช้ในการสรุปข้อมูลทั้งหมดตามที่ต้องการ หรือใน <code>dplyr</code> 1.1.0 ขึ้นไปท่านสามารถใช้ <code>.by = …</code> ได้</li>
 </ul>
 <div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span>  </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span>  <span class="co"># จัดกลุ่มตาม Species</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>Sepal.Length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span>, Sepal.Width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span> <span class="co"># รวมความยาวทั้งหมด และเฉลี่ยความกว้าง</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>Sepal.Length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span>, </span>
+<span>            Sepal.Width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span> <span class="co"># รวมความยาวทั้งหมด และเฉลี่ยความกว้าง</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Species"],"name":[1],"type":["fct"],"align":["left"]},{"label":["Sepal.Length"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"setosa","2":"250.3","3":"3.428"},{"1":"versicolor","2":"296.8","3":"2.770"},{"1":"virginica","2":"329.4","3":"2.974"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span>  </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>Sepal.Length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span>, </span>
+<span>            Sepal.Width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Width</span><span class="op">)</span>,</span>
+<span>            .by <span class="op">=</span> <span class="va">Species</span><span class="op">)</span> </span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Species"],"name":[1],"type":["fct"],"align":["left"]},{"label":["Sepal.Length"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"setosa","2":"250.3","3":"3.428"},{"1":"versicolor","2":"296.8","3":"2.770"},{"1":"virginica","2":"329.4","3":"2.974"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -284,7 +296,7 @@
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code> สามารถใช้ในการเปลี่ยนชื่อคอลัมน์ ระวังว่าชื่อที่ต้องการจะอยู่ด้านซ้ายของเครื่องหมาย <code>=</code> ซึ่งไม่เหมือนคำสั่งอื่น</li>
 </ul>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span><span class="st">"Sepal_length"</span> <span class="op">=</span> <span class="st">"Sepal.Length"</span>, <span class="st">"Sepal_width"</span> <span class="op">=</span> <span class="st">"Sepal.Width"</span><span class="op">)</span> </span></code></pre></div>
 <div data-pagedtable="false">
@@ -293,14 +305,88 @@
   </script>
 </div>
 </div>
-<div id="joining-data" class="section level3" number="6.1.2">
+<div id="tidyselect" class="section level3" number="6.1.2">
 <h3>
-<span class="header-section-number">6.1.2</span> Joining data<a class="anchor" aria-label="anchor" href="#joining-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1.2</span> Tidyselect<a class="anchor" aria-label="anchor" href="#tidyselect"><i class="fas fa-link"></i></a>
+</h3>
+<p>ในหลายๆ ฟังก์ชัน เช่น <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> ,<code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> ท่านสามารถใช้<strong>คำสั่งตัวช่วย (Selection helper)</strong> เพื่อให้การเลือกคอลัมน์ที่ต้องการเป็นไปได้สะดวกยิ่งขึ้น</p>
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"Length"</span><span class="op">)</span><span class="op">)</span> <span class="co"># เลือกคอลัมน์ที่มีคำว่า "Length"</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Sepal.Length"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Petal.Length"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"5.1","2":"1.4"},{"1":"4.9","2":"1.4"},{"1":"4.7","2":"1.3"},{"1":"4.6","2":"1.5"},{"1":"5.0","2":"1.4"},{"1":"5.4","2":"1.7"},{"1":"4.6","2":"1.4"},{"1":"5.0","2":"1.5"},{"1":"4.4","2":"1.4"},{"1":"4.9","2":"1.5"},{"1":"5.4","2":"1.5"},{"1":"4.8","2":"1.6"},{"1":"4.8","2":"1.4"},{"1":"4.3","2":"1.1"},{"1":"5.8","2":"1.2"},{"1":"5.7","2":"1.5"},{"1":"5.4","2":"1.3"},{"1":"5.1","2":"1.4"},{"1":"5.7","2":"1.7"},{"1":"5.1","2":"1.5"},{"1":"5.4","2":"1.7"},{"1":"5.1","2":"1.5"},{"1":"4.6","2":"1.0"},{"1":"5.1","2":"1.7"},{"1":"4.8","2":"1.9"},{"1":"5.0","2":"1.6"},{"1":"5.0","2":"1.6"},{"1":"5.2","2":"1.5"},{"1":"5.2","2":"1.4"},{"1":"4.7","2":"1.6"},{"1":"4.8","2":"1.6"},{"1":"5.4","2":"1.5"},{"1":"5.2","2":"1.5"},{"1":"5.5","2":"1.4"},{"1":"4.9","2":"1.5"},{"1":"5.0","2":"1.2"},{"1":"5.5","2":"1.3"},{"1":"4.9","2":"1.4"},{"1":"4.4","2":"1.3"},{"1":"5.1","2":"1.5"},{"1":"5.0","2":"1.3"},{"1":"4.5","2":"1.3"},{"1":"4.4","2":"1.3"},{"1":"5.0","2":"1.6"},{"1":"5.1","2":"1.9"},{"1":"4.8","2":"1.4"},{"1":"5.1","2":"1.6"},{"1":"4.6","2":"1.4"},{"1":"5.3","2":"1.5"},{"1":"5.0","2":"1.4"},{"1":"7.0","2":"4.7"},{"1":"6.4","2":"4.5"},{"1":"6.9","2":"4.9"},{"1":"5.5","2":"4.0"},{"1":"6.5","2":"4.6"},{"1":"5.7","2":"4.5"},{"1":"6.3","2":"4.7"},{"1":"4.9","2":"3.3"},{"1":"6.6","2":"4.6"},{"1":"5.2","2":"3.9"},{"1":"5.0","2":"3.5"},{"1":"5.9","2":"4.2"},{"1":"6.0","2":"4.0"},{"1":"6.1","2":"4.7"},{"1":"5.6","2":"3.6"},{"1":"6.7","2":"4.4"},{"1":"5.6","2":"4.5"},{"1":"5.8","2":"4.1"},{"1":"6.2","2":"4.5"},{"1":"5.6","2":"3.9"},{"1":"5.9","2":"4.8"},{"1":"6.1","2":"4.0"},{"1":"6.3","2":"4.9"},{"1":"6.1","2":"4.7"},{"1":"6.4","2":"4.3"},{"1":"6.6","2":"4.4"},{"1":"6.8","2":"4.8"},{"1":"6.7","2":"5.0"},{"1":"6.0","2":"4.5"},{"1":"5.7","2":"3.5"},{"1":"5.5","2":"3.8"},{"1":"5.5","2":"3.7"},{"1":"5.8","2":"3.9"},{"1":"6.0","2":"5.1"},{"1":"5.4","2":"4.5"},{"1":"6.0","2":"4.5"},{"1":"6.7","2":"4.7"},{"1":"6.3","2":"4.4"},{"1":"5.6","2":"4.1"},{"1":"5.5","2":"4.0"},{"1":"5.5","2":"4.4"},{"1":"6.1","2":"4.6"},{"1":"5.8","2":"4.0"},{"1":"5.0","2":"3.3"},{"1":"5.6","2":"4.2"},{"1":"5.7","2":"4.2"},{"1":"5.7","2":"4.2"},{"1":"6.2","2":"4.3"},{"1":"5.1","2":"3.0"},{"1":"5.7","2":"4.1"},{"1":"6.3","2":"6.0"},{"1":"5.8","2":"5.1"},{"1":"7.1","2":"5.9"},{"1":"6.3","2":"5.6"},{"1":"6.5","2":"5.8"},{"1":"7.6","2":"6.6"},{"1":"4.9","2":"4.5"},{"1":"7.3","2":"6.3"},{"1":"6.7","2":"5.8"},{"1":"7.2","2":"6.1"},{"1":"6.5","2":"5.1"},{"1":"6.4","2":"5.3"},{"1":"6.8","2":"5.5"},{"1":"5.7","2":"5.0"},{"1":"5.8","2":"5.1"},{"1":"6.4","2":"5.3"},{"1":"6.5","2":"5.5"},{"1":"7.7","2":"6.7"},{"1":"7.7","2":"6.9"},{"1":"6.0","2":"5.0"},{"1":"6.9","2":"5.7"},{"1":"5.6","2":"4.9"},{"1":"7.7","2":"6.7"},{"1":"6.3","2":"4.9"},{"1":"6.7","2":"5.7"},{"1":"7.2","2":"6.0"},{"1":"6.2","2":"4.8"},{"1":"6.1","2":"4.9"},{"1":"6.4","2":"5.6"},{"1":"7.2","2":"5.8"},{"1":"7.4","2":"6.1"},{"1":"7.9","2":"6.4"},{"1":"6.4","2":"5.6"},{"1":"6.3","2":"5.1"},{"1":"6.1","2":"5.6"},{"1":"7.7","2":"6.1"},{"1":"6.3","2":"5.6"},{"1":"6.4","2":"5.5"},{"1":"6.0","2":"4.8"},{"1":"6.9","2":"5.4"},{"1":"6.7","2":"5.6"},{"1":"6.9","2":"5.1"},{"1":"5.8","2":"5.1"},{"1":"6.8","2":"5.9"},{"1":"6.7","2":"5.7"},{"1":"6.7","2":"5.2"},{"1":"6.3","2":"5.0"},{"1":"6.5","2":"5.2"},{"1":"6.2","2":"5.4"},{"1":"5.9","2":"5.1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">last_col</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># เลือกคอลัมน์สุดท้าย</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Species"],"name":[1],"type":["fct"],"align":["left"]}],"data":[{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"setosa"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"versicolor"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"},{"1":"virginica"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="44%">
+<col width="56%">
+</colgroup>
+<thead><tr class="header">
+<th>คำสั่ง</th>
+<th>การทำงาน</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>
+<code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code>, <code>ends_width()</code>
+</td>
+<td>เริ่มหรือจบลงด้วยตัวอักษรที่ต้องการ</td>
+</tr>
+<tr class="even">
+<td><code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains()</a></code></td>
+<td>มีตัวอักษรที่ต้องการ</td>
+</tr>
+<tr class="odd">
+<td><code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches()</a></code></td>
+<td>Regular expression</td>
+</tr>
+<tr class="even">
+<td><code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">num_range()</a></code></td>
+<td>ช่วงของตัวเลข เช่น 1,2,3,4, ….,10</td>
+</tr>
+<tr class="odd">
+<td><code><a href="https://tidyselect.r-lib.org/reference/where.html">where()</a></code></td>
+<td>คำสั่งตรวจสอบทางตรรกศาสตร์ เช่น <code>is.numeric</code>
+</td>
+</tr>
+<tr class="even">
+<td><code><a href="https://tidyselect.r-lib.org/reference/everything.html">last_col()</a></code></td>
+<td>คอลัมน์สุดท้าย</td>
+</tr>
+<tr class="odd">
+<td><code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code></td>
+<td>ทุกคอลัมน์</td>
+</tr>
+</tbody>
+</table></div>
+<p>ในส่วนของการใช้ <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> และ <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> ร่วมกับคำสั่งตัวช่วยนั้น ท่านต้องใช้ภายในคำสั่ง <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code></p>
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, .fns <span class="op">=</span> <span class="va">mean</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Sepal.Length"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Petal.Length"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Petal.Width"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"5.843333","2":"3.057333","3":"3.758","4":"1.199333"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="joining-data" class="section level3" number="6.1.3">
+<h3>
+<span class="header-section-number">6.1.3</span> Joining data<a class="anchor" aria-label="anchor" href="#joining-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>หลายครั้งที่การจัดการกับข้อมูลนั้นมีที่มาจากหลายส่วน โดยคอลัมน์หลักร่วมเพียงไม่กี่คอลัมน์ ผู้วิเคราะห์สามารถรวมตารางจากหลายแห่งเข้าด้วยกันได้โดยการใช้คำสั่ง <code>x_join</code> เพื่อความสะดวกในการวิเคราะห์</p>
-<div id="mutating-join" class="section level4" number="6.1.2.1">
+<div id="mutating-join" class="section level4" number="6.1.3.1">
 <h4>
-<span class="header-section-number">6.1.2.1</span> Mutating join<a class="anchor" aria-label="anchor" href="#mutating-join"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1.3.1</span> Mutating join<a class="anchor" aria-label="anchor" href="#mutating-join"><i class="fas fa-link"></i></a>
 </h4>
 <p>Mutating join คือการรวมตารางสองตารางเข้าด้วยกันภายใต้เงื่อนไขต่างๆ ใน<strong>คอลัมน์หลัก</strong>ที่กำหนด</p>
 <div class="inline-figure"><img src="Picture/mutating_join.jpg" width="70%"></div>
@@ -320,7 +406,7 @@
 <code>Inner join</code> รวมบรรทัดที่มีตัวแปรที่มีร่วมกันทั้งสองตาราง</li>
 </ul>
 <div class="inline-figure"><img src="Picture/inner_join.jpg" width="70%"></div>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -332,7 +418,7 @@
 <code>Outer join/Full join</code> รวมทุกบรรทัด</li>
 </ul>
 <div class="inline-figure"><img src="Picture/outer_join.jpg" width="70%"></div>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -344,7 +430,7 @@
 <code>Left join</code> รวมบรรทัดจากตาราง <code>y</code> ที่มีตัวแปรในตาราง <code>x</code> และคงบรรทัดในตาราง <code>x</code> ทั้งหมด</li>
 </ul>
 <div class="inline-figure"><img src="Picture/left_join.jpg" width="70%"></div>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -356,7 +442,7 @@
 <code>Right join</code> รวมบรรทัดจากตาราง <code>x</code> ที่มีตัวแปรในตาราง <code>y</code> และคงบรรทัดในตาราง <code>y</code> ทั้งหมด</li>
 </ul>
 <div class="inline-figure"><img src="Picture/right_join.jpg" width="70%"></div>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">right_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -364,9 +450,9 @@
   </script>
 </div>
 </div>
-<div id="filtering-join" class="section level4" number="6.1.2.2">
+<div id="filtering-join" class="section level4" number="6.1.3.2">
 <h4>
-<span class="header-section-number">6.1.2.2</span> Filtering join<a class="anchor" aria-label="anchor" href="#filtering-join"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1.3.2</span> Filtering join<a class="anchor" aria-label="anchor" href="#filtering-join"><i class="fas fa-link"></i></a>
 </h4>
 <p>Filtering join คือการกรองบรรทัดในตาราง <code>x</code>โดยเงื่อนไขจากตาราง <code>y</code></p>
 <div class="inline-figure"><img src="Picture/filtering_join.jpg" width="70%"></div>
@@ -376,7 +462,7 @@
 </li>
 </ul>
 <div class="inline-figure"><img src="Picture/semi_join.jpg" width="70%"></div>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -389,13 +475,14 @@
 </li>
 </ul>
 <div class="inline-figure"><img src="Picture/anti_join.jpg" width="70%"></div>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">score_df</span>, <span class="va">grade_df</span>, by <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Score"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Pom","2":"30"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
+<hr>
 </div>
 </div>
 </div>
@@ -409,11 +496,13 @@
 </h3>
 <p>โดยปกติแล้วรูปแบบลักษณะของการบันทึกข้อมูลนั้นจะมีอยู่ 2 ลักษณะ</p>
 <ol style="list-style-type: decimal">
-<li>Wide form เป็นลักษณะที่ง่ายต่อการบันทึก วิเคราะห์และอ่านผลเบื้องต้น โดยมีรูปแบบคือ ในแต่ละแถวนั้น จะมี<strong>ข้อมูลหลัก</strong>ที่ไม่ซ้ำกัน (มักจะเป็นข้อมูลระบุตัวตน)</li>
-<li>Long form เป็นลักษณะที่ง่ายต่อการ Visualize โดยมีรูปแบบคือ สามารถมี<strong>ข้อมูลหลัก</strong>ที่ซ้ำกันได้</li>
+<li>
+<strong>Wide form</strong> เป็นลักษณะที่ง่ายต่อการบันทึก วิเคราะห์และอ่านผลเบื้องต้น โดยมีรูปแบบคือ ในแต่ละแถวนั้น จะมี<strong>ข้อมูลหลัก</strong>ที่ไม่ซ้ำกัน (มักจะเป็นข้อมูลระบุตัวตน)</li>
+<li>
+<strong>Long form</strong> เป็นลักษณะที่ง่ายต่อการ Visualize โดยมีรูปแบบคือ สามารถมี<strong>ข้อมูลหลัก</strong>ที่ซ้ำกันได้</li>
 </ol>
 <p>ลองทำการดูที่ข้อมูล <code>iris</code> อีกครั้ง</p>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -421,7 +510,7 @@
   </script>
 </div>
 <p>จะเห็นว่า ข้อมูลในแต่ละแถวนั้น คือ <strong>ดอกไม้ 1 ดอก</strong> จำนวนคอลัมน์จะมากกว่าข้อมูลแบบ Long form</p>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_id</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>flower_id <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span>, </span>
 <span>         .before <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># สร้าง unique id ดอกไม้แต่ละดอก</span></span>
@@ -438,7 +527,7 @@
 <span class="header-section-number">6.2.2</span> Wide to long<a class="anchor" aria-label="anchor" href="#wide-to-long"><i class="fas fa-link"></i></a>
 </h3>
 <p>ท่านสามารถเปลี่ยนข้อมูลจาก Wide form เป็น Long form ได้โดย package <code>tidyr</code> โดยใช้ฟังก์ชัน <code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code></p>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">long_df</span> <span class="op">&lt;-</span> <span class="va">df_id</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">flower_id</span>, <span class="va">Species</span><span class="op">)</span>, </span>
 <span>                 names_to <span class="op">=</span> <span class="st">"Metrics"</span>, values_to <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span> <span class="co">#ไม่รวมคอลัมน์ Species</span></span>
@@ -450,7 +539,7 @@
   </script>
 </div>
 <p>ซึ่งจะทำให้สามารถวิเคราะห์ข้อมูลได้สะดวกขึ้น ยกตัวอย่างถ้าเราต้องการสรุปข้อมูลชุดนี้</p>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_df</span> <span class="op">&lt;-</span> <span class="va">long_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span>, <span class="va">Metrics</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>`Median (cm)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">cm</span><span class="op">)</span>,`Mean (cm)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cm</span><span class="op">)</span>, `sd (cm)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">cm</span><span class="op">)</span><span class="op">)</span></span>
@@ -462,7 +551,7 @@
   </script>
 </div>
 <p>ถ้าลองทำในข้อมูล Wide form</p>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean_Petal_L <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Petal.Length</span><span class="op">)</span>, </span>
@@ -484,11 +573,12 @@
   </script>
 </div>
 <p>จะเห็นว่าค่อนข้าง intensive และผิดพลาดง่าย</p>
-<p>ปล. อย่างไรก็ตาม <code>dplyr</code> ในปัจจุบันมีการพัฒนาไปมาก การวิเคราะห์ ใน Wide form ก็สามารถทำได้โดยง่าย ขึ้นอยู่กับว่าถนัดแบบใดมากกว่า</p>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<p>ปล. อย่างไรก็ตาม <code>dplyr</code> ในปัจจุบันมีการพัฒนาไปมาก การวิเคราะห์ ใน Wide form ก็สามารถทำได้โดยง่ายอย่างที่เคยกล่าวไปขั้นต้น ขึ้นอยู่กับว่าถนัดแบบใดมากกว่า</p>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span>    </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>median <span class="op">=</span> <span class="va">median</span>, mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>median <span class="op">=</span> <span class="va">median</span>, mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Species"],"name":[1],"type":["fct"],"align":["left"]},{"label":["Sepal.Length_median"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Sepal.Length_mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Sepal.Length_sd"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width_median"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width_mean"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width_sd"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Petal.Length_median"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["Petal.Length_mean"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["Petal.Length_sd"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["Petal.Width_median"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["Petal.Width_mean"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["Petal.Width_sd"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"setosa","2":"5.0","3":"5.006","4":"0.3524897","5":"3.4","6":"3.428","7":"0.3790644","8":"1.50","9":"1.462","10":"0.1736640","11":"0.2","12":"0.246","13":"0.1053856"},{"1":"versicolor","2":"5.9","3":"5.936","4":"0.5161711","5":"2.8","6":"2.770","7":"0.3137983","8":"4.35","9":"4.260","10":"0.4699110","11":"1.3","12":"1.326","13":"0.1977527"},{"1":"virginica","2":"6.5","3":"6.588","4":"0.6358796","5":"3.0","6":"2.974","7":"0.3224966","8":"5.55","9":"5.552","10":"0.5518947","11":"2.0","12":"2.026","13":"0.2746501"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -502,7 +592,7 @@
 <span class="header-section-number">6.2.3</span> Long to wide<a class="anchor" aria-label="anchor" href="#long-to-wide"><i class="fas fa-link"></i></a>
 </h3>
 <p>ท่านสามารถเปลี่ยนกลับเป็น Wide form ได้เช่นกัน</p>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wide_df</span> <span class="op">&lt;-</span> <span class="va">long_df</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"Metrics"</span>, values_from <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span></span>
 <span></span>
@@ -513,7 +603,7 @@
   </script>
 </div>
 <p>หรือท่านอยากจะเปลี่ยนข้อมูลที่สรุปแล้วให้เป็น Wide form ก็เป็นได้</p>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"Metrics"</span>, </span>
 <span>              values_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Median (cm)"</span> ,<span class="st">"Mean (cm)"</span>, <span class="st">"sd (cm)"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -522,8 +612,38 @@
 {"columns":[{"label":["Species"],"name":[1],"type":["fct"],"align":["left"]},{"label":["Median (cm)_Petal.Length"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Median (cm)_Petal.Width"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Median (cm)_Sepal.Length"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Median (cm)_Sepal.Width"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Mean (cm)_Petal.Length"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Mean (cm)_Petal.Width"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Mean (cm)_Sepal.Length"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["Mean (cm)_Sepal.Width"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["sd (cm)_Petal.Length"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["sd (cm)_Petal.Width"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["sd (cm)_Sepal.Length"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["sd (cm)_Sepal.Width"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"setosa","2":"1.50","3":"0.2","4":"5.0","5":"3.4","6":"1.462","7":"0.246","8":"5.006","9":"3.428","10":"0.1736640","11":"0.1053856","12":"0.3524897","13":"0.3790644"},{"1":"versicolor","2":"4.35","3":"1.3","4":"5.9","5":"2.8","6":"4.260","7":"1.326","8":"5.936","9":"2.770","10":"0.4699110","11":"0.1977527","12":"0.5161711","13":"0.3137983"},{"1":"virginica","2":"5.55","3":"2.0","4":"6.5","5":"3.0","6":"5.552","7":"2.026","8":"6.588","9":"2.974","10":"0.5518947","11":"0.2746501","12":"0.6358796","13":"0.3224966"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-
+<hr>
 </div>
+</div>
+<div id="separate-and-unite-column-with-tidyr" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Separate and unite column with tidyr<a class="anchor" aria-label="anchor" href="#separate-and-unite-column-with-tidyr"><i class="fas fa-link"></i></a>
+</h2>
+<p>ท่านสามารถแยกคอลัมน์ที่มีช่องว่างออกจากกันได้โดยใช้คำสั่ง <code><a href="https://tidyr.tidyverse.org/reference/separate.html">separate()</a></code></p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Names"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Ramos, Horatio"},{"1":"Chong, Brendan"},{"1":"Cao, Vincent"},{"1":"Phan, Kestral"},{"1":"Nakamura, Christopher"},{"1":"Lee, Cindy"},{"1":"Hazlehurst, Kristy"},{"1":"Young, Jaelene"},{"1":"Baker, Donny"},{"1":"Fetter, Dat"},{"1":"Yatsu, Nina"},{"1":"Ventura, Elaine"},{"1":"Bishop, Hela"},{"1":"Her, Tyler"},{"1":"Khamsoulinh, Lily"},{"1":"Zarate, Calvin"},{"1":"Hutchinson, Kayla"},{"1":"Sheng, Jimmy"},{"1":"Yu, Vu"},{"1":"Piazza, Angad"},{"1":"Tobin, Sohail"},{"1":"Nguyen, Hana"},{"1":"Thanh, Johnny"},{"1":"Yann, Scott"},{"1":"Guerette, Lance"},{"1":"Le, Michael"},{"1":"Doan, Christine"},{"1":"Wang, Melissa"},{"1":"Hart, Daniel"},{"1":"Wu, Melenaite"},{"1":"Yang, Barathwaj"},{"1":"Raab, Elaine"},{"1":"Liddle, Chiaki"},{"1":"Liufau, Foifon"},{"1":"Beehler, Anh"},{"1":"Yoo, Panupoan"},{"1":"Lacsina, Saad"},{"1":"Okazaki, Thomas"},{"1":"Guha, Pradyumna"},{"1":"Tram, Malia"},{"1":"Chhetry, Ulambayar"},{"1":"Sharma, Rosemary"},{"1":"Im, Li-Mae"},{"1":"Saraogi, Kota"},{"1":"Steenburgh, Jeong Min"},{"1":"Lor, Braden"},{"1":"George, Aaron"},{"1":"Vu, Sylviana"},{"1":"Yuan, Eric"},{"1":"Chen, Sameer"},{"1":"Fu, Christina"},{"1":"Park, Ilheum"},{"1":"Samadh, Faran"},{"1":"Noriega, Cuong"},{"1":"Verano, Alex"},{"1":"Abo, Stephanie"},{"1":"Bridwell, Christina"},{"1":"Leung, Lucas"},{"1":"Reeves, Divya"},{"1":"Leon-Guerrero, Leo"},{"1":"Hopkins, Kevin"},{"1":"Park, Sarah"},{"1":"Shrestha, Mylee"},{"1":"Fahrenbrink, Adam"},{"1":"Ngiateng, Ryan"},{"1":"Miller, Moel"},{"1":"Moran, Randy"},{"1":"Inthavong, Johnny"},{"1":"Vogel, Kevin"},{"1":"Rohrbach, Mahyar"},{"1":"Do, Lesley"},{"1":"Von Holten, Rohan"},{"1":"Oza, Shashank"},{"1":"Mcclellan, Ganbayar"},{"1":"Gupta, Jash Mikyle"},{"1":"Pahlavan, Yashna"},{"1":"Fejeran, Angel"},{"1":"Lin, Henry"},{"1":"Ertelt, Mackenzie"},{"1":"Ho, Thuanh"},{"1":"Yang, Grace"},{"1":"Tan, Thao"},{"1":"Cheng, Channing"},{"1":"Lo, Marisa"},{"1":"Joy, Manikoun"},{"1":"Lew, Angela"},{"1":"Won, Wing"},{"1":"Wainess, Rajdeep"},{"1":"Pham, Nahoa Olelo"},{"1":"Barisas, Matthew"},{"1":"Rafiq, Lisa"},{"1":"Reynoso, Se Ra"},{"1":"Pak, Pharwit"},{"1":"Nichols, Tienkieu"},{"1":"Navalta, Erinn"},{"1":"Tang, Keith"},{"1":"Nguyen, Sandeep"},{"1":"Le, Michelle"},{"1":"Muckom, Richard"},{"1":"Meyers, Aaron"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sep_name_df</span> <span class="op">&lt;-</span> <span class="va">name_df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">Names</span>, into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"First"</span>, <span class="st">"Last"</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></span>
+<span><span class="va">sep_name_df</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["First"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Last"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Ramos","2":"Horatio"},{"1":"Chong","2":"Brendan"},{"1":"Cao","2":"Vincent"},{"1":"Phan","2":"Kestral"},{"1":"Nakamura","2":"Christopher"},{"1":"Lee","2":"Cindy"},{"1":"Hazlehurst","2":"Kristy"},{"1":"Young","2":"Jaelene"},{"1":"Baker","2":"Donny"},{"1":"Fetter","2":"Dat"},{"1":"Yatsu","2":"Nina"},{"1":"Ventura","2":"Elaine"},{"1":"Bishop","2":"Hela"},{"1":"Her","2":"Tyler"},{"1":"Khamsoulinh","2":"Lily"},{"1":"Zarate","2":"Calvin"},{"1":"Hutchinson","2":"Kayla"},{"1":"Sheng","2":"Jimmy"},{"1":"Yu","2":"Vu"},{"1":"Piazza","2":"Angad"},{"1":"Tobin","2":"Sohail"},{"1":"Nguyen","2":"Hana"},{"1":"Thanh","2":"Johnny"},{"1":"Yann","2":"Scott"},{"1":"Guerette","2":"Lance"},{"1":"Le","2":"Michael"},{"1":"Doan","2":"Christine"},{"1":"Wang","2":"Melissa"},{"1":"Hart","2":"Daniel"},{"1":"Wu","2":"Melenaite"},{"1":"Yang","2":"Barathwaj"},{"1":"Raab","2":"Elaine"},{"1":"Liddle","2":"Chiaki"},{"1":"Liufau","2":"Foifon"},{"1":"Beehler","2":"Anh"},{"1":"Yoo","2":"Panupoan"},{"1":"Lacsina","2":"Saad"},{"1":"Okazaki","2":"Thomas"},{"1":"Guha","2":"Pradyumna"},{"1":"Tram","2":"Malia"},{"1":"Chhetry","2":"Ulambayar"},{"1":"Sharma","2":"Rosemary"},{"1":"Im","2":"Li-Mae"},{"1":"Saraogi","2":"Kota"},{"1":"Steenburgh","2":"Jeong Min"},{"1":"Lor","2":"Braden"},{"1":"George","2":"Aaron"},{"1":"Vu","2":"Sylviana"},{"1":"Yuan","2":"Eric"},{"1":"Chen","2":"Sameer"},{"1":"Fu","2":"Christina"},{"1":"Park","2":"Ilheum"},{"1":"Samadh","2":"Faran"},{"1":"Noriega","2":"Cuong"},{"1":"Verano","2":"Alex"},{"1":"Abo","2":"Stephanie"},{"1":"Bridwell","2":"Christina"},{"1":"Leung","2":"Lucas"},{"1":"Reeves","2":"Divya"},{"1":"Leon-Guerrero","2":"Leo"},{"1":"Hopkins","2":"Kevin"},{"1":"Park","2":"Sarah"},{"1":"Shrestha","2":"Mylee"},{"1":"Fahrenbrink","2":"Adam"},{"1":"Ngiateng","2":"Ryan"},{"1":"Miller","2":"Moel"},{"1":"Moran","2":"Randy"},{"1":"Inthavong","2":"Johnny"},{"1":"Vogel","2":"Kevin"},{"1":"Rohrbach","2":"Mahyar"},{"1":"Do","2":"Lesley"},{"1":"Von Holten","2":"Rohan"},{"1":"Oza","2":"Shashank"},{"1":"Mcclellan","2":"Ganbayar"},{"1":"Gupta","2":"Jash Mikyle"},{"1":"Pahlavan","2":"Yashna"},{"1":"Fejeran","2":"Angel"},{"1":"Lin","2":"Henry"},{"1":"Ertelt","2":"Mackenzie"},{"1":"Ho","2":"Thuanh"},{"1":"Yang","2":"Grace"},{"1":"Tan","2":"Thao"},{"1":"Cheng","2":"Channing"},{"1":"Lo","2":"Marisa"},{"1":"Joy","2":"Manikoun"},{"1":"Lew","2":"Angela"},{"1":"Won","2":"Wing"},{"1":"Wainess","2":"Rajdeep"},{"1":"Pham","2":"Nahoa Olelo"},{"1":"Barisas","2":"Matthew"},{"1":"Rafiq","2":"Lisa"},{"1":"Reynoso","2":"Se Ra"},{"1":"Pak","2":"Pharwit"},{"1":"Nichols","2":"Tienkieu"},{"1":"Navalta","2":"Erinn"},{"1":"Tang","2":"Keith"},{"1":"Nguyen","2":"Sandeep"},{"1":"Le","2":"Michelle"},{"1":"Muckom","2":"Richard"},{"1":"Meyers","2":"Aaron"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>ถ้าท่านต้องการรวมคอลัมน์เข้าด้วยสามารถใช้คำสั่ง <code><a href="https://tidyr.tidyverse.org/reference/unite.html">unite()</a></code></p>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sep_name_df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"Full"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"First"</span>, <span class="st">"Last"</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Full"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Ramos Horatio"},{"1":"Chong Brendan"},{"1":"Cao Vincent"},{"1":"Phan Kestral"},{"1":"Nakamura Christopher"},{"1":"Lee Cindy"},{"1":"Hazlehurst Kristy"},{"1":"Young Jaelene"},{"1":"Baker Donny"},{"1":"Fetter Dat"},{"1":"Yatsu Nina"},{"1":"Ventura Elaine"},{"1":"Bishop Hela"},{"1":"Her Tyler"},{"1":"Khamsoulinh Lily"},{"1":"Zarate Calvin"},{"1":"Hutchinson Kayla"},{"1":"Sheng Jimmy"},{"1":"Yu Vu"},{"1":"Piazza Angad"},{"1":"Tobin Sohail"},{"1":"Nguyen Hana"},{"1":"Thanh Johnny"},{"1":"Yann Scott"},{"1":"Guerette Lance"},{"1":"Le Michael"},{"1":"Doan Christine"},{"1":"Wang Melissa"},{"1":"Hart Daniel"},{"1":"Wu Melenaite"},{"1":"Yang Barathwaj"},{"1":"Raab Elaine"},{"1":"Liddle Chiaki"},{"1":"Liufau Foifon"},{"1":"Beehler Anh"},{"1":"Yoo Panupoan"},{"1":"Lacsina Saad"},{"1":"Okazaki Thomas"},{"1":"Guha Pradyumna"},{"1":"Tram Malia"},{"1":"Chhetry Ulambayar"},{"1":"Sharma Rosemary"},{"1":"Im Li-Mae"},{"1":"Saraogi Kota"},{"1":"Steenburgh Jeong Min"},{"1":"Lor Braden"},{"1":"George Aaron"},{"1":"Vu Sylviana"},{"1":"Yuan Eric"},{"1":"Chen Sameer"},{"1":"Fu Christina"},{"1":"Park Ilheum"},{"1":"Samadh Faran"},{"1":"Noriega Cuong"},{"1":"Verano Alex"},{"1":"Abo Stephanie"},{"1":"Bridwell Christina"},{"1":"Leung Lucas"},{"1":"Reeves Divya"},{"1":"Leon-Guerrero Leo"},{"1":"Hopkins Kevin"},{"1":"Park Sarah"},{"1":"Shrestha Mylee"},{"1":"Fahrenbrink Adam"},{"1":"Ngiateng Ryan"},{"1":"Miller Moel"},{"1":"Moran Randy"},{"1":"Inthavong Johnny"},{"1":"Vogel Kevin"},{"1":"Rohrbach Mahyar"},{"1":"Do Lesley"},{"1":"Von Holten Rohan"},{"1":"Oza Shashank"},{"1":"Mcclellan Ganbayar"},{"1":"Gupta Jash Mikyle"},{"1":"Pahlavan Yashna"},{"1":"Fejeran Angel"},{"1":"Lin Henry"},{"1":"Ertelt Mackenzie"},{"1":"Ho Thuanh"},{"1":"Yang Grace"},{"1":"Tan Thao"},{"1":"Cheng Channing"},{"1":"Lo Marisa"},{"1":"Joy Manikoun"},{"1":"Lew Angela"},{"1":"Won Wing"},{"1":"Wainess Rajdeep"},{"1":"Pham Nahoa Olelo"},{"1":"Barisas Matthew"},{"1":"Rafiq Lisa"},{"1":"Reynoso Se Ra"},{"1":"Pak Pharwit"},{"1":"Nichols Tienkieu"},{"1":"Navalta Erinn"},{"1":"Tang Keith"},{"1":"Nguyen Sandeep"},{"1":"Le Michelle"},{"1":"Muckom Richard"},{"1":"Meyers Aaron"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -536,7 +656,8 @@
 <li>
 <a class="nav-link" href="#data-manipulation-with-dplyr"><span class="header-section-number">6.1</span> Data manipulation with dplyr</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#basic-dataframe-manipulation"><span class="header-section-number">6.1.1</span> Basic dataframe manipulation</a></li>
-<li><a class="nav-link" href="#joining-data"><span class="header-section-number">6.1.2</span> Joining data</a></li>
+<li><a class="nav-link" href="#tidyselect"><span class="header-section-number">6.1.2</span> Tidyselect</a></li>
+<li><a class="nav-link" href="#joining-data"><span class="header-section-number">6.1.3</span> Joining data</a></li>
 </ul>
 </li>
 <li>
@@ -546,6 +667,7 @@
 <li><a class="nav-link" href="#long-to-wide"><span class="header-section-number">6.2.3</span> Long to wide</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#separate-and-unite-column-with-tidyr"><span class="header-section-number">6.3</span> Separate and unite column with tidyr</a></li>
 </ul>
 
       <div class="book-extra">
@@ -562,7 +684,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-26.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-10-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
