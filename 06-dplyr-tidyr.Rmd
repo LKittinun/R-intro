@@ -127,7 +127,7 @@ df |>
 ```
 
 | คำสั่ง                            | การทำงาน                                 |
-|---------------------------------|------------------------------------------|
+|--------------------------------|----------------------------------------|
 | `starts_with()`, `ends_width()` | เริ่มหรือจบลงด้วยตัวอักษรที่ต้องการ               |
 | `contains()`                    | มีตัวอักษรที่ต้องการ                           |
 | `matches()`                     | Regular expression                       |
@@ -151,7 +151,7 @@ df |>
 
 Mutating join คือการรวมตารางสองตารางเข้าด้วยกันภายใต้เงื่อนไขต่างๆ ใน**คอลัมน์หลัก**ที่กำหนด
 
-```{r mutating_join, echo=FALSE, out.width="70%"}
+```{r mutating_join, fig.align="center", echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/mutating_join.jpg")
 ```
 
@@ -167,7 +167,7 @@ grade_df
 
 -   `inner_join()` รวมบรรทัดที่มีตัวแปรที่มีร่วมกันทั้งสองตาราง
 
-```{r inner_join, echo=FALSE, out.width="70%"}
+```{r inner_join, fig.align="center", echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/inner_join.jpg")
 ```
 
@@ -177,17 +177,17 @@ inner_join(score_df, grade_df, by = "Name")
 
 -   `full_join()` หรือ full outer join รวมทุกบรรทัด
 
-```{r full_join, echo=FALSE, out.width="70%"}
+```{r full_join, fig.align="center", echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/outer_join.jpg")
 ```
 
-```{r full_join_df, out.width="70%", warning = FALSE}
+```{r full_join_df, fig.align="center", out.width="70%", warning = FALSE}
 full_join(score_df, grade_df, by = "Name")
 ```
 
 -   `left_join()` รวมบรรทัดจากตาราง `y` ที่มีตัวแปรในตาราง `x` และคงบรรทัดในตาราง `x` ทั้งหมด
 
-```{r left_join, echo=FALSE, out.width="70%"}
+```{r left_join, fig.align="center", echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/left_join.jpg")
 ```
 
@@ -197,7 +197,7 @@ left_join(score_df, grade_df, by = "Name")
 
 -   `right_join()` รวมบรรทัดจากตาราง `x` ที่มีตัวแปรในตาราง `y` และคงบรรทัดในตาราง `y` ทั้งหมด
 
-```{r right_join, echo=FALSE, out.width="70%"}
+```{r right_join, fig.align="center", echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/right_join.jpg")
 ```
 
@@ -209,13 +209,13 @@ right_join(score_df, grade_df, by = "Name")
 
 Filtering join คือการกรองบรรทัดในตาราง `x`โดยเงื่อนไขจากตาราง `y`
 
-```{r filtering, echo=FALSE, out.width="70%"}
+```{r filtering, fig.align="center", echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/filtering_join.jpg")
 ```
 
 -   `semi_join()` กรองบรรทัดในตาราง `x` ที่**มี**ตัวแปรในตาราง `y`
 
-```{r semi_join, echo=FALSE, out.width="70%"}
+```{r semi_join, fig.align="center", echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/semi_join.jpg")
 ```
 
@@ -225,7 +225,7 @@ semi_join(score_df, grade_df, by = "Name")
 
 -   `anti_join()` กรองบรรทัดในตาราง `x` ที่**ไม่มี**ตัวแปรในตาราง `y`
 
-```{r anti_join, echo=FALSE, out.width="70%"}
+```{r anti_join, fig.align="center", echo=FALSE, out.width="70%"}
 knitr::include_graphics("Picture/anti_join.jpg")
 ```
 
