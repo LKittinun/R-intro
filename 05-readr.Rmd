@@ -24,16 +24,16 @@ head(GSE63514_meta, 10)
 
 ท่านสามารถเขียนข้อมูลจาก R ลงไปในไฟล์ที่ท่านต้องการด้วย `write_()*` อีกด้วย อย่างไรก็ตาม แม้ว่า `readr` นั้นจะสามารถอ่านและเขียนไฟล์ได้ครอบคลุมเป็นอย่างมาก ในบางสกุลไฟล์นั้น อาจจะต้องใช้การอ่านจาก package อื่น
 
-| Extension                                          | Read                           | Write                                           | Package           |
-|----------------------------------------------------|--------------------------------|-------------------------------------------------|-------------------|
-| .csv (comma-separated), .csv (semicolon-separated) | `read_csv()` , `read_csv2()`   | `write_csv()`, `write_csv2()`                   | `readr`           |
-| .tsv                                               | `read_tsv()`                   | `write_tsv()`                                   | `readr`           |
-| .txt                                               | `read_delim()`                 | `write_delim()`                                 | `readr`           |
-| text table                                         | `read_table()`                 | `write_table()`                                 | `readr`           |
-| .xlsx, .xls                                        | `read_excel()` , `read.xlsx()` | `-`, `write.xlsx()`, `write.xlsx2()` (large DF) | `readxl` , `xlsx` |
-| googlesheet url                                    | `read_sheet()`                 | `write_sheet()`                                 | `googlesheets4`   |
-| .sas                                               | `read_sas()`                   | `write_sas()`                                   | `haven`           |
-| .sav (SPSS)                                        | `read_sav()`                   | `write_sav()`                                   | `haven`           |
-| .dta (STATA)                                       | `read_dta()`                   | `write_dta()`                                   | `haven`           |
-| .json                                              | `read_json()`                  | `write_json()`                                  | `jsonlite`        |
-| Very large file/No idea                            | `fread()`                      | `fwrite()`                                      | `data.table`      |
+| Extension                                              | Read                           | Write                                           | Package           |
+|----------------------|---------------|--------------------|---------------|
+| **.csv (comma-separated), .csv (semicolon-separated)** | `read_csv()` , `read_csv2()`   | `write_csv()`, `write_csv2()`                   | `readr`           |
+| **.tsv**                                               | `read_tsv()`                   | `write_tsv()`                                   | `readr`           |
+| **.txt**                                               | `read_delim()`                 | `write_delim()`                                 | `readr`           |
+| **text table**                                         | `read_table()`                 | `write_table()`                                 | `readr`           |
+| **.xlsx, .xls**                                        | `read_excel()` , `read.xlsx()` | `-`, `write.xlsx()`, `write.xlsx2()` (large DF) | `readxl` , `xlsx` |
+| **googlesheet url**                                    | `read_sheet()`                 | `write_sheet()`                                 | `googlesheets4`   |
+| **.sas**                                               | `read_sas()`                   | `write_sas()`                                   | `haven`           |
+| **.sav (SPSS)**                                        | `read_sav()`                   | `write_sav()`                                   | `haven`           |
+| **.dta (STATA)**                                       | `read_dta()`                   | `write_dta()`                                   | `haven`           |
+| **.json**                                              | `read_json()`                  | `write_json()`                                  | `jsonlite`        |
+| **Very large file/No idea**                            | `fread()`                      | `fwrite()`                                      | `data.table`      |

@@ -38,7 +38,7 @@ histogram
 fitting-a-statistical-model
 ggplot-customization
 faceting
-labs
+labels
 scales
 color-palettes
 themes

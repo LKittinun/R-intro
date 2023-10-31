@@ -306,7 +306,8 @@
 </h3>
 <p>ในบางครั้งท่านอาจจะต้องการที่จะพล็อตกราฟแยกกันเป็นส่วนๆ มากกว่ารวมกันในกราฟเดียว ท่านสามารถแบ่ง Partition ของการพล็อตแต่ละกลุ่มได้โดยใช้ <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code></p>
 <div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Petal.Length</span>, color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># สีตาม Species</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Petal.Length</span>, </span>
+<span>               color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># สีตาม Species</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">Species</span><span class="op">)</span> <span class="op">+</span> <span class="co"># แบ่งเป็นหลายกลุ่ม</span></span>
@@ -329,9 +330,9 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/facet_grid-1.png" width="672"></div>
 </div>
-<div id="labs" class="section level3" number="7.2.2">
+<div id="labels" class="section level3" number="7.2.2">
 <h3>
-<span class="header-section-number">7.2.2</span> Labs<a class="anchor" aria-label="anchor" href="#labs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.2</span> Labels<a class="anchor" aria-label="anchor" href="#labels"><i class="fas fa-link"></i></a>
 </h3>
 <p>ท่านสามารถปรับแต่งชื่อของแต่ละตำแหน่งได้โดยใช้ <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs()</a></code></p>
 <div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
@@ -366,7 +367,7 @@
 <tbody>
 <tr class="odd">
 <td><code>"Text" ~ quote() ~ "Text"</code></td>
-<td>ตัวอักษรปกติ ~ Mathematic expression ~ ตัวอักษรปกติ</td>
+<td>ตัวอักษรปกติ ~ Mathematical expression ~ ตัวอักษรปกติ</td>
 </tr>
 <tr class="even">
 <td><code>x %+-% y</code></td>
@@ -386,7 +387,7 @@
 </tr>
 <tr class="even">
 <td><code>x ~~ y</code></td>
-<td>x เว้นวรรค y (ใน Mathematic expression เดียวกัน)</td>
+<td>x เว้นวรรค y (ใน Mathematical expression เดียวกัน)</td>
 </tr>
 <tr class="odd">
 <td><code>sqrt(x, y)</code></td>
@@ -469,7 +470,7 @@
 <span>  <span class="fu"><a href="https://nanx.me/ggsci/reference/scale_nejm.html">scale_color_nejm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/ggsci-1.png" width="672"></div>
-<p>ในส่วนของสีที่เป็นพื้นที่ จะใช้ <code>scale_fill_xxx</code> ซึ่งมีลักษณะการใช้ในทางเดียวกัน</p>
+<p>ในส่วนของสีที่เป็นพื้นที่ จะใช้ <code>scale_fill_*()</code> ซึ่งมีลักษณะการใช้ในแบบเดียวกัน</p>
 </div>
 <div id="themes" class="section level3" number="7.2.5">
 <h3>
@@ -492,7 +493,7 @@
 <ul>
 <li><p><strong>Function reference:</strong> <a href="https://ggplot2.tidyverse.org/reference/" class="uri">https://ggplot2.tidyverse.org/reference/</a></p></li>
 <li><p><strong>Plot gallery:</strong> <a href="https://r-graph-gallery.com/" class="uri">https://r-graph-gallery.com/</a></p></li>
-<li><p><strong>Parameter ของ aesthetics ต่างๆ:</strong> เรียกฟังก์ชัน <code>vignette("ggplot2-specs)"</code></p></li>
+<li><p><strong>Parameter ของ aesthetics ต่างๆ:</strong> เรียกฟังก์ชัน <code><a href="https://ggplot2.tidyverse.org/articles/ggplot2-specs.html">vignette("ggplot2-specs")</a></code></p></li>
 </ul>
 </div>
 </div>
@@ -518,7 +519,7 @@
 <li>
 <a class="nav-link" href="#ggplot-customization"><span class="header-section-number">7.2</span> Customization</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#faceting"><span class="header-section-number">7.2.1</span> Faceting</a></li>
-<li><a class="nav-link" href="#labs"><span class="header-section-number">7.2.2</span> Labs</a></li>
+<li><a class="nav-link" href="#labels"><span class="header-section-number">7.2.2</span> Labels</a></li>
 <li><a class="nav-link" href="#scales"><span class="header-section-number">7.2.3</span> Scales</a></li>
 <li><a class="nav-link" href="#color-palettes"><span class="header-section-number">7.2.4</span> Color palettes</a></li>
 <li><a class="nav-link" href="#themes"><span class="header-section-number">7.2.5</span> Themes</a></li>
