@@ -1,10 +1,10 @@
-# **Data visualization**
+# **Data visualization with** `ggplot2`
 
-## General visualization with `ggplot2` {#ggplot2}
+## Building a plot
 
 `ggplot2` คือ Package ย่อยอีกตัวของ `tidyverse` ซึ่งใช้สำหรับการพล็อตกราฟ
 
-### (Simple) Anatomy of ggplot
+### Anatomy of ggplot
 
 ```{r iris_loading, echo=FALSE}
 df <- iris
@@ -22,6 +22,7 @@ ggplot(data = your_data, aes(x = x, y = y, col = col, fill = fill)) +
     -   `col` = สี, `fill` = สีพื้นหลัง
 -   `geom_*()` คือ การกำหนดว่าท่านต้องการที่จะ plot กราฟอะไร
 -   `theme_*()` คือ การกำหนด theme ของกราฟ เพื่อความสวยงาม เช่น `theme_bw()`, `theme_classic()`
+-   `…` คือการปรับแต่งอื่นๆ ในส่วนของ [Customization](#ggplot-customization)
 
 การสร้างภาพที่สมบูรณ์นั้นมีส่วนจำเป็นที่ประกอบด้วย `aes` และ `geom` ตรงส่วนอื่นเป็นส่วนเสริมที่จะช่วยให้ภาพมีความสวยงามขึ้น
 
@@ -33,10 +34,12 @@ ggplot(df, aes(x = Sepal.Width, y = Sepal.Length))
 
 สังเกตว่าจะยังไม่มีกราฟใดๆ ปรากฏ ท่านจำเป็นต้องใช้ `geom` เพื่อทำการสร้างภาพนั้นขึ้น
 
-### Scatterplot
+### Scatter plot
 
 ```{r scatterplot, fig.path="figure/"}
-ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + geom_point()
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, 
+               col = Species, shape = Species)) + 
+  geom_point()
 ```
 
 สังเกตการ mapping ของ `aes()`
@@ -52,9 +55,12 @@ knitr::include_graphics("Picture/aes.jpg")
 ```{r straight_line, fig.path="figure/"}
 ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + 
   geom_point() + 
-  geom_hline(yintercept = 6, linetype = "dashed", col = "red", linewidth = 1) + 
-  geom_vline(xintercept = 2.7, linetype = "dotted", col = "blue", linewidth = 1.25) + 
-  geom_abline(intercept = 2, slope = 1, linetype = "dotdash", col = "black", linewidth = 1.5)
+  geom_hline(yintercept = 6, linetype = "dashed", 
+             col = "red", linewidth = 1) + 
+  geom_vline(xintercept = 2.7, linetype = "dotted", 
+             col = "blue", linewidth = 1.25) + 
+  geom_abline(intercept = 2, slope = 1, 
+              linetype = "dotdash", col = "black", linewidth = 1.5)
 ```
 
 สังเกตว่าท่านสามารถปรับค่าจำพวก สี ลักษณะเส้นต่างๆ ได้ โดย Parameter นั้น ต้องอยู่นอก `aes` มิเช่นนั้น ฟังก์ชันจะพยายามไปดึงข้อมูลจากกราฟมา
@@ -62,9 +68,12 @@ ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) +
 ```{r wrong_aes, fig.path="figure/"}
 ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = "darkviolet")) + # ผิด
   geom_point() + 
-  geom_hline(yintercept = 6, linetype = "dashed", col = "red", linewidth = 1) + 
-  geom_vline(xintercept = 2.7, linetype = "dotted", col = "blue", linewidth = 1.25) + 
-  geom_abline(intercept = 2, slope = 1, linetype = "dotdash", col = "black", linewidth = 1.5)
+  geom_hline(yintercept = 6, linetype = "dashed", 
+             col = "red", linewidth = 1) + 
+  geom_vline(xintercept = 2.7, linetype = "dotted", 
+             col = "blue", linewidth = 1.25) + 
+  geom_abline(intercept = 2, slope = 1, 
+              linetype = "dotdash", col = "black", linewidth = 1.5)
 ```
 
 ที่ถูกต้อง ท่านต้องนำ `col` ไปอยู่นอก `aes` จึงจะได้สีที่ท่านต้องการ
@@ -72,14 +81,17 @@ ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = "darkviolet")) + # ผ�
 ```{r wrong_aes_fixed, fig.path="figure/"}
 ggplot(df, aes(x = Sepal.Width, y = Sepal.Length)) + # ผิด
   geom_point(col = "darkviolet") + 
-  geom_hline(yintercept = 6, linetype = "dashed", col = "red", linewidth = 1) + 
-  geom_vline(xintercept = 2.7, linetype = "dotted", col = "blue", linewidth = 1.25) + 
-  geom_abline(intercept = 2, slope = 1, linetype = "dotdash", col = "black", linewidth = 1.5)
+  geom_hline(yintercept = 6, linetype = "dashed", 
+             col = "red", linewidth = 1) + 
+  geom_vline(xintercept = 2.7, linetype = "dotted", 
+             col = "blue", linewidth = 1.25) + 
+  geom_abline(intercept = 2, slope = 1, linetype = "dotdash", 
+              col = "black", linewidth = 1.5)
 ```
 
 ### Bar chart
 
-`geom_bar()` ใช้สำหรับนับจำนวนของ Column นั้น ไม่มีค่า `y`
+`geom_bar()` ใช้สำหรับนับจำนวนของคอลัมน์นั้น ไม่มีค่า `y`
 
 ```{r barplot, fig.path="figure/"}
 ggplot(df, aes(x = Species, fill = Species)) + # fill ไว้สำหรับแบ่งสีใน barchart
@@ -107,14 +119,14 @@ df |>
 
 ### Box plot {#multi_boxplot}
 
-ทำการสร้าง box plot
+ทำการสร้าง Box plot
 
 ```{r boxplot, fig.path="figure/"}
 ggplot(df, aes(x = Species, y = Sepal.Width, fill = Species)) +
   geom_boxplot(width = 0.5) 
 ```
 
-ถ้าท่านต้องการสร้าง plot ที่แสดงหลาย metrics ท่านจะต้อง[เปลี่ยนข้อมูลเป็น Long form](#reshape) เสียก่อน
+ถ้าท่านต้องการสร้าง Plot ที่แสดงหลาย metrics ท่านจะต้อง[เปลี่ยนข้อมูลเป็น Long form](#reshape) เสียก่อน
 
 ```{r multi_boxplot, fig.path="figure/"}
 head(long_df, 10)
@@ -126,15 +138,21 @@ long_df |>
 
 ### Histogram
 
-ในการทำงานสถิตินั้น โดยส่วนใหญ่จะต้องทำการตรวจสอบการกระจายของข้อมูลก่อนวิเคราะห์ทางสถิติ ซึ่งสามารถทำได้โดยใช้ `geom_histogram()`หรือ `geom_density()`
+ในการทำงานสถิตินั้น โดยส่วนใหญ่จะต้องทำการตรวจสอบการกระจายของข้อมูลก่อนวิเคราะห์ทางสถิติ ซึ่งสามารถทำได้โดยใช้ `geom_histogram()` หรือ `geom_density()` โดยท่านสามารถเลือกประเภทของข้อมูลที่ใช้ในแกน `y` ได้โดยใช้ `after_stat()`
 
 ```{r geom_histogram, fig.path="figure/"}
 ggplot(df, aes(x = Sepal.Width)) + 
-  geom_histogram(fill = "skyblue", binwidth = 0.1)  # binwidth = ความกว้างของแต่ละช่วงข้อมุล
+  geom_histogram(fill = "skyblue", binwidth = 0.1)  # binwidth = ความกว้างของแต่ละช่วงข้อมูล
+
+ggplot(df, aes(x = Sepal.Width, y = after_stat(density))) + # ใช้ density
+  geom_histogram(fill = "skyblue", binwidth = 0.1)  
 ```
 
 ```{r geom_density, fig.path="figure/"}
 ggplot(df, aes(x = Sepal.Width)) + 
+  geom_density(fill = "violet", alpha = 0.5)
+
+ggplot(df, aes(x = Sepal.Width, y = after_stat(count))) + # ใช้ count 
   geom_density(fill = "violet", alpha = 0.5)
 ```
 
@@ -142,32 +160,35 @@ ggplot(df, aes(x = Sepal.Width)) +
 
 ```{r combine_density, fig.path="figure/"}
 ggplot(df, aes(x = Sepal.Width)) +
-  geom_histogram(aes(y = after_stat(density)), binwidth = 0.1, fill = "skyblue") + # ปรับเป็นความถี่
+  geom_histogram(aes(y = after_stat(density)), 
+                 binwidth = 0.1, fill = "skyblue") + # ปรับเป็นความถี่
   geom_density(fill = "violet", alpha = 0.5) +
   theme_bw() # ลบภาพพื้นหลังสีเทาออก
 ```
 
 ### Fitting a statistical model
 
-ท่านสามารถที่พล็อต Statistical model ได้โดยใช้ `geom_smooth()` ยกตัวอย่าง เช่น ถ้าอยากดูความสัมพันธ์ของ `Sepal.Length` และ `Petal.Length`
+ท่านสามารถที่จะพล็อต Statistical model ได้โดยใช้ `geom_smooth()` ยกตัวอย่าง เช่น ถ้าอยากดูความสัมพันธ์ของ `Sepal.Length` และ `Petal.Length`
 
 ```{r geom_smooth_loess, fig.path="figure/"}
 ggplot(df, aes(x = Sepal.Length, y = Petal.Length, color = Species)) + # สีตาม Species
   geom_point(color = "black") +
-  geom_smooth(method = "loess") + # fit a LOESS model
-  theme_bw()
+  geom_smooth(method = "loess") # fit a LOESS model
 ```
 
 ```{r geom_smooth, fig.path="figure/"}
 ggplot(df, aes(x = Sepal.Length, y = Petal.Length, color = Species)) + # สีตาม Species
   geom_point(color = "black") +
-  geom_smooth(method = "lm") + # fit a linear model
-  theme_bw()
+  geom_smooth(method = "lm") # fit a linear model
 ```
+
+------------------------------------------------------------------------
+
+## Customization {#ggplot-customization}
 
 ### Faceting
 
-ในบางครั้งท่านอาจจะต้องการที่จะพล็อตกราฟแยกกันเป็นส่วนๆ มากกว่ารวมกันในกราฟเดียว ท่านสามารถแบ่ง Partition ของการพล็อตแต่ละกลุ่มได้โดยใช้ `facet`
+ในบางครั้งท่านอาจจะต้องการที่จะพล็อตกราฟแยกกันเป็นส่วนๆ มากกว่ารวมกันในกราฟเดียว ท่านสามารถแบ่ง Partition ของการพล็อตแต่ละกลุ่มได้โดยใช้ `facet_wrap()`
 
 ```{r facet_model, fig.path="figure/"}
 ggplot(df, aes(x = Sepal.Length, y = Petal.Length, color = Species)) + # สีตาม Species
@@ -181,11 +202,158 @@ ggplot(df, aes(x = Sepal.Length, y = Petal.Length, color = Species)) + # สี�
 ggplot(df, aes(x = Sepal.Length,  fill = Species)) + # สีตาม Species
   geom_histogram(binwidth = 0.1) +
   facet_wrap(~Species, scales = "free_x", nrow = 2) + # ทำให้แกน x ไม่ fix ค่า
+  theme_bw() 
+```
+
+และถ้าท่านต้องการเรียงข้อมูลให้เป็นไปตามแกนที่ท่านต้องการ สามารถใช้ `facet_grid()`
+
+```{r facet_grid, fig.path="figure/"}
+ggplot(mtcars, 
+       aes(x = mpg, y = disp, color = as.factor(cyl))) + 
+  facet_grid(vs + am ~ gear, 
+             labeller = label_both, # แสดงชื่อและข้อมูล 
+             scale = "free") +
+  geom_point() +
   theme_bw()
 ```
+
+### Labs
+
+ท่านสามารถปรับแต่งชื่อของแต่ละตำแหน่งได้โดยใช้ `labs()`
+
+```{r labels, fig.path="figure/"}
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + 
+  geom_point() +
+  labs(title = "Iris dataset", subtitle = "Sepal length vs Sepal width",
+       x = "Sepal width", y = "Sepal length", 
+       color = "List of species",
+       tag = "1") +
+  theme_bw()
+```
+
+สำหรับสัญลักษณ์ทางคณิตศาสตร์สามารถปรับได้โดยใช้คำสั่ง `bquote()`
+
+```{r math_expression, message = FALSE, fig.path="figure/"}
+poly_data <- data.frame(x = seq(-10, 10, length.out = 100)) |> 
+  mutate(y = x^9+x+10+rnorm(100, mean = 0, sd =3))
+
+ggplot(poly_data, aes(x = x, y = y)) + geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(y = bquote("This function is" ~ f(x) == x^9+x+10+epsilon ~ ".")) +
+  theme_bw()
+```
+
+**Mathematics quote** ที่ใช้บ่อยมีดังนี้
+
+| Syntax                      | Meaning                                         |
+|---------------------------|---------------------------------------------|
+| `"Text" ~ quote() ~ "Text"` | ตัวอักษรปกติ \~ Mathematic expression \~ ตัวอักษรปกติ |
+| `x %+-% y`                  | x บวก หรือ ลบ y                                  |
+| `x %/% y`                   | x หาร y                                         |
+| `x[i]`                      | x ห้อยด้วย i (Subscript)                          |
+| `x^i`                       | x ยกกำลัง i (Superscript)                        |
+| `x ~~ y`                    | x เว้นวรรค y (ใน Mathematic expression เดียวกัน)   |
+| `sqrt(x, y)`                | รากที่ y ของ x                                    |
+| `x <= y, x >= y`            | x น้อยกว่าหรือเท่ากับ มากกว่าหรือเท่ากับ y               |
+| `infinity`                  | อนันต์                                            |
+| `frac(x, y)`                | เศษส่วน                                          |
+
+สามารถศึกษาเพิ่มเติมได้ที่ `?plotmath`
+
+### Scales
+
+ท่านสามารถปรับแต่ง Scale ของแกน `x` แกน `y` และสีต่างได้โดยใช้ฟังก์ชัน `scale_*_*()`
+
+```{r scale, message = FALSE, warning = TRUE, fig.path="figure/"}
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + 
+  geom_point() +
+  scale_x_continuous(breaks = seq(0,5,0.5), # Major breaks
+                     minor_breaks = seq(0,5,0.1), # Minor breaks
+                     limits = c(1,5)) + # Axis limits
+  scale_y_continuous(breaks = seq(0,8,0.5), 
+                     minor_breaks = seq(0,8,0.1),
+                     limits = c(5,8)
+                    ) +
+  theme_bw()
+```
+
+**Note:** ท่านจะเห็นข้อความเตือนว่าข้อมูลที่เกินกว่า Axis นั้นจะถูกตัดออกไป
+
+นอกจากนั้น ท่านยังสามารถ Transform ข้อมูลเป็นรูปแบบอื่นๆ ได้ด้วย
+
+```{r other_scale, message = FALSE, fig.path="figure/"}
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + 
+  geom_point() +
+  scale_x_continuous(name = bquote(sqrt(Sepal.Width)), 
+                     trans = "sqrt") + # เปลี่ยนชื่อได้เลย
+  scale_y_continuous(name = "Reverse Sepal.Length",
+                  trans = "reverse") + # More information ?scale_x_continuous 
+  theme_bw()
+```
+
+ในส่วนตัวแปรประเภท Discrete นั้นก็สามารถปรับเปลี่ยนได้เช่นกัน
+
+```{r discrete_scale, message = FALSE, fig.path="figure/"}
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + 
+  geom_point() +
+  scale_color_manual(values = c("darkred", "darkblue", "darkgreen"),
+    labels = c("Setosa", "Versicolor", "Virginica")) +
+  theme_bw()
+```
+
+### Color palettes
+
+`ggplot2` นั้นมีชุดของสีเตรียมไว้ให้ส่วนหนึ่งแล้วสำหรับการสร้างกราฟ โดยใช้ `scale_color_brewer()`
+
+```{r brewer_scale, message = FALSE, fig.path="figure/"}
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + 
+  geom_point() +
+  scale_color_brewer(palette = "Dark2") +
+  theme_bw()
+```
+
+สีทั้งหมดที่มาพร้อมกับ `ggplot2()` มีดังนี้
+
+```{r all_brewer_scale, message = FALSE, fig.path="figure/", fig.height=7, fig.width=4}
+RColorBrewer::display.brewer.all()
+```
+
+และยังมีสีเพิ่มเติมสำหรับการวาดกราฟที่ใช้บ่อยใน Journal ต่างๆ ใน Package `ggsci` รายละเียดเพิ่มเติมที่ <https://nanx.me/ggsci/>
+
+```{r ggsci, message = FALSE, fig.path="figure/"}
+library(ggsci)
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + 
+  geom_point() +
+  scale_color_nejm() +
+  theme_bw()
+```
+
+ในส่วนของสีที่เป็นพื้นที่ จะใช้ `scale_fill_xxx` ซึ่งมีลักษณะการใช้ในทางเดียวกัน
+
+### Themes
+
+ในส่วนของภาพรวมของกราฟทั้งหมดนั้น สามารถปรับแต่งได้โดยฟังก์ชัน `theme_*()`
+
+```{r theme_list, fig.path="figure/"}
+ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + 
+  geom_point() +
+  theme_classic()
+```
+
+ซึ่ง Theme ที่ใช้บ่อยนั้น ได้แก่
+
+-   `theme_bw()`
+
+-   `theme_classic()`
+
+-   `theme_minimal()`
+
+------------------------------------------------------------------------
 
 ทั้งหมดที่แสดงนี้ เป็นเพียงกราฟพื้นฐานเท่านั้น ยังมีการปรับแต่งอื่นๆ ได้อีกมาก สามารถศึกษาเพิ่มเติมได้ที่
 
 -   **Function reference:** <https://ggplot2.tidyverse.org/reference/>
 
 -   **Plot gallery:** <https://r-graph-gallery.com/>
+
+-   **Parameter ของ aesthetics ต่างๆ:** เรียกฟังก์ชัน `vignette("ggplot2-specs)"`

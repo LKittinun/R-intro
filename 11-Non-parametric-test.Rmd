@@ -369,8 +369,9 @@ $$
 poly_data <- data.frame(x = seq(-10, 10, length.out = 100)) |> 
   mutate(y = x^9+x+10+rnorm(100, mean = 0, sd =3))
 
-ggplot(poly_data, aes(x=x,y=y)) + geom_point() + 
+ggplot(poly_data, aes(x = x,y = y)) + geom_point() + 
   geom_smooth(method = "lm", se = FALSE) +
+  labs(y = quote(f(x) == x^9+x+10+epsilon)) +
   theme_bw()
 
 cor(poly_data$x, poly_data$y, method = "pearson") # not quite linear
