@@ -207,7 +207,8 @@ $$
 ```{r cor_iris, fig.path="figure/"}
 ggplot(iris, aes(x = Sepal.Length, y = Petal.Length)) + 
   geom_point(aes(col = Species)) +
-  geom_smooth(method = "lm", se = FALSE)
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
 
 cor(iris$Sepal.Length, iris$Petal.Length)
 ```
