@@ -157,18 +157,18 @@ $$
 $$
 
 $$
-h(x) = \frac{1}{1+e^{z}}
+h(x) = \frac{e^{z}}{1+e^{z}}
 $$
 
 $$
-h(x) = \frac{1}{1+e^{\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + x_{n}\theta_{n} + \epsilon}}
+h(x) = \frac{1}{1+e^{-(\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + x_{n}\theta_{n} + \epsilon)}}
 $$
 
 ความพิเศษของสมการนี้คือ ขอบเขตของ $h(x)$ จะอยู่ระหว่าง (0, 1) เสมอ ซึ่งส่งผลให้สามารถคำนวณกลับไปทำนายอัตราการเกิดเหตุการณ์จากอัตราส่วนความเสี่ยงได้
 
 ```{r logistic_regression, fig.path="figure/"}
 log_df <- data.frame(x = -20:20) |> 
-  mutate(y = 1/(1+exp(0 + 0.75*x)))
+  mutate(y = 1/(1+exp(-(0 + 0.75*x))))
 
 ggplot(log_df, aes(x = x, y = y)) + geom_line() + theme_bw() +
   labs(y = "h(x)")
