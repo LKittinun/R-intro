@@ -87,9 +87,16 @@ adjust-p-in-r
 regression-model
 linear-regression
 model-summary
+model-performance
 prediction
 logistic-regression
+model-summary-1
+model-performance-1
+prediction-1
 poisson-family
+poisson-regression
+quasipoisson-regression
+negative-binomial-regression
 survival-analysis
 kaplein-meier-estimate-km
 การสราง-km-ใน-r
@@ -129,7 +136,7 @@ distribution
 norm-dist
 t-dist
 unif-dist
-binomial-distribution
+binom-dist
 negative-binomial-distribution
 hypergeometric-distribution
 poisson-dist

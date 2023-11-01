@@ -232,7 +232,7 @@ ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) +
   theme_bw()
 ```
 
-สำหรับสัญลักษณ์ทางคณิตศาสตร์สามารถปรับได้โดยใช้คำสั่ง `bquote()`
+สำหรับสัญลักษณ์ทางคณิตศาสตร์สามารถแสดงได้โดยใช้คำสั่ง `bquote()`
 
 ```{r math_expression, message = FALSE, fig.path="figure/"}
 poly_data <- data.frame(x = seq(-10, 10, length.out = 100)) |> 
@@ -247,7 +247,7 @@ ggplot(poly_data, aes(x = x, y = y)) + geom_point() +
 **Mathematics quote** ที่ใช้บ่อยมีดังนี้
 
 | Syntax                      | Meaning                                           |
-|---------------------------|---------------------------------------------|
+|-----------------------------|---------------------------------------------------|
 | `"Text" ~ quote() ~ "Text"` | ตัวอักษรปกติ \~ Mathematical expression \~ ตัวอักษรปกติ |
 | `x %+-% y`                  | x บวก หรือ ลบ y                                    |
 | `x %/% y`                   | x หาร y                                           |
@@ -280,7 +280,7 @@ ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) +
 
 **Note:** ท่านจะเห็นข้อความเตือนว่าข้อมูลที่เกินกว่า Axis นั้นจะถูกตัดออกไป
 
-นอกจากนั้น ท่านยังสามารถ Transform ข้อมูลเป็นรูปแบบอื่นๆ ได้ด้วย
+นอกจากนั้น ท่านยังสามารถเปลี่ยนข้อมูลเป็นรูปแบบอื่นๆ ได้ด้วย
 
 ```{r other_scale, message = FALSE, fig.path="figure/"}
 ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + 
@@ -304,7 +304,7 @@ ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) +
 
 ### Color palettes
 
-`ggplot2` นั้นมีชุดของสีเตรียมไว้ให้ส่วนหนึ่งแล้วสำหรับการสร้างกราฟ โดยใช้ `scale_color_brewer()`
+`ggplot2` นั้นมีชุดของสีเตรียมไว้ให้ส่วนหนึ่งแล้วสำหรับการสร้างกราฟ โดยใช้ `scale_*_brewer()`
 
 ```{r brewer_scale, message = FALSE, fig.path="figure/"}
 ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) + 
@@ -319,7 +319,7 @@ ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) +
 RColorBrewer::display.brewer.all()
 ```
 
-และยังมีสีเพิ่มเติมสำหรับการวาดกราฟที่ใช้บ่อยใน Journal ต่างๆ ใน Package `ggsci` รายละเียดเพิ่มเติมที่ <https://nanx.me/ggsci/>
+และยังมีสีเพิ่มเติมสำหรับการวาดกราฟที่ใช้บ่อยในสารสาร ต่างๆ ใน Package `ggsci` ศึกษารายละเอียดเพิ่มเติมได้ที่ <https://nanx.me/ggsci/>
 
 ```{r ggsci, message = FALSE, fig.path="figure/"}
 library(ggsci)

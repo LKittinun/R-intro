@@ -27,6 +27,8 @@ ggplot(Diabetes, aes(x = glufast, y = sspg)) +
   theme_bw()
 ```
 
+### Model performance
+
 ในการวัดความแม่นยำของ Linear regression นั้นประกอบด้วยสามองค์ประกอบ
 
 ```{r residual, echo = FALSE, message = FALSE, fig.path="figure/"}
@@ -91,19 +93,23 @@ diabetes_fit <- lm(sspg ~ glufast, data = Diabetes)
 summary(diabetes_fit)
 ```
 
-$R^{2}$ คือ อัตราส่วนระหว่าง Explained variation กับ Total variation = $\frac{SSR}{TSS} = 1-\frac{SSE}{TSS}$ ซึ่งจะบ่งบอกความสามารถของเส้นถดถอย ในการอธิบายข้อมูล (goodness of fit)
+-   **Estimate** คือ ค่าสัมประสิทธิ์ของตัวแปรที่มีผลต่อสมการนั้นๆ โดย `(Intercept)` คือ จุดตัดแกนของ Dependent variable เมื่อไม่คิดผลกระทบจากตัวแปรอื่น และ ในส่วน `glufast` คือ ค่าที่เพิ่มขึ้น เมื่อ `glufast` เพิ่มขึ้น 1 หน่วย ซึ่งเขียนเป็นสมการได้ว่า
 
-$F$-test คือการเปรียบเทียบความสามารถของเส้นถดถอย ว่าสามารถอธิบายข้อมูลได้ดีกว่า $H_{0}$ อย่างมีนัยสำคัญหรือไม่ ภายใต้สมมติฐาน
+$$ f(x) = 39.4354 \ + 1.1866\times(\text{glufast}) + \epsilon $$
 
--   $H_{0}$: $f(x) = \theta_{0} + c$ หรือ สามารถอธิบายข้อมูลได้โดยใช้แค่ค่าเฉลี่ย
+-   $R^{2}$ คือ อัตราส่วนระหว่าง Explained variation กับ Total variation = $\frac{SSR}{TSS} = 1-\frac{SSE}{TSS}$ ซึ่งจะบ่งบอกความสามารถของเส้นถดถอย ในการอธิบายข้อมูล (Goodness of fit)
 
--   $H_{a}$: $f(x) = \theta_{0} + x_{1}\theta_{1} + … + \epsilon$
+-   $F$**-test** คือการเปรียบเทียบความสามารถของเส้นถดถอย ว่าสามารถอธิบายข้อมูลได้ดีกว่า $H_{0}$ อย่างมีนัยสำคัญหรือไม่ ภายใต้สมมติฐาน
 
-ซึ่งเป็นการเทียบอัตราส่วน Explained กับ Unexplained variation เช่นเดียวกับ [ANOVA](#ANOVA)
+    -   $H_{0}$: $f(x) = \theta_{0} + c$ หรือ สามารถอธิบายข้อมูลได้โดยใช้แค่ค่าเฉลี่ย
+
+    -   $H_{a}$: $f(x) = \theta_{0} + x_{1}\theta_{1} + … + \epsilon$
+
+    ซึ่งเป็นการเทียบอัตราส่วน Explained กับ Unexplained variation เช่นเดียวกับ [ANOVA](#ANOVA)
 
 $$F =\frac{MSR}{MSE} = \frac{TSS-SSE}{SSE}/\frac{DF_{TSS}-DF_{SSE}}{DF_{SSE}}$$
 
-$t$-test คือการเปรียบเทียบเส้น Regression เมื่อมีตัวแปรนั้น ว่าอธิบายได้ดีกว่าเมื่อไม่มีตัวแปรนั้นหรือไม่
+-   $t$**-test** คือการเปรียบเทียบเส้น Regression เมื่อมีตัวแปรนั้น ว่าอธิบายได้ดีกว่าเมื่อไม่มีตัวแปรนั้นหรือไม่
 
 -   $H_{0}$: $\theta = 0$
 
@@ -121,11 +127,7 @@ $$
 
 ### Prediction
 
-ข้อดีของสมการถอดถอย คือ สามารถใช้ในการทำนายข้อมูลตัวแปรตามชุดใหม่ได้ จากผลลัพธ์ขั้นต้นในคอลัมน์ `coef` พบว่าทุกๆ `glufast` ที่เพิ่มขึ้น 1.186 หน่วย ส่งผลให้ `sspg` เพิ่มขึ้น 1 หน่วย ซึ่งเขียนเป็นสมการได้ว่า
-
-$$
-f(x) = 39.4354 \ + 1.1866\times(\text{glufast}) + \epsilon
-$$
+ข้อดีของสมการถอดถอย คือ สามารถใช้ในการทำนายข้อมูลตัวแปรตามชุดใหม่ได้ จากผลลัพธ์ขั้นต้นในคอลัมน์ `coef` พบว่าทุกๆ `glufast` ที่เพิ่มขึ้น 1.186 หน่วย ส่งผลให้ `sspg` เพิ่มขึ้น 1 หน่วย
 
 โดยสมการนี้จะอยู่ใน `diabetes_fit`
 
@@ -141,6 +143,8 @@ ggplot(new_sspg, aes(x = glufast, y = predicted_sspg)) +
 ------------------------------------------------------------------------
 
 ## Logistic regression
+
+### Model summary
 
 คือ สมการถดถอยซึ่งมีคุณสมบัติในการจำแนกตัวแปรแบบสองตัวแปร (Binary classification) ซึ่งเขียนอยู่ในรูปของ ค่าลอการิธึมของอัตราส่วนความเสี่ยง (Log odds)
 
@@ -163,19 +167,21 @@ $$
 ความพิเศษของสมการนี้คือ ขอบเขตของ $h(x)$ จะอยู่ระหว่าง (0, 1) เสมอ ซึ่งส่งผลให้สามารถคำนวณกลับไปทำนายอัตราการเกิดเหตุการณ์จากอัตราส่วนความเสี่ยงได้
 
 ```{r logistic_regression, fig.path="figure/"}
-log_df <- data.frame(x = -20:20) |> mutate(y = 1/(1+exp(0 + 0.75*x)))
+log_df <- data.frame(x = -20:20) |> 
+  mutate(y = 1/(1+exp(0 + 0.75*x)))
+
 ggplot(log_df, aes(x = x, y = y)) + geom_line() + theme_bw() +
   labs(y = "h(x)")
 ```
 
 ต่อไปเราจะทำนายว่า `glufast` เพื่อให้ตัวแปรเป็น binary เราจะรวม `Overt_Diabetic` และ `Chemical_Diabetic` เป็นกลุ่มเดียวกัน
 
-```{r logistc_summary, message = FALSE, fig.path="figure/"}
-Diabetes_mixed <- Diabetes |> mutate(group = 
-                                       case_match(group,
-                                                  "Normal" ~ 0,
-                                                  "Chemical_Diabetic" ~ 1,
-                                                  "Overt_Diabetic" ~ 1))
+```{r logistic_summary, message = FALSE, fig.path="figure/"}
+Diabetes_mixed <- Diabetes |> 
+  mutate(group = case_match(group,
+                            "Normal" ~ 0,
+                            "Chemical_Diabetic" ~ 1,
+                            "Overt_Diabetic" ~ 1))
 
 ggplot(Diabetes_mixed, aes(x = glufast, y = group)) + 
   geom_point() +
@@ -184,23 +190,98 @@ ggplot(Diabetes_mixed, aes(x = glufast, y = group)) +
   theme_bw()
 ```
 
-```{r predicted_logit, fig.path="figure/"}
+### Model performance
+
+```{r logit, fig.path="figure/"}
 logit_fit <- glm(group ~ glufast, family = "binomial", 
                  data = Diabetes_mixed) 
-logit_fit
+summary(logit_fit)
+```
 
+-   **Estimate** ในที่นี้คือ $log(\frac{h(x)}{1-h(x)})$ โดยที่ $\frac{h(x)}{1-h(x)}$ คือ **Odd ratio** ของการเกิดเหตุการณ์
+
+-   **Likelihood** คือ ค่าของตวามเป็นไปได้ที่จะเกิดเหตุการณ์นั้นๆ
+
+    $$
+    \prod_{i=1}^{n}p_{i}^{y_{i}}(1-p_{i}^{y_{i}})
+    $$โดย $y_{i}$ คือ ค่าของความเป็นไปได้ของการเกิดเหตุการณ์ตาม [Binomial distribution](#binom-dist) ซึ่งในที่นี่คือ `group` = 0 และ `group` = 1 ซึ่งการคำนวณนั้นจะนิยมใช้ค่า log มากกว่า เพิ่มความสะดวก
+
+    $$
+    LL = log(\prod_{i=1}^{n}p_{i}^{y_{i}}(1-p_{i}^{1-y_{i}})) = \sum_{i=1}^{n}log(p_{i}^{y_{i}}(1-p_{i}^{1-y_{i}}))
+    $$
+
+-   **Null deviance** คือ $2(LL(\text{Saturated model}) - LL(\text{Null model}))$
+
+-   **Residual deviance** คือ $2(LL(\text{Saturated model}) - LL(\text{Fitted model}))$
+
+-   **Akaike information criterion (AIC)** คือ ค่าการประมาณความผิดพลาดของสมการ $2(\text{Parameters}- LL(\text{Fitted model}))$ มักใช้ในการเปรียบเทียบกับสมการตัวแปรชนิดอื่น เพื่อเทียบคุณภาพของแบบจำลองที่มีตัวแปรต่างกัน
+
+-   **Pseudo** $R^{2}$ สามารถคำนวณได้จาก $1 - \frac{D_{Fitted}}{D_{Null}}$
+
+ค่าที่เกี่ยวข้องกับ Deviance นั้น ยิ่งน้อยยิ่งดี เนื่องหมายความว่ามี Deviation ต่ำ
+
+```{r model_performance}
+logit_performance <- Diabetes_mixed |> select(glufast, group) |> 
+  mutate(predicted_group = predict(logit_fit, newdata = Diabetes_mixed,
+                                   type = "response")) |> 
+  mutate(binomial_response = 
+           (predicted_group^group)*(1-predicted_group)^(1-group)) |> 
+  mutate(saturated_response = 1) |> 
+  mutate(null_response = 0.5)
+
+logit_likelihood <- logit_performance |> 
+  summarize(across(contains("response"), ~sum(log(.x))))
+logit_likelihood
+
+## Null deviance
+nd <- with(logit_likelihood, 2*(saturated_response - null_response))
+nd
+## Residual deviance
+rd <- with(logit_likelihood, 2*(saturated_response - binomial_response))
+rd 
+## AIC
+aic <- 2*(2-logit_likelihood$binomial_response)
+aic
+```
+
+จากข้อมูลนี้ สามารถคำนวณ **Likelihood ratio statistics** ได้
+
+$$
+L = -2log(\frac{LL_{Fitted}}{LL_{Null}}) =D_{Null} - D_{Fitted}
+$$
+
+ซึ่งค่า $L$ นั้นจะมีลักษณะการกระจายตัวเป็นแบบเดียวกับ Chi-square
+
+```{r likelihood_ratio_test, message = FALSE}
+L <- nd - rd
+L
+pchisq(L, df = 144-143, lower.tail = FALSE)
+
+library(lmtest) # Use package
+null_fit <- glm(group ~ 1, data = Diabetes_mixed, family = "binomial")
+lrtest(logit_fit, null_fit)
+```
+
+### Prediction
+
+ในส่วนของ Prediction นั้น ใช้ฟังก์ชันลักษณะเดียวกันกับ Linear regression โดยให้ Argument `type = response`
+
+```{r predicted_logit, fig.path="figure/", message = FALSE}
 new_group <- data.frame(glufast = 1:200) 
 new_group <- new_group |> 
-  mutate(predicted_group = predict(logit_fit, 
-                                   newdata = new_group, type = "response"))
+  mutate(predicted_response = predict(logit_fit, 
+                                   newdata = new_group, type = "response")) 
 
-ggplot(new_group, aes(x = glufast, y = predicted_group)) +
-  geom_point() + theme_bw()
+ggplot(new_group, aes(x = glufast, y = predicted_response)) +
+  geom_point() + 
+  theme_bw()
 ```
 
 ------------------------------------------------------------------------
 
 ## Poisson, quassipoisson, and negative binomial regression {#poisson-family}
+
+### Poisson regression
 
 Poisson regression คือ สมการถดถอยที่ใช้ในการทำนายความถี่ หรือค่าเฉลี่ยของการเกิดเหตุการณ์นั้นๆ มักใช้กับข้อมูลที่ไม่ต่อเนื่อง (Discrete value) พิจารณาข้อมูลแบบ [Poisson distribution](#poisson-dist)
 
@@ -277,6 +358,8 @@ ggplot(new_data, aes (x = age_group, y = predicted_dead, col = histo_major)) +
 -   ต้องเป็นจำนวนนับ
 -   การกระจายตัวของข้อมูล = Dispersion parameter ($\phi$) = Variance/Mean = 1
 
+### Quasipoisson regression
+
 เมื่อตรวจสอบจากผลลัพธ์ของสมการถอดถอย โดยพิจารณาจาก $\text{Residuals/Deviance}$ แล้วพบว่า $\phi > 1$ ซึ่งหมายความว่าข้อมูลตั้งต้นนั้นมีการกระจายตัวของข้อมูลสูงเกินไป (Overdispersed) จึงไม่เป็นไปตามสมมติฐานของ Poisson ณ จุดนี้จึงจำเป็นต้องใช้ ส่วนขยายสมการของ Poisson regression เรียกว่า Quasipoisson regression ซึ่งจะทำการปรับความแปรปรวน ตามการเพิ่มขึ้นของความแปรปรวนต่อค่าเฉลี่ย
 
 $$
@@ -286,19 +369,26 @@ $$ $$
 $$
 
 ```{r quasi_fit}
-quasipois_fit <- glm(dead ~  age_group + histo_major + stage + offset(log(person_month)),
+quasipois_fit <- glm(dead ~ age_group + histo_major + stage + 
+                       offset(log(person_month)),
                 family = "quasipoisson", data = cervix_mort)
 summary(quasipois_fit)
 ```
 
-จะเห็นว่าหลังจากปรับ Dispersion parameter แล้ว `age_group` ไม่ได้ส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญแต่อย่างใด ปัญหาของ Quasipoisson คือ อาจจะไม่มี Parameter ที่ต้องการ เช่น `AIC` เป็นต้น ซึ่งสามารถใช้อีกหนึ่งสมการถดถอยที่นิยมใช้คือ Negative binomial regression จาก Package `MASS` ซึ่งปรับตามอัตราส่วนความแปรปรวนเช่นกัน
+จะเห็นว่าหลังจากปรับ Dispersion parameter แล้ว `age_group` ไม่ได้ส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญแต่อย่างใด
+
+### Negative binomial regression
+
+ปัญหาของ Quasipoisson คือ อาจจะไม่มี Parameter ที่ต้องการ เช่น `AIC` เป็นต้น ซึ่งสามารถใช้อีกหนึ่งสมการถดถอยที่นิยมใช้คือ Negative binomial regression จาก Package `MASS` ซึ่งปรับตามอัตราส่วนความแปรปรวนเช่นกัน
 
 $$
 V = u_{i}(1+\frac{u_{i}}{\phi})
 $$
 
 ```{r nb_fit}
-nb_fit <- MASS::glm.nb(dead ~  age_group + histo_major + stage + offset(log(person_month)), 
+nb_fit <- MASS::glm.nb(dead ~  
+                         age_group + histo_major + stage + 
+                         offset(log(person_month)), 
                  data = cervix_mort)
 summary(nb_fit)
 ```
