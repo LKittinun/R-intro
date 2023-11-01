@@ -314,7 +314,7 @@ h(x) = \frac{1}{1+e^{\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + 
 <p><strong>Likelihood</strong> คือ ค่าของตวามเป็นไปได้ที่จะเกิดเหตุการณ์นั้นๆ</p>
 <p><span class="math display">\[
 \prod_{i=1}^{n}p_{i}^{y_{i}}(1-p_{i}^{y_{i}})
-\]</span>โดย <span class="math inline">\(y_{i}\)</span> คือ ค่าของความเป็นไปได้ของการเกิดเหตุการณ์ตาม <a href="distribution.html#binom-dist">Binomial distribution</a> ซึ่งในที่นี่คือ <code>group</code> = 0 และ <code>group</code> = 1 ซึ่งการคำนวณนั้นจะนิยมใช้ค่า log มากกว่า เพิ่มความสะดวก</p>
+\]</span>โดย <span class="math inline">\(y_{i}\)</span> คือ ค่าของความเป็นไปได้ของการเกิดเหตุการณ์ตาม <a href="distribution.html#binom-dist">Binomial distribution</a> ซึ่งในที่นี่คือ <code>group</code> = 0 และ <code>group</code> = 1 ซึ่งการคำนวณนั้นจะนิยมใช้ค่า log มากกว่าเพื่อความสะดวกในการคำนวณ</p>
 <p><span class="math display">\[
 LL = log(\prod_{i=1}^{n}p_{i}^{y_{i}}(1-p_{i}^{1-y_{i}})) = \sum_{i=1}^{n}log(p_{i}^{y_{i}}(1-p_{i}^{1-y_{i}}))
 \]</span></p>

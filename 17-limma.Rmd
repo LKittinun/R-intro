@@ -60,7 +60,7 @@ ggplot(data = NULL, aes(x = cx_var)) +
   theme_bw() 
 ```
 
-ค่า mean variance นี้จะถูกนำไปถ่วงน้ำหนักความแปรปรวนเดิมของแต่ละยีน และจะถูกนำไปใช้ในการคำนวณใหม่ เรียกว่า moderated $t$
+ค่า Mean variance นี้จะถูกนำไปถ่วงน้ำหนักความแปรปรวนเดิมของแต่ละยีน และจะถูกนำไปใช้ในการคำนวณใหม่ เรียกว่า Moderated $t$
 
 $$
 \tilde{t_{gj}} = \sqrt\frac{d_{0} + d_{g}}{d_{g}}\times\frac{\hat{\beta_{gj}}}{\sqrt{s^{2}_{*,g}/n_{gj}}}
