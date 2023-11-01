@@ -65,7 +65,7 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="index.html">Welcome!</a></li>
 <li class="book-part">Basic R</li>
 <li><a class="" href="basic-r.html"><span class="header-section-number">1</span> Basic R</a></li>
 <li><a class="" href="r-function.html"><span class="header-section-number">2</span> R function</a></li>
@@ -154,7 +154,7 @@
 <span><span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.14    0.03    0.42</code></pre>
+##    0.14    0.10    1.09</code></pre>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span> <span class="co"># Pre-allocate memory</span></span>
@@ -163,13 +163,13 @@
 <span><span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span> <span class="co">## 3x faster</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.04    0.00    0.09</code></pre>
+##    0.02    0.01    0.11</code></pre>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowMeans</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span> <span class="co">## Instant for vectorized function</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.00    0.00    0.02</code></pre>
+##    0.00    0.00    0.03</code></pre>
 <p>นั่นหมายความว่า การเรียกฟังก์ชันที่เร็วที่สุดควร</p>
 <ol style="list-style-type: decimal">
 <li>เลือกฟังก์ชันที่มีการเขียนให้รองรับ Vectorization (เรียกคำสั่งภายในพร้อมกันทุกตัวแปร) อยู่แล้ว</li>
