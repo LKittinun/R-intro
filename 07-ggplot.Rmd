@@ -1,3 +1,7 @@
+---
+output: powerpoint_presentation
+---
+
 # **Data visualization with** `ggplot2`
 
 ## Building a plot
@@ -356,5 +360,7 @@ ggplot(df, aes(x = Sepal.Width, y = Sepal.Length, col = Species)) +
 -   **Function reference:** <https://ggplot2.tidyverse.org/reference/>
 
 -   **Plot gallery:** <https://r-graph-gallery.com/>
+
+-   **All extensions:** <https://exts.ggplot2.tidyverse.org/gallery/>
 
 -   **Parameter ของ aesthetics ต่างๆ:** เรียกฟังก์ชัน `vignette("ggplot2-specs")`

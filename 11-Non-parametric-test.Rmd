@@ -125,35 +125,69 @@ pchisq(chi_value, df = lung_chisq$parameter, lower.tail = FALSE) # p-value
 คือการทดสอบว่าข้อมูลนั้นมีความสัมพันธ์หรือไม่ โดยการเทียบกับความสัมพันธ์แบบสุ่ม การทดสอบนี้จะมีความแม่นยำกว่า Chi-square เนื่องจากเป็นการคำนวณความน่าจะเป็นโดยตรง
 
 $$
-p = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose B}{C+D \choose D}}{{n \choose B+D}}
+p = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}} = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose B}{C+D \choose D}}{{n \choose B+D}}
 $$
 
-พิจารณาสูตร จุดประสงค์คือ การคำนวณความน่าจะเป็นของการหยิบสุ่มแบบไม่คืนให้ได้ตาม Condition ที่ต้องการนั่นเอง
+พิจารณาสูตร จุดประสงค์คือ การคำนวณความน่าจะเป็นของการหยิบสุ่มแบบไม่คืนให้ได้ตาม สถานการณ์ต้องการนั่นเอง
 
 ```{r fisher_lung}
-fisher.test(lung_ob, alternative = "two.sided")
+lung_fish <- fisher.test(lung_ob, alternative = "greater")
+lung_fish
 ```
 
 $p$ \< 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ สังเกตว่า $p$ จะมากกว่า Chi-square เนื่องจากการทดสอบนี้มีความ Conservative กว่า
 
-ลองคำนวณเองตามสูตรขั้นต้น
+ลองคำนวณเองตามสูตรขั้นต้น หลักการคือ การหาผลรวมของโอกาสการสุ่มที่จะเกิดสถานการณ์ที่ต้องการ และ สถานการณ์ที่เกิดยากกว่านั้น
 
 ```{r fish_lung_man}
-alive_dead <- colSums(lung_ob)
-alive_dead # total alive and dead
-male_female <- rowSums(lung_ob)
-male_female # total male and female
-fisher_p <- (choose(alive_dead[1], lung_ob[1]-1)*choose(alive_dead[2], lung_ob[3])/
-               (choose(sum(lung_ob), male_female[1])))
+lung_ob_sum <- addmargins(lung_ob)
+lung_ob_sum
 
-unname(fisher_p)*2 # remove name
+## Margins
+nm <- lung_ob_sum[1,3]
+N_nm <- lung_ob_sum[2,3]
+Km <- lung_ob_sum[3,1]
+N_Km <- lung_ob_sum[3,2]
+
+## Position in the matrix
+c1 <- 0:nm 
+c2 <- nm-c1
+c3 <- 0:N_nm
+c4 <- N_nm-c3
+
+## Build a permutation grid with fixed margin (n, N-n, K, N-K)
+filtered_permuted_grid <- expand_grid(c1,c2,c3,c4) |> 
+  mutate(n = c1+c2) |> 
+  mutate(N_n = c3+c4) |> 
+  mutate(K = c1+c3) |> 
+  mutate(N_K = c2+c4) |>
+  filter(n == nm & N_n ==  N_nm & K == Km & N_K == N_Km)
+
+## Compute p for each condition
+permuted_grid_p <- filtered_permuted_grid |> 
+  mutate(p = (choose(K, c1)*choose(N_K, c2)/(choose(n+N_n, n))) )
+permuted_grid_p
+
+## Fisher's exact pvalue
+pval_greater <- permuted_grid_p |> filter(c1 >= 37 ) |> pull(p) |> sum()
+pval_greater
 
 ## or
-2*(phyper(lung_ob[1]-1,alive_dead[1], 
-       alive_dead[2], male_female[1],lower.tail=FALSE))
+phyper(lung_ob[1]-1,alive_dead[1], 
+       alive_dead[2], male_female[1],lower.tail=FALSE)
 ```
 
-ปล. การใช้ `lung_ob[1] - 1` นั้นมีที่มาจากว่า เมื่อใช้ `lower.tail = TRUE` จะคำนวณโอกาสที่ ได้ $P[X > x]$ ซึ่งเราต้องการ $P[X \geq x]$ จึงต้อง ลบ Condition ที่ต้องการออกด้วย
+**Note:** การใช้ `lung_ob[1] - 1` นั้นมีที่มาจากว่า เมื่อใช้ `lower.tail = FALSE` จะคำนวณโอกาสที่ ได้ $P[X > x]$ ซึ่งเราต้องการ $P[X \geq x]$ จึงต้องลบสถานการณ์ที่ต้องการออกด้วย
+
+สำหรับการทดสอบแบบ `two.sided` คือการหาสถานการณ์สุดโต่งทั้งสองด้าน โดยการคำนวณ $p_{con}$ ของสถานการณ์ที่ต้องการก่อน และรวมผลลัพธ์ของสถานการณ์ทั้งหมดที่ $p \leq p_{con}$
+
+```{r two_sided_fisher}
+pbase <- permuted_grid_p |> filter(c1 ==37) |> pull(p)
+pval_twoside <- permuted_grid_p |> filter(p <= pbase) |> pull(p) |> sum()
+pval_twoside
+
+fisher.test(lung_ob, alternative = "two.sided")$p.value ## same
+```
 
 ------------------------------------------------------------------------
 

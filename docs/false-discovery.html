@@ -110,21 +110,21 @@
 <span class="header-section-number">12.1</span> <span class="math inline">\(p\)</span>-value histogram<a class="anchor" aria-label="anchor" href="#p-value-histogram"><i class="fas fa-link"></i></a>
 </h2>
 <p>พิจารณา <span class="math inline">\(p\)</span>-value histogram ที่เกิดจากการเปรียบเทียบ <span class="math inline">\(t\)</span>-test ของกลุ่มตัวอย่างที่มาจากประชากรเดียวกัน ทั้งหมด 10,000 ครั้ง</p>
-<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">same_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10000</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">10</span>,<span class="fl">4</span><span class="op">)</span>, </span>
 <span>                                         <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">10</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span><span class="op">)</span> <span class="co"># Mean 10 vs 10</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/same_dist_plot-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>ท่านจะเห็นว่าการกระจายตัวของ <span class="math inline">\(p\)</span>-value นั่นมีลักษณะเป็น <a href="distribution.html#unif-dist">Uniform distribution</a> สังเกตว่าจะมีบางส่วนที่ <span class="math inline">\(p\)</span>-value น้อยกว่า Critical-value ที่ตั้งไว้ ซึ่งในที่นี้คือ <span class="math inline">\(p\)</span>-value <span class="math inline">\(\leq\)</span> 0.05 ซึ่งจะเห็นว่ามีประมาณ 5% เหตุเพราะใน <span class="math inline">\(H_{0}\)</span> ที่ไม่มีความแตกต่างของค่าเฉลี่ยระหว่างประชากรนั้น มีโอกาสที่จะมีความแตกต่างที่มากกว่า 0 <a href="hypothesis-testing.html#p-crit">ได้ประมาณ 5% อยู่แล้ว</a> ซึ่งถือว่านี่คือ False positive</p>
 <p>ส่วนอีกตัวอย่าง เป็นกลุ่มตัวอย่างสองกลุ่มที่มาจากประชากรที่ต่างกัน 100%</p>
-<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">very_diff_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10000</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">10</span>,<span class="fl">4</span><span class="op">)</span>, </span>
 <span>                                         <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">15</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span><span class="op">)</span> <span class="co"># Mean 10 vs 15</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/very_diff_dist-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>จะเห็นว่า <span class="math inline">\(p\)</span>-value นั้นจะมีการกระจายตัวที่ไม่เป็น <a href="distribution.html#unif-dist">Uniform distribution</a> นั่นเพราะความต่างของข้อมูลนั้น ได้อยู่ในระดับที่จะ ปฏิเสธ <span class="math inline">\(H_{0}\)</span> ได้อยู่แล้ว การทำการทดสอบหลายๆ ครั้ง จึงได้ผลที่ <span class="math inline">\(p\)</span>-value <span class="math inline">\(\leq\)</span> 0.05 นั้นอยู่ที่ระดับใกล้ 0</p>
 <p>สุดท้ายจะทำการจำลองข้อมูลจากการทดลอง 10000 ครั้งที่มี True positive 20% และทดสอบที่ <span class="math inline">\(\alpha\)</span> = 0.05</p>
-<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">num_tests</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
@@ -135,7 +135,7 @@
 <span><span class="va">alt_pvalues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">true_positives</span>, <span class="fl">0</span>, <span class="fl">0.05</span><span class="op">)</span> <span class="co"># True p-value</span></span>
 <span><span class="va">all_pvalues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">null_pvalues</span>, <span class="va">alt_pvalues</span><span class="op">)</span> <span class="co"># All p-value</span></span></code></pre></div>
 <p>เมื่อท่านคำนวณ % ของ Rejected <span class="math inline">\(p\)</span>-value จะได้ว่า</p>
-<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rejected_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">all_pvalues</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">all_pvalues</span><span class="op">)</span></span>
 <span><span class="va">rejected_p</span><span class="op">*</span><span class="fl">100</span></span></code></pre></div>
 <pre><code>## [1] 24.19</code></pre>
@@ -164,7 +164,7 @@ FWER(\alpha) = 1- \prod_{j=1}^{m}(1-\alpha) = 1-(1-\alpha)^m
 \]</span></p>
 <p>ตัวอย่างเช่น ที่ <span class="math inline">\(\alpha\)</span> = 0.05 ถ้าท่านทำการทดลอง 100 ครั้ง ท่านมีโอกาสที่จะเกิด False positive 1 ครั้ง ถึง <span class="math inline">\(1-(1-0.05)^{100} = 0.994\)</span> = 99%</p>
 <p>เมื่อทำการเปรียบเทียบที่ <span class="math inline">\(\alpha\)</span> Threshold ต่างๆ จะได้ว่า</p>
-<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">FWER</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid</a></span><span class="op">(</span>times <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">500</span>, alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.001</span>, <span class="fl">0.005</span>, <span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>FWER <span class="op">=</span> <span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">)</span><span class="op">^</span><span class="va">times</span><span class="op">)</span></span>
 <span></span>
@@ -189,7 +189,7 @@ FWER(\alpha) \leq m \times \frac{\alpha}{m} = \alpha
 \]</span></p>
 <p>กล่าวโดยง่ายก็คือการปรับ Threshold ของ <span class="math inline">\(\alpha\)</span> ตามจำนวนครั้งที่ทดสอบนั่นเอง เช่น <span class="math inline">\(\alpha\)</span> เดิม = 0.05 ทดสอบ 10 ครั้ง <span class="math inline">\(\alpha\)</span> ที่ควรจะเป็นคือ 0.005 หรือคิดในทางกลับกัน คือ <span class="math inline">\(p\)</span>-value ใหม่ = <span class="math inline">\(m \times p_{org}\)</span></p>
 <p>ยกตัวอย่าง <span class="math inline">\(p\)</span>-value ที่ <span class="math inline">\(\alpha\)</span> เดิม = 0.05</p>
-<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pval_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>hypo <span class="op">=</span> <span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, </span>
 <span>                      pval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.75</span>, <span class="fl">0.045</span>, <span class="fl">0.1</span>, <span class="fl">0.012</span><span class="op">)</span>, </span>
 <span>                      alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.05</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -214,7 +214,7 @@ FWER(\alpha) \leq m \times \frac{\alpha}{m} = \alpha
 <li>สร้าง <span class="math inline">\(\alpha\)</span> Criteria ใหม่โดย <span class="math inline">\(\alpha_{new_{j}} = \frac{\alpha}{m+1-j}\)</span> เมื่อ <span class="math inline">\(m\)</span> คือ จำนวน <span class="math inline">\(p\)</span> ทั้งหมด และ <span class="math inline">\(j\)</span> คือ ลำดับของ <span class="math inline">\(p\)</span>-value</li>
 </ol>
 <p>ต่อไปจะลองใช้ข้อมูลเดิมมาปรับ <span class="math inline">\(\alpha\)</span> แบบ Holm’s</p>
-<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pval_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sequence <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">pval</span><span class="op">)</span> <span class="op">|&gt;</span>  <span class="co"># sort p-val</span></span>
@@ -256,7 +256,7 @@ FDR = E(FDP) = E(\frac{TP}{TP+FP})
 <span class="math inline">\(p_{new}\)</span> มากที่สุด = 1</li>
 <li>คำนวน <span class="math inline">\(p_{new_{j}} = cummin(1, \frac{m}{j} \times p)\)</span> (Cumulative min)</li>
 </ol>
-<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pval_df</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">pval</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># rank of pval</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sequence <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># original sequence</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">pval</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># arrange p</span></span>
@@ -278,13 +278,13 @@ FDR = E(FDP) = E(\frac{TP}{TP+FP})
 <span class="header-section-number">12.4</span> Adjust <span class="math inline">\(p\)</span> in R<a class="anchor" aria-label="anchor" href="#adjust-p-in-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>ท่านไม่ต้องทำวิธีนี้ทั้งหมดด้วยตนเอง เนื่องจาก <code>R</code> มี <code><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust()</a></code> ไว้ให้อยู่แล้ว</p>
-<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pval_df</span><span class="op">$</span><span class="va">pval</span></span></code></pre></div>
 <pre><code>## [1] 0.010 0.750 0.045 0.100 0.012</code></pre>
-<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">pval_df</span><span class="op">$</span><span class="va">pval</span>, method <span class="op">=</span> <span class="st">"bonferroni"</span><span class="op">)</span> </span></code></pre></div>
 <pre><code>## [1] 0.050 1.000 0.225 0.500 0.060</code></pre>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">pval_df</span><span class="op">$</span><span class="va">pval</span>, method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.030 0.750 0.075 0.125 0.030</code></pre>
 
@@ -327,7 +327,7 @@ FDR = E(FDP) = E(\frac{TP}{TP+FP})
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-01.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
