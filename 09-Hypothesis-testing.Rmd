@@ -45,7 +45,7 @@ density_df |>
   summarize(AUC_white = sum(y)) |> pull()
 ```
 
--   ที่ $t$ \< -0.7345 หรือ $t$ \> 0.7345 (พื้นที่ใต้กราฟสีฟ้า) หมายถึงโอกาสที่ค่านั้น**ไม่ได้**เกิดจากความบังเอิญภายใต้ $H_{0}$ ที่ยังเป็นจริง (extreme value) คิดเป็น AUC ได้
+-   ที่ $t$ \< -0.7345 หรือ $t$ \> 0.7345 (พื้นที่ใต้กราฟสีฟ้า) หมายถึงโอกาสที่ค่านั้น**ไม่ได้**เกิดจากความบังเอิญภายใต้ $H_{0}$ ที่ยังเป็นจริง (Extreme value) คิดเป็น AUC ได้
 
 ```{r AUC_blue}
 density_df |> 
@@ -76,8 +76,10 @@ density_df <- density_df |>
 
 ggplot(density_df, aes(x,y)) + 
   geom_area(fill = "darkred", color = "black") +
-  geom_area(data = filter(density_df, crits), fill = "skyblue", color = "black") + 
-  geom_area(data = filter(density_df, area), fill = "white", color = "black") +
+  geom_area(data = filter(density_df, crits), 
+            fill = "skyblue", color = "black") + 
+  geom_area(data = filter(density_df, area), 
+            fill = "white", color = "black") +
   geom_vline(xintercept = c(-tval,tval), linetype = "dashed") +
   geom_vline(xintercept = c(-crit,crit), linetype = "dashed", color = "red") +
   theme_bw()
@@ -85,7 +87,11 @@ ggplot(density_df, aes(x,y)) +
 
 จะเห็นว่า โอกาสที่ความแตกต่างนั้น**ไม่ได้**เกิดจากความบังเอิญภายใต้ $H_{0}$ นั้นอยู่ที่ 46% ซึ่งมากกว่า 5% ที่ต้องการ จึงไม่สามารถปฏิเสธ $H_{0}$ ได้ เรียกอีกแบบหนึ่งว่า ไม่ได้แตกต่างอย่างมีนัยสำคัญ (จนสามารถปฏิเสธ $H_{0}$ ได้)
 
-ตรงส่วนพื้นที่ระหว่าง Critical value (ระหว่างเส้นประสีแดง) คือ พิสัยของความแตกต่างที่สามารถรับได้ ซึ่งจะถูกนำไปใช้ในการคำนวณ**ค่าความเชื่อมั่น (Confidence interval)** ต่อไป
+ตรงส่วนพื้นที่ระหว่าง Critical value (ระหว่างเส้นประสีแดง) คือ พิสัยของความแตกต่างที่สามารถรับได้ ซึ่งจะถูกนำไปใช้ในการคำนวณ**ค่าความเชื่อมั่น (Confidence interval)**
+
+$$
+CI = \text{Estimate } \pm \text{Test statistics}\times SE
+$$
 
 ------------------------------------------------------------------------
 
@@ -98,7 +104,7 @@ ggplot(density_df, aes(x,y)) +
 ```{r power_ttest}
 set.seed(123)
 mean_5_sample <- rnorm(5, mean = 13, sd = 1.7)
-sd(mean_5_sample) #sd
+sd(mean_5_sample) # sd
 t_test_5 <- t.test(mean_5_sample, mu = 12, alternative = "greater")
 t_test_5
 ```

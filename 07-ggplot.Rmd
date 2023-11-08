@@ -1,7 +1,3 @@
----
-output: powerpoint_presentation
----
-
 # **Data visualization with** `ggplot2`
 
 ## Building a plot
@@ -251,7 +247,7 @@ ggplot(poly_data, aes(x = x, y = y)) + geom_point() +
 **Mathematics quote** ที่ใช้บ่อยมีดังนี้
 
 | Syntax                      | Meaning                                           |
-|-----------------------------|---------------------------------------------------|
+|---------------------------|---------------------------------------------|
 | `"Text" ~ quote() ~ "Text"` | ตัวอักษรปกติ \~ Mathematical expression \~ ตัวอักษรปกติ |
 | `x %+-% y`                  | x บวก หรือ ลบ y                                    |
 | `x %/% y`                   | x หาร y                                           |

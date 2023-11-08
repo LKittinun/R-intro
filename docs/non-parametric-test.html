@@ -230,6 +230,7 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 <p>อย่างเช่น Expected event สำหรับช่อง <span class="math inline">\(A\)</span> คือ <span class="math display">\[
 \frac{(A + B) \times (A + C)}{(A + B + C + D)^{2}}(A+B+C+D)
 \]</span></p>
+<p>ซึ่งอยู่ภายใต้ <span class="math inline">\(df = (n_{row} - 1)\times(n_{col} -1)\)</span></p>
 <p>ยกตัวอย่างว่าอยากทราบว่าเพศมีผลต่ออัตราการตายในมะเร็งปอดหรือไม่</p>
 <div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lung_ob</span></span></code></pre></div>
@@ -248,15 +249,16 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 <p><span class="math inline">\(p\)</span> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ</p>
 <p>ลองคำนวณเองตามสูตรขั้นต้น</p>
 <div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lung_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span><span class="op">)</span>,<span class="fl">1</span>, <span class="va">prod</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">lung_exp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span> <span class="fl">1</span>, <span class="va">prod</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span> <span class="co"># สร้าง expected table</span></span>
 <span></span>
-<span><span class="va">lung_ex</span></span></code></pre></div>
+<span><span class="va">lung_exp</span></span></code></pre></div>
 <pre><code>##          [,1]     [,2]
 ## [1,] 24.86842 65.13158
 ## [2,] 38.13158 99.86842</code></pre>
 <div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chi_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">lung_ob</span> <span class="op">-</span> <span class="va">lung_ex</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="va">lung_ex</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">chi_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">lung_ob</span> <span class="op">-</span> <span class="va">lung_exp</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="va">lung_exp</span><span class="op">)</span></span>
 <span><span class="va">chi_value</span> <span class="co"># chi-squared</span></span></code></pre></div>
 <pre><code>## [1] 13.51117</code></pre>
 <div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
@@ -268,11 +270,40 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 <h3>
 <span class="header-section-number">11.1.2</span> Fisher’s exact test<a class="anchor" aria-label="anchor" href="#fisher"><i class="fas fa-link"></i></a>
 </h3>
-<p>คือการทดสอบว่าข้อมูลนั้นมีความสัมพันธ์หรือไม่ โดยการเทียบกับความสัมพันธ์แบบสุ่ม การทดสอบนี้จะมีความแม่นยำกว่า Chi-square เนื่องจากเป็นการคำนวณความน่าจะเป็นโดยตรง</p>
+<p>คือการทดสอบว่าข้อมูลนั้นมีความสัมพันธ์หรือไม่ โดยการเทียบกับความสัมพันธ์แบบสุ่ม การทดสอบนี้จะมีความแม่นยำกว่า Chi-square เนื่องจากเป็นการคำนวณความน่าจะเป็นโดยตรง เมื่อพิจารณาตาราง <span class="math inline">\(2 \times 2\)</span> ในหลักของการหยิบสุ่ม จะตารางดังนี้</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th>Group/Success</th>
+<th>Con1</th>
+<th>Con2</th>
+<th>Total</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>Group 1</strong></td>
+<td><span class="math inline">\(k\)</span></td>
+<td><span class="math inline">\(n-k\)</span></td>
+<td><span class="math inline">\(n\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Group 2</strong></td>
+<td><span class="math inline">\(K-k\)</span></td>
+<td><span class="math inline">\(N-K-n-k\)</span></td>
+<td><span class="math inline">\(N-n\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td><span class="math inline">\(K\)</span></td>
+<td><span class="math inline">\(N-K\)</span></td>
+<td><span class="math inline">\(N\)</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>ซึ่งความน่าจะเป็นที่จะหยิบสุ่มได้สถานการณ์ที่ต้องการจำนวน <span class="math inline">\(k\)</span> ครั้ง คือ</p>
 <p><span class="math display">\[
-p = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}} = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose B}{C+D \choose D}}{{n \choose B+D}}
+p_{k} = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}} = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose B}{C+D \choose D}}{{n \choose B+D}}
 \]</span></p>
-<p>พิจารณาสูตร จุดประสงค์คือ การคำนวณความน่าจะเป็นของการหยิบสุ่มแบบไม่คืนให้ได้ตาม สถานการณ์ต้องการนั่นเอง</p>
+<p>ใน Fisher’s exact test <span class="math inline">\(p\)</span> ที่คำนวณได้คือ ผลรวมของโอกาสที่จะเกิดสถานการณ์ <span class="math inline">\(p_{k}\)</span> และโอกาสที่เกิดขึ้นสถานการณ์ที่ยากกว่า สถานการณ์ <span class="math inline">\(p_{k}\)</span></p>
 <div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lung_fish</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">lung_ob</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span>
 <span><span class="va">lung_fish</span></span></code></pre></div>
@@ -287,7 +318,7 @@ p = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}} = \frac{{A+B \choose A}
 ## sample estimates:
 ## odds ratio 
 ##   2.991585</code></pre>
-<p><span class="math inline">\(p\)</span> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ สังเกตว่า <span class="math inline">\(p\)</span> จะมากกว่า Chi-square เนื่องจากการทดสอบนี้มีความ Conservative กว่า</p>
+<p><span class="math inline">\(p\)</span> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ (โอกาสที่จะเกิดสถานการณ์นี้ ยากกว่าสถานการณ์หยิบสุ่มแบบไม่คืนโดยทั่วไป) สังเกตว่า <span class="math inline">\(p\)</span> จะมากกว่า Chi-square เนื่องจากการทดสอบนี้มีความ Conservative กว่า</p>
 <p>ลองคำนวณเองตามสูตรขั้นต้น หลักการคือ การหาผลรวมของโอกาสการสุ่มที่จะเกิดสถานการณ์ที่ต้องการ และ สถานการณ์ที่เกิดยากกว่านั้น</p>
 <div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lung_ob_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span></span>
@@ -334,10 +365,9 @@ p = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}} = \frac{{A+B \choose A}
 <pre><code>## [1] 0.000231783</code></pre>
 <div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## or</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">phyper</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span>,<span class="va">alive_dead</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, </span>
-<span>       <span class="va">alive_dead</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">male_female</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,lower.tail<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">phyper</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span>, <span class="va">Km</span>, <span class="va">N_Km</span>, <span class="va">nm</span>, lower.tail<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.000231783</code></pre>
-<p><strong>Note:</strong> การใช้ <code>lung_ob[1] - 1</code> นั้นมีที่มาจากว่า เมื่อใช้ <code>lower.tail = FALSE</code> จะคำนวณโอกาสที่ ได้ <span class="math inline">\(P[X &gt; x]\)</span> ซึ่งเราต้องการ <span class="math inline">\(P[X \geq x]\)</span> จึงต้องลบสถานการณ์ที่ต้องการออกด้วย</p>
+<p><strong>Note:</strong> การใช้ <code>lung_ob[1] - 1</code> นั้นมีที่มาจากว่า เมื่อใช้ <code>lower.tail = FALSE</code> จะคำนวณโอกาสที่ ได้ <span class="math inline">\(P[X &gt; x]\)</span> ซึ่งเราต้องการ <span class="math inline">\(P[X \geq x]\)</span> จึงต้องเริ่มคำนวณตั้งแต่สถานการณ์ก่อนหน้า 1 สถานการณ์</p>
 <p>สำหรับการทดสอบแบบ <code>two.sided</code> คือการหาสถานการณ์สุดโต่งทั้งสองด้าน โดยการคำนวณ <span class="math inline">\(p_{con}\)</span> ของสถานการณ์ที่ต้องการก่อน และรวมผลลัพธ์ของสถานการณ์ทั้งหมดที่ <span class="math inline">\(p \leq p_{con}\)</span></p>
 <div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pbase</span> <span class="op">&lt;-</span> <span class="va">permuted_grid_p</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">c1</span> <span class="op">==</span><span class="fl">37</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
@@ -354,7 +384,7 @@ p = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}} = \frac{{A+B \choose A}
 <h2>
 <span class="header-section-number">11.2</span> Rank test<a class="anchor" aria-label="anchor" href="#rank-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>เป็นการหาความต่างของ<strong>ลำดับ</strong> แทนที่จะหาความต่างของ Mean/Variance ในภาวะที่ไม่ทราบการกระจายตัวของข้อมูลที่ชัดเจน</p>
+<p>เป็นการหาความต่างของ<strong>ลำดับ</strong> แทนที่จะหาความแตกต่างของ Mean/Variance ในภาวะที่ไม่ทราบการกระจายตัวของข้อมูลที่ชัดเจน</p>
 <div id="test-for-normality" class="section level3" number="11.2.1">
 <h3>
 <span class="header-section-number">11.2.1</span> Test for normality<a class="anchor" aria-label="anchor" href="#test-for-normality"><i class="fas fa-link"></i></a>
@@ -606,7 +636,7 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 <div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">poly_data</span><span class="op">$</span><span class="va">x</span>, <span class="va">poly_data</span><span class="op">$</span><span class="va">y</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span> <span class="co"># monotonic</span></span></code></pre></div>
 <pre><code>## [1] 0.9993399</code></pre>
-<p>การทดสอบใน <code>R</code> ใช้ลักษณะ code เดียวกันกับ <a href="parametric-test.html#pearson">Pearson’s correlation</a> แต่เปลี่ยน Argument เป็น <code>method = "pearson"</code> และข้อควรระวังก็คิดเหมือนกัน</p>
+<p>การทดสอบใน <code>R</code> ใช้ลักษณะ code เดียวกันกับ <a href="parametric-test.html#pearson">Pearson’s correlation</a> แต่เปลี่ยน Argument เป็น <code>method = "pearson"</code> และมีข้อควรระวังที่เหมือนกัน</p>
 
 </div>
 </div>
