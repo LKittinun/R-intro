@@ -151,7 +151,7 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
   </script>
 </div>
 <p>จะเห็นว่าความแตกต่างระหว่าง Observed และ Expected นั้น อยู่ในพิสัยของของ <span class="math inline">\(H_{0}\)</span></p>
-<p>แต่ถ้าลูกเต๋านั้นเป็นลูกเต๋าถ่วงน้ำหนัก</p>
+<p>แต่ถ้าลูกเต๋านั้นเป็นลูกเต๋าถ่วงน้ำหนัก เมื่อวิเคราะห์ Chi-square ตามการกระจายตัวของลูกเต๋าทั่วไป จะแตกต่างอย่างมีนัยสำคัญ</p>
 <div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">weight_dice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">1000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">9</span><span class="op">)</span></span>
 <span><span class="va">chisq_weight_norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">weight_dice</span><span class="op">)</span><span class="op">)</span></span>
@@ -168,7 +168,7 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["O.weight_dice"],"name":[1],"type":["fct"],"align":["left"]},{"label":["O.Freq"],"name":[2],"type":["int"],"align":["right"]},{"label":["E.freq"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"335","3":"166.6667","_rn_":"1"},{"1":"2","2":"209","3":"166.6667","_rn_":"2"},{"1":"3","2":"122","3":"166.6667","_rn_":"3"},{"1":"4","2":"113","3":"166.6667","_rn_":"4"},{"1":"5","2":"103","3":"166.6667","_rn_":"5"},{"1":"6","2":"118","3":"166.6667","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>เมื่อวิเคราะห์ Chi-square ตามการกระจายตัวของลูกเต๋าทั่วไป จะแตกต่างอย่างมีนัยสำคัญ</p>
+<p>แต่ถ้าวิเคราะห์เทียบกับการกระจายตัวเดียวกับลูกเต๋าถ่วงน้ำหนัก จะไม่แตกต่างกัน</p>
 <div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chisq_weight_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">weight_dice</span><span class="op">)</span>, p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">9</span><span class="op">)</span></span>
 <span><span class="va">chisq_weight_weight</span></span></code></pre></div>
@@ -184,7 +184,6 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["O.weight_dice"],"name":[1],"type":["fct"],"align":["left"]},{"label":["O.Freq"],"name":[2],"type":["int"],"align":["right"]},{"label":["E.freq"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"335","3":"333.3333","_rn_":"1"},{"1":"2","2":"209","3":"222.2222","_rn_":"2"},{"1":"3","2":"122","3":"111.1111","_rn_":"3"},{"1":"4","2":"113","3":"111.1111","_rn_":"4"},{"1":"5","2":"103","3":"111.1111","_rn_":"5"},{"1":"6","2":"118","3":"111.1111","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>แต่ถ้าวิเคราะห์เทียบกับการกระจายตัวเดียวกับลูกเต๋าถ่วงน้ำหนัก จะไม่แตกต่างกัน</p>
 </div>
 <div id="chi-square-test-of-independence" class="section level4" number="11.1.1.2">
 <h4>
@@ -193,23 +192,23 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
 <p>เป็นการเปรียบเทียบข้อมูลจำนวนสองกลุ่มขึ้นไปว่า มีความสัมพันธ์ที่ทำให้การกระจายตัวของข้อมูลเปลี่ยนไปจากปกติหรือไม่</p>
 <p><span class="math inline">\(H_{0}\)</span>: ข้อมูลทั้ง 2+ กลุ่มนั้น<strong>ไม่</strong>มีความสัมพันธ์ต่อกัน</p>
 <p><span class="math inline">\(H_{a}\)</span>: ข้อมูลทั้ง 2+ กลุ่มนั้นมีความสัมพันธ์ต่อกัน</p>
-<p>โดยการวิเคราะห์นั้นจะใช้กับข้อมูลความถี่แบบ <span class="math inline">\(n \times n\)</span> โดย Expected event นั้นคิดจาก</p>
+<p>โดยการวิเคราะห์นั้นจะใช้กับข้อมูลความถี่แบบ <span class="math inline">\(m \times n\)</span> โดย Expected event นั้นคิดจาก</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
-<th>Group/Success</th>
-<th>Con1</th>
-<th>Con2</th>
+<th>Condition/Group</th>
+<th>Group 1</th>
+<th>Group 2</th>
 <th>Total</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><strong>Group 1</strong></td>
+<td><strong>Cond 1</strong></td>
 <td>A</td>
 <td>B</td>
 <td>A + B</td>
 </tr>
 <tr class="even">
-<td><strong>Group 2</strong></td>
+<td><strong>Cond 2</strong></td>
 <td>C</td>
 <td>D</td>
 <td>C + D</td>
@@ -223,7 +222,7 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
 </tbody>
 </table></div>
 <p><span class="math display">\[
-E_{i,j} = P(G_{i,j}) \times P(Con_{i,j}) \times \text{total counts}
+E_{i,j} = P(Cond_{i,j}) \times P(Group_{i,j}) \times \text{total counts}
 \]</span> <span class="math display">\[
 E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 \]</span></p>
@@ -251,7 +250,7 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 <div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lung_exp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span> <span class="fl">1</span>, <span class="va">prod</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span> <span class="co"># สร้าง expected table</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span> <span class="co"># สร้าง expected table</span></span>
 <span></span>
 <span><span class="va">lung_exp</span></span></code></pre></div>
 <pre><code>##          [,1]     [,2]
@@ -270,23 +269,23 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 <h3>
 <span class="header-section-number">11.1.2</span> Fisher’s exact test<a class="anchor" aria-label="anchor" href="#fisher"><i class="fas fa-link"></i></a>
 </h3>
-<p>คือการทดสอบว่าข้อมูลนั้นมีความสัมพันธ์หรือไม่ โดยการเทียบกับความสัมพันธ์แบบสุ่ม การทดสอบนี้จะมีความแม่นยำกว่า Chi-square เนื่องจากเป็นการคำนวณความน่าจะเป็นโดยตรง เมื่อพิจารณาตาราง <span class="math inline">\(2 \times 2\)</span> ในหลักของการหยิบสุ่ม จะตารางดังนี้</p>
+<p>คือการทดสอบว่าข้อมูลนั้นมีความสัมพันธ์หรือไม่ โดยการเทียบกับความสัมพันธ์แบบสุ่ม การทดสอบนี้จะมีความแม่นยำกว่า Chi-square เนื่องจากเป็นการคำนวณความน่าจะเป็นโดยตรง เมื่อพิจารณาตาราง <span class="math inline">\(2 \times 2\)</span> ในหลักของการหยิบสุ่ม จะได้ตารางดังนี้</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
-<th>Group/Success</th>
-<th>Con1</th>
-<th>Con2</th>
+<th>Condition/Group</th>
+<th>Group 1</th>
+<th>Group 2</th>
 <th>Total</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><strong>Group 1</strong></td>
+<td><strong>Cond 1</strong></td>
 <td><span class="math inline">\(k\)</span></td>
 <td><span class="math inline">\(n-k\)</span></td>
 <td><span class="math inline">\(n\)</span></td>
 </tr>
 <tr class="even">
-<td><strong>Group 2</strong></td>
+<td><strong>Cond 2</strong></td>
 <td><span class="math inline">\(K-k\)</span></td>
 <td><span class="math inline">\(N-K-n-k\)</span></td>
 <td><span class="math inline">\(N-n\)</span></td>
@@ -301,7 +300,7 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 </table></div>
 <p>ซึ่งความน่าจะเป็นที่จะหยิบสุ่มได้สถานการณ์ที่ต้องการจำนวน <span class="math inline">\(k\)</span> ครั้ง คือ</p>
 <p><span class="math display">\[
-p_{k} = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}} = \frac{{A+B \choose A}{C+D \choose C}}{{n \choose A+C}} = \frac{{A+B \choose B}{C+D \choose D}}{{n \choose B+D}}
+p_{k} = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}}
 \]</span></p>
 <p>ใน Fisher’s exact test <span class="math inline">\(p\)</span> ที่คำนวณได้คือ ผลรวมของโอกาสที่จะเกิดสถานการณ์ <span class="math inline">\(p_{k}\)</span> และโอกาสที่เกิดขึ้นสถานการณ์ที่ยากกว่า สถานการณ์ <span class="math inline">\(p_{k}\)</span></p>
 <div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
