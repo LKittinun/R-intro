@@ -115,7 +115,7 @@ ind_t_se
 ind_t <- (ind_t_df$ten_mean - ind_t_df$thirty_mean - 0)/ind_t_se
 ind_t
 
-pt(ind_t, df = nrow(paired_t_df)*2-2)*2
+pt(ind_t, df = length(norm_10_sample) + length(norm_30_sample)-2)*2
 ```
 
 **Note:** บางครั้งข้อมูลอาจจะมีความแปรปรวนไม่เท่ากัน ในที่นี้มักจะใช้ Welch's $t$-test โดย `t.test(…, var.equal = FALSE)` โดยสมการนี้จะทำการปรับความแปรปรวนให้ด้วย

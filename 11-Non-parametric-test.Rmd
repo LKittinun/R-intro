@@ -35,8 +35,25 @@ set.seed(123)
 dice <- sample(6, 1000, replace = TRUE) # โยนลูกเต๋า 1000 ครั้ง
 chisq_dice <- chisq.test(table(dice))
 chisq_dice
+```
 
-data.frame(O = chisq_dice$observed, E.Freq = chisq_dice$expected)
+ลองคำนวณเองตามสูตรขั้นต้น
+
+```{r chisq_gof_df}
+chisq_gof_df <- data.frame(O = chisq_dice$observed, 
+                           E.Freq = chisq_dice$expected) |> 
+  mutate(X2 = ((`O.Freq` - `E.Freq`)^2)/`E.Freq`)
+chisq_gof_df |> 
+  pivot_longer(!c(`O.dice`, X2), names_to = "Type", values_to = "Freq") |> 
+  ggplot(aes(x = `O.dice`, y = Freq))+
+  geom_line(aes(group = Type, linetype = Type)) + 
+  theme_bw()
+
+chisq_gof_df |> knitr::kable()
+
+chisq_gof <- sum(chisq_gof_df$X2)
+chisq_gof
+pchisq(chisq_gof, df = 5, lower.tail = FALSE)
 ```
 
 จะเห็นว่าความแตกต่างระหว่าง Observed และ Expected นั้น อยู่ในพิสัยของของ $H_{0}$
@@ -47,7 +64,10 @@ data.frame(O = chisq_dice$observed, E.Freq = chisq_dice$expected)
 weight_dice <- sample(6,1000, replace = TRUE, prob = c(3,2,1,1,1,1)/9)
 chisq_weight_norm <- chisq.test(table(weight_dice))
 chisq_weight_norm
-data.frame(O = chisq_weight_norm$observed, E.freq = chisq_weight_norm$expected)
+
+data.frame(O = chisq_weight_norm$observed, 
+           E.Freq = chisq_weight_norm$expected) |> 
+     mutate(X2 = ((`O.Freq` - `E.Freq`)^2)/`E.Freq` ) 
 ```
 
 แต่ถ้าวิเคราะห์เทียบกับการกระจายตัวเดียวกับลูกเต๋าถ่วงน้ำหนัก จะไม่แตกต่างกัน
@@ -55,7 +75,9 @@ data.frame(O = chisq_weight_norm$observed, E.freq = chisq_weight_norm$expected)
 ```{r weight_dice_weight}
 chisq_weight_weight <- chisq.test(table(weight_dice), p = c(3,2,1,1,1,1)/9)
 chisq_weight_weight
-data.frame(O = chisq_weight_weight$observed, E.freq = chisq_weight_weight$expected)
+data.frame(O = chisq_weight_weight$observed, 
+           E.Freq = chisq_weight_weight$expected) |> 
+     mutate(X2 = ((`O.Freq` - `E.Freq`)^2)/`E.Freq` )
 ```
 
 #### Chi-square test of independence
