@@ -148,70 +148,23 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
 <code class="sourceCode R"><span><span class="va">chisq_gof_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>O <span class="op">=</span> <span class="va">chisq_dice</span><span class="op">$</span><span class="va">observed</span>, </span>
 <span>                           E.Freq <span class="op">=</span> <span class="va">chisq_dice</span><span class="op">$</span><span class="va">expected</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>X2 <span class="op">=</span> <span class="op">(</span><span class="op">(</span><span class="va">`O.Freq`</span> <span class="op">-</span> <span class="va">`E.Freq`</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="va">`E.Freq`</span><span class="op">)</span></span>
-<span><span class="va">chisq_gof_df</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">`O.dice`</span>, <span class="va">X2</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"Type"</span>, values_to <span class="op">=</span> <span class="st">"Freq"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">`O.dice`</span>, y <span class="op">=</span> <span class="va">Freq</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">Type</span>, linetype <span class="op">=</span> <span class="va">Type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/chisq_gof_df-1.png" width="672"></div>
+<span></span>
+<span><span class="va">chisq_gof_df</span> </span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["O.dice"],"name":[1],"type":["fct"],"align":["left"]},{"label":["O.Freq"],"name":[2],"type":["int"],"align":["right"]},{"label":["E.Freq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"170","3":"166.6667","4":"0.06666667","_rn_":"1"},{"1":"2","2":"176","3":"166.6667","4":"0.52266667","_rn_":"2"},{"1":"3","2":"171","3":"166.6667","4":"0.11266667","_rn_":"3"},{"1":"4","2":"157","3":"166.6667","4":"0.56066667","_rn_":"4"},{"1":"5","2":"162","3":"166.6667","4":"0.13066667","_rn_":"5"},{"1":"6","2":"164","3":"166.6667","4":"0.04266667","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chisq_gof_df</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-table"><table class="table table-sm">
-<thead><tr class="header">
-<th align="left">O.dice</th>
-<th align="right">O.Freq</th>
-<th align="right">E.Freq</th>
-<th align="right">X2</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1</td>
-<td align="right">170</td>
-<td align="right">166.6667</td>
-<td align="right">0.0666667</td>
-</tr>
-<tr class="even">
-<td align="left">2</td>
-<td align="right">176</td>
-<td align="right">166.6667</td>
-<td align="right">0.5226667</td>
-</tr>
-<tr class="odd">
-<td align="left">3</td>
-<td align="right">171</td>
-<td align="right">166.6667</td>
-<td align="right">0.1126667</td>
-</tr>
-<tr class="even">
-<td align="left">4</td>
-<td align="right">157</td>
-<td align="right">166.6667</td>
-<td align="right">0.5606667</td>
-</tr>
-<tr class="odd">
-<td align="left">5</td>
-<td align="right">162</td>
-<td align="right">166.6667</td>
-<td align="right">0.1306667</td>
-</tr>
-<tr class="even">
-<td align="left">6</td>
-<td align="right">164</td>
-<td align="right">166.6667</td>
-<td align="right">0.0426667</td>
-</tr>
-</tbody>
-</table></div>
-<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chisq_gof</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">chisq_gof_df</span><span class="op">$</span><span class="va">X2</span><span class="op">)</span></span>
 <span><span class="va">chisq_gof</span></span></code></pre></div>
 <pre><code>## [1] 1.436</code></pre>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">chisq_gof</span>, df <span class="op">=</span> <span class="fl">5</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.9203351</code></pre>
 <p>จะเห็นว่าความแตกต่างระหว่าง Observed และ Expected นั้น อยู่ในพิสัยของของ <span class="math inline">\(H_{0}\)</span></p>
 <p>แต่ถ้าลูกเต๋านั้นเป็นลูกเต๋าถ่วงน้ำหนัก เมื่อวิเคราะห์ Chi-square ตามการกระจายตัวของลูกเต๋าทั่วไป จะแตกต่างอย่างมีนัยสำคัญ</p>
-<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">weight_dice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">1000</span>, replace <span class="op">=</span> <span class="cn">TRUE</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">9</span><span class="op">)</span></span>
 <span><span class="va">chisq_weight_norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">weight_dice</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">chisq_weight_norm</span></span></code></pre></div>
@@ -220,7 +173,7 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
 ## 
 ## data:  table(weight_dice)
 ## X-squared = 248.55, df = 5, p-value &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>O <span class="op">=</span> <span class="va">chisq_weight_norm</span><span class="op">$</span><span class="va">observed</span>, </span>
 <span>           E.Freq <span class="op">=</span> <span class="va">chisq_weight_norm</span><span class="op">$</span><span class="va">expected</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>X2 <span class="op">=</span> <span class="op">(</span><span class="op">(</span><span class="va">`O.Freq`</span> <span class="op">-</span> <span class="va">`E.Freq`</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="va">`E.Freq`</span> <span class="op">)</span> </span></code></pre></div>
@@ -230,7 +183,7 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
   </script>
 </div>
 <p>แต่ถ้าวิเคราะห์เทียบกับการกระจายตัวเดียวกับลูกเต๋าถ่วงน้ำหนัก จะไม่แตกต่างกัน</p>
-<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chisq_weight_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">weight_dice</span><span class="op">)</span>, p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">9</span><span class="op">)</span></span>
 <span><span class="va">chisq_weight_weight</span></span></code></pre></div>
 <pre><code>## 
@@ -238,7 +191,7 @@ E_{i} = CDF_{i}(Y_{u})-CDF_{i}(Y_{l})
 ## 
 ## data:  table(weight_dice)
 ## X-squared = 2.9135, df = 5, p-value = 0.7133</code></pre>
-<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>O <span class="op">=</span> <span class="va">chisq_weight_weight</span><span class="op">$</span><span class="va">observed</span>, </span>
 <span>           E.Freq <span class="op">=</span> <span class="va">chisq_weight_weight</span><span class="op">$</span><span class="va">expected</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>X2 <span class="op">=</span> <span class="op">(</span><span class="op">(</span><span class="va">`O.Freq`</span> <span class="op">-</span> <span class="va">`E.Freq`</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="va">`E.Freq`</span> <span class="op">)</span></span></code></pre></div>
@@ -294,13 +247,13 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 \]</span></p>
 <p>ซึ่งอยู่ภายใต้ <span class="math inline">\(df = (n_{row} - 1)\times(n_{col} -1)\)</span></p>
 <p>ยกตัวอย่างว่าอยากทราบว่าเพศมีผลต่ออัตราการตายในมะเร็งปอดหรือไม่</p>
-<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lung_ob</span></span></code></pre></div>
 <pre><code>##         status
 ## sex      Alive Dead
 ##   Female    37   53
 ##   Male      26  112</code></pre>
-<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lung_chisq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">lung_ob</span>, correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">lung_chisq</span></span></code></pre></div>
 <pre><code>## 
@@ -310,7 +263,7 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 ## X-squared = 13.511, df = 1, p-value = 0.0002371</code></pre>
 <p><span class="math inline">\(p\)</span> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ</p>
 <p>ลองคำนวณเองตามสูตรขั้นต้น</p>
-<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lung_exp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span> <span class="fl">1</span>, <span class="va">prod</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span> <span class="co"># สร้าง expected table</span></span>
@@ -319,11 +272,11 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 <pre><code>##          [,1]     [,2]
 ## [1,] 24.86842 65.13158
 ## [2,] 38.13158 99.86842</code></pre>
-<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chi_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">lung_ob</span> <span class="op">-</span> <span class="va">lung_exp</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="va">lung_exp</span><span class="op">)</span></span>
 <span><span class="va">chi_value</span> <span class="co"># chi-squared</span></span></code></pre></div>
 <pre><code>## [1] 13.51117</code></pre>
-<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">chi_value</span>, df <span class="op">=</span> <span class="va">lung_chisq</span><span class="op">$</span><span class="va">parameter</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># p-value</span></span></code></pre></div>
 <pre><code>## [1] 0.000237147</code></pre>
 </div>
@@ -366,7 +319,7 @@ E = \frac{\text{Row total} \times \text{Column total}}{\text{Total sample size}}
 p_{k} = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}}
 \]</span></p>
 <p>ใน Fisher’s exact test <span class="math inline">\(p\)</span> ที่คำนวณได้คือ ผลรวมของโอกาสที่จะเกิดสถานการณ์ <span class="math inline">\(p_{k}\)</span> และโอกาสที่เกิดขึ้นสถานการณ์ที่ยากกว่า สถานการณ์ <span class="math inline">\(p_{k}\)</span></p>
-<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lung_fish</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">lung_ob</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span>
 <span><span class="va">lung_fish</span></span></code></pre></div>
 <pre><code>## 
@@ -382,7 +335,7 @@ p_{k} = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}}
 ##   2.991585</code></pre>
 <p><span class="math inline">\(p\)</span> &lt; 0.05 หมายความว่าเพศมีผลต่ออัตราการตายอย่างมีนัยสำคัญ (โอกาสที่จะเกิดสถานการณ์นี้ ยากกว่าสถานการณ์หยิบสุ่มแบบไม่คืนโดยทั่วไป) สังเกตว่า <span class="math inline">\(p\)</span> จะมากกว่า Chi-square เนื่องจากการทดสอบนี้มีความ Conservative กว่า</p>
 <p>ลองคำนวณเองตามสูตรขั้นต้น หลักการคือ การหาผลรวมของโอกาสการสุ่มที่จะเกิดสถานการณ์ที่ต้องการ และ สถานการณ์ที่เกิดยากกว่านั้น</p>
-<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lung_ob_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">)</span></span>
 <span><span class="va">lung_ob_sum</span></span></code></pre></div>
 <pre><code>##         status
@@ -390,7 +343,7 @@ p_{k} = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}}
 ##   Female    37   53  90
 ##   Male      26  112 138
 ##   Sum       63  165 228</code></pre>
-<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Margins</span></span>
 <span><span class="va">nm</span> <span class="op">&lt;-</span> <span class="va">lung_ob_sum</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">]</span></span>
 <span><span class="va">N_nm</span> <span class="op">&lt;-</span> <span class="va">lung_ob_sum</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">]</span></span>
@@ -420,23 +373,23 @@ p_{k} = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}}
 {"columns":[{"label":["c1"],"name":[1],"type":["int"],"align":["right"]},{"label":["c2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["c3"],"name":[3],"type":["int"],"align":["right"]},{"label":["c4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["n"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["N_n"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["K"],"name":[7],"type":["int"],"align":["right"]},{"label":["N_K"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["p"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"0","2":"90","3":"63","4":"75","5":"90","6":"138","7":"63","8":"165","9":"1.026712e-17"},{"1":"1","2":"89","3":"62","4":"76","5":"90","6":"138","7":"63","8":"165","9":"7.659812e-16"},{"1":"2","2":"88","3":"61","4":"77","5":"90","6":"138","7":"63","8":"165","9":"2.744600e-14"},{"1":"3","2":"87","3":"60","4":"78","5":"90","6":"138","7":"63","8":"165","9":"6.296159e-13"},{"1":"4","2":"86","3":"59","4":"79","5":"90","6":"138","7":"63","8":"165","9":"1.040062e-11"},{"1":"5","2":"85","3":"58","4":"80","5":"90","6":"138","7":"63","8":"165","9":"1.319318e-10"},{"1":"6","2":"84","3":"57","4":"81","5":"90","6":"138","7":"63","8":"165","9":"1.338321e-09"},{"1":"7","2":"83","3":"56","4":"82","5":"90","6":"138","7":"63","8":"165","9":"1.116355e-08"},{"1":"8","2":"82","3":"55","4":"83","5":"90","6":"138","7":"63","8":"165","9":"7.814488e-08"},{"1":"9","2":"81","3":"54","4":"84","5":"90","6":"138","7":"63","8":"165","9":"4.661818e-07"},{"1":"10","2":"80","3":"53","4":"85","5":"90","6":"138","7":"63","8":"165","9":"2.398917e-06"},{"1":"11","2":"79","3":"52","4":"86","5":"90","6":"138","7":"63","8":"165","9":"1.075202e-05"},{"1":"12","2":"78","3":"51","4":"87","5":"90","6":"138","7":"63","8":"165","9":"4.230774e-05"},{"1":"13","2":"77","3":"50","4":"88","5":"90","6":"138","7":"63","8":"165","9":"1.471155e-04"},{"1":"14","2":"76","3":"49","4":"89","5":"90","6":"138","7":"63","8":"165","9":"4.545705e-04"},{"1":"15","2":"75","3":"48","4":"90","5":"90","6":"138","7":"63","8":"165","9":"1.253941e-03"},{"1":"16","2":"74","3":"47","4":"91","5":"90","6":"138","7":"63","8":"165","9":"3.100404e-03"},{"1":"17","2":"73","3":"46","4":"92","5":"90","6":"138","7":"63","8":"165","9":"6.894632e-03"},{"1":"18","2":"72","3":"45","4":"93","5":"90","6":"138","7":"63","8":"165","9":"1.383045e-02"},{"1":"19","2":"71","3":"44","4":"94","5":"90","6":"138","7":"63","8":"165","9":"2.508996e-02"},{"1":"20","2":"70","3":"43","4":"95","5":"90","6":"138","7":"63","8":"165","9":"4.125317e-02"},{"1":"21","2":"69","3":"42","4":"96","5":"90","6":"138","7":"63","8":"165","9":"6.159327e-02"},{"1":"22","2":"68","3":"41","4":"97","5":"90","6":"138","7":"63","8":"165","9":"8.364447e-02"},{"1":"23","2":"67","3":"40","4":"98","5":"90","6":"138","7":"63","8":"165","9":"1.034609e-01"},{"1":"24","2":"66","3":"39","4":"99","5":"90","6":"138","7":"63","8":"165","9":"1.166983e-01"},{"1":"25","2":"65","3":"38","4":"100","5":"90","6":"138","7":"63","8":"165","9":"1.201526e-01"},{"1":"26","2":"64","3":"37","4":"101","5":"90","6":"138","7":"63","8":"165","9":"1.130148e-01"},{"1":"27","2":"63","3":"36","4":"102","5":"90","6":"138","7":"63","8":"165","9":"9.717465e-02"},{"1":"28","2":"62","3":"35","4":"103","5":"90","6":"138","7":"63","8":"165","9":"7.641890e-02"},{"1":"29","2":"61","3":"34","4":"104","5":"90","6":"138","7":"63","8":"165","9":"5.498310e-02"},{"1":"30","2":"60","3":"33","4":"105","5":"90","6":"138","7":"63","8":"165","9":"3.620157e-02"},{"1":"31","2":"59","3":"32","4":"106","5":"90","6":"138","7":"63","8":"165","9":"2.181348e-02"},{"1":"32","2":"58","3":"31","4":"107","5":"90","6":"138","7":"63","8":"165","9":"1.202800e-02"},{"1":"33","2":"57","3":"30","4":"108","5":"90","6":"138","7":"63","8":"165","9":"6.067995e-03"},{"1":"34","2":"56","3":"29","4":"109","5":"90","6":"138","7":"63","8":"165","9":"2.799858e-03"},{"1":"35","2":"55","3":"28","4":"110","5":"90","6":"138","7":"63","8":"165","9":"1.181031e-03"},{"1":"36","2":"54","3":"27","4":"111","5":"90","6":"138","7":"63","8":"165","9":"4.551520e-04"},{"1":"37","2":"53","3":"26","4":"112","5":"90","6":"138","7":"63","8":"165","9":"1.601379e-04"},{"1":"38","2":"52","3":"25","4":"113","5":"90","6":"138","7":"63","8":"165","9":"5.139033e-05"},{"1":"39","2":"51","3":"24","4":"114","5":"90","6":"138","7":"63","8":"165","9":"1.502641e-05"},{"1":"40","2":"50","3":"23","4":"115","5":"90","6":"138","7":"63","8":"165","9":"3.998333e-06"},{"1":"41","2":"49","3":"22","4":"116","5":"90","6":"138","7":"63","8":"165","9":"9.667961e-07"},{"1":"42","2":"48","3":"21","4":"117","5":"90","6":"138","7":"63","8":"165","9":"2.120892e-07"},{"1":"43","2":"47","3":"20","4":"118","5":"90","6":"138","7":"63","8":"165","9":"4.213360e-08"},{"1":"44","2":"46","3":"19","4":"119","5":"90","6":"138","7":"63","8":"165","9":"7.564092e-09"},{"1":"45","2":"45","3":"18","4":"120","5":"90","6":"138","7":"63","8":"165","9":"1.224262e-09"},{"1":"46","2":"44","3":"17","4":"121","5":"90","6":"138","7":"63","8":"165","9":"1.781625e-10"},{"1":"47","2":"43","3":"16","4":"122","5":"90","6":"138","7":"63","8":"165","9":"2.324129e-11"},{"1":"48","2":"42","3":"15","4":"123","5":"90","6":"138","7":"63","8":"165","9":"2.708334e-12"},{"1":"49","2":"41","3":"14","4":"124","5":"90","6":"138","7":"63","8":"165","9":"2.808181e-13"},{"1":"50","2":"40","3":"13","4":"125","5":"90","6":"138","7":"63","8":"165","9":"2.579033e-14"},{"1":"51","2":"39","3":"12","4":"126","5":"90","6":"138","7":"63","8":"165","9":"2.086986e-15"},{"1":"52","2":"38","3":"11","4":"127","5":"90","6":"138","7":"63","8":"165","9":"1.478967e-16"},{"1":"53","2":"37","3":"10","4":"128","5":"90","6":"138","7":"63","8":"165","9":"9.112736e-18"},{"1":"54","2":"36","3":"9","4":"129","5":"90","6":"138","7":"63","8":"165","9":"4.840242e-19"},{"1":"55","2":"35","3":"8","4":"130","5":"90","6":"138","7":"63","8":"165","9":"2.193340e-20"},{"1":"56","2":"34","3":"7","4":"131","5":"90","6":"138","7":"63","8":"165","9":"8.371528e-22"},{"1":"57","2":"33","3":"6","4":"132","5":"90","6":"138","7":"63","8":"165","9":"2.648091e-23"},{"1":"58","2":"32","3":"5","4":"133","5":"90","6":"138","7":"63","8":"165","9":"6.797019e-25"},{"1":"59","2":"31","3":"4","4":"134","5":"90","6":"138","7":"63","8":"165","9":"1.375567e-26"},{"1":"60","2":"30","3":"3","4":"135","5":"90","6":"138","7":"63","8":"165","9":"2.105806e-28"},{"1":"61","2":"29","3":"2","4":"136","5":"90","6":"138","7":"63","8":"165","9":"2.284505e-30"},{"1":"62","2":"28","3":"1","4":"137","5":"90","6":"138","7":"63","8":"165","9":"1.559940e-32"},{"1":"63","2":"27","3":"0","4":"138","5":"90","6":"138","7":"63","8":"165","9":"5.023960e-35"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Fisher's exact pvalue</span></span>
 <span><span class="va">pval_greater</span> <span class="op">&lt;-</span> <span class="va">permuted_grid_p</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">c1</span> <span class="op">&gt;=</span> <span class="fl">37</span> <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">pval_greater</span></span></code></pre></div>
 <pre><code>## [1] 0.000231783</code></pre>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## or</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">phyper</a></span><span class="op">(</span><span class="va">lung_ob</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span>, <span class="va">Km</span>, <span class="va">N_Km</span>, <span class="va">nm</span>, lower.tail<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.000231783</code></pre>
 <p><strong>Note:</strong> การใช้ <code>lung_ob[1] - 1</code> นั้นมีที่มาจากว่า เมื่อใช้ <code>lower.tail = FALSE</code> จะคำนวณโอกาสที่ ได้ <span class="math inline">\(P[X &gt; x]\)</span> ซึ่งเราต้องการ <span class="math inline">\(P[X \geq x]\)</span> จึงต้องเริ่มคำนวณตั้งแต่สถานการณ์ก่อนหน้า 1 สถานการณ์</p>
 <p>สำหรับการทดสอบแบบ <code>two.sided</code> คือการหาสถานการณ์สุดโต่งทั้งสองด้าน โดยการคำนวณ <span class="math inline">\(p_{con}\)</span> ของสถานการณ์ที่ต้องการก่อน และรวมผลลัพธ์ของสถานการณ์ทั้งหมดที่ <span class="math inline">\(p \leq p_{con}\)</span></p>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pbase</span> <span class="op">&lt;-</span> <span class="va">permuted_grid_p</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">c1</span> <span class="op">==</span><span class="fl">37</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
 <span><span class="va">pval_twoside</span> <span class="op">&lt;-</span> <span class="va">permuted_grid_p</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;=</span> <span class="va">pbase</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">pval_twoside</span></span></code></pre></div>
 <pre><code>## [1] 0.0004349142</code></pre>
-<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">lung_ob</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span> <span class="co">## same</span></span></code></pre></div>
 <pre><code>## [1] 0.0004349142</code></pre>
 <hr>
@@ -452,13 +405,13 @@ p_{k} = \frac{{K \choose k}{N-K \choose n-k}}{{N \choose n}}
 <span class="header-section-number">11.2.1</span> Test for normality<a class="anchor" aria-label="anchor" href="#test-for-normality"><i class="fas fa-link"></i></a>
 </h3>
 <p>กลับมาที่ตัวอย่าง <code>iris</code> ดูการกระจายของข้อมูล</p>
-<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">long_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cm</span>, fill <span class="op">=</span> <span class="va">Metrics</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">Metrics</span><span class="op">~</span><span class="va">Species</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/iris_hist-1.png" width="672"></div>
 <p>พิจารณาแล้ว <code>Petal.Width</code> ไม่น่าจะใช่ Normal distribution จะทำการทดสอบต่อโดย <code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code> ซึ่งเป็นการทดสอบการกระจายตัวของข้อมูลว่าหลุดออกจาก Normal distribution หรือไม่</p>
-<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">long_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Metrics</span>, <span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>normality <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">cm</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -481,7 +434,7 @@ W_{j} = n_{1}n_{2} + \frac{n_{j}(n_{j}+1)}{2} - R_{n}
 <p><span class="math display">\[
 W = min(W_{1}, W_{2})
 \]</span></p>
-<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris_pw</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">!=</span> <span class="st">"virginica"</span> <span class="op">)</span></span>
@@ -495,7 +448,7 @@ W = min(W_{1}, W_{2})
 ## data:  Petal.Width by Species
 ## W = 0, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
-<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris_wx</span><span class="op">$</span><span class="va">p.value</span></span></code></pre></div>
 <pre><code>## [1] 2.284669e-18</code></pre>
 <p>ลองคำนวณเอง หลักการคือ</p>
@@ -503,7 +456,7 @@ W = min(W_{1}, W_{2})
 <li><p>จัดอันดับของข้อมูลโดยเรียงจาก น้อยไปมาก และให้อันดับเป็นตัวเลข (อันดับที่เท่ากัน ให้เป็นค่าเฉลี่ยของลำดับนั้น เช่น อันดับ 2, 3, 4 ที่มีค่าเท่ากัน ให้อันดับเป็น (2+3+4)/3 = 5 ทุกตัว)</p></li>
 <li><p>คำนวณค่า <span class="math inline">\(W\)</span> โดยแยกกลุ่ม 1 และ กลุ่ม 2 และเลือกค่า <span class="math inline">\(W\)</span> ที่น้อยที่สุด</p></li>
 </ul>
-<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris_pw_rank</span> <span class="op">&lt;-</span> <span class="va">iris_pw</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">`Petal.Width`</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="va">`Petal.Width`</span>, ties.method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span><span class="op">)</span> <span class="co"># rank all values</span></span>
@@ -514,19 +467,19 @@ W = min(W_{1}, W_{2})
 <span><span class="va">all_combn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">setosa</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">versicolor</span><span class="op">)</span></span>
 <span><span class="va">all_combn</span></span></code></pre></div>
 <pre><code>## [1] 2500</code></pre>
-<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setosa_rank_sum</span> <span class="op">&lt;-</span> <span class="va">all_combn</span> <span class="op">+</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">setosa</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">setosa</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">setosa</span><span class="op">$</span><span class="va">Rank</span><span class="op">)</span></span>
 <span><span class="va">setosa_rank_sum</span></span></code></pre></div>
 <pre><code>## [1] 2500</code></pre>
-<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">versicolor_rank_sum</span> <span class="op">&lt;-</span> <span class="va">all_combn</span> <span class="op">+</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">versicolor</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">versicolor</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">versicolor</span><span class="op">$</span><span class="va">Rank</span><span class="op">)</span></span>
 <span><span class="va">versicolor_rank_sum</span></span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">W</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">setosa_rank_sum</span>,<span class="va">versicolor_rank_sum</span><span class="op">)</span></span>
 <span><span class="va">W</span></span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Normal approximation</span></span>
 <span><span class="va">mW</span> <span class="op">&lt;-</span> <span class="va">all_combn</span><span class="op">/</span><span class="fl">2</span></span>
 <span><span class="va">sdW</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">all_combn</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">setosa</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">versicolor</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">12</span><span class="op">)</span></span>
@@ -562,7 +515,7 @@ V = min(V_{-}, V_{+})
 \]</span></p>
 <p>สมมติการวัด Wound healing assay (วัดการเคลื่อนที่ของเซลล์) ก่อนและหลัง Treat ยา</p>
 <div class="inline-figure"><img src="Picture/cell_migration.jpg" width="60%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">treat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,</span>
@@ -575,7 +528,7 @@ V = min(V_{-}, V_{+})
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["sample"],"name":[1],"type":["int"],"align":["right"]},{"label":["Before"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["After"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"428.7578","3":"303.0696","_rn_":"1"},{"1":"2","2":"478.8305","3":"366.3324","_rn_":"2"},{"1":"3","2":"440.8977","3":"362.7011","_rn_":"3"},{"1":"4","2":"488.3017","3":"389.0433","_rn_":"4"},{"1":"5","2":"494.0467","3":"449.7370","_rn_":"5"},{"1":"6","2":"404.5556","3":"287.1157","_rn_":"6"},{"1":"7","2":"452.8105","3":"354.2570","_rn_":"7"},{"1":"8","2":"489.2419","3":"515.6657","_rn_":"8"},{"1":"9","2":"455.1435","3":"337.4896","_rn_":"9"},{"1":"10","2":"445.6615","3":"442.5479","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">treat</span><span class="op">$</span><span class="va">Before</span>, <span class="va">treat</span><span class="op">$</span><span class="va">After</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon signed rank exact test
@@ -589,7 +542,7 @@ V = min(V_{-}, V_{+})
 <li><p>จัดอันดับของข้อมูลโดยเรียงจาก น้อยไปมาก และให้อันดับเป็นตัวเลข (อันดับที่เท่ากัน ให้เป็นค่าเฉลี่ยของลำดับนั้น เช่น อันดับ 2, 3, 4 เท่ากัน ให้อันดับเป็น (2+3+4)/3 = 5 ทุกตัวแปร)</p></li>
 <li><p>คำนวณค่า <span class="math inline">\(V\)</span> โดยแยกเครื่องหมาย <code>+</code> และ <code>-</code> และเลือกค่า <span class="math inline">\(V\)</span> ที่น้อยที่สุด</p></li>
 </ul>
-<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">treat_rank</span> <span class="op">&lt;-</span> <span class="va">treat</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Diff <span class="op">=</span> <span class="va">Before</span><span class="op">-</span><span class="va">After</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Absdiff <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">Diff</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="va">Absdiff</span>, ties.method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span><span class="op">)</span> </span>
@@ -599,14 +552,14 @@ V = min(V_{-}, V_{+})
 {"columns":[{"label":["sample"],"name":[1],"type":["int"],"align":["right"]},{"label":["Before"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["After"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Diff"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Absdiff"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Rank"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"428.7578","3":"303.0696","4":"125.688143","5":"125.688143","6":"19"},{"1":"2","2":"478.8305","3":"366.3324","4":"112.498103","5":"112.498103","6":"16"},{"1":"3","2":"440.8977","3":"362.7011","4":"78.196580","5":"78.196580","6":"12"},{"1":"4","2":"488.3017","3":"389.0433","4":"99.258441","5":"99.258441","6":"15"},{"1":"5","2":"494.0467","3":"449.7370","4":"44.309755","5":"44.309755","6":"9"},{"1":"6","2":"404.5556","3":"287.1157","4":"117.439959","5":"117.439959","6":"17"},{"1":"7","2":"452.8105","3":"354.2570","4":"98.553597","5":"98.553597","6":"14"},{"1":"8","2":"489.2419","3":"515.6657","4":"-26.423829","5":"26.423829","6":"8"},{"1":"9","2":"455.1435","3":"337.4896","4":"117.653880","5":"117.653880","6":"18"},{"1":"10","2":"445.6615","3":"442.5479","4":"3.113528","5":"3.113528","6":"1"},{"1":"11","2":"495.6833","3":"488.4314","4":"7.251942","5":"7.251942","6":"3"},{"1":"12","2":"445.3334","3":"419.5685","4":"25.764901","5":"25.764901","6":"7"},{"1":"13","2":"467.7571","3":"485.7330","4":"-17.975980","5":"17.975980","6":"4"},{"1":"14","2":"457.2633","3":"464.0356","4":"-6.772238","5":"6.772238","6":"2"},{"1":"15","2":"410.2925","3":"455.5750","4":"-45.282567","5":"45.282567","6":"10"},{"1":"16","2":"489.9825","3":"514.5312","4":"-24.548709","5":"24.548709","6":"6"},{"1":"17","2":"424.6088","3":"327.1418","4":"97.466941","5":"97.466941","6":"13"},{"1":"18","2":"404.2060","3":"385.0956","4":"19.110398","5":"19.110398","6":"5"},{"1":"19","2":"432.7921","3":"492.7410","4":"-59.948960","5":"59.948960","6":"11"},{"1":"20","2":"495.4504","3":"301.5993","4":"193.851048","5":"193.851048","6":"20"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sign_rank</span> <span class="op">&lt;-</span> <span class="va">treat_rank</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span><span class="op">(</span><span class="va">Diff</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>rank_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">Rank</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">V</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">sign_rank</span><span class="op">$</span><span class="va">rank_sum</span><span class="op">)</span></span>
 <span><span class="va">V</span></span></code></pre></div>
 <pre><code>## [1] 41</code></pre>
-<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/SignRank.html">psignrank</a></span><span class="op">(</span><span class="va">V</span>, <span class="fl">20</span>,<span class="fl">20</span><span class="op">)</span><span class="op">*</span><span class="fl">2</span></span>
 <span><span class="va">pval</span></span></code></pre></div>
 <pre><code>## [1] 0.01531219</code></pre>
@@ -619,7 +572,7 @@ V = min(V_{-}, V_{+})
 <p><span class="math display">\[
 H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^{n_{i}}_{j=1}(r_{ij}-\bar{r})^{2}}
 \]</span></p>
-<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris_pw_all</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>               <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="va">Species</span><span class="op">)</span> <span class="co"># 3 groups</span></span>
 <span></span>
@@ -627,7 +580,7 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 <span><span class="va">iris_kw</span><span class="op">$</span><span class="va">p.value</span></span></code></pre></div>
 <pre><code>## [1] 3.261796e-29</code></pre>
 <p>ลองคำนวณเอง หลักการการจัดอันดับเหมือน <a href="non-parametric-test.html#wilcox-rs">Wilcoxon’s rank sum test</a></p>
-<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris_pw_all_ranked</span> <span class="op">&lt;-</span> <span class="va">iris_pw_all</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">`Petal.Width`</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="va">`Petal.Width`</span>, ties.method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">iris_pw_all_ranked</span></span></code></pre></div>
@@ -636,11 +589,11 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 {"columns":[{"label":["Petal.Width"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Species"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Rank"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.1","2":"setosa","3":"3.0"},{"1":"0.1","2":"setosa","3":"3.0"},{"1":"0.1","2":"setosa","3":"3.0"},{"1":"0.1","2":"setosa","3":"3.0"},{"1":"0.1","2":"setosa","3":"3.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.2","2":"setosa","3":"20.0"},{"1":"0.3","2":"setosa","3":"38.0"},{"1":"0.3","2":"setosa","3":"38.0"},{"1":"0.3","2":"setosa","3":"38.0"},{"1":"0.3","2":"setosa","3":"38.0"},{"1":"0.3","2":"setosa","3":"38.0"},{"1":"0.3","2":"setosa","3":"38.0"},{"1":"0.3","2":"setosa","3":"38.0"},{"1":"0.4","2":"setosa","3":"45.0"},{"1":"0.4","2":"setosa","3":"45.0"},{"1":"0.4","2":"setosa","3":"45.0"},{"1":"0.4","2":"setosa","3":"45.0"},{"1":"0.4","2":"setosa","3":"45.0"},{"1":"0.4","2":"setosa","3":"45.0"},{"1":"0.4","2":"setosa","3":"45.0"},{"1":"0.5","2":"setosa","3":"49.0"},{"1":"0.6","2":"setosa","3":"50.0"},{"1":"1.0","2":"versicolor","3":"54.0"},{"1":"1.0","2":"versicolor","3":"54.0"},{"1":"1.0","2":"versicolor","3":"54.0"},{"1":"1.0","2":"versicolor","3":"54.0"},{"1":"1.0","2":"versicolor","3":"54.0"},{"1":"1.0","2":"versicolor","3":"54.0"},{"1":"1.0","2":"versicolor","3":"54.0"},{"1":"1.1","2":"versicolor","3":"59.0"},{"1":"1.1","2":"versicolor","3":"59.0"},{"1":"1.1","2":"versicolor","3":"59.0"},{"1":"1.2","2":"versicolor","3":"63.0"},{"1":"1.2","2":"versicolor","3":"63.0"},{"1":"1.2","2":"versicolor","3":"63.0"},{"1":"1.2","2":"versicolor","3":"63.0"},{"1":"1.2","2":"versicolor","3":"63.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.3","2":"versicolor","3":"72.0"},{"1":"1.4","2":"versicolor","3":"82.5"},{"1":"1.4","2":"versicolor","3":"82.5"},{"1":"1.4","2":"versicolor","3":"82.5"},{"1":"1.4","2":"versicolor","3":"82.5"},{"1":"1.4","2":"versicolor","3":"82.5"},{"1":"1.4","2":"versicolor","3":"82.5"},{"1":"1.4","2":"versicolor","3":"82.5"},{"1":"1.4","2":"virginica","3":"82.5"},{"1":"1.5","2":"versicolor","3":"92.5"},{"1":"1.5","2":"versicolor","3":"92.5"},{"1":"1.5","2":"versicolor","3":"92.5"},{"1":"1.5","2":"versicolor","3":"92.5"},{"1":"1.5","2":"versicolor","3":"92.5"},{"1":"1.5","2":"versicolor","3":"92.5"},{"1":"1.5","2":"versicolor","3":"92.5"},{"1":"1.5","2":"versicolor","3":"92.5"},{"1":"1.5","2":"versicolor","3":"92.5"},{"1":"1.5","2":"versicolor","3":"92.5"},{"1":"1.5","2":"virginica","3":"92.5"},{"1":"1.5","2":"virginica","3":"92.5"},{"1":"1.6","2":"versicolor","3":"100.5"},{"1":"1.6","2":"versicolor","3":"100.5"},{"1":"1.6","2":"versicolor","3":"100.5"},{"1":"1.6","2":"virginica","3":"100.5"},{"1":"1.7","2":"versicolor","3":"103.5"},{"1":"1.7","2":"virginica","3":"103.5"},{"1":"1.8","2":"versicolor","3":"110.5"},{"1":"1.8","2":"virginica","3":"110.5"},{"1":"1.8","2":"virginica","3":"110.5"},{"1":"1.8","2":"virginica","3":"110.5"},{"1":"1.8","2":"virginica","3":"110.5"},{"1":"1.8","2":"virginica","3":"110.5"},{"1":"1.8","2":"virginica","3":"110.5"},{"1":"1.8","2":"virginica","3":"110.5"},{"1":"1.8","2":"virginica","3":"110.5"},{"1":"1.8","2":"virginica","3":"110.5"},{"1":"1.8","2":"virginica","3":"110.5"},{"1":"1.8","2":"virginica","3":"110.5"},{"1":"1.9","2":"virginica","3":"119.0"},{"1":"1.9","2":"virginica","3":"119.0"},{"1":"1.9","2":"virginica","3":"119.0"},{"1":"1.9","2":"virginica","3":"119.0"},{"1":"1.9","2":"virginica","3":"119.0"},{"1":"2.0","2":"virginica","3":"124.5"},{"1":"2.0","2":"virginica","3":"124.5"},{"1":"2.0","2":"virginica","3":"124.5"},{"1":"2.0","2":"virginica","3":"124.5"},{"1":"2.0","2":"virginica","3":"124.5"},{"1":"2.0","2":"virginica","3":"124.5"},{"1":"2.1","2":"virginica","3":"130.5"},{"1":"2.1","2":"virginica","3":"130.5"},{"1":"2.1","2":"virginica","3":"130.5"},{"1":"2.1","2":"virginica","3":"130.5"},{"1":"2.1","2":"virginica","3":"130.5"},{"1":"2.1","2":"virginica","3":"130.5"},{"1":"2.2","2":"virginica","3":"135.0"},{"1":"2.2","2":"virginica","3":"135.0"},{"1":"2.2","2":"virginica","3":"135.0"},{"1":"2.3","2":"virginica","3":"140.5"},{"1":"2.3","2":"virginica","3":"140.5"},{"1":"2.3","2":"virginica","3":"140.5"},{"1":"2.3","2":"virginica","3":"140.5"},{"1":"2.3","2":"virginica","3":"140.5"},{"1":"2.3","2":"virginica","3":"140.5"},{"1":"2.3","2":"virginica","3":"140.5"},{"1":"2.3","2":"virginica","3":"140.5"},{"1":"2.4","2":"virginica","3":"146.0"},{"1":"2.4","2":"virginica","3":"146.0"},{"1":"2.4","2":"virginica","3":"146.0"},{"1":"2.5","2":"virginica","3":"149.0"},{"1":"2.5","2":"virginica","3":"149.0"},{"1":"2.5","2":"virginica","3":"149.0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">average_rank</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">iris_pw_all_ranked</span><span class="op">$</span><span class="va">Rank</span><span class="op">)</span> <span class="co"># also = (nrow(iris_pw_all_ranked)+1)/2</span></span>
 <span><span class="va">average_rank</span></span></code></pre></div>
 <pre><code>## [1] 75.5</code></pre>
-<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">between_group_var</span> <span class="op">&lt;-</span> <span class="va">iris_pw_all_ranked</span> <span class="op">|&gt;</span></span>
 <span>                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>rank_var <span class="op">=</span> <span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Rank</span><span class="op">)</span> <span class="op">-</span> <span class="va">average_rank</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -650,7 +603,7 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 {"columns":[{"label":["Species"],"name":[1],"type":["fct"],"align":["left"]},{"label":["rank_var"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"setosa","2":"125000.00"},{"1":"versicolor","2":"48.02"},{"1":"virginica","2":"120148.02"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">within_group_var</span> <span class="op">&lt;-</span> <span class="va">iris_pw_all_ranked</span> <span class="op">|&gt;</span> </span>
 <span>                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>rank_var <span class="op">=</span> <span class="op">(</span><span class="va">Rank</span><span class="op">-</span><span class="va">average_rank</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">within_group_var</span></span></code></pre></div>
@@ -659,11 +612,11 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 {"columns":[{"label":["Petal.Width"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Species"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Rank"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["rank_var"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.1","2":"setosa","3":"3.0","4":"5256.25"},{"1":"0.1","2":"setosa","3":"3.0","4":"5256.25"},{"1":"0.1","2":"setosa","3":"3.0","4":"5256.25"},{"1":"0.1","2":"setosa","3":"3.0","4":"5256.25"},{"1":"0.1","2":"setosa","3":"3.0","4":"5256.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.2","2":"setosa","3":"20.0","4":"3080.25"},{"1":"0.3","2":"setosa","3":"38.0","4":"1406.25"},{"1":"0.3","2":"setosa","3":"38.0","4":"1406.25"},{"1":"0.3","2":"setosa","3":"38.0","4":"1406.25"},{"1":"0.3","2":"setosa","3":"38.0","4":"1406.25"},{"1":"0.3","2":"setosa","3":"38.0","4":"1406.25"},{"1":"0.3","2":"setosa","3":"38.0","4":"1406.25"},{"1":"0.3","2":"setosa","3":"38.0","4":"1406.25"},{"1":"0.4","2":"setosa","3":"45.0","4":"930.25"},{"1":"0.4","2":"setosa","3":"45.0","4":"930.25"},{"1":"0.4","2":"setosa","3":"45.0","4":"930.25"},{"1":"0.4","2":"setosa","3":"45.0","4":"930.25"},{"1":"0.4","2":"setosa","3":"45.0","4":"930.25"},{"1":"0.4","2":"setosa","3":"45.0","4":"930.25"},{"1":"0.4","2":"setosa","3":"45.0","4":"930.25"},{"1":"0.5","2":"setosa","3":"49.0","4":"702.25"},{"1":"0.6","2":"setosa","3":"50.0","4":"650.25"},{"1":"1.0","2":"versicolor","3":"54.0","4":"462.25"},{"1":"1.0","2":"versicolor","3":"54.0","4":"462.25"},{"1":"1.0","2":"versicolor","3":"54.0","4":"462.25"},{"1":"1.0","2":"versicolor","3":"54.0","4":"462.25"},{"1":"1.0","2":"versicolor","3":"54.0","4":"462.25"},{"1":"1.0","2":"versicolor","3":"54.0","4":"462.25"},{"1":"1.0","2":"versicolor","3":"54.0","4":"462.25"},{"1":"1.1","2":"versicolor","3":"59.0","4":"272.25"},{"1":"1.1","2":"versicolor","3":"59.0","4":"272.25"},{"1":"1.1","2":"versicolor","3":"59.0","4":"272.25"},{"1":"1.2","2":"versicolor","3":"63.0","4":"156.25"},{"1":"1.2","2":"versicolor","3":"63.0","4":"156.25"},{"1":"1.2","2":"versicolor","3":"63.0","4":"156.25"},{"1":"1.2","2":"versicolor","3":"63.0","4":"156.25"},{"1":"1.2","2":"versicolor","3":"63.0","4":"156.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.3","2":"versicolor","3":"72.0","4":"12.25"},{"1":"1.4","2":"versicolor","3":"82.5","4":"49.00"},{"1":"1.4","2":"versicolor","3":"82.5","4":"49.00"},{"1":"1.4","2":"versicolor","3":"82.5","4":"49.00"},{"1":"1.4","2":"versicolor","3":"82.5","4":"49.00"},{"1":"1.4","2":"versicolor","3":"82.5","4":"49.00"},{"1":"1.4","2":"versicolor","3":"82.5","4":"49.00"},{"1":"1.4","2":"versicolor","3":"82.5","4":"49.00"},{"1":"1.4","2":"virginica","3":"82.5","4":"49.00"},{"1":"1.5","2":"versicolor","3":"92.5","4":"289.00"},{"1":"1.5","2":"versicolor","3":"92.5","4":"289.00"},{"1":"1.5","2":"versicolor","3":"92.5","4":"289.00"},{"1":"1.5","2":"versicolor","3":"92.5","4":"289.00"},{"1":"1.5","2":"versicolor","3":"92.5","4":"289.00"},{"1":"1.5","2":"versicolor","3":"92.5","4":"289.00"},{"1":"1.5","2":"versicolor","3":"92.5","4":"289.00"},{"1":"1.5","2":"versicolor","3":"92.5","4":"289.00"},{"1":"1.5","2":"versicolor","3":"92.5","4":"289.00"},{"1":"1.5","2":"versicolor","3":"92.5","4":"289.00"},{"1":"1.5","2":"virginica","3":"92.5","4":"289.00"},{"1":"1.5","2":"virginica","3":"92.5","4":"289.00"},{"1":"1.6","2":"versicolor","3":"100.5","4":"625.00"},{"1":"1.6","2":"versicolor","3":"100.5","4":"625.00"},{"1":"1.6","2":"versicolor","3":"100.5","4":"625.00"},{"1":"1.6","2":"virginica","3":"100.5","4":"625.00"},{"1":"1.7","2":"versicolor","3":"103.5","4":"784.00"},{"1":"1.7","2":"virginica","3":"103.5","4":"784.00"},{"1":"1.8","2":"versicolor","3":"110.5","4":"1225.00"},{"1":"1.8","2":"virginica","3":"110.5","4":"1225.00"},{"1":"1.8","2":"virginica","3":"110.5","4":"1225.00"},{"1":"1.8","2":"virginica","3":"110.5","4":"1225.00"},{"1":"1.8","2":"virginica","3":"110.5","4":"1225.00"},{"1":"1.8","2":"virginica","3":"110.5","4":"1225.00"},{"1":"1.8","2":"virginica","3":"110.5","4":"1225.00"},{"1":"1.8","2":"virginica","3":"110.5","4":"1225.00"},{"1":"1.8","2":"virginica","3":"110.5","4":"1225.00"},{"1":"1.8","2":"virginica","3":"110.5","4":"1225.00"},{"1":"1.8","2":"virginica","3":"110.5","4":"1225.00"},{"1":"1.8","2":"virginica","3":"110.5","4":"1225.00"},{"1":"1.9","2":"virginica","3":"119.0","4":"1892.25"},{"1":"1.9","2":"virginica","3":"119.0","4":"1892.25"},{"1":"1.9","2":"virginica","3":"119.0","4":"1892.25"},{"1":"1.9","2":"virginica","3":"119.0","4":"1892.25"},{"1":"1.9","2":"virginica","3":"119.0","4":"1892.25"},{"1":"2.0","2":"virginica","3":"124.5","4":"2401.00"},{"1":"2.0","2":"virginica","3":"124.5","4":"2401.00"},{"1":"2.0","2":"virginica","3":"124.5","4":"2401.00"},{"1":"2.0","2":"virginica","3":"124.5","4":"2401.00"},{"1":"2.0","2":"virginica","3":"124.5","4":"2401.00"},{"1":"2.0","2":"virginica","3":"124.5","4":"2401.00"},{"1":"2.1","2":"virginica","3":"130.5","4":"3025.00"},{"1":"2.1","2":"virginica","3":"130.5","4":"3025.00"},{"1":"2.1","2":"virginica","3":"130.5","4":"3025.00"},{"1":"2.1","2":"virginica","3":"130.5","4":"3025.00"},{"1":"2.1","2":"virginica","3":"130.5","4":"3025.00"},{"1":"2.1","2":"virginica","3":"130.5","4":"3025.00"},{"1":"2.2","2":"virginica","3":"135.0","4":"3540.25"},{"1":"2.2","2":"virginica","3":"135.0","4":"3540.25"},{"1":"2.2","2":"virginica","3":"135.0","4":"3540.25"},{"1":"2.3","2":"virginica","3":"140.5","4":"4225.00"},{"1":"2.3","2":"virginica","3":"140.5","4":"4225.00"},{"1":"2.3","2":"virginica","3":"140.5","4":"4225.00"},{"1":"2.3","2":"virginica","3":"140.5","4":"4225.00"},{"1":"2.3","2":"virginica","3":"140.5","4":"4225.00"},{"1":"2.3","2":"virginica","3":"140.5","4":"4225.00"},{"1":"2.3","2":"virginica","3":"140.5","4":"4225.00"},{"1":"2.3","2":"virginica","3":"140.5","4":"4225.00"},{"1":"2.4","2":"virginica","3":"146.0","4":"4970.25"},{"1":"2.4","2":"virginica","3":"146.0","4":"4970.25"},{"1":"2.4","2":"virginica","3":"146.0","4":"4970.25"},{"1":"2.5","2":"virginica","3":"149.0","4":"5402.25"},{"1":"2.5","2":"virginica","3":"149.0","4":"5402.25"},{"1":"2.5","2":"virginica","3":"149.0","4":"5402.25"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">H</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">iris_pw_all_ranked</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">between_group_var</span><span class="op">$</span><span class="va">rank_var</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">within_group_var</span><span class="op">$</span><span class="va">rank_var</span><span class="op">)</span></span>
 <span><span class="va">H</span></span></code></pre></div>
 <pre><code>## [1] 131.1854</code></pre>
-<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">H</span>, <span class="fl">2</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">pval</span></span></code></pre></div>
 <pre><code>## [1] 3.261796e-29</code></pre>
@@ -683,7 +636,7 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 \rho_{xy} = \frac{\sum^{n}_{i=1}(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum^{n}_{i=1}(x_{i}-\bar{x})^{2}}\sqrt{\sum^{n}_{i=1}(y_{i}-\bar{y})^{2}}}
 \]</span></p>
 <p>โดย <span class="math inline">\(x, y\)</span> คือ ลำดับของข้อมูล (ไม่ใช่ตัวข้อมูลเอง) ส่งผลให้การทดสอบนี้ เป็นการทดสอบการเพิ่มขึ้นของลำดับ ไม่ใช่การเพิ่มขึ้นของข้อมูล ดังนั้น จึงไม่ใช่การทดสอบความสัมพันธ์เป็นเชิงเส้นเหมือน <a href="parametric-test.html#pearson">Pearson’s correlation</a> แต่เป็นการทดสอบเพียงว่าข้อมูลไปในทิศทางเดียวันหรือไม่</p>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">poly_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">10</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">x</span><span class="op">^</span><span class="fl">9</span><span class="op">+</span><span class="va">x</span><span class="op">+</span><span class="fl">10</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -692,10 +645,10 @@ H = (N-1)\frac{\sum^{g}_{i=1}n_{i}(\bar{r_{i}}-\bar{r})^{2}}{\sum^{g}_{i=1}\sum^
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="fu">f</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">==</span> <span class="va">x</span><span class="op">^</span><span class="fl">9</span><span class="op">+</span><span class="va">x</span><span class="op">+</span><span class="fl">10</span><span class="op">+</span><span class="va">epsilon</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/poly_cor-1.png" width="672"></div>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">poly_data</span><span class="op">$</span><span class="va">x</span>, <span class="va">poly_data</span><span class="op">$</span><span class="va">y</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span> <span class="co"># not quite linear</span></span></code></pre></div>
 <pre><code>## [1] 0.6870804</code></pre>
-<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">poly_data</span><span class="op">$</span><span class="va">x</span>, <span class="va">poly_data</span><span class="op">$</span><span class="va">y</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span> <span class="co"># monotonic</span></span></code></pre></div>
 <pre><code>## [1] 0.9993399</code></pre>
 <p>การทดสอบใน <code>R</code> ใช้ลักษณะ code เดียวกันกับ <a href="parametric-test.html#pearson">Pearson’s correlation</a> แต่เปลี่ยน Argument เป็น <code>method = "pearson"</code> และมีข้อควรระวังที่เหมือนกัน</p>

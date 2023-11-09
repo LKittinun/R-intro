@@ -43,17 +43,20 @@ chisq_dice
 chisq_gof_df <- data.frame(O = chisq_dice$observed, 
                            E.Freq = chisq_dice$expected) |> 
   mutate(X2 = ((`O.Freq` - `E.Freq`)^2)/`E.Freq`)
+
+chisq_gof_df 
+
+chisq_gof <- sum(chisq_gof_df$X2)
+chisq_gof
+pchisq(chisq_gof, df = 5, lower.tail = FALSE)
+```
+
+```{r plot, echo= FALSE, include = FALSE, fig.path="figure/"}
 chisq_gof_df |> 
   pivot_longer(!c(`O.dice`, X2), names_to = "Type", values_to = "Freq") |> 
   ggplot(aes(x = `O.dice`, y = Freq))+
   geom_line(aes(group = Type, linetype = Type)) + 
   theme_bw()
-
-chisq_gof_df |> knitr::kable()
-
-chisq_gof <- sum(chisq_gof_df$X2)
-chisq_gof
-pchisq(chisq_gof, df = 5, lower.tail = FALSE)
 ```
 
 จะเห็นว่าความแตกต่างระหว่าง Observed และ Expected นั้น อยู่ในพิสัยของของ $H_{0}$

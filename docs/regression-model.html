@@ -123,7 +123,7 @@
 <p><span class="math display">\[
 h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \theta_{n}x_{n} + \epsilon
 \]</span></p>
-<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"Diabetes"</span>, package <span class="op">=</span> <span class="st">"heplots"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Diabetes</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">glufast</span>, y <span class="op">=</span> <span class="va">sspg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -170,7 +170,7 @@ h_{\theta}(x) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + \ …  \ + \the
 <li><p><span class="math inline">\(SSR\)</span> = Explained variation = ค่าความผันผวนระหว่างค่าเฉลี่ยของข้อมูลกับเส้น Regression</p></li>
 <li><p><span class="math inline">\(SSE\)</span> = Error = ค่าความผันผวนระหว่างข้อมูลกับเส้น Regression</p></li>
 </ul>
-<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">diabetes_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">sspg</span> <span class="op">~</span> <span class="va">glufast</span>, data <span class="op">=</span> <span class="va">Diabetes</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">diabetes_fit</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -227,7 +227,7 @@ SE(\theta) = \sqrt{\frac{1}{n-2} \times {\sum_{i=1}^{n}\frac{(y_{i} - \hat{y_{i}
 </h3>
 <p>ข้อดีของสมการถอดถอย คือ สามารถใช้ในการทำนายข้อมูลตัวแปรตามชุดใหม่ได้ จากผลลัพธ์ขั้นต้นในคอลัมน์ <code>coef</code> พบว่าทุกๆ <code>glufast</code> ที่เพิ่มขึ้น 1.186 หน่วย ส่งผลให้ <code>sspg</code> เพิ่มขึ้น 1 หน่วย</p>
 <p>โดยสมการนี้จะอยู่ใน <code>diabetes_fit</code></p>
-<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_sspg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>glufast <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span> </span>
 <span><span class="va">new_sspg</span> <span class="op">&lt;-</span> <span class="va">new_sspg</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>predicted_sspg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">diabetes_fit</span>, newdata <span class="op">=</span> <span class="va">new_sspg</span><span class="op">)</span><span class="op">)</span></span>
@@ -260,7 +260,7 @@ h(x) = \frac{e^{z}}{1+e^{z}}
 h(x) = \frac{1}{1+e^{-(\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ + x_{n}\theta_{n} + \epsilon)}}
 \]</span></p>
 <p>ความพิเศษของสมการนี้คือ ขอบเขตของ <span class="math inline">\(h(x)\)</span> จะอยู่ระหว่าง (0, 1) เสมอ ซึ่งส่งผลให้สามารถคำนวณกลับไปทำนายอัตราการเกิดเหตุการณ์จากอัตราส่วนความเสี่ยงได้</p>
-<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">log_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="op">(</span><span class="fl">0</span> <span class="op">+</span> <span class="fl">0.75</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -268,7 +268,7 @@ h(x) = \frac{1}{1+e^{-(\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ 
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"h(x)"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/logistic_regression-1.png" width="672"></div>
 <p>ต่อไปเราจะทำนายว่า <code>glufast</code> เพื่อให้ตัวแปรเป็น binary เราจะรวม <code>Overt_Diabetic</code> และ <code>Chemical_Diabetic</code> เป็นกลุ่มเดียวกัน</p>
-<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Diabetes_mixed</span> <span class="op">&lt;-</span> <span class="va">Diabetes</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span><span class="va">group</span>,</span>
 <span>                            <span class="st">"Normal"</span> <span class="op">~</span> <span class="fl">0</span>,</span>
@@ -286,7 +286,7 @@ h(x) = \frac{1}{1+e^{-(\theta_{0} + x_{1}\theta_{1} + x_{2}\theta_{2} + \ ... \ 
 <h3>
 <span class="header-section-number">13.2.2</span> Model performance<a class="anchor" aria-label="anchor" href="#model-performance-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">logit_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">group</span> <span class="op">~</span> <span class="va">glufast</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, </span>
 <span>                 data <span class="op">=</span> <span class="va">Diabetes_mixed</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">logit_fit</span><span class="op">)</span></span></code></pre></div>
@@ -325,7 +325,7 @@ LL = log(\prod_{i=1}^{n}p_{i}^{y_{i}}(1-p_{i}^{1-y_{i}})) = \sum_{i=1}^{n}log(p_
 <li><p><strong>Pseudo</strong> <span class="math inline">\(R^{2}\)</span> สามารถคำนวณได้จาก <span class="math inline">\(1 - \frac{D_{Fitted}}{D_{Null}}\)</span></p></li>
 </ul>
 <p>ค่าที่เกี่ยวข้องกับ Deviance นั้น ยิ่งน้อยยิ่งดี เนื่องหมายความว่ามี Deviation ต่ำ</p>
-<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">logit_performance</span> <span class="op">&lt;-</span> <span class="va">Diabetes_mixed</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">glufast</span>, <span class="va">group</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>predicted_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">logit_fit</span>, newdata <span class="op">=</span> <span class="va">Diabetes_mixed</span>,</span>
 <span>                                   type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -342,17 +342,17 @@ LL = log(\prod_{i=1}^{n}p_{i}^{y_{i}}(1-p_{i}^{1-y_{i}})) = \sum_{i=1}^{n}log(p_
 {"columns":[{"label":["binomial_response"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["saturated_response"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["null_response"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"-60.972","2":"0","3":"-100.5063"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Null deviance</span></span>
 <span><span class="va">nd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">logit_likelihood</span>, <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">saturated_response</span> <span class="op">-</span> <span class="va">null_response</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">nd</span></span></code></pre></div>
 <pre><code>## [1] 201.0127</code></pre>
-<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Residual deviance</span></span>
 <span><span class="va">rd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">logit_likelihood</span>, <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">saturated_response</span> <span class="op">-</span> <span class="va">binomial_response</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">rd</span> </span></code></pre></div>
 <pre><code>## [1] 121.944</code></pre>
-<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## AIC</span></span>
 <span><span class="va">aic</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fl">2</span><span class="op">-</span><span class="va">logit_likelihood</span><span class="op">$</span><span class="va">binomial_response</span><span class="op">)</span></span>
 <span><span class="va">aic</span></span></code></pre></div>
@@ -362,14 +362,14 @@ LL = log(\prod_{i=1}^{n}p_{i}^{y_{i}}(1-p_{i}^{1-y_{i}})) = \sum_{i=1}^{n}log(p_
 L = -2log(\frac{LL_{Fitted}}{LL_{Null}}) =D_{Null} - D_{Fitted}
 \]</span></p>
 <p>ซึ่งค่า <span class="math inline">\(L\)</span> นั้นจะมีลักษณะการกระจายตัวเป็นแบบเดียวกับ Chi-square</p>
-<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">L</span> <span class="op">&lt;-</span> <span class="va">nd</span> <span class="op">-</span> <span class="va">rd</span></span>
 <span><span class="va">L</span></span></code></pre></div>
 <pre><code>## [1] 79.06869</code></pre>
-<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">L</span>, df <span class="op">=</span> <span class="fl">144</span><span class="op">-</span><span class="fl">143</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 5.998755e-19</code></pre>
-<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">lmtest</span><span class="op">)</span> <span class="co"># Use package</span></span>
 <span><span class="va">null_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">group</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">Diabetes_mixed</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/lrtest.html">lrtest</a></span><span class="op">(</span><span class="va">logit_fit</span>, <span class="va">null_fit</span><span class="op">)</span></span></code></pre></div>
@@ -384,7 +384,7 @@ L = -2log(\frac{LL_{Fitted}}{LL_{Null}}) =D_{Null} - D_{Fitted}
 <span class="header-section-number">13.2.3</span> Prediction<a class="anchor" aria-label="anchor" href="#prediction-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>ในส่วนของ Prediction นั้น ใช้ฟังก์ชันลักษณะเดียวกันกับ Linear regression โดยให้ Argument <code>type = response</code></p>
-<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>glufast <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">200</span><span class="op">)</span> </span>
 <span><span class="va">new_group</span> <span class="op">&lt;-</span> <span class="va">new_group</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>predicted_response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">logit_fit</span>, </span>
@@ -429,7 +429,7 @@ ln(\lambda) = \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n}
 ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t) \rightarrow  \text{offset}
 \]</span></p>
 <p>ซึ่งสมการนี้เป็นสมการพื้นฐานของการนับจำนวนใดๆ ดังเช่นตัวอย่างนี้ คือความสัมพันธ์ของตัวแปรต่างๆ กับอัตราการตายในโรคมะเร็งปากมดลูก</p>
-<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cervix_mort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"Resource/cervix_mort.csv"</span><span class="op">)</span> <span class="op">|&gt;</span>  <span class="co"># aggregrated data for demonstration</span></span>
 <span>                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>histo_major <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">histo_major</span>, <span class="st">"Squamous cell carcinoma"</span>,</span>
 <span>                                                 <span class="st">"Adenocarcinoma"</span>,</span>
@@ -459,7 +459,7 @@ ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t)
 ## AIC: 9832.1
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
-<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">cervix_mort</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span> <span class="op">(</span>x <span class="op">=</span> <span class="va">age_group</span>, y <span class="op">=</span> <span class="va">dead</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"glm"</span>, method.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"poisson"</span><span class="op">)</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
@@ -467,7 +467,7 @@ ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t)
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/poisson-1.png" width="672"></div>
 <p>สังเกตว่ายิ่งอายุเยอะ อัตราการตายยิ่งน้อยลงอย่างมีนัยสำคัญ ซึ่งไม่น่าจะเป็นไปได้ ทั้งนี้ เพราะยังไม่ได้ปรับระยะเวลาติดตาม โดยการใส่ Offset เป็น <code>person-month</code> เข้าไปคำนวณด้วย</p>
-<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pois_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">dead</span> <span class="op">~</span>  <span class="va">age_group</span> <span class="op">+</span> <span class="va">histo_major</span> <span class="op">+</span> <span class="va">stage</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">person_month</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                family <span class="op">=</span> <span class="st">"poisson"</span>, data <span class="op">=</span> <span class="va">cervix_mort</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">pois_fit</span><span class="op">)</span></span></code></pre></div>
@@ -495,7 +495,7 @@ ln(k) =  \theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+…+\theta_{n}x_{n} + \ln(t)
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>จะพบว่าหลังจากปรับตามระยะเวลาติดตาม กลุ่มอายุที่เพิ่มขึ้นจะส่งผลให้การตายเพิ่มขึ้นอย่างมีนัยสำคัญ</p>
-<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid</a></span><span class="op">(</span>age_group <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
 <span>                       histo_major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">cervix_mort</span><span class="op">$</span><span class="va">histo_major</span><span class="op">)</span>,</span>
 <span>                       stage <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
@@ -525,7 +525,7 @@ V = \phi\mu_{i}
 \]</span> <span class="math display">\[
 \phi = \frac{\chi^{2}}{\text{DF}} = \frac{1}{n-k}{\sum_{i=1}^{n}\frac{(Y_{i}-\hat{\mu_{i}})^{2}}{\hat{\mu_{i}}}}
 \]</span></p>
-<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">quasipois_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">dead</span> <span class="op">~</span> <span class="va">age_group</span> <span class="op">+</span> <span class="va">histo_major</span> <span class="op">+</span> <span class="va">stage</span> <span class="op">+</span> </span>
 <span>                       <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">person_month</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                family <span class="op">=</span> <span class="st">"quasipoisson"</span>, data <span class="op">=</span> <span class="va">cervix_mort</span><span class="op">)</span></span>
@@ -563,7 +563,7 @@ V = \phi\mu_{i}
 <p><span class="math display">\[
 V = u_{i}(1+\frac{u_{i}}{\phi})
 \]</span></p>
-<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nb_fit</span> <span class="op">&lt;-</span> <span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html">glm.nb</a></span><span class="op">(</span><span class="va">dead</span> <span class="op">~</span>  </span>
 <span>                         <span class="va">age_group</span> <span class="op">+</span> <span class="va">histo_major</span> <span class="op">+</span> <span class="va">stage</span> <span class="op">+</span> </span>
 <span>                         <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">person_month</span><span class="op">)</span><span class="op">)</span>, </span>
