@@ -117,11 +117,11 @@
 </ul>
 <p>และอื่นๆ อีกมากสามารถดูได้ที่ <a href="https://www.bioconductor.org/packages/release/bioc/" class="uri">https://www.bioconductor.org/packages/release/bioc/</a></p>
 <p>การติดตั้ง <code>package</code> ต่างๆ จาก Bioconductor ลงใน <code>R</code> นั้น จำเป็นเรียกจากชุดติดตั้งของ Bioconductor โดยเฉพาะ ชื่อว่า <code>BiocManager</code></p>
-<div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb453"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://bioconductor.github.io/BiocManager/">"BiocManager"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co"># ตรวจสอบว่ามีติดตั้งไว้แล้วหรือไม่</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span></code></pre></div>
 <p>หลังจากนั้น จะสามารถติดตั้ง <code>package</code> ได้โดยการเรียกชุดติดตั้ง <code>BiocManager</code> เช่น</p>
-<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html">install</a></span><span class="op">(</span><span class="st">"limma"</span><span class="op">)</span></span></code></pre></div>
 <p>จะทำการติดตั้ง <code>package</code> <code>limma</code> ลงใน <code>R</code> ซึ่งหลังจากนั้นสามารถใช้คำสั่ง <code>library</code> เรียกได้ตามปกติ</p>
 
@@ -147,7 +147,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-08.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

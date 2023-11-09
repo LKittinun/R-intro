@@ -86,7 +86,7 @@ t = \frac{\bar{x_{1}}-\bar{x_{2}}-\mu_{0}}{\sqrt{\frac{s^{2}_1}{n_{1}}+\frac{s^{
 $$
 
 $$
-s_{p}^{2} = \frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}
+s_{p} = \sqrt{\frac{(n_{1}-1)s^{2}_{1}+(n_{2}-1)s^{2}_{2}}{{n_{1}} + n_{2} - 2}}
 $$
 
 กลับไปดูภาพขั้นต้น ครั้งนี้จะเทียบระหว่างกลุ่มตัวอย่างสองกลุ่ม คือ `norm_10_sample` และ `norm_30_sample` ว่ามี ค่าเฉลี่ยที่แตกต่างกันอย่างมีนัยสำคัญหรือไม่
@@ -101,7 +101,24 @@ t.test(norm_10_sample, norm_30_sample, var.equal = TRUE)
 
 สรุปได้ว่าค่าเฉลี่ยของกลุ่มตัวอย่างทั้งสองกลุ่มนั้นแตกต่างกันอย่างมีนัยสำคัญ
 
-ปล. บางครั้งข้อมูลอาจจะมีความแปรปรวนไม่เท่ากัน ในที่นี้มักจะใช้ Welch's $t$-test โดย `t.test(…, var.equal = FALSE)` โดยสมการนี้จะทำการปรับความแปรปรวนให้ด้วย
+ลองคำนวณเอง
+
+```{r manual_ind_t}
+ind_t_df <- data.frame(ten = norm_10_sample, thirty = norm_30_sample) |> 
+  summarize(across(c(everything()), .fns = 
+                     list(mean = mean, sd = sd)))
+ind_t_df
+
+ind_t_se <- with(ind_t_df, sqrt( (ten_sd^2)/100 + (thirty_sd^2)/100 ) )
+ind_t_se
+
+ind_t <- (ind_t_df$ten_mean - ind_t_df$thirty_mean - 0)/ind_t_se
+ind_t
+
+pt(ind_t, df = nrow(paired_t_df)*2-2)*2
+```
+
+**Note:** บางครั้งข้อมูลอาจจะมีความแปรปรวนไม่เท่ากัน ในที่นี้มักจะใช้ Welch's $t$-test โดย `t.test(…, var.equal = FALSE)` โดยสมการนี้จะทำการปรับความแปรปรวนให้ด้วย
 
 ### Paired t-test {#pair-t}
 
@@ -116,14 +133,33 @@ x_{di} = x_{1_{i}}-x_{2_{i}}
 $$
 
 $$
-s_{x_{d}} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})}{(n-1)}} 
+s_{x_{d}} = \sqrt{\frac{\sum_{d=1}^{n}(x_{d}-\bar{x}_{d})^{2}}{(n-1)}} 
 $$
 
 ```{r paired_t}
-t.test(norm_10_sample, norm_30_sample, paired = TRUE)
+t.test(norm_10_sample, norm_30_sample, paired = TRUE, var.equal = TRUE)
 ```
 
 จะเห็นว่ามีความแตกต่างในส่วนของ $df$ (Degree of freedom) ซึ่งเกิดจากการจับคู่หาความต่าง 100 ครั้ง เนื่องจากค่าที่เปรียบเทียบนั้นอยู่ในตัวอย่างเดียวกัน (แม่ลูก คู่ที่ 1 แม่ลูกคู่ที่ 2 ... เป็นต้น) เมื่อเปรียบเทียบกับ Independent $t$-test เนื่องจากเป็นการหา mean ในกลุ่มของตัวเอง 2 ครั้ง และมาเทียบความต่างกัน
+
+ลองคำนวณเอง
+
+```{r manual_paired_t}
+paired_t_df <- data.frame(ten = norm_10_sample, thirty = norm_30_sample) |> 
+  mutate(diff = ten -thirty) |> 
+  mutate(mean_diff = mean(diff)) |> 
+  mutate(ss_mean_diff = (diff-mean_diff)^2)
+
+paired_t_df
+
+t_sd <- (sum(paired_t_df$ss_mean_diff)/(nrow(paired_t_df)-1) ) |> sqrt()
+t_sd
+
+t_paired <- mean(paired_t_df$diff)/(t_sd/sqrt(nrow(paired_t_df)))
+t_paired
+
+pt(t_paired, df = nrow(paired_t_df)-1)*2
+```
 
 ดังนั้น การเลือก Paired vs Independent นั้นมีความสำคัญ ขึ้นอยู่กับโจทย์การศึกษาของท่านด้วย
 

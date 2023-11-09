@@ -191,7 +191,7 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 <span class="header-section-number">18.3</span> Example<a class="anchor" aria-label="anchor" href="#edgeR-ex"><i class="fas fa-link"></i></a>
 </h2>
 <p>ในตัวอย่างนี้จะใช้ Bladder gene expression ระหว่าง Tumor และ Control และใช้สมการ Generalized log-linear model</p>
-<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">bladder_mat</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -199,7 +199,7 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
   </script>
 </div>
 <p>ก่อนอื่นเราต้องสร้าง Condition matrix ซึ่งประกอบด้วย แต่ละ Sample ที่ต้องการศึกษา และ Condition ของตัวอย่างนั้น ซึ่งในที่นี้เราจะแบ่งเป็นสองกลุ่ม ก็คือ <code>Normal</code> และ <code>Tumor</code></p>
-<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">design</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  ID <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">bladder_mat</span><span class="op">)</span>,</span>
 <span>  condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">".{1}$"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">bladder_mat</span><span class="op">)</span><span class="op">)</span> <span class="co"># Remove number</span></span>
@@ -212,12 +212,12 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
   </script>
 </div>
 <p>หลังจากนั้นจะต้องกรองเอายีนที่แสดงออกน้อยออกไป เนื่องจาก Technical variation ของ RNA-seq นั้นมีการกระจายตัวแบบ Poisson นั่นหมายความว่า ยีนที่มีการแสดงออกต่ำนั้นย่อมมี CV ที่สูง อีกทั้ง ยีนที่มีการแสดงออกต่ำนั้นมีโอกาสที่จะถูก Translate ไปเป็นโปรตีนน้อย จึงถือว่าเป็นข้อมูลที่ไม่ค่อยเป็นประโยชน์และเพิ่ม <span class="math inline">\(\alpha\)</span> error โดยใช่เหตุ จึงสมควรที่จะตัดออกไป โดยค่า Default ของ edgeR นั้นอยู่ที่ 10 counts/sample (จาก Count-per million)</p>
-<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bladder_dge</span> <span class="op">&lt;-</span> <span class="fu">DGEList</span><span class="op">(</span><span class="va">bladder_mat</span>, group <span class="op">=</span> <span class="va">design</span><span class="op">$</span><span class="va">condition</span><span class="op">)</span> </span>
 <span><span class="va">keep</span> <span class="op">&lt;-</span> <span class="fu">filterByExpr</span><span class="op">(</span><span class="va">bladder_dge</span>, min.count <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">bladder_dge</span> <span class="op">&lt;-</span> <span class="va">bladder_dge</span><span class="op">[</span><span class="va">keep</span>,<span class="op">]</span></span></code></pre></div>
 <p>ต่อมา เราจะต้องทำการ Normalize ค่าการแสดงออกของ RNA เนื่องจากการ run RNA seq ในแต่ละ Sample นั้น สภาวะของเครื่องอาจจะมีความแตกต่างกัน ส่งผลให้ค่า Total read count ในแต่ละ Sample มีไม่เท่ากัน โดย edgeR จะใช้วิธี Normalize ที่เรียกว่า Trimmed mean of M-values (TMM) ซึ่งใช้ค่าเฉลี่ยถ่วงน้ำหนักของการแสดงออกยีนในตัวอย่างนั้นๆ หลังจากตัด Outlier ทั้งสูงและต่ำออก (30% ของค่า Log และ 5% ของค่า Absolute)</p>
-<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bladder_dge</span> <span class="op">&lt;-</span> <span class="fu">calcNormFactors</span><span class="op">(</span><span class="va">bladder_dge</span><span class="op">)</span></span>
 <span><span class="va">bladder_dge</span><span class="op">$</span><span class="va">samples</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -226,7 +226,7 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
   </script>
 </div>
 <p>หลังจากนั้นจะทำการคำนวณ <span class="math inline">\(\phi\)</span> ถ้ามี edgeR จะใช้วิธี qCML ถ้าไม่มี Design matrix และใช้วิธี cPAL ถ้ามี Design matrix</p>
-<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="fl">0</span><span class="op">+</span><span class="va">condition</span>, data <span class="op">=</span> <span class="va">design</span><span class="op">)</span></span>
 <span><span class="va">model</span></span></code></pre></div>
 <pre><code>##   conditionN conditionT
@@ -241,18 +241,18 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 ## attr(,"contrasts")
 ## attr(,"contrasts")$condition
 ## [1] "contr.treatment"</code></pre>
-<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bladder_dge</span> <span class="op">&lt;-</span> <span class="fu">estimateDisp</span><span class="op">(</span><span class="va">bladder_dge</span>, design <span class="op">=</span> <span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu">plotBCV</span><span class="op">(</span><span class="va">bladder_dge</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/calculate_dispersion-1.png" width="672"></div>
 <p>ต่อไปจะทำการ ทดสอบ DGE ด้วยสมการถดถอย ql-nbglm</p>
-<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">glmQLFit</span><span class="op">(</span><span class="va">bladder_dge</span>, <span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu">plotQLDisp</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/squeezvar-1.png" width="672"></div>
 <p>ตอนนี้จะเห็นว่า BCV ของข้อมูลนั้นถูกบีบมาให้อยู่ใน Trend line จาก Empirical Bayes (<strong>Note</strong>: edgeR เรียก Function นี้จาก package <code>limma</code>)</p>
 <p>สุดท้าย เราจะใช้ <code>glmQLFTest()</code> เพื่อวิเคราะห์ <span class="math inline">\(p\)</span>-value จาก <span class="math inline">\(F\)</span>-test (สามารถใช้ Likelihood-ratio test ได้ด้วย <code>glmLRT()</code>) และเรียก <code>topTags()</code> เพื่อทำการดึงตารางผลของ DGE ออกมา</p>
-<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">genediff</span> <span class="op">&lt;-</span> <span class="fu">glmQLFTest</span><span class="op">(</span><span class="va">fit</span>, contrast<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">topTags</span><span class="op">(</span><span class="va">genediff</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># First 100 genes</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -296,7 +296,7 @@ y_{gi} \sim NB(\mu_{gi}, \phi_{i})
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-08.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
