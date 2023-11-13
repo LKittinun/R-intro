@@ -51,7 +51,7 @@ chisq_gof
 pchisq(chisq_gof, df = 5, lower.tail = FALSE)
 ```
 
-```{r plot, echo= FALSE, include = FALSE, fig.path="figure/"}
+```{r plot, echo = FALSE, include = FALSE, fig.path="figure/"}
 chisq_gof_df |> 
   pivot_longer(!c(`O.dice`, X2), names_to = "Type", values_to = "Freq") |> 
   ggplot(aes(x = `O.dice`, y = Freq))+

@@ -7,7 +7,7 @@
 | 6 Nov 2023  | Data visualization with ggplot2                            | 2    |
 | 13 Nov 2023 | Statistical distribution and hypothesis testing            | 2    |
 | 20 Nov 2023 | Regression, dimensionality reduction and survival analysis | 2    |
-| 27 Nov 2023 | Introduction to Bioconductor                               | 2    |
+| 4 Dec 2023 | Introduction to Bioconductor                               | 2    |
 
 ## Materials
 - [Handout](https://lkittinun.github.io/R-intro/)
