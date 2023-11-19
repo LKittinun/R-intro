@@ -123,7 +123,7 @@ t = \frac{\theta_{1}-0}{SE} = \frac{\theta_{1}}{S/\sqrt{n}}
 \]</span></p>
 <p>ซึ่งเมื่อพิจารณาจากสูตรแล้ว จะเห็นว่าจำนวนตัวอย่างที่ต่ำ ส่งผลให้ <span class="math inline">\(SE\)</span> สูง มีค่า <span class="math inline">\(t\)</span> ที่แกว่ง (ตาม <span class="math inline">\(S\)</span>) และมี <a href="hypothesis-testing.html#power">Power ที่ต่ำด้วย เนื่องจากมีกลุ่มตัวอย่างน้อย</a></p>
 <p>ผู้นิพนธ์ limma นั้นได้แก้ปัญหานี้โดยใช้หลักการสถิติแบบ Empirical Bayes ชื่อว่า Moderated <span class="math inline">\(t\)</span>-test โดยหลักการคือ เนื่องจากหลักการของการอ่านข้อมูลใน Microarray ในแต่ละยีนนั้นเป็นไปโดยพร้อมกัน อัตราส่วนความแปรปรวนของยีนแต่ละตัวที่อ่านค่าได้นั้นจะเท่าๆ กันตลอดทั้ง array ดังนั้นจึงสามารถยืมข้อมูลของความแปรปรวนมาจากทุกยีนทั้งหมด มาสร้างเป็น <strong>ความน่าจะเป็นก่อนหน้า (Prior probability)</strong> เพื่อนำมาถ่วงน้ำหนักกับ<strong>ยีนแต่ละตัว (Posterior probability)</strong> ภายหลัง</p>
-<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_nc</span> <span class="op">&lt;-</span> <span class="va">GSE63514</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Normal"</span>, <span class="st">"Cancer"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -159,13 +159,13 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 </h2>
 <p>ต่อจากนี้จะยกตัวอย่างการคำนวณ DGE ระหว่างกลุ่มโดยใช้ limma ต่อจาก <a href="#GSE6354">GSE63514</a> ซึ่งครั้งนี้จะเทียบทุกกลุ่ม และเทียบทุกยีน</p>
 <p>ก่อนอื่นจะต้องสร้างสมการเชิงเส้นของกลุ่มแต่ละกลุ่มขึ้นมาก่อน</p>
-<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pData</span> <span class="op">&lt;-</span> <span class="va">GSE63514_meta</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">title</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"-\\d+"</span>, <span class="st">""</span>, <span class="va">title</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">pData</span><span class="op">$</span><span class="va">group</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Normal" "CIN1"   "CIN2"   "CIN3"   "Cancer"</code></pre>
-<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span> <span class="fl">0</span> <span class="op">+</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">pData</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cx_mod</span><span class="op">)</span> <span class="co"># Display as dataframe</span></span></code></pre></div>
 <div data-pagedtable="false">
@@ -175,7 +175,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 </div>
 <p>แมทริกซ์ที่เห็นนี้ ข้อมูลของ Sample แต่ละคน โดยแต่ละคอลัมน์จะเป็นตัวแทนของกลุ่มของ Sample นั้น เช่น คนที่ 1 จะมีตัวเลข <code>[0 0 0 0 1]</code> บ่งบอกว่าเป็นชิ้นเนื้อประเภท <code>Cancer</code> และคนสุดท้ายเป็น <code>[1 0 0 0 0]</code> บ่งบอกว่าชิ้นเนื้อประเภท <code>Normal</code></p>
 <p>ต่อจากนั้นเราจะสร้าง contrast matrix ขึ้นมาเพื่อนำไปใช้อ้างอิงในการเทียบ DEG</p>
-<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioinf.wehi.edu.au/limma/">limma</a></span><span class="op">)</span></span>
 <span><span class="va">contrasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">cx_mod</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">1</span>,<span class="op">]</span>, <span class="fl">2</span>, <span class="va">paste</span>, collapse <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span></span>
 <span><span class="va">contrasts</span></span></code></pre></div>
@@ -183,44 +183,44 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 ##  [4] "groupNormal-groupCancer" "groupCIN2-groupCIN1"     "groupCIN3-groupCIN1"    
 ##  [7] "groupNormal-groupCIN1"   "groupCIN3-groupCIN2"     "groupNormal-groupCIN2"  
 ## [10] "groupNormal-groupCIN3"</code></pre>
-<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">contrasts.matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/makeContrasts.html">makeContrasts</a></span><span class="op">(</span>contrasts <span class="op">=</span> <span class="va">contrasts</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">cx_mod</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="va">contrasts.matrix</span></span></code></pre></div>
 <pre><code>##              Contrasts
-## Levels        groupCIN1-groupCancer groupCIN2-groupCancer groupCIN3-groupCancer
-##   groupCancer                    -1                    -1                    -1
-##   groupCIN1                       1                     0                     0
-##   groupCIN2                       0                     1                     0
-##   groupCIN3                       0                     0                     1
-##   groupNormal                     0                     0                     0
+## Levels        groupCIN1-groupCancer groupCIN2-groupCancer groupCIN3-groupCancer groupNormal-groupCancer
+##   groupCancer                    -1                    -1                    -1                      -1
+##   groupCIN1                       1                     0                     0                       0
+##   groupCIN2                       0                     1                     0                       0
+##   groupCIN3                       0                     0                     1                       0
+##   groupNormal                     0                     0                     0                       1
 ##              Contrasts
-## Levels        groupNormal-groupCancer groupCIN2-groupCIN1 groupCIN3-groupCIN1 groupNormal-groupCIN1
-##   groupCancer                      -1                   0                   0                     0
-##   groupCIN1                         0                  -1                  -1                    -1
-##   groupCIN2                         0                   1                   0                     0
-##   groupCIN3                         0                   0                   1                     0
-##   groupNormal                       1                   0                   0                     1
+## Levels        groupCIN2-groupCIN1 groupCIN3-groupCIN1 groupNormal-groupCIN1 groupCIN3-groupCIN2
+##   groupCancer                   0                   0                     0                   0
+##   groupCIN1                    -1                  -1                    -1                   0
+##   groupCIN2                     1                   0                     0                  -1
+##   groupCIN3                     0                   1                     0                   1
+##   groupNormal                   0                   0                     1                   0
 ##              Contrasts
-## Levels        groupCIN3-groupCIN2 groupNormal-groupCIN2 groupNormal-groupCIN3
-##   groupCancer                   0                     0                     0
-##   groupCIN1                     0                     0                     0
-##   groupCIN2                    -1                    -1                     0
-##   groupCIN3                     1                     0                    -1
-##   groupNormal                   0                     1                     1</code></pre>
+## Levels        groupNormal-groupCIN2 groupNormal-groupCIN3
+##   groupCancer                     0                     0
+##   groupCIN1                       0                     0
+##   groupCIN2                      -1                     0
+##   groupCIN3                       0                    -1
+##   groupNormal                     1                     1</code></pre>
 <p>สังเกตว่าแต่ละคอลัมน์ผลรวมจะเท่ากับ 0 เนื่องจาก <span class="math inline">\(H_{0}\)</span> ว่าไม่มีความแตกต่างกันในการแสดงออกของยีน (= 0) นั่นเอง</p>
 <p>เมื่อได้ design matrix ต่อไปคือการ fit linear regression ตาม model โดยข้อมูลจะต้องอยู่ในรูปตัวเลขทั้งหมด ดังนั้นจะต้องปรับแต่ง ข้อมูล expression เริ่มต้นเล็กน้อย</p>
-<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">GSE63514_fixed</span> <span class="op">&lt;-</span> <span class="va">GSE63514</span> <span class="op">|&gt;</span> </span>
 <span>                    <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"prob"</span><span class="op">)</span></span></code></pre></div>
 <p>ต่อจากนั้นจะ fit model ด้วย <code><a href="https://rdrr.io/pkg/limma/man/lmFit.html">lmFit()</a></code> และเทียบแต่ละกลุ่มด้วย <code><a href="https://rdrr.io/pkg/limma/man/contrasts.fit.html">contrasts.fit()</a></code></p>
-<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/lmFit.html">lmFit</a></span><span class="op">(</span><span class="va">GSE63514_fixed</span>, design <span class="op">=</span> <span class="va">cx_mod</span><span class="op">)</span></span>
 <span><span class="va">cx_fit_contrasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/contrasts.fit.html">contrasts.fit</a></span><span class="op">(</span><span class="va">cx_fit</span>, <span class="va">contrasts.matrix</span><span class="op">)</span></span></code></pre></div>
 <p>สุดท้ายเราจะทำการคำนวณ Moderated t-test โดยใช้ <code><a href="https://rdrr.io/pkg/limma/man/ebayes.html">eBayes()</a></code></p>
-<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_fit_contrasts_eB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/ebayes.html">eBayes</a></span><span class="op">(</span><span class="va">cx_fit_contrasts</span><span class="op">)</span></span></code></pre></div>
 <p>สุดท้ายคือการแสดงผล DGE จากการคำนวณทั้งหมดโดยใช้ <code><a href="https://rdrr.io/pkg/limma/man/toptable.html">topTable()</a></code> ซึ่งจะแสดง Moderated <span class="math inline">\(F\)</span>-test (<a href="parametric-test.html#ANOVA">ANOVA</a>) และ <span class="math inline">\(p\)</span>-value, Adjusted <span class="math inline">\(p\)</span>-value</p>
-<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/toptable.html">topTable</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="co"># First 100 genes</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -228,7 +228,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
   </script>
 </div>
 <p>และสามารถเรียกดู <span class="math inline">\(t\)</span>-test แต่ละกลุ่มได้โดยการระบุ <code>coef</code></p>
-<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/toptable.html">topTable</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, coef <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="co"># เรียงตาม contrasts.matrix</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -236,7 +236,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
   </script>
 </div>
 <p>โดย <code>logFC</code> คือ Log2 fold-change ของ Gene expression แต่ละตัว</p>
-<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">contrasts.matrix</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>    <span class="op">~</span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/toptable.html">topTable</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, coef <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">contrasts.matrix</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -370,7 +370,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 ## 204603_at   -0.9813232  8.164955 -9.000435 2.930854e-15 1.649719e-11 24.03517
 ## 218039_at   -1.7300249 11.879667 -8.995189 3.017319e-15 1.649719e-11 24.00746</code></pre>
 <p>ท่านสามารถสรุปข้อมูล DGE ได้โดยใช้ <code><a href="https://rdrr.io/pkg/limma/man/decideTests.html">decideTests()</a></code></p>
-<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/decideTests.html">decideTests</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, fc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fl">1.5</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##        groupCIN1-groupCancer groupCIN2-groupCancer groupCIN3-groupCancer groupNormal-groupCancer
@@ -385,7 +385,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 ## Down                     311                  2214
 ## NotSig                 54333                 50612
 ## Up                        31                  1849</code></pre>
-<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/venn.html">vennDiagram</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span> <span class="co"># max 5 groups</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/decideTests-1.png" width="672"></div>
 <hr>
@@ -395,11 +395,11 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 <span class="header-section-number">17.3</span> Mean-variance relationship<a class="anchor" aria-label="anchor" href="#mean-variance-relationship"><i class="fas fa-link"></i></a>
 </h2>
 <p>ในบางข้อมูลนั้นมีความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวน ซึ่งสามารถตรวจสอบได้โดยใช้ <code><a href="https://rdrr.io/pkg/limma/man/plotSA.html">plotSA()</a></code></p>
-<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/plotSA.html">plotSA</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span><span class="op">)</span> </span></code></pre></div>
 <div class="inline-figure"><img src="figure/SA_eB-1.png" width="672"></div>
 <p>จากกราฟจะพบความสัมพันธ์ระหว่าง <code>Average log-expression</code> และ <code>sqrt(sigma)</code> แปลว่ามีความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวน เนื่องจาก Linear model นั้นมีสมมติฐานว่า ความแปรปรวนนั้นคงที่ตลอด (Homoscedasticity) การสร้างสมการแบบธรรมดาอาจจะทำให้เกิด False positive มากกว่าปกติ ซึ่ง limma นั้นมีฟังก์ชันที่ปรับสมการตามแนวโน้มของความแปรปรวนด้วย <code>eBayes(..., trend = TRUE)</code></p>
-<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_fit_contrasts_eB_trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/ebayes.html">eBayes</a></span><span class="op">(</span><span class="va">cx_fit_contrasts</span>, trend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">results_trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/decideTests.html">decideTests</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB</span>, fc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fl">1.5</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">results_trend</span><span class="op">)</span></span></code></pre></div>
@@ -416,7 +416,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 ## NotSig                 54333                 50612
 ## Up                        31                  1849</code></pre>
 <p>เมื่อทำการพล็อตความสัมพันธ์ระหว่างค่าเฉลี่ยและความแปรปรวนอีกครั้ง จะพบว่าโมเดลนั้นถูกปรับตามความแปรปรวนแล้ว</p>
-<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/plotSA.html">plotSA</a></span><span class="op">(</span><span class="va">cx_fit_contrasts_eB_trend</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/SA_trend-1.png" width="672"></div>
 <p>การใช้ <code>trend = TRUE</code> นี้มีความสำคัญมากในการประยุกต์ใช้ limma ในการวิเคราะห์ข้อมูลแบบอื่นๆ ที่ไม่ใช่ Microarray เช่น RNA-seq, Proteomics เนื่องจากข้อมูลมักจะมีความสัมพันธ์ระหว่างค่าเฉลี่ยกับตัวแปรสูง (Heteroscedasticity)</p>
@@ -449,7 +449,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-09.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

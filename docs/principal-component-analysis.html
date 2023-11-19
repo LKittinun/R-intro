@@ -144,7 +144,7 @@
 <span class="header-section-number">15.2</span> Manually calculate PCA<a class="anchor" aria-label="anchor" href="#manually-calculate-pca"><i class="fas fa-link"></i></a>
 </h2>
 <p>ต่อไปจะแสดงวิธีการคำนวณ PCA เพื่อให้เข้าใจลำดับของการวิเคราะห์</p>
-<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">20</span>, sd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
@@ -166,7 +166,7 @@
 ##  [9,] 18.62629  2.40271180 -1.6906847
 ## [10,] 19.10868  0.05441718 10.2690746</code></pre>
 <p>เริ่มต้นด้วยการ Normalize ข้อมูลให้อยู่ในรูป Mean-centering</p>
-<div class="sourceCode" id="cb433"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scaled_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">data</span>,<span class="fl">2</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">(</span><span class="va">x</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">scaled_data</span></span></code></pre></div>
 <pre><code>##                  A           B          C
@@ -180,7 +180,7 @@
 ##  [8,] -1.404601888 -2.09545793  0.6208920
 ##  [9,] -0.798376211  0.47466195 -0.7666212
 ## [10,] -0.545498338 -0.65642119  1.8031341</code></pre>
-<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scaled_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">data</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># Same</span></span>
 <span><span class="va">scaled_data</span></span></code></pre></div>
 <pre><code>##                  A           B          C
@@ -206,14 +206,14 @@
 cov = \frac{1}{n-1}({A^{T}A})
 \]</span></p>
 <p>โดย <span class="math inline">\(n\)</span> คือ จำนวนแถวของ Matrix <span class="math inline">\(A\)</span></p>
-<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cov_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">scaled_data</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">scaled_data</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">scaled_data</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># matrix multiplication</span></span>
 <span><span class="va">cov_matrix</span></span></code></pre></div>
 <pre><code>##            A          B          C
 ## A  1.0000000  0.5776151 -0.4059593
 ## B  0.5776151  1.0000000 -0.5673487
 ## C -0.4059593 -0.5673487  1.0000000</code></pre>
-<div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cov_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov</a></span><span class="op">(</span><span class="va">scaled_data</span><span class="op">)</span></span>
 <span><span class="va">cov_matrix</span> <span class="co"># same</span></span></code></pre></div>
 <pre><code>##            A          B          C
@@ -221,7 +221,7 @@ cov = \frac{1}{n-1}({A^{T}A})
 ## B  0.5776151  1.0000000 -0.5673487
 ## C -0.4059593 -0.5673487  1.0000000</code></pre>
 <p>หลังจากนั้นเราทำการแยกทิศทางของความแปรปรวนออกมาโดยวิธี Eigendecomposition ซึ่งสำหรับ PCA แล้ว ซึ่ง Eigenvector นั้นบ่งบอกถึงทิศทางของความแปรปรวนของข้อมูลที่ตั้งฉากกัน โดยมีขนาดของการกระจายตัวของข้อมูล คือ Eigenvalue</p>
-<div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eigen_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">cov_matrix</span><span class="op">)</span></span>
 <span><span class="va">eigen_info</span></span></code></pre></div>
 <pre><code>## eigen() decomposition
@@ -238,21 +238,21 @@ cov = \frac{1}{n-1}({A^{T}A})
 <p><span class="math display">\[
 A = VQV^{-1}
 \]</span></p>
-<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eigen_back</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">eigen_info</span><span class="op">$</span><span class="va">vectors</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">eigen_info</span><span class="op">$</span><span class="va">values</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">eigen_info</span><span class="op">$</span><span class="va">vectors</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">eigen_back</span> <span class="op">-</span> <span class="va">cov_matrix</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span> <span class="co"># Diff nearly 0 due to algorithm</span></span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>ต่อไปจะต้องเรียง Eigenvector ตามขนาดของ Eigenvalues จากน้อยไปมาก ซึ่งนั้นก็คือ Principal component ของข้อมูล (PC1, PC2, PC3, ….) นั่นหมายความว่า <span class="math inline">\(n_{PC} \leq n_{Obs}\)</span> เสมอ</p>
-<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sorted_eigenvalues</span> <span class="op">&lt;-</span> <span class="va">eigen_info</span><span class="op">$</span><span class="va">values</span></span>
 <span><span class="va">sorted_eigenvectors</span> <span class="op">&lt;-</span> <span class="va">eigen_info</span><span class="op">$</span><span class="va">vectors</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">sorted_eigenvalues</span><span class="op">)</span><span class="op">]</span> <span class="co"># Decreasing order</span></span></code></pre></div>
-<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_components</span> <span class="op">&lt;-</span> <span class="fl">3</span>  <span class="co"># Adjust this as needed</span></span>
 <span><span class="va">selected_eigenvectors</span> <span class="op">&lt;-</span> <span class="va">sorted_eigenvectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="va">num_components</span><span class="op">]</span></span></code></pre></div>
 <p>สุดท้ายเมื่อทำการคูณข้อมูลเดิมกลับไปด้วย Eigenvectors ที่เรียงแล้ว จะได้ ข้อมูลของความแปรปรวนข้อมูลแต่ละคอลัมน์ในแต่ละ PC</p>
-<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca_result</span> <span class="op">&lt;-</span> <span class="va">scaled_data</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">selected_eigenvectors</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">pca_result</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"PC"</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">selected_eigenvectors</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">pca_result</span></span></code></pre></div>
@@ -274,7 +274,7 @@ A = VQV^{-1}
 <span class="header-section-number">15.3</span> PCA by R function<a class="anchor" aria-label="anchor" href="#pca-by-r-function"><i class="fas fa-link"></i></a>
 </h2>
 <p>ท่านไม่จำเป็นต้องคำนวณ PCA ตามทั้งหมดที่กล่าวมาขั้นต้น เนื่องจาก <code>R</code> ได้มีฟังก์ชันสำหรับวิเคราะห์ PCA ไว้ให้แล้ว ในที่นี้จะลองสร้างสถานการณ์ที่ Features &gt; Observations</p>
-<div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb453"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
@@ -289,7 +289,7 @@ A = VQV^{-1}
 {"columns":[{"label":["A"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["B"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["C"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["D"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["E"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["F"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["G"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["H"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["I"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["J"],"name":[10],"type":["dbl"],"align":["right"]}],"data":[{"1":"18.570620","2":"10.070553","3":"21.652869","4":"2.400106","5":"17.284334","6":"8.769588","7":"0.8768292","8":"-2.594688","9":"15.131765","10":"6.000378"},{"1":"9.931333","2":"6.511437","3":"17.429859","4":"9.402037","5":"9.838178","6":"5.690441","7":"28.3516477","8":"4.144220","9":"-9.390022","10":"3.944274"},{"1":"18.718488","2":"12.585010","3":"9.498826","4":"17.494274","5":"3.344357","6":"4.470187","7":"20.6636960","8":"1.839351","9":"7.676910","10":"3.784626"},{"1":"14.673102","2":"6.647290","3":"2.940560","4":"8.982245","5":"14.056131","6":"4.097645","7":"2.0151313","8":"12.449363","9":"3.990834","10":"7.910586"},{"1":"14.648274","2":"5.714639","3":"3.398471","4":"1.841186","5":"13.903201","6":"2.526465","7":"7.7769213","8":"10.141964","9":"4.727533","10":"8.344629"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">data</span>, scale. <span class="op">=</span> <span class="cn">TRUE</span>, center <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pc</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## List of 5
@@ -313,7 +313,7 @@ A = VQV^{-1}
 <li><p><code>x</code> คือ ข้อมูลสุดท้ายที่ถูกลดมิติแล้ว</p></li>
 </ul>
 <p>สังเกตว่าสุดท้าย PC จะไม่เกินจำนวน Observations = 5</p>
-<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pc</span><span class="op">$</span><span class="va">x</span></span></code></pre></div>
 <pre><code>##             PC1          PC2        PC3          PC4           PC5
 ## [1,] -1.2422037 -2.971150049 -0.8164442 -0.009920526  3.701466e-16
@@ -326,7 +326,7 @@ A = VQV^{-1}
 <span class="header-section-number">15.3.1</span> Biplot<a class="anchor" aria-label="anchor" href="#biplot"><i class="fas fa-link"></i></a>
 </h3>
 <p>คือการพล็อตกราฟเพื่อบ่งบอก ว่า แต่ละ Features ดั้งเดิมนั้น มีผลต่อ PC มากน้อยเพียงใด</p>
-<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html">biplot</a></span><span class="op">(</span><span class="va">pc</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/biplot-1.png" width="672"></div>
 <p>โดยทิศทางที่ชี้ไปนั้นคืออิทธิพลของ Features ดั้งเดิมที่ประกอบเป็น PC</p>
@@ -336,7 +336,7 @@ A = VQV^{-1}
 <span class="header-section-number">15.3.2</span> Screeplot<a class="anchor" aria-label="anchor" href="#screeplot"><i class="fas fa-link"></i></a>
 </h3>
 <p>เป็นการพล็อตเพื่อสำรวจว่าแต่ละ PC นั้นมีอิทธิผลจากข้อมูลมากเท่าใด ซึ่งก็คือการดูขนาดของ Eigenvalues หรือ ความแปรปรวนของ PC นั้นๆ</p>
-<div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="cn">NULL</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">pc</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>,fill <span class="op">=</span> <span class="st">"skyblue"</span>, col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">pc</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -346,7 +346,7 @@ A = VQV^{-1}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/screeplot_manua-1.png" width="672"></div>
 <p>หรือท่านอาจจะเรียก <code><a href="https://rdrr.io/r/stats/screeplot.html">screeplot()</a></code></p>
-<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html">screeplot</a></span><span class="op">(</span><span class="va">pc</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="figure/screeplot-1.png" width="672"></div>
 <p>สังเกตว่า PC จะเรียงจากมากไปน้อยเสมอ ตามขนาดของ Eigenvalue</p>
@@ -388,7 +388,7 @@ A = VQV^{-1}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-09.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

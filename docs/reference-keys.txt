@@ -92,7 +92,8 @@ prediction
 logistic-regression
 model-summary-1
 model-performance-1
-prediction-1
+prediction-and-classification
+receiver-operating-characteristic-roc-curve
 poisson-family
 poisson-regression
 quasipoisson-regression
