@@ -297,7 +297,7 @@ ROC <- map(seq(0,1,0.01), \(x) {
 ROC
 ```
 
-สังเกตว่า ที่ Cut-off สูงขึ้นเรื่อยๆ นั้น Sensitivity นั้นจะสูงขึ้น ในขณะที่ 1-Specificity (True Positive) นั้นจะลดลง เมื่อนำมาสร้างกราฟจะได้ ROC curve
+สังเกตว่า ที่ Cut-off สูงขึ้นเรื่อยๆ นั้น Sensitivity นั้นจะต่ำลง ในขณะที่ 1-Specificity (True Positive) นั้นจะลดลง เมื่อนำมาสร้างกราฟจะได้ ROC curve
 
 ```{r roc_curve, fig.path="figure/", message = FALSE}
 ggplot(ROC, aes(x = 1-spec , y = sens)) + geom_point(size = 1) +
