@@ -282,7 +282,7 @@ ggplot(new_group, aes(x = glufast, y = predicted_response)) +
 
 ### Receiver Operating Characteristic (ROC) curve
 
-ในการจัดกลุ่มนั้น ที่ Decision boundary ต่างกัน ย่อมส่งผลต่อความแม่นยำของการจำแนกที่ต่างกัน ท่านสามารถประเมินความแม่นยำที่ขอบเขตต่างๆ ได้ด้วย ROC
+ในการจัดกลุ่มนั้น ที่ Decision boundary ต่างกัน ย่อมส่งผลต่อความแม่นยำของการจำแนกที่ต่างกัน ท่านสามารถประเมินความแม่นยำที่ขอบเขตต่างๆ ได้ด้วย ROC ซึ่งคือการสร้างกราฟของ Sensitivity (True positive) และ 1 - Specificity (False positive)
 
 ```{r ROC, warning = FALSE}
 ROC <- map(seq(0,1,0.01), \(x) {
@@ -297,7 +297,7 @@ ROC <- map(seq(0,1,0.01), \(x) {
 ROC
 ```
 
-สังเกตว่า ที่ Cut-off สูงขึ้นเรื่อยๆ นั้น Sensitivity นั้นจะต่ำลง ในขณะที่ 1-Specificity (True Positive) นั้นจะลดลง เมื่อนำมาสร้างกราฟจะได้ ROC curve
+สังเกตว่า ที่ Cut-off สูงขึ้นเรื่อยๆ นั้น Sensitivity นั้นจะต่ำลง ในขณะที่ Specificity นั้นจะสูงขึ้น (1 - Specificity ต่ำลง) เมื่อนำมาสร้างกราฟจะได้ ROC curve
 
 ```{r roc_curve, fig.path="figure/", message = FALSE}
 ggplot(ROC, aes(x = 1-spec , y = sens)) + geom_point(size = 1) +
