@@ -6,17 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>17 Limma | A gentle introduction to R for biologists</title>
 <meta name="author" content="Kittinun Leetanaporn">
-<meta name="description" content="17.1 Principle Limma (Linear Model for Microarray Data) (Smyth et al., 2023) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม...">
+<meta name="description" content="17.1 Principle Limma (Linear Model for Microarray Data) (G. Smyth et al., 2023) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา...">
 <meta name="generator" content="bookdown 0.36 with bs4_book()">
 <meta property="og:title" content="17 Limma | A gentle introduction to R for biologists">
 <meta property="og:type" content="book">
-<meta property="og:description" content="17.1 Principle Limma (Linear Model for Microarray Data) (Smyth et al., 2023) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม...">
+<meta property="og:description" content="17.1 Principle Limma (Linear Model for Microarray Data) (G. Smyth et al., 2023) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="17 Limma | A gentle introduction to R for biologists">
-<meta name="twitter:description" content="17.1 Principle Limma (Linear Model for Microarray Data) (Smyth et al., 2023) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม...">
+<meta name="twitter:description" content="17.1 Principle Limma (Linear Model for Microarray Data) (G. Smyth et al., 2023) เป็นหนึ่งใน bioconductor package ที่นิยมใช้อย่างแพร่หลายในการศึกษา...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.0/transition.js"></script><script src="libs/bs3compat-0.6.0/tabs.js"></script><script src="libs/bs3compat-0.6.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
@@ -109,8 +109,8 @@
 <h2>
 <span class="header-section-number">17.1</span> Principle<a class="anchor" aria-label="anchor" href="#principle-2"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://bioconductor.org/packages/release/bioc/html/limma.html">Limma</a> (Linear Model for Microarray Data) <span class="citation">(Smyth et al., 2023)</span> เป็นหนึ่งใน <code>bioconductor package</code> ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene expression; DGE) ในงานทดลอง Microarray</p>
-<p>หลักการสำคัญของ <code>limma</code> คือการใช้สมการถดถอยเชิงเส้นในการหา DGE โดยมีสมมติฐานเบื้องต้นว่าค่าความเข้มพื้นหลังที่อ่านได้จาก Probe ของ Microarray นั้นมีการกระจายตัวแบบ <a href="distribution.html#norm-dist">Normal distribution</a> ซึ่งหลักการนี้สามารถนำไปปรับใช้ในการหา Differential expression ในงานประเภทอื่นๆ ได้ด้วย เช่น RNA-seq, Proteomics</p>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/limma.html">Limma</a> (Linear Model for Microarray Data) <span class="citation">(G. Smyth et al., 2023)</span> เป็นหนึ่งใน <code>bioconductor package</code> ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene expression; DGE) ในงานทดลอง Microarray</p>
+<p>หลักการสำคัญของ limma คือการใช้สมการถดถอยเชิงเส้นในการหา DGE โดยมีสมมติฐานเบื้องต้นว่าค่าความเข้มพื้นหลังที่อ่านได้จาก Probe ของ Microarray นั้นมีการกระจายตัวแบบ <a href="distribution.html#norm-dist">Normal distribution</a> ซึ่งหลักการนี้สามารถนำไปปรับใช้ในการหา Differential expression ในงานประเภทอื่นๆ ได้ด้วย เช่น RNA-seq, Proteomics</p>
 <ul>
 <li><p><span class="math inline">\(H_{0}\)</span>: ไม่มีความแตกต่างกันในการแสดงออกของยีน</p></li>
 <li><p><span class="math inline">\(H_{a}\)</span>: มีความแตกต่างกันในการแสดงออกของยีน</p></li>
@@ -122,7 +122,7 @@
 t = \frac{\theta_{1}-0}{SE} = \frac{\theta_{1}}{S/\sqrt{n}}
 \]</span></p>
 <p>ซึ่งเมื่อพิจารณาจากสูตรแล้ว จะเห็นว่าจำนวนตัวอย่างที่ต่ำ ส่งผลให้ <span class="math inline">\(SE\)</span> สูง มีค่า <span class="math inline">\(t\)</span> ที่แกว่ง (ตาม <span class="math inline">\(S\)</span>) และมี <a href="hypothesis-testing.html#power">Power ที่ต่ำด้วย เนื่องจากมีกลุ่มตัวอย่างน้อย</a></p>
-<p>ผู้นิพนธ์ limma นั้นได้แก้ปัญหานี้โดยใช้หลักการสถิติแบบ Empirical Bayes ชื่อว่า Moderated <span class="math inline">\(t\)</span>-test โดยหลักการคือ เนื่องจากหลักการของการอ่านข้อมูลใน Microarray ในแต่ละยีนนั้นเป็นไปโดยพร้อมกัน อัตราส่วนความแปรปรวนของยีนแต่ละตัวที่อ่านค่าได้นั้นจะเท่าๆ กันตลอดทั้ง array ดังนั้นจึงสามารถยืมข้อมูลของความแปรปรวนมาจากทุกยีนทั้งหมด มาสร้างเป็น <strong>ความน่าจะเป็นก่อนหน้า (Prior probability)</strong> เพื่อนำมาถ่วงน้ำหนักกับ<strong>ยีนแต่ละตัว (Posterior probability)</strong> ภายหลัง</p>
+<p>ผู้นิพนธ์ limma นั้นได้แก้ปัญหานี้โดยใช้หลักการสถิติแบบ Empirical Bayes ชื่อว่า Moderated <span class="math inline">\(t\)</span>-test โดยหลักการคือ เนื่องจากหลักการของการอ่านข้อมูลใน Microarray ในแต่ละยีนนั้นเป็นไปโดยพร้อมกัน อัตราส่วนความแปรปรวนของยีนแต่ละตัวที่อ่านค่าได้นั้นจะเท่าๆ กันตลอดทั้ง Array ดังนั้นจึงสามารถยืมข้อมูลของความแปรปรวนมาจากทุกยีนทั้งหมด มาสร้างเป็น <strong>ความน่าจะเป็นก่อนหน้า (Prior probability)</strong> เพื่อนำมาถ่วงน้ำหนักความเป็นไปได้กับยีนแต่ละตัว เกิดเป็น<strong>ความน่าจะเป็นภายหลัง (Posterior probability)</strong></p>
 <div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cx_nc</span> <span class="op">&lt;-</span> <span class="va">GSE63514</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -137,7 +137,7 @@ t = \frac{\theta_{1}-0}{SE} = \frac{\theta_{1}}{S/\sqrt{n}}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cx_var</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
 <div class="inline-figure"><img src="figure/overall_vairiance-1.png" width="672"></div>
-<p>ค่า Mean variance นี้จะถูกนำไปถ่วงน้ำหนักความแปรปรวนเดิมของแต่ละยีน และจะถูกนำไปใช้ในการคำนวณใหม่ เรียกว่า Moderated <span class="math inline">\(t\)</span></p>
+<p>ค่า Mean variance นี้จะถูกนำไปถ่วงน้ำหนักความแปรปรวนเดิมของแต่ละยีน และจะถูกนำไปใช้ในการคำนวณใหม่ เรียกว่า Moderated <span class="math inline">\(t\)</span> <span class="citation">(G. K. Smyth, 2004)</span></p>
 <p><span class="math display">\[
 \tilde{t_{gj}} = \sqrt\frac{d_{0} + d_{g}}{d_{g}}\times\frac{\hat{\beta_{gj}}}{\sqrt{s^{2}_{*,g}/n_{gj}}}
 \]</span></p>
@@ -146,10 +146,11 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 \]</span></p>
 <p>สังเกตว่า ค่า <span class="math inline">\(\tilde{t}\)</span> นั้นจะถูก Moderated ให้เข้าสู่ <span class="math inline">\(d_{0}\)</span> (Prior degree of freedom) และ <span class="math inline">\(s_{0}\)</span> (Prior variance) ส่งผลให้</p>
 <ul>
-<li><p>ถ้า <span class="math inline">\(d_{g}\)</span> (Degree of freedom แต่ละยีน) &gt; <span class="math inline">\(d_{0}\)</span> และ <span class="math inline">\(s_{g}\)</span> (ความแปรปรวนแต่ละยีน) &gt; <span class="math inline">\(s_{0}\)</span>: <span class="math inline">\(d\)</span> และ <span class="math inline">\(s^{2}\)</span> โดยรวมจะถูกดึงให้เพิ่มขึ้น</p></li>
-<li><p>ถ้า <span class="math inline">\(d_{g}\)</span> &lt; <span class="math inline">\(d_{0}\)</span> และ <span class="math inline">\(s_{g}\)</span> &lt; <span class="math inline">\(s_{0}\)</span>: <span class="math inline">\(d\)</span> และ <span class="math inline">\(s^{2}\)</span> โดยรวมจะถูกดึงให้ลดลง</p></li>
-<li><p>ถ้า <span class="math inline">\(d_{g}\)</span> = <span class="math inline">\(d_{0}\)</span> และ <span class="math inline">\(s_{g}\)</span> = <span class="math inline">\(s_{0}\)</span>: <span class="math inline">\(d\)</span> จะเพิ่มขึ้นในอัตราส่วนคงที่ (<span class="math inline">\(\sqrt{2}\)</span>) และ <span class="math inline">\(s^{2}\)</span> โดยรวมจะเท่าเดิม</p></li>
+<li><p>ถ้า <span class="math inline">\(s_{g}\)</span> &gt; <span class="math inline">\(s_{0}\)</span>: <span class="math inline">\(s_{*,g}\)</span> จะเพิ่มขึ้นจาก <span class="math inline">\(s_{g}\)</span> เล็กน้อย ทำให้ <span class="math inline">\(\tilde{t}\)</span> ลดลงเล็กน้อย เมื่อเทียบกับ <span class="math inline">\(\tilde{t}\)</span> ที่เพิ่มขึ้นจาก <span class="math inline">\(\sqrt{\frac{d_{0}+d_{g}}{d_{g}}}\)</span></p></li>
+<li><p>ถ้า <span class="math inline">\(s_{g}\)</span> &lt; <span class="math inline">\(s_{0}\)</span>: <span class="math inline">\(s_{*,g}\)</span> จะเพิ่มขึ้นจาก <span class="math inline">\(s_{g}\)</span> เป็นอย่างมาก ทำให้ <span class="math inline">\(\tilde{t}\)</span> ลดลงมาก เมื่อเทียบกับ <span class="math inline">\(\tilde{t}\)</span> ที่เพิ่มขึ้นจาก <span class="math inline">\(\sqrt{\frac{d_{0}+d_{g}}{d_{g}}}\)</span></p></li>
 </ul>
+<p>ถ้า <span class="math inline">\(s_{g}\)</span> = <span class="math inline">\(s_{0}\)</span>: <span class="math inline">\(s_{*,g}\)</span> การลดลงของ <span class="math inline">\(\tilde{t}\)</span> จะหักล้างกับการเพิ่มขึ้นของ <span class="math inline">\(\tilde{t}\)</span> จาก <span class="math inline">\(\sqrt{\frac{d_{0}+d_{g}}{d_{g}}}\)</span> พอดี</p>
+<div class="inline-figure"><img src="figure/todd-1.png" width="672"></div>
 <p>ทั้งหมดนี้จะส่งผลให้ มี Moderate effect ของการคำนวณค่า <span class="math inline">\(\tilde{t}\)</span> และมี Degree of freedom ที่เพิ่มขึ้นส่งผลให้ Power สูงขึ้น (เพราะการกระจายตัวแคบลง)</p>
 <hr>
 </div>
@@ -449,7 +450,7 @@ s^{2}_{*,g} = s^{2}_{g}+(\frac{d_{0}}{d_{g}})s_{0}^{2}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-19.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-12-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

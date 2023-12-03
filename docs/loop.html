@@ -16,7 +16,7 @@
 <meta name="twitter:description" content='3.1 General loop ท่านสามารถสร้าง Loop ได้เหมือนภาษาอื่นๆ โดยทั่วไปใน R for(i in 1:2){  for (j in c("a","b"))  print(c(i,j)) } ## [1] "1" "a" ## [1] "1" "b" ## [1] "2" "a" ## [1] "2" "b" i &lt;- 0...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.0/transition.js"></script><script src="libs/bs3compat-0.6.0/tabs.js"></script><script src="libs/bs3compat-0.6.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
@@ -154,7 +154,7 @@
 <span><span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.04    0.08    0.39</code></pre>
+##    0.08    0.03    0.40</code></pre>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span> <span class="co"># Pre-allocate memory</span></span>
@@ -163,13 +163,13 @@
 <span><span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span> <span class="co">## 3x faster</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.05    0.00    0.10</code></pre>
+##    0.04    0.00    0.11</code></pre>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowMeans</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span> <span class="co">## Instant for vectorized function</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.00    0.00    0.01</code></pre>
+##    0.01    0.00    0.03</code></pre>
 <p>นั่นหมายความว่า การเรียกฟังก์ชันที่เร็วที่สุดควร</p>
 <ol style="list-style-type: decimal">
 <li>เลือกฟังก์ชันที่มีการเขียนให้รองรับ Vectorization (เรียกคำสั่งภายในพร้อมกันทุกตัวแปร) อยู่แล้ว</li>
@@ -330,7 +330,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-11-19.</p>
+    <p>"<strong>A gentle introduction to R for biologists</strong>" was written by Kittinun Leetanaporn. It was last built on 2023-12-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

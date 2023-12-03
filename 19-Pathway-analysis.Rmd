@@ -44,7 +44,7 @@ knitr::include_graphics("Picture/pathway.jpg")
 
 #### Over-representation analysis (ORA)
 
-คือ การเปรียบเทียบวจำนวนยีนที่อยู่ใน Pathway นั้นๆ กับกลุ่มยีนทั้งหมดที่มีอยู่ เรียกว่ายีนพื้นหลัง (Background) โดยยีนพื้นหลังนี้หมายถึงยีนทีมีอยู่ในกลุ่มประชากรโดยทั่วไป ซึ่งการคำนวณทางสถิตินั้นใช้วิธี [Fisher's exact test](#fisher)
+คือ การเปรียบเทียบจำนวนยีนที่อยู่ใน Pathway นั้นๆ กับกลุ่มยีนทั้งหมดที่มีอยู่ เรียกว่ายีนพื้นหลัง (Background) โดยยีนพื้นหลังนี้หมายถึงยีนทีมีอยู่ในกลุ่มประชากรโดยทั่วไป ซึ่งการคำนวณทางสถิตินั้นใช้วิธี [Fisher's exact test](#fisher)
 
 ยกตัวอย่างเช่น
 
@@ -113,11 +113,14 @@ gene_result
 
 ### ORA
 
-```{r}
+```{r ora}
 gene_sig <- gene_result |> filter(FDR <= 0.05) # significant gene with FDR <= 0.01
 
-ora_entries <- mapIds(org.Hs.eg.db, rownames(gene_sig), "ENTREZID", "ALIAS") |> na.omit() |> 
-  as.character()
+ora_df <- bitr(rownames(gene_sig), fromType = "ALIAS", toType = "ENTREZID", 
+     OrgDb = org.Hs.eg.db) |> distinct(ALIAS, .keep_all = TRUE)
+
+ora_entries <- ora_df$ENTREZID
+
 head(ora_entries, 20)
 unique(ora_entries) |> length()
 ```
@@ -156,20 +159,20 @@ goplot(ora_cc)
 
 ```{r GSEA}
 gene_result_ranked <- gene_result |> 
-  mutate(Score = -log10(FDR)*logFC) |> 
+  mutate(Score = -log10(FDR)*logFC) |>
+  rownames_to_column("ALIAS") |> 
   arrange(desc(Score)) # arrange score max -> min
-gene_result_ranked |> dplyr::select(logFC, FDR, Score)
+gene_result_ranked |> dplyr::select(ALIAS, logFC, FDR, Score)
 ```
 
 ต่อจากนั้นจะนำข้อมูลนี้ไปใช้ต่อ ซึ่งต้องเปลี่ยนเป็น Entries ID เหมือน ORA
 
 ```{r rank_dge}
-dge_ranked <- gene_result_ranked$Score
-names(dge_ranked) <- rownames(gene_result_ranked)
-head(dge_ranked, 20) # gene names
-gene_entries <- mapIds(org.Hs.eg.db, names(dge_ranked), "ENTREZID", "ALIAS") 
-names(dge_ranked) <- gene_entries
-head(dge_ranked, 20) # entriesID sorted by rank
+gene_df <- bitr(gene_result_ranked$ALIAS, "ALIAS", "ENTREZID", org.Hs.eg.db) |> 
+  distinct(ALIAS, .keep_all = TRUE)
+
+dge_ranked <- gene_result_ranked |> left_join(gene_df, by = "ALIAS") |> 
+  pull( Score, ENTREZID) 
 ```
 
 ```{r gsea, warning = FALSE}
@@ -183,7 +186,7 @@ as.data.frame(gsea_bp)
 
 จะเห็นว่าผลลัพธ์ที่ได้เป็น ES แทน Ratio
 
-ท่านสามารถพล๋อตผลลัพธ์ได้เหมือน ORA
+ท่านสามารถแสดงผลลัพธ์ได้เหมือน ORA
 
 ```{r gsea_dotplot, fig.path="figure/"}
 dotplot(gsea_bp, showCategory = 20, font.size = 10, label_format = 50)

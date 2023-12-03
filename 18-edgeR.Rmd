@@ -165,7 +165,7 @@ fit <- glmQLFit(bladder_dge, model)
 plotQLDisp(fit)
 ```
 
-ตอนนี้จะเห็นว่า BCV ของข้อมูลนั้นถูกบีบมาให้อยู่ใน Trend line จาก Empirical Bayes (**Note**: edgeR เรียก Function นี้จาก package `limma`)
+ตอนนี้จะเห็นว่า BCV ของข้อมูลนั้นถูกบีบมาให้อยู่ใน Trend line จาก Empirical Bayes (**Note**: edgeR เรียก Function นี้จาก limma)
 
 สุดท้าย เราจะใช้ `glmQLFTest()` เพื่อวิเคราะห์ $p$-value จาก $F$-test (สามารถใช้ Likelihood-ratio test ได้ด้วย `glmLRT()`) และเรียก `topTags()` เพื่อทำการดึงตารางผลของ DGE ออกมา
 

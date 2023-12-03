@@ -4,7 +4,7 @@
 
 [Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) (Linear Model for Microarray Data) [@R-limma] เป็นหนึ่งใน `bioconductor package` ที่นิยมใช้อย่างแพร่หลายในการศึกษา ความแตกต่างของการแสดงออกของยีนระหว่างกลุ่มสองกลุ่ม (Differential gene expression; DGE) ในงานทดลอง Microarray
 
-หลักการสำคัญของ `limma` คือการใช้สมการถดถอยเชิงเส้นในการหา DGE โดยมีสมมติฐานเบื้องต้นว่าค่าความเข้มพื้นหลังที่อ่านได้จาก Probe ของ Microarray นั้นมีการกระจายตัวแบบ [Normal distribution](#norm-dist) ซึ่งหลักการนี้สามารถนำไปปรับใช้ในการหา Differential expression ในงานประเภทอื่นๆ ได้ด้วย เช่น RNA-seq, Proteomics
+หลักการสำคัญของ limma คือการใช้สมการถดถอยเชิงเส้นในการหา DGE โดยมีสมมติฐานเบื้องต้นว่าค่าความเข้มพื้นหลังที่อ่านได้จาก Probe ของ Microarray นั้นมีการกระจายตัวแบบ [Normal distribution](#norm-dist) ซึ่งหลักการนี้สามารถนำไปปรับใช้ในการหา Differential expression ในงานประเภทอื่นๆ ได้ด้วย เช่น RNA-seq, Proteomics
 
 -   $H_{0}$: ไม่มีความแตกต่างกันในการแสดงออกของยีน
 
@@ -43,7 +43,7 @@ $$
 
 ซึ่งเมื่อพิจารณาจากสูตรแล้ว จะเห็นว่าจำนวนตัวอย่างที่ต่ำ ส่งผลให้ $SE$ สูง มีค่า $t$ ที่แกว่ง (ตาม $S$) และมี [Power ที่ต่ำด้วย เนื่องจากมีกลุ่มตัวอย่างน้อย](#power)
 
-ผู้นิพนธ์ limma นั้นได้แก้ปัญหานี้โดยใช้หลักการสถิติแบบ Empirical Bayes ชื่อว่า Moderated $t$-test โดยหลักการคือ เนื่องจากหลักการของการอ่านข้อมูลใน Microarray ในแต่ละยีนนั้นเป็นไปโดยพร้อมกัน อัตราส่วนความแปรปรวนของยีนแต่ละตัวที่อ่านค่าได้นั้นจะเท่าๆ กันตลอดทั้ง array ดังนั้นจึงสามารถยืมข้อมูลของความแปรปรวนมาจากทุกยีนทั้งหมด มาสร้างเป็น **ความน่าจะเป็นก่อนหน้า (Prior probability)** เพื่อนำมาถ่วงน้ำหนักกับ**ยีนแต่ละตัว (Posterior probability)** ภายหลัง
+ผู้นิพนธ์ limma นั้นได้แก้ปัญหานี้โดยใช้หลักการสถิติแบบ Empirical Bayes ชื่อว่า Moderated $t$-test โดยหลักการคือ เนื่องจากหลักการของการอ่านข้อมูลใน Microarray ในแต่ละยีนนั้นเป็นไปโดยพร้อมกัน อัตราส่วนความแปรปรวนของยีนแต่ละตัวที่อ่านค่าได้นั้นจะเท่าๆ กันตลอดทั้ง Array ดังนั้นจึงสามารถยืมข้อมูลของความแปรปรวนมาจากทุกยีนทั้งหมด มาสร้างเป็น **ความน่าจะเป็นก่อนหน้า (Prior probability)** เพื่อนำมาถ่วงน้ำหนักความเป็นไปได้กับยีนแต่ละตัว เกิดเป็น**ความน่าจะเป็นภายหลัง (Posterior probability)**
 
 ```{r overall_vairiance, warning = FALSE, fig.path="figure/"}
 cx_nc <- GSE63514 |> 
@@ -60,7 +60,7 @@ ggplot(data = NULL, aes(x = cx_var)) +
   theme_bw() 
 ```
 
-ค่า Mean variance นี้จะถูกนำไปถ่วงน้ำหนักความแปรปรวนเดิมของแต่ละยีน และจะถูกนำไปใช้ในการคำนวณใหม่ เรียกว่า Moderated $t$
+ค่า Mean variance นี้จะถูกนำไปถ่วงน้ำหนักความแปรปรวนเดิมของแต่ละยีน และจะถูกนำไปใช้ในการคำนวณใหม่ เรียกว่า Moderated $t$ [@smyth2004]
 
 $$
 \tilde{t_{gj}} = \sqrt\frac{d_{0} + d_{g}}{d_{g}}\times\frac{\hat{\beta_{gj}}}{\sqrt{s^{2}_{*,g}/n_{gj}}}
@@ -72,11 +72,32 @@ $$
 
 สังเกตว่า ค่า $\tilde{t}$ นั้นจะถูก Moderated ให้เข้าสู่ $d_{0}$ (Prior degree of freedom) และ $s_{0}$ (Prior variance) ส่งผลให้
 
--   ถ้า $d_{g}$ (Degree of freedom แต่ละยีน) \> $d_{0}$ และ $s_{g}$ (ความแปรปรวนแต่ละยีน) \> $s_{0}$: $d$ และ $s^{2}$ โดยรวมจะถูกดึงให้เพิ่มขึ้น
+-   ถ้า $s_{g}$ \> $s_{0}$: $s_{*,g}$ จะเพิ่มขึ้นจาก $s_{g}$ เล็กน้อย ทำให้ $\tilde{t}$ ลดลงเล็กน้อย เมื่อเทียบกับ $\tilde{t}$ ที่เพิ่มขึ้นจาก $\sqrt{\frac{d_{0}+d_{g}}{d_{g}}}$
 
--   ถ้า $d_{g}$ \< $d_{0}$ และ $s_{g}$ \< $s_{0}$: $d$ และ $s^{2}$ โดยรวมจะถูกดึงให้ลดลง
+-   ถ้า $s_{g}$ \< $s_{0}$: $s_{*,g}$ จะเพิ่มขึ้นจาก $s_{g}$ เป็นอย่างมาก ทำให้ $\tilde{t}$ ลดลงมาก เมื่อเทียบกับ $\tilde{t}$ ที่เพิ่มขึ้นจาก $\sqrt{\frac{d_{0}+d_{g}}{d_{g}}}$
 
--   ถ้า $d_{g}$ = $d_{0}$ และ $s_{g}$ = $s_{0}$: $d$ จะเพิ่มขึ้นในอัตราส่วนคงที่ ($\sqrt{2}$) และ $s^{2}$ โดยรวมจะเท่าเดิม
+ถ้า $s_{g}$ = $s_{0}$: $s_{*,g}$ การลดลงของ $\tilde{t}$ จะหักล้างกับการเพิ่มขึ้นของ $\tilde{t}$ จาก $\sqrt{\frac{d_{0}+d_{g}}{d_{g}}}$ พอดี
+
+```{r todd, echo = FALSE, message = FALSE, warning = FALSE, fig.path="figure/"}
+sg <- seq(0,20,0.2)
+s0 <- 10
+d0 <- 20
+dg <- 10
+n <- 6
+sa <- sqrt(sg^2 + (d0/dg)*s0^2)
+ta <- sqrt(d0/dg + 1 )*100 / (sqrt((sa^2)/n) )
+ta_u <- 100/(sqrt(sg^2/n))
+
+data.frame(sg = sg, s0 = s0, sa = sa, todd = ta/ta_u) |> 
+  ggplot(aes(x = sg, y = todd)) + geom_line() +
+  geom_segment(x = 0, xend = 10, y = 1, yend = 1, linetype = "dashed") +
+  geom_segment(x = 10, xend = 10, y = 0, yend = 1, linetype = "dashed") +
+  scale_x_continuous(breaks = seq(0,20,1), expand = c(0,0)) +
+  scale_y_continuous(breaks = seq(0,1.5,0.2), expand = c(0,0)) +
+  labs(x = bquote(s[g]), y = bquote(tilde(t)/t), 
+       title = bquote("Proportion of " ~ tilde(t) ~ "according to increase variance at" ~ s[0] == 10)) + theme_bw() 
+
+```
 
 ทั้งหมดนี้จะส่งผลให้ มี Moderate effect ของการคำนวณค่า $\tilde{t}$ และมี Degree of freedom ที่เพิ่มขึ้นส่งผลให้ Power สูงขึ้น (เพราะการกระจายตัวแคบลง)
 
