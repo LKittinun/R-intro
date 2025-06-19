@@ -1,1 +1,138 @@
-<a href="R_introduction/docs/index.html">A gentle introduction to R for biologists</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome</title>
+  <link href="https://unpkg.com/lucide@latest" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #fff);
+      color: #333;
+    }
+
+    header {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+    }
+
+    header p {
+      font-size: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .links {
+      margin-top: 1.5rem;
+    }
+
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.5rem 1rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .links a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #1976d2;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lkittinun.github.io</h1>
+    <p>Welcome to my GitHub Pages.</p>
+    <p>A collection of projects, tools, and thoughts in progress — feel free to look around.</p>
+    <div class="links">
+      <a href="https://scholar.google.com/citations?user=pzrXr54AAAAJ&hl=en" target="_blank">
+        <span class="icon" data-lucide="book-open"></span> Google Scholar
+      </a>
+      <a href="https://www.scopus.com/authid/detail.uri?authorId=57194532818" target="_blank">
+        <span class="icon" data-lucide="search"></span> Scopus
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="cards">
+      <div class="card">
+        <h2>A gentle introduction to R for biologists</h2>
+        <p>A little book that introduces biologists to the world of R program.</p>
+        <a href="R_intro/docs/index.html">Read a book</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Kittinun Leetanaporn. All rights reserved.
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
