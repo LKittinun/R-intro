@@ -171,6 +171,7 @@ plotQLDisp(fit)
 
 ```{r result}
 genediff <- glmQLFTest(fit, contrast=c(-1,1))
+
 topTags(genediff, n = 100) |> as.data.frame() # First 100 genes
 ```
 

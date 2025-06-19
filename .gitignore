@@ -2,6 +2,6 @@
 *.Rhistory
 .Rproj.user/
 *.zip
-word/
-code_only/
-traffic/
+**/word/
+**/code_only/
+**/traffic/
