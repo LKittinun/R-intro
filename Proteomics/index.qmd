@@ -1,5 +1,7 @@
 ---
 title: "Proteomics blog"
+image: "thumbnail.png"  
+
 listing:
   contents: posts
   sort: "date desc"
