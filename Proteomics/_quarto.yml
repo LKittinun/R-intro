@@ -4,7 +4,7 @@ project:
 
 website:
   title: "Proteomics blog"
-  image: "http://lkittinun.github.io/Proteomics/thumbnail.png"
+  image: "https://lkittinun.github.io/Proteomics/site/thumbnail.png"
   open-graph:
     site-name: "Proteomics blog"
   navbar:
