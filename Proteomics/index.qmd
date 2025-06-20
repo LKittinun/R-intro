@@ -1,6 +1,5 @@
 ---
 title: "Proteomics blog"
-image: "thumbnail.png"  
 
 listing:
   contents: posts

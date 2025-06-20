@@ -4,8 +4,9 @@ project:
 
 website:
   title: "Proteomics blog"
-  site-url: "https://lkittinun.github.io/Proteomics/site/index.html"
-  open-graph: true
+  open-graph:
+    site-name: "Proteomics blog"
+    image: "http://lkittinun.github.io/Proteomics/thumbnail.png"
   navbar:
     right:
       - about.qmd
