@@ -3,7 +3,7 @@ project:
   output-dir: site
 
 website:
-  title: "Proteomics blog"
+  title: "Proteomics"
   image: "https://lkittinun.github.io/Proteomics/thumbnail_1.png"
   open-graph:
     site-name: "Proteomics blog"
