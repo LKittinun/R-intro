@@ -4,7 +4,7 @@ project:
 
 website:
   title: "Proteomics blog"
-  site-url: "https://lkittinun.github.io/Proteomics/site/"
+  site-url: "https://lkittinun.github.io/Proteomics/site/index.html"
   open-graph: true
   navbar:
     right:
