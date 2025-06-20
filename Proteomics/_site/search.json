@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Test new blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Proteomics",
+    "section": "",
+    "text": "Missed cleavage\n\n\n\n\n\n\nProteomics\n\n\n\n\n\n\n\n\n\nJun 16, 2025\n\n\nLeetanaporn K\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/missed_cleavage/index.html",
+    "href": "posts/missed_cleavage/index.html",
+    "title": "Missed cleavage",
+    "section": "",
+    "text": "In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of proteins, certain protein sites may be partially or completely inaccessible to the enzymatic cleavage. This situation eventually leads to missed cleavages—where peptides are longer than expected due to uncleavage at intended sites. Too many missed cleavages can complicate peptide identification and quantification in downstream analysis."
+  },
+  {
+    "objectID": "posts/missed_cleavage/index.html#missed-cleavage",
+    "href": "posts/missed_cleavage/index.html#missed-cleavage",
+    "title": "Missed cleavage",
+    "section": "",
+    "text": "In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of proteins, certain protein sites may be partially or completely inaccessible to the enzymatic cleavage. This situation eventually leads to missed cleavages—where peptides are longer than expected due to uncleavage at intended sites. Too many missed cleavages can complicate peptide identification and quantification in downstream analysis."
+  },
+  {
+    "objectID": "posts/missed_cleavage/index.html#how-is-missed-cleavage-calculated",
+    "href": "posts/missed_cleavage/index.html#how-is-missed-cleavage-calculated",
+    "title": "Missed cleavage",
+    "section": "How is missed cleavage calculated?",
+    "text": "How is missed cleavage calculated?\nTo identify spectra generated from the mass spectrometry, most software we used relies on a protein sequence database, typically in FASTA format, as a reference. Consequently, the software performs in silico digestion on FASTA to generate a theoretical list of peptides to map the spectra against. Consider human albumin protein as an example.\n\nalbu_human &lt;- paste(readLines(\"data/albu_human.fasta\")[-1], collapse = \"\")\nalbu_human\n\n[1] \"MKWVTFISLLFLFSSAYSRGVFRRDAHKSEVAHRFKDLGEENFKALVLIAFAQYLQQCPFEDHVKLVNEVTEFAKTCVADESAENCDKSLHTLFGDKLCTVATLRETYGEMADCCAKQEPERNECFLQHKDDNPNLPRLVRPEVDVMCTAFHDNEETFLKKYLYEIARRHPYFYAPELLFFAKRYKAAFTECCQAADKAACLLPKLDELRDEGKASSAKQRLKCASLQKFGERAFKAWAVARLSQRFPKAEFAEVSKLVTDLTKVHTECCHGDLLECADDRADLAKYICENQDSISSKLKECCEKPLLEKSHCIAEVENDEMPADLPSLAADFVESKDVCKNYAEAKDVFLGMFLYEYARRHPDYSVVLLLRLAKTYETTLEKCCAAADPHECYAKVFDEFKPLVEEPQNLIKQNCELFEQLGEYKFQNALLVRYTKKVPQVSTPTLVEVSRNLGKVGSKCCKHPEAKRMPCAEDYLSVVLNQLCVLHEKTPVSDRVTKCCTESLVNRRPCFSALEVDETYVPKEFNAETFTFHADICTLSEKERQIKKQTALVELVKHKPKATKEQLKAVMDDFAAFVEKCCKADDKETCFAEEGKKLVAASQAALGL\"\n\n\nTheoretically, we know that trypsin can digest proteins at Lysine (K) and Arginine (R) sites, where it is not followed by Proline (P) or KR/P. So, ideally, albumin should be digested into peptides based on this rule.\n\ntrypsin_digest &lt;- function(seq){\n  if (!is.character(seq) || nchar(seq) &lt;2) stop(\"Input must be &gt;2 characters string\")\n  unlist(stringi::stri_split_regex(seq, pattern = \"(?&lt;=(K(?!P)|R(?!P)))\"))\n}\n\nalbu_pep &lt;- trypsin_digest(albu_human)\n\n## Normally the softwares consider at least 5 amino acids to be valid peptides\n\nalbu_pep[nchar(albu_pep)&gt;=5]\n\n [1] \"WVTFISLLFLFSSAYSR\"           \"SEVAHR\"                     \n [3] \"DLGEENFK\"                    \"ALVLIAFAQYLQQCPFEDHVK\"      \n [5] \"LVNEVTEFAK\"                  \"TCVADESAENCDK\"              \n [7] \"SLHTLFGDK\"                   \"LCTVATLR\"                   \n [9] \"ETYGEMADCCAK\"                \"QEPER\"                      \n[11] \"NECFLQHK\"                    \"DDNPNLPR\"                   \n[13] \"LVRPEVDVMCTAFHDNEETFLK\"      \"YLYEIAR\"                    \n[15] \"HPYFYAPELLFFAK\"              \"AAFTECCQAADK\"               \n[17] \"AACLLPK\"                     \"LDELR\"                      \n[19] \"ASSAK\"                       \"CASLQK\"                     \n[21] \"AWAVAR\"                      \"AEFAEVSK\"                   \n[23] \"LVTDLTK\"                     \"VHTECCHGDLLECADDR\"          \n[25] \"ADLAK\"                       \"YICENQDSISSK\"               \n[27] \"ECCEKPLLEK\"                  \"SHCIAEVENDEMPADLPSLAADFVESK\"\n[29] \"NYAEAK\"                      \"DVFLGMFLYEYAR\"              \n[31] \"HPDYSVVLLLR\"                 \"TYETTLEK\"                   \n[33] \"CCAAADPHECYAK\"               \"VFDEFKPLVEEPQNLIK\"          \n[35] \"QNCELFEQLGEYK\"               \"FQNALLVR\"                   \n[37] \"VPQVSTPTLVEVSR\"              \"HPEAK\"                      \n[39] \"MPCAEDYLSVVLNQLCVLHEK\"       \"TPVSDR\"                     \n[41] \"CCTESLVNR\"                   \"RPCFSALEVDETYVPK\"           \n[43] \"EFNAETFTFHADICTLSEK\"         \"QTALVELVK\"                  \n[45] \"AVMDDFAAFVEK\"                \"ETCFAEEGK\"                  \n[47] \"LVAASQAALGL\"                \n\n\nThis generates a list of theoretical peptides that are digested by trypsin, which is further used to generate theoretical spectra to match against our experiment. So if the real cleavage results longer sequence than these, it means that there was incomplete digestion occurred. Suppose we digest real albumin and get some peptides.\n\npeptides &lt;- c(\"ACLLPKLDELRDEGKASSAKQR\",\n              \"KDVCKNYAEAKDVFLGMFLYEYARR\",\n              \"YICENQDSISSK\",\n              \"FGERAFKAWAVAR\",\n              \"VFDEFKPLVEEPQNLIK\")\n\nWe want to know if our digestion experiment results in missed cleavage, so we check for non-C-terminal KR/P missed cleavage.\n\ncount.missed.cleavage &lt;- function(peptide) {\n  if (!is.character(peptide) || nchar(peptide) &lt;2) stop(\"Input must be &gt;2 characters string\")\n  peptide &lt;- toupper(peptide)\n  matches &lt;- unlist(gregexpr(\"(?=(K(?!P)|R(?!P)))\", peptide, perl = TRUE))\n  matches &lt;- matches[matches &lt; nchar(peptide)]\n  length(matches)\n}\n\ndata.frame(no.cleavage = sapply(peptides, count.missed.cleavage))\n\n                          no.cleavage\nACLLPKLDELRDEGKASSAKQR              4\nKDVCKNYAEAKDVFLGMFLYEYARR           4\nYICENQDSISSK                        0\nFGERAFKAWAVAR                       2\nVFDEFKPLVEEPQNLIK                   0\n\n\nThis way, we can identify the number of cleavages present in each peptide. In the real situation, our bottom-up proteomic experiment often allows only 0-1 missed cleavage theoretical peptides in the search space for identification (so the result will only contain peptides with missed cleavage &lt;2), since missed cleavage &gt;1 results in an inconsistent peptide pattern and thus a larger search space and poor quantification result. There was an exception in some samples, e.g., plasma, which was expected to have a high missed cleavage count due to nonspecific cleavage from plasma enzymes. In this case, we might increase the missed cleavage threshold to 2."
+  },
+  {
+    "objectID": "posts/missed_cleavage/index.html#how-to-reduce-missed-cleavage",
+    "href": "posts/missed_cleavage/index.html#how-to-reduce-missed-cleavage",
+    "title": "Missed cleavage",
+    "section": "How to reduce missed cleavage?",
+    "text": "How to reduce missed cleavage?\nThe principle of digestion improvement is to prepare proteins to be in a condition that is suitable for digestion, or improve digestion efficiency.\n\nUse the precipitation method to obtain purer proteins.\nReduce non-specific digestion from other enzymes (since we are only interested in particular enzymatic digestion, e.g., trypsin). This can be done by heat or by adding protease inhibitors.\nReduce and alkylate proteins.\nUse a higher enzyme-to-protein ratio.\nUse multiple enzymes. Most commonly, we use Lys-C in conjunction with trypsin, since Lys-C specifically cleaves C-terminal K. Our experience found that adding Lys-C results in 5-10% cleavage efficiency.\nUse a suitable time and temperature for specific enzymes. Too short will cause missed cleavage, but too long will cause autolysis and excessive digestion."
+  }
+]

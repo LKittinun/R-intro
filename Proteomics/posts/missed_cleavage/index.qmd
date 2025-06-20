@@ -1,0 +1,74 @@
+---
+title: "Missed cleavage"
+author: "Leetanaporn K"
+date: "2025-06-16"
+categories: [Proteomics]
+---
+
+In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of proteins, certain protein sites may be partially or completely inaccessible to the enzymatic cleavage. This situation eventually leads to missed cleavages—where peptides are longer than expected due to uncleavage at intended sites. Too many missed cleavages can complicate peptide identification and quantification in downstream analysis.
+
+## How is missed cleavage calculated?
+
+To identify spectra generated from the mass spectrometry, most software we used relies on a protein sequence database, typically in FASTA format, as a reference. Consequently, the software performs *in silico* digestion on FASTA to generate a theoretical list of peptides to map the spectra against. Consider human albumin protein as an example.
+
+```{r albumin_fasta}
+albu_human <- paste(readLines("data/albu_human.fasta")[-1], collapse = "")
+albu_human
+```
+
+Theoretically, we know that trypsin can digest proteins at Lysine (K) and Arginine (R) sites, where it is not followed by Proline (P) or KR/P. So, ideally, albumin should be digested into peptides based on this rule.
+
+```{r albu_digestion}
+trypsin_digest <- function(seq){
+  if (!is.character(seq) || nchar(seq) <2) stop("Input must be >2 characters string")
+  unlist(stringi::stri_split_regex(seq, pattern = "(?<=(K(?!P)|R(?!P)))"))
+}
+
+albu_pep <- trypsin_digest(albu_human)
+
+## Normally the softwares consider at least 5 amino acids to be valid peptides
+
+albu_pep[nchar(albu_pep)>=5]
+```
+
+This generates a list of theoretical peptides that are digested by trypsin, which is further used to generate theoretical spectra to match against our experiment. So if the real cleavage results longer sequence than these, it means that there was incomplete digestion occurred. Suppose we digest real albumin and get some peptides.
+
+```{r peptides_ex}
+peptides <- c("ACLLPKLDELRDEGKASSAKQR",
+              "KDVCKNYAEAKDVFLGMFLYEYARR",
+              "YICENQDSISSK",
+              "FGERAFKAWAVAR",
+              "VFDEFKPLVEEPQNLIK")
+```
+
+We want to know if our digestion experiment results in missed cleavage, so we check for non-C-terminal KR/P missed cleavage.
+
+```{r check_missed_cleavage}
+count.missed.cleavage <- function(peptide) {
+  if (!is.character(peptide) || nchar(peptide) <2) stop("Input must be >2 characters string")
+  peptide <- toupper(peptide)
+  matches <- unlist(gregexpr("(?=(K(?!P)|R(?!P)))", peptide, perl = TRUE))
+  matches <- matches[matches < nchar(peptide)]
+  length(matches)
+}
+
+data.frame(no.cleavage = sapply(peptides, count.missed.cleavage))
+```
+
+This way, we can identify the number of cleavages present in each peptide. In the real situation, our bottom-up proteomic experiment often allows only 0-1 missed cleavage theoretical peptides in the search space for identification (so the result will only contain peptides with missed cleavage \<2), since missed cleavage \>1 results in an inconsistent peptide pattern and thus a larger search space and poor quantification result. There was an exception in some samples, e.g., plasma, which was expected to have a high missed cleavage count due to nonspecific cleavage from plasma enzymes. In this case, we might increase the missed cleavage threshold to 2.
+
+## How to reduce missed cleavage?
+
+The principle of digestion improvement is to prepare proteins to be in a condition that is suitable for digestion, or improve digestion efficiency.
+
+-   Use the precipitation method to obtain purer proteins.
+
+-   Reduce non-specific digestion from other enzymes (since we are only interested in particular enzymatic digestion, e.g., trypsin). This can be done by heat or by adding protease inhibitors.
+
+-   Reduce and alkylate proteins.
+
+-   Use a higher enzyme-to-protein ratio.
+
+-   Use multiple enzymes. Most commonly, we use Lys-C in conjunction with trypsin, since Lys-C specifically cleaves C-terminal K. Our experience found that adding Lys-C results in 5-10% cleavage efficiency.
+
+-   Use a suitable time and temperature for specific enzymes. Too short will cause missed cleavage, but too long will cause autolysis and excessive digestion.
