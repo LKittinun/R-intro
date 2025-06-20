@@ -4,6 +4,8 @@ project:
 
 website:
   title: "Proteomics blog"
+  image: "thumbnail.png"  
+  open-graph: true
   navbar:
     right:
       - about.qmd
@@ -13,10 +15,6 @@ format:
   html:
     theme: flatly
     css: styles.css
-open-graph:
-    title: "Proteomics blog"
-    description: "A blog for sharing ideas, experiences, and knowledge in proteomics—whatever I’m exploring, working on, or feel like writing about."
-    image: "thumbnail.png"
-    
+
 editor: visual
 
