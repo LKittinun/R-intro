@@ -11,6 +11,8 @@ website:
     image: "https://lkittinun.github.io/Proteomics/thumbnail_1.png"
   navbar:
     right:
+      - text: "Home"
+        href: https://lkittinun.github.io
       - about.qmd
       - icon: github
         href: https://github.com/LKittinun/LKittinun.github.io
