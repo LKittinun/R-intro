@@ -1,6 +1,6 @@
 ---
 title: "Proteomics blog"
-image: "http://lkittinun.github.io/Proteomics/thumbnail.png"
+image: "https://lkittinun.github.io/Proteomics/thumbnail.png"
 
 listing:
   contents: posts
