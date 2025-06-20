@@ -1,5 +1,6 @@
 ---
-title: "Proteomics blog"
+title: "Pete's proteomics blog"
+description: "A blog for sharing ideas, experiences, and knowledge in proteomics. **Disclaimer:** The content shared here reflects my personal research, experiences, and perspectives. It is not intended to serve as an official source or formal reference."
 image: "https://lkittinun.github.io/Proteomics/thumbnail_1.png"
 
 listing:
