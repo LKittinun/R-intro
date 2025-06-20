@@ -1,42 +1,7 @@
 [
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Test new blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Proteomics blog",
-    "section": "",
-    "text": "Missed cleavage\n\n\n\n\n\n\nProteomics\n\n\n\n\n\n\n\n\n\nJun 16, 2025\n\n\nLeetanaporn K\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this blog"
-  },
-  {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
-  },
-  {
     "objectID": "posts/missed_cleavage/index.html",
     "href": "posts/missed_cleavage/index.html",
-    "title": "Missed cleavage",
-    "section": "",
-    "text": "In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of proteins, certain protein sites may be partially or completely inaccessible to the enzymatic cleavage. This situation eventually leads to missed cleavages—where peptides are longer than expected due to uncleavage at intended sites. Too many missed cleavages can complicate peptide identification and quantification in downstream analysis."
-  },
-  {
-    "objectID": "posts/missed_cleavage/index.html#missed-cleavage",
-    "href": "posts/missed_cleavage/index.html#missed-cleavage",
     "title": "Missed cleavage",
     "section": "",
     "text": "In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of proteins, certain protein sites may be partially or completely inaccessible to the enzymatic cleavage. This situation eventually leads to missed cleavages—where peptides are longer than expected due to uncleavage at intended sites. Too many missed cleavages can complicate peptide identification and quantification in downstream analysis."
@@ -54,5 +19,19 @@
     "title": "Missed cleavage",
     "section": "How to reduce missed cleavage?",
     "text": "How to reduce missed cleavage?\nThe principle of digestion improvement is to prepare proteins to be in a condition that is suitable for digestion, or improve digestion efficiency.\n\nUse the precipitation method to obtain purer proteins.\nReduce non-specific digestion from other enzymes (since we are only interested in particular enzymatic digestion, e.g., trypsin). This can be done by heat or by adding protease inhibitors.\nReduce and alkylate proteins.\nUse a higher enzyme-to-protein ratio.\nUse multiple enzymes. Most commonly, we use Lys-C in conjunction with trypsin, since Lys-C specifically cleaves C-terminal K. Our experience found that adding Lys-C results in 5-10% cleavage efficiency.\nUse a suitable time and temperature for specific enzymes. Too short will cause missed cleavage, but too long will cause autolysis and excessive digestion."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Proteomics blog",
+    "section": "",
+    "text": "Missed cleavage\n\n\n\n\n\n\nProteomics\n\n\n\n\n\n\n\n\n\nJun 16, 2025\n\n\nLeetanaporn K\n\n\n\n\n\n\nNo matching items"
   }
 ]
