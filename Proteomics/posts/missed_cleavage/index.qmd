@@ -2,10 +2,12 @@
 title: "Missed cleavage"
 author: "Leetanaporn K"
 date: "2025-06-16"
-categories: [Proteomics]
+categories: 
+  - Sample preparation
+  - Analysis
 ---
 
-In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of proteins, certain protein sites may be partially or completely inaccessible to the enzymatic cleavage. This situation eventually leads to missed cleavages—where peptides are longer than expected due to uncleavage at intended sites. Too many missed cleavages can complicate peptide identification and quantification in downstream analysis.
+In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of proteins, certain protein sites may be partially or completely inaccessible to the enzymatic cleavage. This situation eventually leads to missed cleavages—where peptides are longer than expected due to being uncleaved at intended sites. Too many missed cleavages can complicate peptide identification and quantification in downstream analysis.
 
 ## How is missed cleavage calculated?
 

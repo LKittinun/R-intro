@@ -1,0 +1,258 @@
+---
+title: "Data-dependent acquisition vs. Data-independent acquisition"
+execute: 
+  echo: false
+  message: false
+  warning: false
+  fig.align: "center"
+date: "2025-06-25"
+categories: 
+  - Instrument
+  - Analysis
+---
+
+If you have ever worked with untargeted proteomic results, you would likely encounter the terms **data-dependent acquisition (DDA)** and **data-independent acquisition (DIA)**. Although these two acquisition schemes finally produced (generally) two-dimensional data matrices of peptides (or proteins) and intensities, they relied on fundamentally distinct mechanisms for acquiring the data. To understand how different these two approaches are, we first have to understand the fundamentals of how mass spectrometry captures and analyzes peptide signals.
+
+## Mass spectrometry data acquisition
+
+After peptides are injected into the mass spectrometry and ionized by the ion source, the resulting ion travels to the mass analyzers. The function of mass analyzers is to separate ionized peptides based on their m/z. For those who are confused about what m/z is, think of it this way: mass analyzers use magnetic or electric fields to separate ions, but they cannot directly measure peptide mass. Instead, they rely on the ion’s **mass-to-charge ratio (m/z)**, where the charge helps distinguish between ions. For instance, a peptide with a mass of 1200 and a 2+ charge will appear as 600 m/z in the analyzer.
+
+In untargeted proteomic analysis, commonly used mass analyzers usually involve two (or even three) mass analyzers with different functions, with collision chamber for further ion fragmentation. This setup is known as **tandem mass spectrometry (MS/MS)**.
+
+```{mermaid}
+flowchart LR
+  A[Ion Source] --- B(Mass Analyzer 1)
+  B --- C[Collision Chamber]
+  C --- D(Mass Analyzer 2)
+  D --- E[Detector]
+```
+
+In general, mass analyzer in MS/MS setup include:
+
+-   **Quadrupole:** This mass analyzer functions as the first m/z (mass-to-charge) filter, so we can define the range of the m/z that interests us most.
+
+-   **Time-of-flight or Orbitrap:** These are high-resolution mass analyzers. Although they have different principles of mass separation, they both share the same goal: to distinguish even minuscule m/z differences between ions with very high precision.
+
+So, basically, data acquisition of peptide ions starts with a quadrupole to filter the m/z that we are interested in. In the case of peptides, these numbers usually range around 400-1800. Then, the filter ions are passed into the high-resolution mass analyzer, which separates the ions in finer detail. Thereafter, all separated ion data are recorded by the detector, which is then processed into the spectrum we see in the software.
+
+```{mermaid}
+flowchart LR
+  A[Ion Source] --> B(Quadrupole)
+  B --- C[Collision Chamber]
+  C --- D(Time-of-flight/Orbitrap)
+  D --> E[Detector]
+  B -.-> D
+
+linkStyle 0,3,4 stroke:darkred,stroke-width:2px  
+```
+
+What I recently described is basically **MS1 acquisition** (or full scan/precursor scan). Note that collision chamber is not used here since there is no fragmentation occurs; it will be involved in MS2.
+
+## Then what about **MS2**?
+
+Well, what we obtain from MS1 is a list of m/z values of all ions present at the moment. This is called **peptide fingerprints**. However, this data is not enough to figure out what these peptides really are, because some peptides have the same m/z even though their sequences are different. This is why we need MS2, where we break down these ions into smaller pieces via a **collision chamber** to analyze their patterns further.
+
+```{mermaid}
+flowchart LR
+  A[Ion Source] --> B(Quadrupole)
+  B --> C["Collision Chamber (Fragmentation)"]
+  C --> D(Time-of-flight/Orbitrap)
+  D --> E[Detector]
+
+linkStyle 0,1,2,3 stroke:darkred,stroke-width:2px  
+```
+
+This is where the **difference between DDA and DIA** acquisition kicks in, because these two approaches have clearly distinct patterns to obtain MS2.
+
+### Data-dependent acquisition
+
+There is a specific time window during which peptides with the same or similar properties elute together as a single peak. This allows mass spectrometry to collect multiple data points as the peak elutes. Mass spectrometry collects multiple rounds of data in one peak. Each round of the scans consists of one MS1 and multiple MS2 scans; this is called a **cycle,** and the time it takes to complete a cycle is called **cycle time**.
+
+```{r MS_acquisition}
+#| fig.cap: "1 cycle = time to complete all defined scan = MS1 to MS1"
+#| out.width: "70%"
+
+library(ggplot2)
+library(gganimate)
+library(dplyr)
+
+# Simulate Gaussian peak
+rt <- seq(10, 20, by = 0.1)
+peak_center <- 15
+peak_width <- 1
+intensity <- dnorm(rt, mean = peak_center, sd = peak_width) * 1e9
+peak_data <- data.frame(rt = rt, intensity = intensity)
+
+# Total number of scans: 5 cycles × (1 MS1 + 5 MS2) = 30 scans
+total_scans <- 5 * 6
+scan_times <- seq(10, 20, length.out = total_scans)
+
+# Assign scan types: MS1 at position 1, 7, 13, ...
+scan_type <- rep("MS2", total_scans)
+scan_type[seq(1, total_scans, by = 6)] <- "MS1"
+
+scan_data <- data.frame(rt = scan_times,
+                        type = scan_type) |> 
+  mutate(cycle = row_number())
+
+# Get intensity at scan points
+scan_data$intensity <- approx(rt, intensity, xout = scan_data$rt)$y
+
+# Plot
+chrom_p <- ggplot(peak_data, aes(x = rt, y = intensity)) +
+  geom_line(color = "gray30", linewidth = 1) +
+  geom_point(data = scan_data,
+             aes(x = rt, y = intensity, col = type, shape = type),
+             size = 3) +
+  scale_color_manual(values = c("MS1" = "blue", "MS2" = "red")) +
+  scale_shape_manual(values = c("MS1" = 16, "MS2" = 17)) +
+  labs(title = "MS data acquistion across one peak (5 cycles)",
+       x = "Retention Time (sec)",
+       y = "Intensity",
+       col = "MS", shape = "MS") +
+  annotate("text", x = scan_data$rt[1]+1, y = 7e7, label = "1 cycle",
+           size = 4.5) +
+  annotate("rect", xmin = scan_data$rt[1], xmax = scan_data$rt[7], ymin = -Inf, ymax = 5e7,
+           fill = "pink", alpha = 0.2) +
+  theme_minimal() +
+  transition_states(cycle, transition_length = 0, state_length = 1, wrap = FALSE) +
+  enter_fade() + 
+  shadow_mark()
+
+animate(chrom_p, fps = 4, nframes = 30)
+```
+
+For DDA, in one cycle, the **top N** most intense data in MS1 (aka precursor ions) will be further fragmented into MS2 (daughter ions). Take a look at the picture below, the 5 most intense spectra in this MS1 are then individually fragmented and analyzed in separate MS2 scans *sequentially* (not simultaneously!), resulting in 5 following MS2 (red triangle in the above picture). This is why it is called "data-dependent"--it depends on the MS1 data. It is a classic data acquisition scheme that has been used since the beginning of the shotgun proteomic era.
+
+```{r dda}
+#| echo: false
+#| message: false
+#| fig.cap: "Note: the shade I made is larger than the actual experiment for visualization. In the real experiment, the quadrupole is very efficient and can isolate within +/- 1-2 m/z, or even lower in modern mass spectrometry."
+#| out.width: "70%"
+
+set.seed(100)
+mz <- round(runif(15, 400, 1600), 4)
+intensity <- round(runif(15, 10e8, 10e9), 2)
+top_rank <- 5
+
+spectrum_data <- data.frame(mz = mz, intensity = intensity) |> 
+  mutate(rank = rank(-intensity)) |> 
+  mutate(top_rank = ifelse(rank <= top_rank, T , F))
+
+shade_data <- spectrum_data |> 
+  filter(top_rank) |> 
+  arrange(rank) |> 
+  mutate(cycle = row_number(), xmin = mz - 10, xmax = mz + 10, ymin = 0,
+         ymax = max(intensity) * 1.05)  # just above top peak
+
+dda_p <- ggplot(spectrum_data, aes(x = mz, y = intensity, col = top_rank)) +
+  geom_rect(data = shade_data,
+            aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+            inherit.aes = FALSE,
+            fill = "blue", alpha = 0.1) +
+  geom_segment(aes(xend = mz, yend = 0), linewidth = 0.5) +
+ geom_text(data = shade_data,
+           aes(x = mz, y = ymax * 0.98, label = rank, group = cycle),
+           inherit.aes = FALSE, size = 4, color = "blue") +
+  labs(title = "Simulated DDA acquisition scheme",
+       x = "m/z", y = "Intensity") +
+  scale_x_continuous(limits = c(380, 1620), breaks = seq(400, 1600, 200)) +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_color_manual(values = c("TRUE" = "red", "FALSE" = "black")) +
+  labs(col = "Top 5 rank") +
+  theme_classic() +
+  transition_states(cycle, transition_length = 0, state_length = 1, wrap = FALSE) +
+  enter_fade() + 
+  exit_fade()
+
+animate(dda_p, fps = 2.5, nframes = 7, end_pause = 1)
+```
+
+Well, this is a solid method for identifying peptides. Still, there's a catch: the fragmentation tends to favor more abundant precursor ions. In other words, more abundant peptides are more likely to get selected for fragmentation, while less abundant peptides may get overlooked. Therefore, when you see quite a lot of missing data in your final data matrix, there is a good chance it was acquired by DDA. To compensate for this bias, most instruments use a feature called **dynamic exclusion** that prevents repeated fragmentation of the same precursors within a short time window. But that's getting a little bit too technical–we'll talk about it in a future post.
+
+### Data-independent acquisition
+
+As I stated, DDA has a limitation that it is bias towards more abundant precursors. So why don't we just fragment it all? Well, this is exactly the concept behind DIA. It works by sequentially fragmenting all ions within the defined mass windows.
+
+```{r dia}
+#| echo: false
+#| message: false
+#| fig-cap: "All ions within predefined m/z windows are selected for fragmentation. Pink shaded regions represent isolation windows, dashed lines indicate window boundaries."
+#| out.width: "70%"
+
+# Simulate mass spectrum
+set.seed(100)
+mz <- round(runif(15, 400, 1000), 4)
+intensity <- round(runif(15, 1e9, 10e9), 2)
+spectrum_data <- data.frame(mz = mz, intensity = intensity)
+
+# Define DIA windows
+window_width <- 50
+window_start <- seq(400, 980, by = window_width)
+window_end <- window_start + window_width
+
+# Shading regions for DIA windows
+shade_data <- data.frame(
+  xmin = window_start,
+  xmax = window_end,
+  ymin = 0,
+  ymax = max(intensity) * 1.05
+) |> 
+  mutate(cycle = row_number()) |> 
+  mutate(label_x = (xmin+xmax)/2 )
+
+# Dashed vertical lines at window borders
+border_lines <- data.frame(x = unique(c(window_start, window_end)))
+
+# Tag ions within DIA windows
+spectrum_data <- spectrum_data |>
+  rowwise() |>
+  mutate(in_window = any(mz >= window_start & mz <= window_end))
+
+# Plot
+dia_p <- ggplot(spectrum_data, aes(x = mz, y = intensity)) +
+  geom_rect(data = shade_data,
+            aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+            inherit.aes = FALSE,
+            fill = "blue", alpha = 0.05) +
+  geom_vline(data = border_lines, aes(xintercept = x),
+             linetype = "dashed", color = "darkblue", linewidth = 0.5) +
+  geom_segment(aes(xend = mz, yend = 0), linewidth = 0.5) +
+  geom_text(data = shade_data,
+            aes(x = label_x, y = ymax * 0.98, label = cycle, group = cycle),
+            inherit.aes = FALSE, size = 4, color = "blue") +
+  labs(title = "Simulated DIA acquisition scheme",
+       x = "m/z", y = "Intensity", col = "In DIA window") +
+  scale_x_continuous(limits = c(380, 1020), breaks = seq(400, 1000, 100)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  theme_classic() +
+  transition_states(cycle, transition_length = 0, state_length = 0.7, wrap = FALSE) +
+  enter_fade() +
+  exit_fade()
+
+animate(dia_p, fps = 2.5, nframes = 13, end_pause = 1)
+```
+
+As you can see in the figure, for this MS1, the next 12 windows will be sequentially fragmented in MS2. In this way, all ions--more or less--get a chance to be fragmented without bias. This makes the fragmentation pattern much more predictable, resulting in more robust, reproducible spectra generation across the run. Accordingly, there will be a lot less missing data events than DDA, especially in low-abundant peptides. There is a lot of variation in window fragmentation patterns, such as staggered windows and variable-width windows that are designed to optimize coverage and improve sensitivity, depending on the instruments.
+
+Terrific! So, should we entirely abandon DDA and move to DDA? Not exactly, for now. While it results in much more reproducible spectra, the spectra themselves are much more complicated. This is because there are multiple precursors fragmented together within one window, leading to **chimeric spectra**. DDA typically isolates and fragments individual precursors within narrow windows, making chimeric events much less likely. Therefore, identifying peptides from these spectra often requires **library**--a pre-built reference of known peptide fragmentation pattern--to serve as a spectrum blueprint to match spectra with overlapping fragmented ions.
+
+Luckily, the bioinformatics tools for DIA are rapidly evolving, making it very feasible to analyze these spectra with ease. Most modern proteomics tools now support analyzing DIA without requiring much effort from the users. Some tools can even do it with library-free settings, such as DIA-NN, MaxQuant, Spectronaut, MSFragger, and many more. Note that proper methods for false discovery estimation in DIA are still in debate. Still, in a general label-free workflow, DIA is now a highly accessible and powerful option at the moment.
+
+### So, DDA still has the place?
+
+Absolutely. While currently DIA is the go-to for general label-free workflow, certain methods still prefer DDA, such as:
+
+-   **Post-translational modification analysis**, DDA provides much cleaner MS2 spectra, which are critical for confident PTM modification site localization. (Though DIA is rapidly catching up in this area.)
+
+-   **Label-based proteomics**, especially with tandem mass tag.
+
+-   **Building a tailored spectral library** for some projects.
+
+-   **Peptidomics**, your regular computer could explode due to a very large search space.
+
+-   **De novo sequencing**, since interpreting chimeric spectra without prior knowledge is still highly challenging.
+
+## Conclusion
+
+So, while DIA is rapidly evolving and can replace some DDA workflows, DDA still has a place, especially when you need to do experiments that require much cleaner spectra, such as PTM or de novo sequencing. Choosing the right approach depends on your specific research questions and analytic goals. But who knows what it will be in the future? With continuous improvements in mass spectrometry hardware and software, the line between DDA and DIA will only grow more flexible.

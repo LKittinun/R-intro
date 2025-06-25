@@ -12,6 +12,8 @@ listing:
   filter-ui: false
 page-layout: full
 title-block-banner: true
+website:
+  google-analytics: "G-90SJY5V32X"
 ---
 
 ***Disclaimer:** The content shared here reflects only my research and perspectives. It is not intended to serve as an official source or formal reference.*
