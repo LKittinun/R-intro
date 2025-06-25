@@ -1,5 +1,6 @@
 ---
 title: "Data-dependent acquisition vs. Data-independent acquisition"
+author: "Leetanaporn K"
 execute: 
   echo: false
   message: false
