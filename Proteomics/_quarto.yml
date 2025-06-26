@@ -15,7 +15,9 @@ website:
   navbar:
     right:
       - text: "Home"
-        href: https://lkittinun.github.io
+        href: https://lkittinun.github.io/Proteomics/blog/
+      - text: "Main site"
+        href: https://lkittinun.github.io/
       - about.qmd
       - icon: github
         href: https://github.com/LKittinun/LKittinun.github.io
