@@ -14,9 +14,9 @@ website:
   site-url: "https://lkittinun.github.io/Proteomics/blog/" 
   navbar:
     right:
-      - text: "Home"
+      - text: "Blog"
         href: https://lkittinun.github.io/Proteomics/blog/
-      - text: "Main site"
+      - text: "Site"
         href: https://lkittinun.github.io/
       - about.qmd
       - icon: github
