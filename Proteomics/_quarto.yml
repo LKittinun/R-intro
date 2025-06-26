@@ -9,6 +9,7 @@ website:
     site-name: "Proteomics blog"
     description: "A blog for sharing ideas, experiences, and knowledge in proteomics—whatever I’m exploring, working on, or feel like writing about."
     image: "https://lkittinun.github.io/Proteomics/thumbnail_1.png"
+  google-analytics: "G-90SJY5V32X"
   navbar:
     right:
       - text: "Home"
