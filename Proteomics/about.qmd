@@ -1,12 +1,14 @@
 ---
 title: "About"
-image: profile.jpg
+image: about.png
 about:
   template: jolla
+  image-width: 20em
+  image-shape: rounded
   links:
     - icon: github
       text: Github
       href: https://github.com/LKittinun/LKittinun.github.io
 ---
 
-About this blog
+Thank you for your visit !
