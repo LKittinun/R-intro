@@ -21,20 +21,6 @@
     "text": "How to reduce missed cleavage?\nThe principle of digestion improvement is to prepare proteins to be in a condition that is suitable for digestion, or improve digestion efficiency.\n\nUse the precipitation method to obtain purer proteins.\nReduce non-specific digestion from other enzymes (since we are only interested in particular enzymatic digestion, e.g., trypsin). This can be done by heat or by adding protease inhibitors.\nReduce and alkylate proteins.\nUse a higher enzyme-to-protein ratio.\nUse multiple enzymes. Most commonly, we use Lys-C in conjunction with trypsin, since Lys-C specifically cleaves C-terminal K. Our experience found that adding Lys-C results in 5-10% cleavage efficiency.\nUse a suitable time and temperature for specific enzymes. Too short will cause missed cleavage, but too long will cause autolysis and excessive digestion."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Pete’s proteomics blog",
-    "section": "",
-    "text": "Disclaimer: The content shared here reflects only my research and perspectives. It is not intended to serve as an official source or formal reference.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMS file formats—gotta convert ’em all!\n\n\n\n\n\n\nInstrument\n\n\nAnalysis\n\n\n\n\n\n\n\n\n\nJun 27, 2025\n\n\nLeetanaporn K\n\n\n\n\n\n\n\n\n\n\n\n\nData-dependent acquisition vs. Data-independent acquisition\n\n\n\n\n\n\nInstrument\n\n\nAnalysis\n\n\n\n\n\n\n\n\n\nJun 25, 2025\n\n\nLeetanaporn K\n\n\n\n\n\n\n\n\n\n\n\n\nMissed cleavage\n\n\n\n\n\n\nSample preparation\n\n\nAnalysis\n\n\n\n\n\n\n\n\n\nJun 16, 2025\n\n\nLeetanaporn K\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "Thank you for your visit !"
-  },
-  {
     "objectID": "posts/DDA_vs_DIA/index.html",
     "href": "posts/DDA_vs_DIA/index.html",
     "title": "Data-dependent acquisition vs. Data-independent acquisition",
@@ -61,6 +47,20 @@
     "title": "Data-dependent acquisition vs. Data-independent acquisition",
     "section": "Conclusion",
     "text": "Conclusion\nSo, while DIA is rapidly evolving and can replace some DDA workflows, DDA still has a place, especially when you need to do experiments that require much cleaner spectra, such as PTM or de novo sequencing. Choosing the right approach depends on your specific research questions and analytic goals. But who knows what it will be in the future? With continuous improvements in mass spectrometry hardware and software, the line between DDA and DIA will only grow more flexible."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Thank you for your visit !"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Pete’s proteomics blog",
+    "section": "",
+    "text": "Disclaimer: The content shared here reflects only my research and perspectives. It is not intended to serve as an official source or formal reference.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMS file formats—gotta convert ’em all!\n\n\n\n\n\n\nInstrument\n\n\nAnalysis\n\n\n\n\n\n\n\n\n\nJul 5, 2025\n\n\nLeetanaporn K\n\n\n\n\n\n\n\n\n\n\n\n\nData-dependent acquisition vs. Data-independent acquisition\n\n\n\n\n\n\nInstrument\n\n\nAnalysis\n\n\n\n\n\n\n\n\n\nJun 25, 2025\n\n\nLeetanaporn K\n\n\n\n\n\n\n\n\n\n\n\n\nMissed cleavage\n\n\n\n\n\n\nSample preparation\n\n\nAnalysis\n\n\n\n\n\n\n\n\n\nJun 16, 2025\n\n\nLeetanaporn K\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/file_conversion/index.html",
