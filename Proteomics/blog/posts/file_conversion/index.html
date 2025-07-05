@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A blog for sharing ideas, experiences, and knowledge in proteomics.">
+<meta name="author" content="Leetanaporn K">
+<meta name="dcterms.date" content="2025-06-27">
 
-<title>Proteomics - Pete’s proteomics blog</title>
+<title>Proteomics - MS file formats—gotta convert ’em all!</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,24 +25,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,35 +68,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-90SJY5V32X"></script>
 
 <script type="text/javascript">
@@ -108,51 +78,22 @@ gtag('js', new Date());
 gtag('config', 'G-90SJY5V32X', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Proteomics - Pete’s proteomics blog">
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Proteomics - MS file formats—gotta convert ’em all!">
 <meta property="og:description" content="A blog for sharing ideas, experiences, and knowledge in proteomics—whatever I’m exploring, working on, or feel like writing about.">
 <meta property="og:image" content="https://lkittinun.github.io/Proteomics/thumbnail_1.png">
 <meta property="og:site_name" content="Proteomics blog">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Proteomics</span>
     </a>
   </div>
@@ -171,7 +112,7 @@ window.Quarto = {
 <span class="menu-text">Site</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -189,158 +130,84 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Pete’s proteomics blog</h1>
-                  <div>
-        <div class="description">
-          A blog for sharing ideas, experiences, and knowledge in proteomics.
-        </div>
-      </div>
-                </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">MS file formats—gotta convert ’em all!</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Instrument</div>
+                <div class="quarto-category">Analysis</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Leetanaporn K </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 27, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Analysis">Analysis <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Instrument">Instrument <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Sample preparation">Sample preparation <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-<p><em><strong>Disclaimer:</strong> The content shared here reflects only my research and perspectives. It is not intended to serve as an official source or formal reference.</em></p>
+<p>Want to work with MS files yourself but do not have access to licensed software? No worries! These days, a lot of free-to-use proteomics tools (academic use mostly) are now available for mass spectrometry data analysis. However, not all programs can analyze native file extensions from different instrument vendors, such as <code>.raw</code>, <code>.wiff</code>, or <code>.d</code>. Luckily, the awesome proteomics community has created standardized file formats like <code>.mzML</code> and <code>.mzXML</code>, which enable cross-platform analysis. Even luckier, there is a tool that lets you convert vendor-specific extensions to these open formats!</p>
+<p><strong>Download now</strong> &gt;&gt; <a href="https://proteowizard.sourceforge.io/download.html" target="_blank">ProteoWizard</a> (nope, not sponsored)</p>
+<p>It works on all major platforms; choose it at your own will. After download, just install normally. You will also installed SeeMS software that can visualize your <code>.mzML</code> file.</p>
+<p>MSConvert comes with both a GUI and a command line version, here is a list of <a href="https://proteowizard.sourceforge.io/doc_users.html#SupportedFormats" target="_blank">supported format</a>. The GUI version looks like this.</p>
+<p><img src="data/msconvert.png" class="img-fluid"></p>
+<p>To convert files, choose your desire files and output directory. Then tick everything as in the figure and you are good to go. To add a little explanation:</p>
+<p>- <code>peakPicking</code> does centroid the spectrum for you. The 1- means you do it at MS1 level.</p>
+<p>- <code>zeroSamples removeExtra</code>. Remove any zero data. This helps reduce file size, as .mzML normally has a larger file size than vendor-specific files.</p>
+<p>For someone who loves the command line. You can run it by locating msconvert.exe file and executing it. You can also add them to <code>PATH</code> for more convenience. These are some of the commands I normally use, note that I use PowerShell in this setting. You can change to your platform, which should not be difficult anyway, or just ask <a href="https://openai.com/index/chatgpt/" target="_blank">Mr.&nbsp;Sam Altman</a> to convert the format for you.</p>
+<section id="all-files-in-the-folder" class="level3">
+<h3 class="anchored" data-anchor-id="all-files-in-the-folder">All files in the folder</h3>
+<p><code>-v</code> stands for verbose. I recommend adding this argument, as it will allow you to track the progress of the conversion.</p>
+<pre><code>msconvert *.raw `
+  --filter "peakPicking true 1-" `
+  --mzML --64 --zlib -o .\yourfolder -v </code></pre>
+</section>
+<section id="specific-files-e.g.-first-10-files" class="level3">
+<h3 class="anchored" data-anchor-id="specific-files-e.g.-first-10-files">Specific files, e.g.&nbsp;first 10 files</h3>
+<p>In this case, we have to do it in loop.</p>
+<pre><code>(gci | Select-Object -first 10).BaseName | 
+  foreach {msconvert $_ --filter "peakPicking true 1-" --mzML --64 --zlib -o .\mzML -v} </code></pre>
+</section>
+<section id="demultiplex" class="level3">
+<h3 class="anchored" data-anchor-id="demultiplex">Demultiplex</h3>
+<p>If by any chance you have data with staggered windows, you also need to demultiplex it.</p>
+<pre><code>msconvert *.raw `
+  --filter "peakPicking true 1-" `
+  --filter "zeroSamples removeExtra" `
+  --filter "demultiplex optimization=overlap_only" `
+  --mzML --64 --zlib `
+  -o .\yourfolder -v </code></pre>
+<p>Happy analyzing!</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Instrument,Analysis" data-listing-date-sort="1750957200000" data-listing-file-modified-sort="1751010055007" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="423">
-<div class="thumbnail">
-<p><a href="./posts/file_conversion/index.html" class="no-external"></a></p><a href="./posts/file_conversion/index.html" class="no-external">
-<p class="card-img-top"><img src="posts\file_conversion\data\msconvert.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/file_conversion/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/file_conversion/index.html" class="no-external">MS file formats—gotta convert ’em all!</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/file_conversion/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Instrument'); return false;">
-Instrument
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Analysis'); return false;">
-Analysis
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/file_conversion/index.html" class="no-external">Want to work with MS files yourself but do not have access to licensed software? No worries! These days, a lot of free-to-use proteomics tools (academic use mostly) are now…<code></code><code></code><code></code><code></code><code></code></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/file_conversion/index.html" class="no-external">
-<div class="listing-date">
-Jun 27, 2025
-</div>
-<div class="listing-author">
-Leetanaporn K
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Instrument,Analysis" data-listing-date-sort="1750784400000" data-listing-file-modified-sort="1751000086027" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2377">
-<div class="thumbnail">
-<p><a href="./posts/DDA_vs_DIA/index.html" class="no-external"></a></p><a href="./posts/DDA_vs_DIA/index.html" class="no-external">
-<p class="card-img-top"><img src="posts\DDA_vs_DIA\index_files\figure-html\MS_acquisition-1.gif"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/DDA_vs_DIA/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/DDA_vs_DIA/index.html" class="no-external">Data-dependent acquisition vs.&nbsp;Data-independent acquisition</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/DDA_vs_DIA/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Instrument'); return false;">
-Instrument
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Analysis'); return false;">
-Analysis
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/DDA_vs_DIA/index.html" class="no-external">If you have ever worked with untargeted proteomic results, you would likely encounter the terms <strong>data-dependent acquisition (DDA)</strong> and <strong>data-independent acquisition (DIA)</strong>.…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/DDA_vs_DIA/index.html" class="no-external">
-<div class="listing-date">
-Jun 25, 2025
-</div>
-<div class="listing-author">
-Leetanaporn K
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Sample preparation,Analysis" data-listing-date-sort="1750006800000" data-listing-file-modified-sort="1750670030256" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="606">
-<div class="thumbnail">
-<p><a href="./posts/missed_cleavage/index.html" class="no-external"></a></p><a href="./posts/missed_cleavage/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/missed_cleavage/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/missed_cleavage/index.html" class="no-external">Missed cleavage</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/missed_cleavage/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Sample preparation'); return false;">
-Sample preparation
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Analysis'); return false;">
-Analysis
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/missed_cleavage/index.html" class="no-external">In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/missed_cleavage/index.html" class="no-external">
-<div class="listing-date">
-Jun 16, 2025
-</div>
-<div class="listing-author">
-Leetanaporn K
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
