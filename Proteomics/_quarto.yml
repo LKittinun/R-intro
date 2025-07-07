@@ -21,6 +21,8 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/LKittinun/LKittinun.github.io
+      - icon: rss
+        href: index.xml
 format:
   html:
     theme: flatly
