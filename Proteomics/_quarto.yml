@@ -5,7 +5,6 @@ project:
     - robots.txt
 website:
   title: "Proteomics"
-  image: "https://lkittinun.github.io/Proteomics/thumbnail_1.png"
   open-graph:
     site-name: "Proteomics blog"
     description: "A blog for sharing ideas, experiences, and knowledge in proteomics—whatever I’m exploring, working on, or feel like writing about."
@@ -21,6 +20,8 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/LKittinun/LKittinun.github.io
+      - icon: rss
+        href: index.xml
 format:
   html:
     theme: flatly

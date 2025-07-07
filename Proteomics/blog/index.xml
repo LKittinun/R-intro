@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Proteomics</title>
+<link>https://lkittinun.github.io/Proteomics/blog/</link>
+<atom:link href="https://lkittinun.github.io/Proteomics/blog/index.xml" rel="self" type="application/rss+xml"/>
+<description>A blog for sharing ideas, experiences, and knowledge in proteomics.</description>
+<generator>quarto-1.4.553</generator>
+<lastBuildDate>Fri, 04 Jul 2025 17:00:00 GMT</lastBuildDate>
+<item>
+  <title>MS file formats—gotta convert ’em all!</title>
+  <dc:creator>Leetanaporn K</dc:creator>
+  <link>https://lkittinun.github.io/Proteomics/blog/posts/file_conversion/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Want to work with MS files yourself but do not have access to licensed software? No worries! These days, a lot of free-to-use proteomics tools (academic use mostly) are now available for mass spectrometry data analysis. However, not all programs can analyze native file extensions from different instrument vendors, such as <code>.raw</code>, <code>.wiff</code>, or <code>.d</code>. Luckily, the awesome proteomics community has created standardized file formats like <code>.mzML</code> and <code>.mzXML</code>, which enable cross-platform analysis. Even luckier, there is a tool that lets you convert vendor-specific extensions to these open formats!</p>
+<p><strong>Download now</strong> &gt;&gt; <a href="https://proteowizard.sourceforge.io/download.html" target="_blank">ProteoWizard</a> (nope, not sponsored)</p>
+<p>It works on all major platforms; choose it at your own will. After download, just install normally. You will also installed SeeMS software that can visualize your <code>.mzML</code> file.</p>
+<p>MSConvert comes with both a GUI and a command line version, here is a list of <a href="https://proteowizard.sourceforge.io/doc_users.html#SupportedFormats" target="_blank">supported format</a>. The GUI version looks like this.</p>
+<p><img src="https://lkittinun.github.io/Proteomics/blog/posts/file_conversion/data/msconvert.png" class="img-fluid"></p>
+<p>To convert files, choose your desire files and output directory. Then tick everything as in the figure and you are good to go. To add a little explanation:</p>
+<p>- <code>peakPicking</code> does centroid the spectrum for you. The 1- means you do it at MS1 level.</p>
+<p>- <code>zeroSamples removeExtra</code> Remove any zero data. This helps reduce file size, as .mzML normally has a larger file size than vendor-specific files.</p>
+<p>For someone who loves the command line. You can run it by locating <code>msconvert.exe</code> file in the installed folder and executing it. You can also add them to <code>PATH</code> for more convenience. These are some of the commands I normally use, note that I use PowerShell in this setting. You can change to your platform, which should not be difficult anyway, or just ask <a href="https://openai.com/index/chatgpt/" target="_blank">Mr.&nbsp;Sam Altman</a> to convert the format for you.</p>
+<section id="all-files-in-the-folder" class="level3">
+<h3 class="anchored" data-anchor-id="all-files-in-the-folder">All files in the folder</h3>
+<p><code>-v</code> stands for verbose. I recommend adding this argument, as it will allow you to track the progress of the conversion.</p>
+<pre><code>msconvert *.raw `
+  --filter "peakPicking true 1-" `
+  --mzML --64 --zlib -o .\yourfolder -v </code></pre>
+</section>
+<section id="specific-files-e.g.-first-10-files" class="level3">
+<h3 class="anchored" data-anchor-id="specific-files-e.g.-first-10-files">Specific files, e.g.&nbsp;first 10 files</h3>
+<p>In this case, we have to do it in loop.</p>
+<pre><code>(gci | Select-Object -first 10).BaseName | 
+  foreach {msconvert $_ --filter "peakPicking true 1-" --mzML --64 --zlib -o .\mzML -v} </code></pre>
+</section>
+<section id="demultiplex" class="level3">
+<h3 class="anchored" data-anchor-id="demultiplex">Demultiplex</h3>
+<p>If by any chance you have data with staggered windows, you also need to demultiplex it.</p>
+<pre><code>msconvert *.raw `
+  --filter "peakPicking true 1-" `
+  --filter "zeroSamples removeExtra" `
+  --filter "demultiplex optimization=overlap_only" `
+  --mzML --64 --zlib `
+  -o .\yourfolder -v </code></pre>
+<p>Happy analyzing!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>Instrument</category>
+  <category>Analysis</category>
+  <guid>https://lkittinun.github.io/Proteomics/blog/posts/file_conversion/</guid>
+  <pubDate>Fri, 04 Jul 2025 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Data-dependent acquisition vs. Data-independent acquisition</title>
+  <dc:creator>Leetanaporn K</dc:creator>
+  <link>https://lkittinun.github.io/Proteomics/blog/posts/DDA_vs_DIA/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>If you have ever worked with untargeted proteomic results, you would likely encounter the terms <strong>data-dependent acquisition (DDA)</strong> and <strong>data-independent acquisition (DIA)</strong>. Although these two acquisition schemes finally produced (generally) two-dimensional data matrices of peptides (or proteins) and intensities, they relied on fundamentally distinct mechanisms for acquiring the data. To understand how different these two approaches are, we first have to understand the fundamentals of how mass spectrometry captures and analyzes peptide signals.</p>
+<section id="mass-spectrometry-data-acquisition" class="level2">
+<h2 class="anchored" data-anchor-id="mass-spectrometry-data-acquisition">Mass spectrometry data acquisition</h2>
+<p>After peptides are injected into the mass spectrometry and ionized by the ion source, the resulting ion travels to the mass analyzers. The function of mass analyzers is to separate ionized peptides based on their m/z. For those who are confused about what m/z is, think of it this way: mass analyzers use magnetic or electric fields to separate ions, but they cannot directly measure peptide mass. Instead, they rely on the ion’s <strong>mass-to-charge ratio (m/z)</strong>, where the charge helps distinguish between ions. For instance, a peptide with a mass of 1200 and a 2+ charge will appear as 600 m/z in the analyzer.</p>
+<p>In untargeted proteomic analysis, commonly used mass analyzers usually involve two (or even three) mass analyzers with different functions, with collision chamber for further ion fragmentation. This setup is known as <strong>tandem mass spectrometry (MS/MS)</strong>.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Ion Source] --- B(Mass Analyzer 1)
+  B --- C[Collision Chamber]
+  C --- D(Mass Analyzer 2)
+  D --- E[Detector]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>In general, mass analyzer in MS/MS setup include:</p>
+<ul>
+<li><p><strong>Quadrupole:</strong> This mass analyzer functions as the first m/z (mass-to-charge) filter, so we can define the range of the m/z that interests us most.</p></li>
+<li><p><strong>Time-of-flight or Orbitrap:</strong> These are high-resolution mass analyzers. Although they have different principles of mass separation, they both share the same goal: to distinguish even minuscule m/z differences between ions with very high precision.</p></li>
+</ul>
+<p>So, basically, data acquisition of peptide ions starts with a quadrupole to filter the m/z that we are interested in. In the case of peptides, these numbers usually range around 400-1800. Then, the filter ions are passed into the high-resolution mass analyzer, which separates the ions in finer detail. Thereafter, all separated ion data are recorded by the detector, which is then processed into the spectrum we see in the software.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Ion Source] --&gt; B(Quadrupole)
+  B --- C[Collision Chamber]
+  C --- D(Time-of-flight/Orbitrap)
+  D --&gt; E[Detector]
+  B -.-&gt; D
+
+linkStyle 0,3,4 stroke:darkred,stroke-width:2px  
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>What I recently described is basically <strong>MS1 acquisition</strong> (or full scan/precursor scan). Note that collision chamber is not used here since there is no fragmentation occurs; it will be involved in MS2.</p>
+</section>
+<section id="then-what-about-ms2" class="level2">
+<h2 class="anchored" data-anchor-id="then-what-about-ms2">Then what about <strong>MS2</strong>?</h2>
+<p>Well, what we obtain from MS1 is a list of m/z values of all ions present at the moment. This is called <strong>peptide fingerprints</strong>. However, this data is not enough to figure out what these peptides really are, because some peptides have the same m/z even though their sequences are different. This is why we need MS2, where we break down these ions into smaller pieces via a <strong>collision chamber</strong> to analyze their patterns further.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Ion Source] --&gt; B(Quadrupole)
+  B --&gt; C["Collision Chamber (Fragmentation)"]
+  C --&gt; D(Time-of-flight/Orbitrap)
+  D --&gt; E[Detector]
+
+linkStyle 0,1,2,3 stroke:darkred,stroke-width:2px  
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>This is where the <strong>difference between DDA and DIA</strong> acquisition kicks in, because these two approaches have clearly distinct patterns to obtain MS2.</p>
+<section id="data-dependent-acquisition" class="level3">
+<h3 class="anchored" data-anchor-id="data-dependent-acquisition">Data-dependent acquisition</h3>
+<p>There is a specific time window during which peptides with the same or similar properties elute together as a single peak. This allows mass spectrometry to collect multiple data points as the peak elutes. Mass spectrometry collects multiple rounds of data in one peak. Each round of the scans consists of one MS1 and multiple MS2 scans; this is called a <strong>cycle,</strong> and the time it takes to complete a cycle is called <strong>cycle time</strong>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://lkittinun.github.io/Proteomics/blog/posts/DDA_vs_DIA/index_files/figure-html/MS_acquisition-1.gif" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>1 cycle = time to complete all defined scan = MS1 to MS1</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For DDA, in one cycle, the <strong>top N</strong> most intense data in MS1 (aka precursor ions) will be further fragmented into MS2 (daughter ions). Take a look at the picture below, the 5 most intense spectra in this MS1 are then individually fragmented and analyzed in separate MS2 scans <em>sequentially</em> (not simultaneously!), resulting in 5 following MS2 (red triangle in the above picture). This is why it is called “data-dependent”–it depends on the MS1 data. It is a classic data acquisition scheme that has been used since the beginning of the shotgun proteomic era.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://lkittinun.github.io/Proteomics/blog/posts/DDA_vs_DIA/index_files/figure-html/dda-1.gif" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Note: the shade I made is larger than the actual experiment for visualization. In the real experiment, the quadrupole is very efficient and can isolate within +/- 1-2 m/z, or even lower in modern mass spectrometry.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Well, this is a solid method for identifying peptides. Still, there’s a catch: the fragmentation tends to favor more abundant precursor ions. In other words, more abundant peptides are more likely to get selected for fragmentation, while less abundant peptides may get overlooked. Therefore, when you see quite a lot of missing data in your final data matrix, there is a good chance it was acquired by DDA. To compensate for this bias, most instruments use a feature called <strong>dynamic exclusion</strong> that prevents repeated fragmentation of the same precursors within a short time window. But that’s getting a little bit too technical–we’ll talk about it in a future post.</p>
+</section>
+<section id="data-independent-acquisition" class="level3">
+<h3 class="anchored" data-anchor-id="data-independent-acquisition">Data-independent acquisition</h3>
+<p>As I stated, DDA has a limitation that it is bias towards more abundant precursors. So why don’t we just fragment it all? Well, this is exactly the concept behind DIA. It works by sequentially fragmenting all ions within the defined mass windows.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://lkittinun.github.io/Proteomics/blog/posts/DDA_vs_DIA/index_files/figure-html/dia-1.gif" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>All ions within predefined m/z windows are selected for fragmentation. Pink shaded regions represent isolation windows, dashed lines indicate window boundaries.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can see in the figure, for this MS1, the next 12 windows will be sequentially fragmented in MS2. In this way, all ions–more or less–get a chance to be fragmented without bias. This makes the fragmentation pattern much more predictable, resulting in more robust, reproducible spectra generation across the run. Accordingly, there will be a lot less missing data events than DDA, especially in low-abundant peptides. There is a lot of variation in window fragmentation patterns, such as staggered windows and variable-width windows that are designed to optimize coverage and improve sensitivity, depending on the instruments.</p>
+<p>Terrific! So, should we entirely abandon DDA and move to DIA? Not exactly, for now. While it results in much more reproducible spectra, the spectra themselves are much more complicated. This is because there are multiple precursors fragmented together within one window, leading to <strong>chimeric spectra</strong>. DDA typically isolates and fragments individual precursors within narrow windows, making chimeric events much less likely. Therefore, identifying peptides from these spectra often requires <strong>library</strong>–a pre-built reference of known peptide fragmentation pattern–to serve as a spectrum blueprint to match spectra with overlapping fragmented ions.</p>
+<p>Luckily, the bioinformatics tools for DIA are rapidly evolving, making it very feasible to analyze these spectra with ease. Most modern proteomics tools now support analyzing DIA without requiring much effort from the users. Some tools can even do it with library-free settings, such as DIA-NN, MaxQuant, Spectronaut, MSFragger, and many more. Note that proper methods for false discovery estimation in DIA are still in debate. Still, in a general label-free workflow, DIA is now a highly accessible and powerful option at the moment.</p>
+</section>
+<section id="so-dda-still-has-the-place" class="level3">
+<h3 class="anchored" data-anchor-id="so-dda-still-has-the-place">So, DDA still has the place?</h3>
+<p>Absolutely. While currently DIA is the go-to for general label-free workflow, certain methods still prefer DDA, such as:</p>
+<ul>
+<li><p><strong>Post-translational modification analysis</strong>, DDA provides much cleaner MS2 spectra, which are critical for confident PTM modification site localization. (Though DIA is rapidly catching up in this area.)</p></li>
+<li><p><strong>Label-based proteomics</strong>, especially with tandem mass tag.</p></li>
+<li><p><strong>Building a tailored spectral library</strong> for some projects.</p></li>
+<li><p><strong>Peptidomics</strong>, your regular computer could explode due to a very large search space.</p></li>
+<li><p><strong>De novo sequencing</strong>, since interpreting chimeric spectra without prior knowledge is still highly challenging.</p></li>
+</ul>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>So, while DIA is rapidly evolving and can replace some DDA workflows, DDA still has a place, especially when you need to do experiments that require much cleaner spectra, such as PTM or de novo sequencing. Choosing the right approach depends on your specific research questions and analytic goals. But who knows what it will be in the future? With continuous improvements in mass spectrometry hardware and software, the line between DDA and DIA will only grow more flexible.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>Instrument</category>
+  <category>Analysis</category>
+  <guid>https://lkittinun.github.io/Proteomics/blog/posts/DDA_vs_DIA/</guid>
+  <pubDate>Tue, 24 Jun 2025 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Missed cleavage</title>
+  <dc:creator>Leetanaporn K</dc:creator>
+  <link>https://lkittinun.github.io/Proteomics/blog/posts/missed_cleavage/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of proteins, certain protein sites may be partially or completely inaccessible to the enzymatic cleavage. This situation eventually leads to missed cleavages—where peptides are longer than expected due to uncleavage at intended sites. Too many missed cleavages can complicate peptide identification and quantification in downstream analysis.</p>
+<section id="how-is-missed-cleavage-calculated" class="level2">
+<h2 class="anchored" data-anchor-id="how-is-missed-cleavage-calculated">How is missed cleavage calculated?</h2>
+<p>To identify spectra generated from the mass spectrometry, most software we used relies on a protein sequence database, typically in FASTA format, as a reference. Consequently, the software performs <em>in silico</em> digestion on FASTA to generate a theoretical list of peptides to map the spectra against. Consider human albumin protein as an example.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">albu_human <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">readLines</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data/albu_human.fasta"</span>)[<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">collapse =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)</span>
+<span id="cb1-2">albu_human</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "MKWVTFISLLFLFSSAYSRGVFRRDAHKSEVAHRFKDLGEENFKALVLIAFAQYLQQCPFEDHVKLVNEVTEFAKTCVADESAENCDKSLHTLFGDKLCTVATLRETYGEMADCCAKQEPERNECFLQHKDDNPNLPRLVRPEVDVMCTAFHDNEETFLKKYLYEIARRHPYFYAPELLFFAKRYKAAFTECCQAADKAACLLPKLDELRDEGKASSAKQRLKCASLQKFGERAFKAWAVARLSQRFPKAEFAEVSKLVTDLTKVHTECCHGDLLECADDRADLAKYICENQDSISSKLKECCEKPLLEKSHCIAEVENDEMPADLPSLAADFVESKDVCKNYAEAKDVFLGMFLYEYARRHPDYSVVLLLRLAKTYETTLEKCCAAADPHECYAKVFDEFKPLVEEPQNLIKQNCELFEQLGEYKFQNALLVRYTKKVPQVSTPTLVEVSRNLGKVGSKCCKHPEAKRMPCAEDYLSVVLNQLCVLHEKTPVSDRVTKCCTESLVNRRPCFSALEVDETYVPKEFNAETFTFHADICTLSEKERQIKKQTALVELVKHKPKATKEQLKAVMDDFAAFVEKCCKADDKETCFAEEGKKLVAASQAALGL"</code></pre>
+</div>
+</div>
+<p>Theoretically, we know that trypsin can digest proteins at Lysine (K) and Arginine (R) sites, where it is not followed by Proline (P) or KR/P. So, ideally, albumin should be digested into peptides based on this rule.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">trypsin_digest <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(seq){</span>
+<span id="cb3-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.character</span>(seq) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">||</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nchar</span>(seq) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stop</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Input must be &gt;2 characters string"</span>)</span>
+<span id="cb3-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unlist</span>(stringi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stri_split_regex</span>(seq, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pattern =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(?&lt;=(K(?!P)|R(?!P)))"</span>))</span>
+<span id="cb3-4">}</span>
+<span id="cb3-5"></span>
+<span id="cb3-6">albu_pep <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">trypsin_digest</span>(albu_human)</span>
+<span id="cb3-7"></span>
+<span id="cb3-8"><span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Normally the softwares consider at least 5 amino acids to be valid peptides</span></span>
+<span id="cb3-9"></span>
+<span id="cb3-10">albu_pep[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nchar</span>(albu_pep)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>]</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "WVTFISLLFLFSSAYSR"           "SEVAHR"                     
+ [3] "DLGEENFK"                    "ALVLIAFAQYLQQCPFEDHVK"      
+ [5] "LVNEVTEFAK"                  "TCVADESAENCDK"              
+ [7] "SLHTLFGDK"                   "LCTVATLR"                   
+ [9] "ETYGEMADCCAK"                "QEPER"                      
+[11] "NECFLQHK"                    "DDNPNLPR"                   
+[13] "LVRPEVDVMCTAFHDNEETFLK"      "YLYEIAR"                    
+[15] "HPYFYAPELLFFAK"              "AAFTECCQAADK"               
+[17] "AACLLPK"                     "LDELR"                      
+[19] "ASSAK"                       "CASLQK"                     
+[21] "AWAVAR"                      "AEFAEVSK"                   
+[23] "LVTDLTK"                     "VHTECCHGDLLECADDR"          
+[25] "ADLAK"                       "YICENQDSISSK"               
+[27] "ECCEKPLLEK"                  "SHCIAEVENDEMPADLPSLAADFVESK"
+[29] "NYAEAK"                      "DVFLGMFLYEYAR"              
+[31] "HPDYSVVLLLR"                 "TYETTLEK"                   
+[33] "CCAAADPHECYAK"               "VFDEFKPLVEEPQNLIK"          
+[35] "QNCELFEQLGEYK"               "FQNALLVR"                   
+[37] "VPQVSTPTLVEVSR"              "HPEAK"                      
+[39] "MPCAEDYLSVVLNQLCVLHEK"       "TPVSDR"                     
+[41] "CCTESLVNR"                   "RPCFSALEVDETYVPK"           
+[43] "EFNAETFTFHADICTLSEK"         "QTALVELVK"                  
+[45] "AVMDDFAAFVEK"                "ETCFAEEGK"                  
+[47] "LVAASQAALGL"                </code></pre>
+</div>
+</div>
+<p>This generates a list of theoretical peptides that are digested by trypsin, which is further used to generate theoretical spectra to match against our experiment. So if the real cleavage results longer sequence than these, it means that there was incomplete digestion occurred. Suppose we digest real albumin and get some peptides.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">peptides <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ACLLPKLDELRDEGKASSAKQR"</span>,</span>
+<span id="cb5-2">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"KDVCKNYAEAKDVFLGMFLYEYARR"</span>,</span>
+<span id="cb5-3">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"YICENQDSISSK"</span>,</span>
+<span id="cb5-4">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"FGERAFKAWAVAR"</span>,</span>
+<span id="cb5-5">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"VFDEFKPLVEEPQNLIK"</span>)</span></code></pre></div>
+</div>
+<p>We want to know if our digestion experiment results in missed cleavage, so we check for non-C-terminal KR/P missed cleavage.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">count.missed.cleavage <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(peptide) {</span>
+<span id="cb6-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.character</span>(peptide) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">||</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nchar</span>(peptide) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stop</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Input must be &gt;2 characters string"</span>)</span>
+<span id="cb6-3">  peptide <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">toupper</span>(peptide)</span>
+<span id="cb6-4">  matches <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unlist</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gregexpr</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(?=(K(?!P)|R(?!P)))"</span>, peptide, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">perl =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>))</span>
+<span id="cb6-5">  matches <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> matches[matches <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nchar</span>(peptide)]</span>
+<span id="cb6-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(matches)</span>
+<span id="cb6-7">}</span>
+<span id="cb6-8"></span>
+<span id="cb6-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">no.cleavage =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(peptides, count.missed.cleavage))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          no.cleavage
+ACLLPKLDELRDEGKASSAKQR              4
+KDVCKNYAEAKDVFLGMFLYEYARR           4
+YICENQDSISSK                        0
+FGERAFKAWAVAR                       2
+VFDEFKPLVEEPQNLIK                   0</code></pre>
+</div>
+</div>
+<p>This way, we can identify the number of cleavages present in each peptide. In the real situation, our bottom-up proteomic experiment often allows only 0-1 missed cleavage theoretical peptides in the search space for identification (so the result will only contain peptides with missed cleavage &lt;2), since missed cleavage &gt;1 results in an inconsistent peptide pattern and thus a larger search space and poor quantification result. There was an exception in some samples, e.g., plasma, which was expected to have a high missed cleavage count due to nonspecific cleavage from plasma enzymes. In this case, we might increase the missed cleavage threshold to 2.</p>
+</section>
+<section id="how-to-reduce-missed-cleavage" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-reduce-missed-cleavage">How to reduce missed cleavage?</h2>
+<p>The principle of digestion improvement is to prepare proteins to be in a condition that is suitable for digestion, or improve digestion efficiency.</p>
+<ul>
+<li><p>Use the precipitation method to obtain purer proteins.</p></li>
+<li><p>Reduce non-specific digestion from other enzymes (since we are only interested in particular enzymatic digestion, e.g., trypsin). This can be done by heat or by adding protease inhibitors.</p></li>
+<li><p>Reduce and alkylate proteins.</p></li>
+<li><p>Use a higher enzyme-to-protein ratio.</p></li>
+<li><p>Use multiple enzymes. Most commonly, we use Lys-C in conjunction with trypsin, since Lys-C specifically cleaves C-terminal K. Our experience found that adding Lys-C results in 5-10% cleavage efficiency.</p></li>
+<li><p>Use a suitable time and temperature for specific enzymes. Too short will cause missed cleavage, but too long will cause autolysis and excessive digestion.</p></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Sample preparation</category>
+  <category>Analysis</category>
+  <guid>https://lkittinun.github.io/Proteomics/blog/posts/missed_cleavage/</guid>
+  <pubDate>Sun, 15 Jun 2025 17:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
