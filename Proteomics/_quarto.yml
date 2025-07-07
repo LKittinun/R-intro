@@ -11,6 +11,7 @@ website:
     image: "https://lkittinun.github.io/Proteomics/thumbnail_1.png"
   google-analytics: "G-90SJY5V32X"
   site-url: "https://lkittinun.github.io/Proteomics/blog/" 
+  favicon: favicon.ico
   navbar:
     right:
       - text: "Blog"
