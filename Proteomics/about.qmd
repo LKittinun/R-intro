@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "Thank you for your visit !"
 image: about.png
 about:
   template: jolla
@@ -14,7 +14,6 @@ about:
       href: https://orcid.org/0000-0002-7621-4510
 ---
 
-## Thank you for your visit !
 I’m an OB-GYN doctor with a Ph.D. in Biomedical Sciences, currently working at the Department of Biomedical Sciences and Biomedical Engineering, Prince of Songkla University. My goal is to integrate clinical experience with biomedical research, particularly in proteomics, to enhance understanding and prediction of treatment outcomes in healthcare.
 
 ```{=html}
