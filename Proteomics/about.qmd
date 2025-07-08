@@ -9,6 +9,28 @@ about:
     - icon: github
       text: Github
       href: https://github.com/LKittinun/LKittinun.github.io
+    - icon: orcid
+      text: ORCiD
+      href: https://orcid.org/0000-0002-7621-4510
 ---
 
-Thank you for your visit !
+## Thank you for your visit !
+I’m an OB-GYN doctor with a Ph.D. in Biomedical Sciences, currently working at the Department of Biomedical Sciences and Biomedical Engineering, Prince of Songkla University. My goal is to integrate clinical experience with biomedical research, particularly in proteomics, to enhance understanding and prediction of treatment outcomes in healthcare.
+
+```{=html}
+<div style="text-align: center;">
+  <div style="display: inline-block; transform: scale(0.75); transform-origin: center;">
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+      data-name="bmc-button"
+      data-slug="petesblog"
+      data-color="#FFDD00"
+      data-emoji="😇"
+      data-font="Lato"
+      data-text="Help me avoid bankruptcy"
+      data-outline-color="#000000"
+      data-font-color="#000000"
+      data-coffee-color="#ffffff">
+    </script>
+  </div>
+</div>
+```
