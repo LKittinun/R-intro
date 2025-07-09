@@ -5,11 +5,12 @@ description: "A blog for sharing ideas, experiences, and knowledge in proteomics
 listing:
   contents: posts
   sort: "date desc"
-  type: default
+  type: grid
   categories: true
   sort-ui: false
   filter-ui: false
   feed: true
+  fields: [image, date, title, author, description, categories, reading-time]
 page-layout: full
 title-block-banner: true
 ---

@@ -27,7 +27,6 @@ website:
 format:
   html:
     theme: flatly
-    css: styles.css
     include-after-body: footer.html
 editor: visual
 

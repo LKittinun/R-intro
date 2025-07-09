@@ -80,9 +80,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-description','listing-categories','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -139,7 +139,6 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
 <link rel="alternate" type="application/rss+xml" title="Proteomics" href="index.xml" data-external="1"><meta property="og:title" content="Proteomics - Pete’s proteomics blog">
 <meta property="og:description" content="A blog for sharing ideas, experiences, and knowledge in proteomics—whatever I’m exploring, working on, or feel like writing about.">
 <meta property="og:image" content="https://lkittinun.github.io/Proteomics/thumbnail_1.png">
@@ -219,7 +218,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Analysis">Analysis <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Instrument">Instrument <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Sample preparation">Sample preparation <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Analysis">Analysis <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Instrument">Instrument <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Sample preparation">Sample preparation <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -232,20 +231,49 @@ window.Quarto = {
 
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Instrument,Analysis" data-listing-date-sort="1751648400000" data-listing-file-modified-sort="1751951582466" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="427">
-<div class="thumbnail">
-<p><a href="./posts/file_conversion/index.html" class="no-external"></a></p><a href="./posts/file_conversion/index.html" class="no-external">
-<p class="card-img-top"><img src="posts\file_conversion\data\msconvert.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/file_conversion/index.html" class="no-external"></a></p>
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="Analysis" data-listing-date-sort="1751994000000" data-listing-file-modified-sort="1752048574684" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="546">
+<a href="./posts/uniprot/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="posts\uniprot\images\clipboard-2045155298.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+UniProt – The Central Hub for Protein Knowledge
+</h5>
+<div class="listing-reading-time card-text text-muted">
+3 min
 </div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/file_conversion/index.html" class="no-external">MS file formats—gotta convert ’em all!</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/file_conversion/index.html" class="no-external"></a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Analysis'); return false;">
+Analysis
+</div>
+</div>
+<div class="card-text listing-description">
+For someone who works with protein, you should once in a lifetime search for the protein name to find its function. Doing so, odds are, that your search will land on the…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Leetanaporn K
+</div>
+<div class="listing-date">
+Jul 9, 2025
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="Instrument,Analysis" data-listing-date-sort="1751648400000" data-listing-file-modified-sort="1752043986667" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="427">
+<a href="./posts/file_conversion/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="posts\file_conversion\data\msconvert.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+MS file formats—gotta convert ’em all!
+</h5>
+<div class="listing-reading-time card-text text-muted">
+3 min
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Instrument'); return false;">
@@ -255,33 +283,31 @@ Instrument
 Analysis
 </div>
 </div>
-<div class="listing-description">
-<a href="./posts/file_conversion/index.html" class="no-external">Want to work with MS files yourself but do not have access to licensed software? No worries! These days, a lot of free-to-use proteomics tools (academic use mostly) are now…<code></code><code></code><code></code><code></code><code></code></a>
+<div class="card-text listing-description">
+Want to work with MS files yourself but do not have access to licensed software? No worries! These days, a lot of free-to-use proteomics tools (academic use mostly) are now…<code></code><code></code><code></code><code></code><code></code>
 </div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Leetanaporn K
 </div>
-<div class="metadata">
-<a href="./posts/file_conversion/index.html" class="no-external">
 <div class="listing-date">
 Jul 5, 2025
 </div>
-<div class="listing-author">
-Leetanaporn K
+</div>
+</div>
 </div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Instrument,Analysis" data-listing-date-sort="1750784400000" data-listing-file-modified-sort="1751872693019" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2377">
-<div class="thumbnail">
-<p><a href="./posts/DDA_vs_DIA/index.html" class="no-external"></a></p><a href="./posts/DDA_vs_DIA/index.html" class="no-external">
-<p class="card-img-top"><img src="posts\DDA_vs_DIA\index_files\figure-html\MS_acquisition-1.gif"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/DDA_vs_DIA/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/DDA_vs_DIA/index.html" class="no-external">Data-dependent acquisition vs.&nbsp;Data-independent acquisition</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/DDA_vs_DIA/index.html" class="no-external"></a>
+<div class="g-col-1" data-index="2" data-categories="Instrument,Analysis" data-listing-date-sort="1750784400000" data-listing-file-modified-sort="1752045852542" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2377">
+<a href="./posts/DDA_vs_DIA/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="posts\DDA_vs_DIA\index_files\figure-html\MS_acquisition-1.gif" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Data-dependent acquisition vs.&nbsp;Data-independent acquisition
+</h5>
+<div class="listing-reading-time card-text text-muted">
+12 min
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Instrument'); return false;">
@@ -291,33 +317,31 @@ Instrument
 Analysis
 </div>
 </div>
-<div class="listing-description">
-<a href="./posts/DDA_vs_DIA/index.html" class="no-external">If you have ever worked with untargeted proteomic results, you would likely encounter the terms <strong>data-dependent acquisition (DDA)</strong> and <strong>data-independent acquisition (DIA)</strong>.…</a>
+<div class="card-text listing-description">
+If you have ever worked with untargeted proteomic results, you would likely encounter the terms <strong>data-dependent acquisition (DDA)</strong> and <strong>data-independent acquisition (DIA)</strong>.…
 </div>
-</div>
-<div class="metadata">
-<a href="./posts/DDA_vs_DIA/index.html" class="no-external">
-<div class="listing-date">
-Jun 25, 2025
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 Leetanaporn K
 </div>
+<div class="listing-date">
+Jun 25, 2025
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Sample preparation,Analysis" data-listing-date-sort="1750006800000" data-listing-file-modified-sort="1750670030256" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="606">
-<div class="thumbnail">
-<p><a href="./posts/missed_cleavage/index.html" class="no-external"></a></p><a href="./posts/missed_cleavage/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/missed_cleavage/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/missed_cleavage/index.html" class="no-external">Missed cleavage</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/missed_cleavage/index.html" class="no-external"></a>
+<div class="g-col-1" data-index="3" data-categories="Sample preparation,Analysis" data-listing-date-sort="1750006800000" data-listing-file-modified-sort="1752045847731" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="606">
+<a href="./posts/missed_cleavage/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="posts\missed_cleavage\images\clipboard-1728693589.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Missed cleavage
+</h5>
+<div class="listing-reading-time card-text text-muted">
+4 min
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Sample preparation'); return false;">
@@ -327,20 +351,20 @@ Sample preparation
 Analysis
 </div>
 </div>
-<div class="listing-description">
-<a href="./posts/missed_cleavage/index.html" class="no-external">In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of…</a>
+<div class="card-text listing-description">
+In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of…
 </div>
-</div>
-<div class="metadata">
-<a href="./posts/missed_cleavage/index.html" class="no-external">
-<div class="listing-date">
-Jun 16, 2025
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 Leetanaporn K
 </div>
-</a>
+<div class="listing-date">
+Jun 16, 2025
 </div>
+</div>
+</div>
+</div>
+</a>
 </div>
 </div>
 <div class="listing-no-matching d-none">

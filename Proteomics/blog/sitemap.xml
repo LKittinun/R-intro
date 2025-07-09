@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lkittinun.github.io/Proteomics/blog/posts/missed_cleavage/index.html</loc>
-    <lastmod>2025-06-23T09:13:50.256Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lkittinun.github.io/Proteomics/blog/posts/DDA_vs_DIA/index.html</loc>
-    <lastmod>2025-07-07T07:18:13.019Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lkittinun.github.io/Proteomics/blog/about.html</loc>
-    <lastmod>2025-07-08T06:49:03.563Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lkittinun.github.io/Proteomics/blog/index.html</loc>
-    <lastmod>2025-07-08T06:24:12.683Z</lastmod>
+    <loc>https://lkittinun.github.io/Proteomics/blog/posts/uniprot/index.html</loc>
+    <lastmod>2025-07-09T08:09:34.684Z</lastmod>
   </url>
   <url>
     <loc>https://lkittinun.github.io/Proteomics/blog/posts/file_conversion/index.html</loc>
-    <lastmod>2025-07-08T05:13:02.466Z</lastmod>
+    <lastmod>2025-07-09T06:53:06.667Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lkittinun.github.io/Proteomics/blog/index.html</loc>
+    <lastmod>2025-07-09T07:24:07.404Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lkittinun.github.io/Proteomics/blog/about.html</loc>
+    <lastmod>2025-07-08T07:25:55.583Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lkittinun.github.io/Proteomics/blog/posts/DDA_vs_DIA/index.html</loc>
+    <lastmod>2025-07-09T07:24:12.542Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lkittinun.github.io/Proteomics/blog/posts/missed_cleavage/index.html</loc>
+    <lastmod>2025-07-09T07:24:07.731Z</lastmod>
   </url>
 </urlset>

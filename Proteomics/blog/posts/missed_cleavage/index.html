@@ -114,7 +114,6 @@ gtag('config', 'G-90SJY5V32X', { 'anonymize_ip': true});
 </script>
 
 
-<link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Proteomics - Missed cleavage">
 <meta property="og:description" content="A blog for sharing ideas, experiences, and knowledge in proteomics—whatever I’m exploring, working on, or feel like writing about.">
 <meta property="og:image" content="https://lkittinun.github.io/Proteomics/thumbnail_1.png">
@@ -211,7 +210,8 @@ gtag('config', 'G-90SJY5V32X', { 'anonymize_ip': true});
 
 
 
-<p>In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of proteins, certain protein sites may be partially or completely inaccessible to the enzymatic cleavage. This situation eventually leads to missed cleavages—where peptides are longer than expected due to uncleavage at intended sites. Too many missed cleavages can complicate peptide identification and quantification in downstream analysis.</p>
+<p><img src="images/clipboard-1728693589.png" class="img-fluid"></p>
+<p>In the bottom-up proteomic experiment, proteins are enzymatically digested into peptides prior to mass spectrometry analysis. However, due to the complex structures of proteins, certain protein sites may be partially or completely inaccessible to the enzymatic cleavage. This situation eventually leads to missed cleavages—where peptides are longer than expected due to being uncleaved at intended sites. Too many missed cleavages can complicate peptide identification and quantification in downstream analysis.</p>
 <section id="how-is-missed-cleavage-calculated" class="level2">
 <h2 class="anchored" data-anchor-id="how-is-missed-cleavage-calculated">How is missed cleavage calculated?</h2>
 <p>To identify spectra generated from the mass spectrometry, most software we used relies on a protein sequence database, typically in FASTA format, as a reference. Consequently, the software performs <em>in silico</em> digestion on FASTA to generate a theoretical list of peptides to map the spectra against. Consider human albumin protein as an example.</p>
