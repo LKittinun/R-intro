@@ -15,4 +15,14 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+    <url>
+    <loc>https://lkittinun.github.io/Proteomics/blog/posts/uniprot/index.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+      <url>
+    <loc>https://lkittinun.github.io/Proteomics/blog/posts/file_conversion/index.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  </url>
 </urlset>
