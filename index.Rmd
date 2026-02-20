@@ -3,15 +3,15 @@ title: "A gentle introduction to R for biologists"
 author: "Kittinun Leetanaporn"
 description: "Basic statistical concept and R application for biologists"
 date: "`r Sys.Date()`"
-output: 
+output:
   bookdown::bs4_book:
     fig.path: "figure/"
     df_print: paged
+    css: "style.css"
     config:
       repo: "https://github.com/LKittinun/R-intro"
-  css: "style.css"
 site: bookdown::bookdown_site
-bibliography: ["references.bib"]
+bibliography: ["references.bib", "packages.bib"]
 csl: "apa-6th-edition.csl"
 nocite: '@*'
 delete_merged_file: true
@@ -37,7 +37,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 ### R console {.unnumbered}
 
-ผู้ที่ต้องการใช้ `R` สามารถดาวน์โหลดโปรแกรม [ได้ที่](https://cran.r-project.org/bin/windows/base/)[นี่](#https://cran.r-project.org/bin/windows/base/) โดยตัว `R` console จะมีหน้าตาดังภาพ
+ผู้ที่ต้องการใช้ `R` สามารถดาวน์โหลดโปรแกรม [ได้ที่นี่](https://cran.r-project.org/bin/windows/base/) โดยตัว `R` console จะมีหน้าตาดังภาพ
 
 ```{r rconsole, fig.align="center", echo=FALSE, out.width="80%"}
 knitr::include_graphics("./Picture/Rconsole (Custom).jpg")
