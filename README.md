@@ -10,7 +10,7 @@
 | 4 Dec 2023 | Introduction to Bioconductor                               | 2    |
 
 ## Materials
-- [Handout](https://lkittinun.github.io/R-intro/)
+- [Handout](https://lkittinun.github.io/R_intro/docs/index.html)
 - [Full course syllabus](/Course%20syllabus.pdf)
 - [Open chat for zoom link](https://line.me/ti/g2/wzhmJ2-cVtw3zdEqpnPcMpLtt9TSvU9Eiskr1w?utm_source=invitation&utm_medium=QR_code&utm_campaign=default)
 - [Recorded files](https://drive.google.com/drive/folders/1hFm4wFD2IHkReJU6yZ8nYduWZjqjRBUw)
